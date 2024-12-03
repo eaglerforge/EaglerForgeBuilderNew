@@ -1,0 +1,65 @@
+:root {
+    --background: rgba(20, 20, 20);
+    --col: rgb(179, 179, 179);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: var(--background);
+    color: var(--col);
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+#toolbar {
+    width: calc(100vw - 0.5rem);
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border-bottom: 2px solid var(--col);
+}
+#blockly {
+    width: 60vw;
+    height: calc(100vh - 2.9rem - 2px)
+}
+table, tr, td {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    position: relative;
+}
+button {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border: 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: 0.4s;
+}
+button:active {
+    background-color: rgba(255,255,255,0.2) !important;
+    transition: 0.1s;
+}
+button:hover {
+    background-color: rgba(255,255,255,0.13);
+}
+.datablock {
+    width: 8rem;
+    height: 8rem;
+    display: inline-block;
+    border: 1px solid white;
+}
+.bottom {
+    justify-self: end;
+}
