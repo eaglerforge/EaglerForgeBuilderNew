@@ -348,9 +348,9 @@
         <td>
           <div id="toolbar">
             <h1>EaglerForgeBuilder</h1>
-            <button>Load</button>
-            <button>Save</button>
-            <button>Compile</button>
+            <button id="load">Load</button>
+            <button id="save">Save</button>
+            <button id="compile">Compile</button>
           </div>
         </td>
       </tr>
@@ -362,16 +362,22 @@
                 <div id="blockly" style="background-color: darkslategrey"></div>
               </td>
               <td id="right">
-                <input type="search" value="" placeholder="Search for content: "><br>
-                <span class="datablock">
-                    <h4>Dirt Block</h4>
-                    <br>
-                    <i>Type: Block</i>
-                    <br><br>
-                    <div class="controls">
-                      <button>Delete</button>
-                    </div>
-                </span>
+                <div id="propnav">
+                  properties of datablock
+                </div>
+                <button style="margin-bottom: 1rem;">New</button>
+                <div>
+                  <input id="search" type="search" value="" placeholder="Search for content: "><br>
+                  <span class="datablock selected">
+                      <h4>Dirt Block</h4>
+                      <br>
+                      <i>Type: Block</i>
+                      <br><br>
+                      <div class="controls">
+                        <button>Delete</button>
+                      </div>
+                  </span>
+                </div>
               </td>
             </tr>
           </table>
@@ -380,5 +386,6 @@
     </table>
 
     <script src="index.js"></script>
+    <script src="serialise.js"></script>
   </body>
 </html>

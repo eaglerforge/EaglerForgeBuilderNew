@@ -60,16 +60,54 @@ button:hover {
     height: 8rem;
     display: inline-block;
     border: 1px solid white;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     padding: 0.5rem;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
+    overflow: hidden;
 }
 .datablock .controls {
     position: absolute;
     bottom: 4px;
     justify-self: end;
 }
+td {
+    vertical-align: top;
+}
 #right {
     text-align: left;
     justify-content: start;
     align-items: start;
+    width: 100%;
+    height: calc(100vh - 2.9rem);
+}
+#right input[type=search] {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.15rem;
+    outline: 0;
+}
+#propnav {
+    width: 100%;
+    min-height: 2rem;
+    height: 4rem;
+    max-height: 80vh;
+    margin-bottom: 1rem;
+    overflow-y: scroll;
+    border-bottom: 1px solid white;
+    resize: vertical;
+}
+.datablock.selected {
+    outline: 4px solid rgba(255,255,255,0.4);
+    background-color: rgba(255,255,255,0.05);
+}
+.datablock.selected h4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    color: var(--background);
+    background-color: var(--col);
 }

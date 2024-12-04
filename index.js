@@ -1,4 +1,4 @@
-globalThis.workspace = Blockly.inject('blockly', {
+var workspace = globalThis.workspace = Blockly.inject('blockly', {
     collapse: true,
     comments: true,
     css: true,
@@ -8,6 +8,35 @@ globalThis.workspace = Blockly.inject('blockly', {
     sounds: true,
     theme: "dark",
     trashcan: true,
-    readOnly: true,
+    readOnly: false,
     toolbox: document.querySelector("#toolbox")
 });
+const VALUE_ENUMS = {
+    FILE: "efb::val__file"
+}
+var state = globalThis.state = {
+    nodes: [
+        {
+            type: "metadata",
+            tags: {
+                Title: "My Awesome Mod",
+                Version: "",
+                Description: "Does literally nothing",
+                Credits: "By me"
+            }
+        },
+        {
+            type: "icon",
+            tags: {
+                Icon: VALUE_ENUMS.FILE,
+            }
+        }
+    ]
+};
+function reloadUI() {
+    document.querySelector("#propnav").innerHTML = "";
+    document.querySelectorAll(".datablock").forEach(elem => {
+        elem.remove()
+    });
+    document.querySelector("#search").value = "";
+}
