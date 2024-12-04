@@ -55,11 +55,21 @@ button:hover {
     background-color: rgba(255,255,255,0.13);
 }
 .datablock {
+    position: relative;
     width: 8rem;
     height: 8rem;
     display: inline-block;
     border: 1px solid white;
+    border-radius: 1rem;
+    padding: 0.5rem;
 }
-.bottom {
+.datablock .controls {
+    position: absolute;
+    bottom: 4px;
     justify-self: end;
+}
+#right {
+    text-align: left;
+    justify-content: start;
+    align-items: start;
 }
