@@ -8,7 +8,7 @@ function compile() {
     var output = 
 `
 (function EFB2Mod() {
-${baseCode};
+${datablock_contents};
 })();
 `;
     fileSave(output, "mod.js");

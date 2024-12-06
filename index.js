@@ -11,13 +11,32 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     readOnly: false,
     toolbox: document.querySelector("#toolbox")
 });
-var handlers = null;
+var handlers = {};
 function getHandlers() {
     return handlers;
 }
-function updateHandlers() {
-    
+const supportedEvents = new Set([
+    Blockly.Events.BLOCK_CHANGE,
+    Blockly.Events.BLOCK_CREATE,
+    Blockly.Events.BLOCK_DELETE
+]);
+function updateHandlers(event) {
+    if (workspace.isDragging()) return;
+    if (!supportedEvents.has(event.type)) return;
+    handlers = {};
+    workspace.getAllBlocks().forEach(block => {
+        if (!handlers[block.type]) {
+            handlers[block.type] = [block.getFieldValue("ID")];
+        } else {
+            var id = block.getFieldValue("ID");
+            if (handlers[block.type].includes(id)) {
+                return block.dispose(true);
+            }
+            handlers[block.type].push();
+        }
+    });
 }
+workspace.addChangeListener(updateHandlers);
 var state = globalThis.state = {
     nodes: [
         getPrimitive("metadata"),
@@ -25,7 +44,7 @@ var state = globalThis.state = {
     ]
 };
 function updatePropsUI() {
-    
+
 }
 function reloadUI(sel) {
     if (!state.nodes.includes(sel)) {
@@ -45,9 +64,9 @@ function reloadUI(sel) {
         if (node === sel) {
             datablock.classList.add("selected");
         }
-        
-        datablock.addEventListener("click", (e)=>{
-            document.querySelectorAll(".datablock.selected").forEach(x=>x.classList.remove("selected"));
+
+        datablock.addEventListener("click", (e) => {
+            document.querySelectorAll(".datablock.selected").forEach(x => x.classList.remove("selected"));
             datablock.classList.add("selected");
             editObject(node, datablock);
         });
@@ -70,7 +89,7 @@ function reloadUI(sel) {
 
         var deleteButton = document.createElement("button");
         deleteButton.innerText = "Delete";
-        deleteButton.addEventListener("click", (e)=>{
+        deleteButton.addEventListener("click", (e) => {
             e.preventDefault();
             e.stopPropagation();
 
@@ -84,7 +103,7 @@ function reloadUI(sel) {
         datablockContainer.appendChild(datablock);
     });
 }
-document.querySelector("#newdatablock").addEventListener("click", (e)=>{
+document.querySelector("#newdatablock").addEventListener("click", (e) => {
     state.nodes.push(getPrimitive(document.querySelector("#addtype").value));
     reloadUI(document.querySelector(".datablock.selected")?.datablock);
 });
