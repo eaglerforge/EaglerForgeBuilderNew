@@ -2,11 +2,15 @@ function toFunctionName(str) {
     return (/^[a-zA-Z_]/.test(str.replace(/[^a-zA-Z0-9_]/g, '')) ? '' : '_') + str.replace(/[^a-zA-Z0-9_]/g, '');
 }
 
-function  getCompiledCode() {
-    javascript.javascriptGenerator.init();
-    var datablock_contents = "";
+function getCompiledCode() {
+    javascript.javascriptGenerator.init(workspace);
+    let datablock_contents = "";
+    let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
+    let metadata = PRIMITIVES["metadata"].asJavaScript();
     return `(function EFB2Mod() {
-${datablock_contents};
+${metadata}
+${datablock_contents}
+${modCode}
 })();
 `;
 }
