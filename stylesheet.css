@@ -166,3 +166,7 @@ select option {
 ::-webkit-resizer {
     background-image: url('assets/resize.svg');
 }
+
+.blocklyMenu, .blocklyEditableText > .blocklyText:not(.blocklyDropdownText) {
+  text-shadow: none;
+}
