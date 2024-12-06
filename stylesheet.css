@@ -1,113 +1,163 @@
 :root {
-    --background: rgba(20, 20, 20);
-    --col: rgb(179, 179, 179);
+  --background: rgba(20, 20, 20);
+  --col: rgb(179, 179, 179);
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: var(--background);
-    color: var(--col);
-    text-shadow: 0px 0px 5px rgba(0,0,0,0.5);
-    overflow: hidden;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: var(--background);
+  color: var(--col);
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
-h1, h2, h3, h4, h5, h6 {
-    display: inline;
-    padding: 0;
-    margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: inline;
+  padding: 0;
+  margin: 0;
 }
 #toolbar {
-    width: calc(100vw - 0.5rem);
-    padding-left: 0.5rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    border-bottom: 2px solid var(--col);
+  width: calc(100vw - 0.5rem);
+  padding-left: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-bottom: 2px solid var(--col);
 }
 #blockly {
-    width: 60vw;
-    height: calc(100vh - 2.9rem - 2px)
+  width: 60vw;
+  height: calc(100vh - 2.9rem - 2px);
 }
-table, tr, td {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    outline: 0;
-    position: relative;
+table,
+tr,
+td {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  position: relative;
 }
 button {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-    border: 0;
-    font-size: 1rem;
-    line-height: 1rem;
-    border-radius: 0.2rem;
-    cursor: pointer;
-    transition: 0.4s;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: 0.4s;
 }
 button:active {
-    background-color: rgba(255,255,255,0.2) !important;
-    transition: 0.1s;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  transition: 0.1s;
 }
 button:hover {
-    background-color: rgba(255,255,255,0.13);
+  background-color: rgba(255, 255, 255, 0.13);
 }
 .datablock {
-    position: relative;
-    width: 8rem;
-    height: 8rem;
-    display: inline-block;
-    border: 1px solid white;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    margin-left: 0.2rem;
-    margin-top: 0.2rem;
-    overflow: hidden;
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+  overflow: hidden;
+  transition: 0.3s;
 }
 .datablock .controls {
-    position: absolute;
-    bottom: 4px;
-    justify-self: end;
+  position: absolute;
+  bottom: 4px;
+  justify-self: end;
 }
 td {
-    vertical-align: top;
+  vertical-align: top;
 }
 #right {
-    text-align: left;
-    justify-content: start;
-    align-items: start;
-    width: 100%;
-    height: calc(100vh - 2.9rem);
+  text-align: left;
+  justify-content: start;
+  align-items: start;
+  width: calc(40vw - 8px);
+  height: calc(100vh - 2.9rem);
+  overflow-y: auto;
+  display: inline-block;
 }
-#right input[type=search] {
-    display: block;
-    width: 100%;
-    margin-bottom: 0.15rem;
-    outline: 0;
+#right input[type="search"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.15rem;
+  outline: 0;
 }
 #propnav {
-    width: 100%;
-    min-height: 2rem;
-    height: 4rem;
-    max-height: 80vh;
-    margin-bottom: 1rem;
-    overflow-y: scroll;
-    border-bottom: 1px solid white;
-    resize: vertical;
+  width: 100%;
+  min-height: 2rem;
+  height: 4rem;
+  max-height: 80vh;
+  margin-bottom: 1rem;
+  overflow-y: scroll;
+  border-bottom: 1px solid white;
+  resize: vertical;
 }
 .datablock.selected {
-    outline: 4px solid rgba(255,255,255,0.4);
-    background-color: rgba(255,255,255,0.05);
+  outline: 4px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .datablock.selected h4 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    color: var(--background);
-    background-color: var(--col);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  color: var(--background);
+  background-color: var(--col);
+}
+.hidden {
+  display: none !important;
+}
+select {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  outline: 0 !important;
+  border: 1px solid white;
+  border-radius: 0.3rem;
+}
+select option {
+  color: white;
+  background-color: black;
+}
+#addtype {
+  margin-right: 0.1rem;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-resizer {
+    background-image: url('assets/resize.svg');
 }

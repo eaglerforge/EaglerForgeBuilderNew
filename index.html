@@ -365,8 +365,10 @@
                 <div id="propnav">
                   properties of datablock
                 </div>
-                <button style="margin-bottom: 1rem;">New</button>
-                <div>
+                <select id="addtype">
+                </select>
+                <button style="margin-bottom: 1rem;" id="newdatablock">New</button>
+                <div id="datablock_container">
                   <input id="search" type="search" value="" placeholder="Search for content: "><br>
                   <span class="datablock selected">
                       <h4>Dirt Block</h4>
@@ -385,6 +387,7 @@
       </tr>
     </table>
 
+    <script src="types.js"></script>
     <script src="index.js"></script>
     <script src="serialise.js"></script>
   </body>

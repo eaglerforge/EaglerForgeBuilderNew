@@ -11,32 +11,66 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     readOnly: false,
     toolbox: document.querySelector("#toolbox")
 });
-const VALUE_ENUMS = {
-    FILE: "efb::val__file"
-}
 var state = globalThis.state = {
     nodes: [
-        {
-            type: "metadata",
-            tags: {
-                Title: "My Awesome Mod",
-                Version: "",
-                Description: "Does literally nothing",
-                Credits: "By me"
-            }
-        },
-        {
-            type: "icon",
-            tags: {
-                Icon: VALUE_ENUMS.FILE,
-            }
-        }
+        getPrimitive("metadata"),
+        getPrimitive("icon"),
     ]
 };
+function updatePropsUI() {
+    
+}
 function reloadUI() {
     document.querySelector("#propnav").innerHTML = "";
     document.querySelectorAll(".datablock").forEach(elem => {
         elem.remove()
     });
     document.querySelector("#search").value = "";
+    var datablockContainer = document.querySelector("#datablock_container");
+    state.nodes.forEach((node, index) => {
+        var datablock = document.createElement("span");
+        datablock.classList.add("datablock");
+        
+        datablock.addEventListener("click", (e)=>{
+            document.querySelectorAll(".datablock.selected").forEach(x=>x.classList.remove("selected"));
+            datablock.classList.add("selected");
+            updatePropsUI(node);
+        });
+
+        var h4 = document.createElement("h4");
+        h4.innerText = node.name;
+        datablock.appendChild(h4);
+
+        datablock.appendChild(document.createElement("br"));
+
+        var type = document.createElement("i");
+        type.innerText = "Type: " + node.type;
+        datablock.appendChild(type);
+
+        datablock.appendChild(document.createElement("br"));
+        datablock.appendChild(document.createElement("br"));
+
+        var controls = document.createElement("div");
+        controls.classList.add("controls");
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+        deleteButton.addEventListener("click", (e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+
+            state.nodes.splice(index, 1);
+            reloadUI();
+        });
+        controls.appendChild(deleteButton);
+
+        datablock.appendChild(controls);
+
+        datablockContainer.appendChild(datablock);
+    });
 }
+document.querySelector("#newdatablock").addEventListener("click", (e)=>{
+    state.nodes.push(getPrimitive(document.querySelector("#addtype").value));
+    reloadUI();
+});
+reloadUI();
