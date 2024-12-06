@@ -26,7 +26,9 @@ PRIMITIVES["icon"] = {
 }
 
 function getPrimitive(type) {
-    return structuredClone(PRIMITIVES[type]);
+    var cloned = structuredClone(PRIMITIVES[type]);
+    delete cloned.asJavaScript;
+    return cloned;
 }
 
 window.addEventListener("load", ()=>{

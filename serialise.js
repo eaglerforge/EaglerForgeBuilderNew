@@ -30,11 +30,11 @@ function fileRead(handler) {
 
     input.click();
 }
-function fileSave(text) {
+function fileSave(text, fname) {
     const blob = new Blob([text], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'mod.efb2';
+    a.download = fname || 'mod.efb2';
     a.click();
     URL.revokeObjectURL(a.href);
 }
