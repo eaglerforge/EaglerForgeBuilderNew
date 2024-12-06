@@ -3,6 +3,7 @@ function toFunctionName(str) {
 }
 
 function  getCompiledCode() {
+    javascript.javascriptGenerator.init();
     var datablock_contents = "";
     return `(function EFB2Mod() {
 ${datablock_contents};

@@ -38,8 +38,8 @@ PRIMITIVES["icon"] = {
     }
 }
 
-PRIMITIVES["block"] = {
-    name: "Custom Block",
+PRIMITIVES["block_advanced"] = {
+    name: "Advanced Block",
     type: "block_advanced",
     tags: {
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",

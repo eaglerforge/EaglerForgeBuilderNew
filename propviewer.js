@@ -40,11 +40,34 @@ function editObject(obj, datablock) {
             input.type = "file";
             input.accept = "image/*";
         }
-
+        console.log(obj);
         if (PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
-            
-            input.accept = "image/*";
+            var handlers = getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, ''));
+            handlers.forEach(opt => {
+                var option = document.createElement("option");
+                option.value = opt;
+                option.innerText = opt;
+                if (opt === obj.tags[k]) {
+                    option.selected = true;
+                }
+                input.appendChild(option);
+            });
+            input.classList.add("handler_select");
+            input.updateHandlerList = function () {
+                var val = input.value;
+                input.innerHTML = "";
+                var handlers = getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, ''));
+                handlers.forEach(opt => {
+                    var option = document.createElement("option");
+                    option.value = opt;
+                    option.innerText = opt;
+                    if (opt === val) {
+                        option.selected = true;
+                    }
+                    input.appendChild(option);
+                });
+            }
         }
 
         input.addEventListener("input", () => {

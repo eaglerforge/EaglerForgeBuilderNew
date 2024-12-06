@@ -12,17 +12,16 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     toolbox: document.querySelector("#toolbox")
 });
 var handlers = {};
-function getHandlers() {
-    return handlers;
+function getHandlers(type) {
+    return handlers["handle_" + type] || [];
 }
 const supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
     Blockly.Events.BLOCK_CREATE,
     Blockly.Events.BLOCK_DELETE
 ]);
-function updateHandlers(event) {
+function updateHandlers() {
     if (workspace.isDragging()) return;
-    if (!supportedEvents.has(event.type)) return;
     handlers = {};
     workspace.getAllBlocks().forEach(block => {
         if (!handlers[block.type]) {
@@ -30,10 +29,13 @@ function updateHandlers(event) {
         } else {
             var id = block.getFieldValue("ID");
             if (handlers[block.type].includes(id)) {
-                return block.dispose(true);
+                return;
             }
-            handlers[block.type].push();
+            handlers[block.type].push(id);
         }
+    });
+    document.querySelectorAll(".handler_select").forEach(x => {
+        x.updateHandlerList();
     });
 }
 workspace.addChangeListener(updateHandlers);
