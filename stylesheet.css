@@ -75,6 +75,11 @@ button:hover {
   overflow: hidden;
   transition: 0.3s;
 }
+.datablock h4 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .datablock .controls {
   position: absolute;
   bottom: 4px;

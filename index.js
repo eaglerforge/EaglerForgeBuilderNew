@@ -20,7 +20,10 @@ var state = globalThis.state = {
 function updatePropsUI() {
     
 }
-function reloadUI() {
+function reloadUI(sel) {
+    if (!state.nodes.includes(sel)) {
+        sel = null;
+    }
     document.querySelector("#propnav").innerHTML = "";
     document.querySelectorAll(".datablock").forEach(elem => {
         elem.remove()
@@ -29,12 +32,17 @@ function reloadUI() {
     var datablockContainer = document.querySelector("#datablock_container");
     state.nodes.forEach((node, index) => {
         var datablock = document.createElement("span");
+        datablock.datablock = node;
         datablock.classList.add("datablock");
+
+        if (node === sel) {
+            datablock.classList.add("selected");
+        }
         
         datablock.addEventListener("click", (e)=>{
             document.querySelectorAll(".datablock.selected").forEach(x=>x.classList.remove("selected"));
             datablock.classList.add("selected");
-            updatePropsUI(node);
+            editObject(node, datablock);
         });
 
         var h4 = document.createElement("h4");
@@ -71,6 +79,6 @@ function reloadUI() {
 }
 document.querySelector("#newdatablock").addEventListener("click", (e)=>{
     state.nodes.push(getPrimitive(document.querySelector("#addtype").value));
-    reloadUI();
+    reloadUI(document.querySelector(".datablock.selected")?.datablock);
 });
 reloadUI();

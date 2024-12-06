@@ -1,5 +1,6 @@
 const VALUE_ENUMS = {
-    FILE: "efb::val__file"
+    FILE: "efb::val__file",
+    IMG: "efb::val__img"
 }
 
 
@@ -20,7 +21,7 @@ PRIMITIVES["icon"] = {
     name: "Icon",
     type: "icon",
     tags: {
-        Icon: VALUE_ENUMS.FILE,
+        Icon: VALUE_ENUMS.IMG,
     }
 }
 

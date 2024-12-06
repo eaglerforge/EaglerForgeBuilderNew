@@ -6,9 +6,9 @@ function editObject(obj, datablock) {
     nameField.placeholder = "Datablock Name";
     nameField.type = "text";
     nameField.value = obj.name;
-    nameField.addEventListener("input", ()=>{
-        obj.name = nameField.value;
-        datablock.loadData(obj);
+    nameField.addEventListener("input", () => {
+        obj.name = nameField.value || "No name";
+        datablock.querySelector("h4").innerText = obj.name;
     });
     propnav.appendChild(nameField);
 
@@ -23,9 +23,6 @@ function editObject(obj, datablock) {
 
         var input = document.createElement("input");
         var val = obj.tags[k];
-        if (val === VALUE_ENUMS.FILE) {
-            input.type = "file";
-        }
         if (typeof val === "number") {
             input.type = "number";
         }
@@ -35,9 +32,26 @@ function editObject(obj, datablock) {
 
         input.value = obj.tags[k];
 
-        input.addEventListener("input", ()=>{
-            obj.tags[k] = input.value;
-            datablock.loadData(obj);
+        if (val === VALUE_ENUMS.FILE) {
+            input.type = "file";
+        }
+
+        if (val === VALUE_ENUMS.IMG) {
+            input.type = "file";
+            input.accept = "image/*";
+        }
+
+        input.addEventListener("input", () => {
+            if (input.type === "file" && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    obj.tags[k] = e.target.result;
+                    editObject(obj, datablock);
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                obj.tags[k] = input.value;
+            }
         });
 
         propnav.appendChild(input);
