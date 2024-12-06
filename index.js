@@ -11,6 +11,13 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     readOnly: false,
     toolbox: document.querySelector("#toolbox")
 });
+var handlers = null;
+function getHandlers() {
+    return handlers;
+}
+function updateHandlers() {
+    
+}
 var state = globalThis.state = {
     nodes: [
         getPrimitive("metadata"),

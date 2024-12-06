@@ -1,5 +1,10 @@
+javascript.javascriptGenerator.init(workspace);
+function toFunctionName(str) {
+    return (/^[a-zA-Z_]/.test(str.replace(/[^a-zA-Z0-9_]/g, '')) ? '' : '_') + str.replace(/[^a-zA-Z0-9_]/g, '');
+}
 function compile() {
-    var baseCode = javascript.javascriptGenerator.workspaceToCode(workspace);
+    var datablock_contents = "";
+    
     var output = 
 `
 (function EFB2Mod() {

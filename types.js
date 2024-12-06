@@ -1,6 +1,7 @@
 const VALUE_ENUMS = {
     FILE: "efb::val__file",
-    IMG: "efb::val__img"
+    IMG: "efb::val__img",
+    ABSTRACT_HANDLER: "efb::handler/"
 }
 
 
@@ -14,6 +15,15 @@ PRIMITIVES["metadata"] = {
         Version: "",
         Description: "Does literally nothing",
         Credits: "By me"
+    },
+    asJavaScript: function () {
+        return `
+(function MetadataDatablock() {
+    ModAPI.meta.title("${this.tags.Title.replaceAll('"', '')}");
+    ModAPI.meta.version("${this.tags.Version.replaceAll('"', '')}");
+    ModAPI.meta.description("${this.tags.Description.replaceAll('"', '')}");
+    ModAPI.meta.credits("${this.tags.Credits.replaceAll('"', '')}");
+})();`;
     }
 }
 
@@ -22,12 +32,27 @@ PRIMITIVES["icon"] = {
     type: "icon",
     tags: {
         Icon: VALUE_ENUMS.IMG,
+    },
+    asJavaScript: function () {
+        return "";
+    }
+}
+
+PRIMITIVES["block"] = {
+    name: "Custom Block",
+    type: "block_advanced",
+    tags: {
+        Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
+    },
+    asJavaScript: function () {
+        return "";
     }
 }
 
 function getPrimitive(type) {
-    var cloned = structuredClone(PRIMITIVES[type]);
+    var cloned = Object.assign({}, PRIMITIVES[type]);
     delete cloned.asJavaScript;
+    cloned = structuredClone(cloned);
     return cloned;
 }
 

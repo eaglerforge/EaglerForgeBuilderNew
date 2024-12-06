@@ -41,6 +41,12 @@ function editObject(obj, datablock) {
             input.accept = "image/*";
         }
 
+        if (PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
+            input = document.createElement("select");
+            
+            input.accept = "image/*";
+        }
+
         input.addEventListener("input", () => {
             if (input.type === "file" && input.files[0]) {
                 const reader = new FileReader();
