@@ -54,7 +54,7 @@ PRIMITIVES["block_advanced"] = {
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
     },
     asJavaScript: function () {
-        var constructorHandler = getHandler("BlockConstructor", this.tags.Constructor)
+        var constructorHandler = javascript.javascriptGenerator.blockToCode(getHandler("BlockConstructor", this.tags.Constructor));
         return "";
     }
 }
