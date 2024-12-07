@@ -335,6 +335,17 @@
           <field name="DIRECTION">1</field>
         </block>
       </category>
+      <sep></sep>
+      <category name="Return" colour="#008855">
+        <block type="proc_return"> </block>
+        <block type="proc_returnvalue">
+          <value name="VALUE">
+            <shadow type="math_number">
+              <field name="NUM">0.5</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
       <!-- <category name="Events" colour="#a59f5b">
         <block type="events_onModLoads">
         </block>
@@ -352,15 +363,19 @@
       <!-- <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category> -->
       <sep></sep>
       <category name="Blocks" colour="#ff00ff">
-        <block type="handle_BlockConstructor">
-        </block>
+        <block type="handle_BlockConstructor"> </block>
         <block type="blocks_blockproperty">
+          <value name="VALUE">
+            <shadow type="math_number">
+              <field name="NUM">0.5</field>
+            </shadow>
+          </value>
         </block>
+        <block type="blocks_blockswitch"> </block>
       </category>
     </xml>
   </head>
-  
-  
+
   <body>
     <table>
       <tr>
@@ -382,22 +397,26 @@
                 <div id="blockly" style="background-color: darkslategrey"></div>
               </td>
               <td id="right">
-                <div id="propnav">
-                  properties of datablock
-                </div>
-                <select id="addtype">
-                </select>
-                <button style="margin-bottom: 1rem;" id="newdatablock">New</button>
+                <div id="propnav">properties of datablock</div>
+                <select id="addtype"></select>
+                <button style="margin-bottom: 1rem" id="newdatablock">
+                  New
+                </button>
                 <div id="datablock_container">
-                  <input id="search" type="search" value="" placeholder="Search for content: "><br>
+                  <input
+                    id="search"
+                    type="search"
+                    value=""
+                    placeholder="Search for content: "
+                  /><br />
                   <span class="datablock selected">
-                      <h4>Dirt Block</h4>
-                      <br>
-                      <i>Type: Block</i>
-                      <br><br>
-                      <div class="controls">
-                        <button>Delete</button>
-                      </div>
+                    <h4>Dirt Block</h4>
+                    <br />
+                    <i>Type: Block</i>
+                    <br /><br />
+                    <div class="controls">
+                      <button>Delete</button>
+                    </div>
                   </span>
                 </div>
               </td>
@@ -409,14 +428,16 @@
     <!-- Additional blocks -->
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Events.js"></script>
+    <script src="blocks/ReturnBlock.js"></script>
 
     <!-- The datablock types -->
     <script src="types.js"></script>
 
     <!-- Datablock Primitives -->
-    <script src="primitives/AdvancedBlock.js"></script>
     <script src="primitives/Metadata.js"></script>
     <script src="primitives/Icon.js"></script>
+    <script src="primitives/Block.js"></script>
+    <script src="primitives/AdvancedBlock.js"></script>
 
     <!-- Web App GUI and Engine -->
     <script src="functions.js"></script>

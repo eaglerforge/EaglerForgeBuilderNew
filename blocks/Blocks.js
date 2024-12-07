@@ -73,8 +73,8 @@ const blocks_blockswitch = {
 };
 Blockly.common.defineBlocks({blocks_blockswitch: blocks_blockswitch});
 javascript.javascriptGenerator.forBlock['blocks_blockswitch'] = function() {
-  const dropdown_property = block.getFieldValue('PROPERTY');
-  const checkbox_value = block.getFieldValue('VALUE') ? 1 : 0;
+  const dropdown_property = this.getFieldValue('PROPERTY');
+  const checkbox_value = this.getFieldValue('VALUE') ? 1 : 0;
   const code = `this["$${dropdown_property}"] = ${checkbox_value};`;
   return code;
 }

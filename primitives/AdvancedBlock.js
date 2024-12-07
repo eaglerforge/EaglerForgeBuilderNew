@@ -1,10 +1,11 @@
+// Todo: add support for more events, and returning stuff in events.
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
     uses: ["fixup_block_ids"],
     type: "block_advanced",
     tags: {
-        id: "custom_block",
-        name: "Custom Block",
+        id: "advanced_block",
+        name: "Advanced Block",
         texture: VALUE_ENUMS.IMG,
         material: ['air', 'grass', 'ground', 'wood', 'rock', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
