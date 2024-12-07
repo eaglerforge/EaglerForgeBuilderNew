@@ -40,7 +40,6 @@ function editObject(obj, datablock) {
             input.type = "file";
             input.accept = "image/*";
         }
-        console.log(obj);
         if (PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
             var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
