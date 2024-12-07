@@ -40,7 +40,7 @@ function editObject(obj, datablock) {
             input.type = "file";
             input.accept = "image/*";
         }
-        if (PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
+        if ((typeof PRIMITIVES[obj.type].tags[k] === "string") && PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
             var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
             handlers.forEach(opt => {
@@ -67,6 +67,20 @@ function editObject(obj, datablock) {
                     input.appendChild(option);
                 });
             }
+        }
+
+        if (Array.isArray(PRIMITIVES[obj.type].tags[k])) {
+            input = document.createElement("select");
+            var handlers = PRIMITIVES[obj.type].tags[k];
+            handlers.forEach(opt => {
+                var option = document.createElement("option");
+                option.value = opt;
+                option.innerText = opt;
+                if (opt === obj.tags[k]) {
+                    option.selected = true;
+                }
+                input.appendChild(option);
+            });
         }
 
         input.addEventListener("input", () => {

@@ -17,10 +17,6 @@
     <!-- Load dark mode -->
     <script src="./libs/blockly/darktheme.js"></script>
 
-    <!-- Load the blocks -->
-    <script src="blocks/Blocks.js"></script>
-    <script src="blocks/Events.js"></script>
-
     <xml
       xmlns="https://developers.google.com/blockly/xml"
       id="toolbox"
@@ -410,8 +406,19 @@
         </td>
       </tr>
     </table>
+    <!-- Additional blocks -->
+    <script src="blocks/Blocks.js"></script>
+    <script src="blocks/Events.js"></script>
 
+    <!-- The datablock types -->
     <script src="types.js"></script>
+
+    <!-- Datablock Primitives -->
+    <script src="primitives/AdvancedBlock.js"></script>
+    <script src="primitives/Metadata.js"></script>
+    <script src="primitives/Icon.js"></script>
+
+    <!-- Web App GUI and Engine -->
     <script src="functions.js"></script>
     <script src="propviewer.js"></script>
     <script src="index.js"></script>
