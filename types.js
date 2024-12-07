@@ -9,12 +9,13 @@ const PRIMITIVES = {};
 
 PRIMITIVES["metadata"] = {
     name: "Metadata",
+    uses: [],
     type: "metadata",
     tags: {
         Title: "My Awesome Mod",
-        Version: "",
+        Version: "v1.0",
         Description: "Does literally nothing",
-        Credits: "By me"
+        Credits: "By <author>"
     },
     asJavaScript: function () {
         return `
@@ -29,22 +30,31 @@ PRIMITIVES["metadata"] = {
 
 PRIMITIVES["icon"] = {
     name: "Icon",
+    uses: [],
     type: "icon",
     tags: {
         Icon: VALUE_ENUMS.IMG,
     },
     asJavaScript: function () {
-        return "";
+        if (!this.tags.Icon || this.tags.Icon === VALUE_ENUMS.IMG) {
+            return "";
+        }
+        return `
+(function IconDatablock() {
+    ModAPI.meta.icon("${this.tags.Icon}");
+})();`;
     }
 }
 
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
+    uses: ["fixup_block_ids"],
     type: "block_advanced",
     tags: {
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
     },
     asJavaScript: function () {
+        var constructorHandler = getHandler("BlockConstructor", this.tags.Constructor)
         return "";
     }
 }

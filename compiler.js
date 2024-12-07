@@ -5,12 +5,22 @@ function toFunctionName(str) {
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
     let datablock_contents = "";
-    let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
-    let metadata = PRIMITIVES["metadata"].asJavaScript();
+    var prereq_contents = "";
+    let functionPrereqs = [];
+    state.nodes.forEach(node => {
+        functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
+        datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
+    });
+    functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
+    functionPrereqs.forEach(fn => {
+        prereq_contents += getFunctionCode(FUNCTIONS[fn]);
+    });
+
+    //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
+
     return `(function EFB2Mod() {
-${metadata}
+${prereq_contents}
 ${datablock_contents}
-${modCode}
 })();
 `;
 }

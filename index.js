@@ -12,8 +12,12 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     toolbox: document.querySelector("#toolbox")
 });
 var handlers = {};
+var handlerMapDict = {};
 function getHandlers(type) {
     return handlers["handle_" + type] || [];
+}
+function getHandler(type, name) {
+    return handlerMapDict["handle_" + type]?.[name] || null;
 }
 const supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
@@ -23,15 +27,22 @@ const supportedEvents = new Set([
 function updateHandlers() {
     if (workspace.isDragging()) return;
     handlers = {};
+    handlerMapDict = {};
     workspace.getAllBlocks().forEach(block => {
+        var id = block.getFieldValue("ID");
+        if (id === "None") {
+            return;
+        }
         if (!handlers[block.type]) {
-            handlers[block.type] = [block.getFieldValue("ID")];
+            handlers[block.type] = [id];
+            handlerMapDict[block.type] = Object.fromEntries([[id, block]]);
         } else {
-            var id = block.getFieldValue("ID");
+            
             if (handlers[block.type].includes(id)) {
                 return;
             }
             handlers[block.type].push(id);
+            handlerMapDict[block.type][id] = block;
         }
     });
     document.querySelectorAll(".handler_select").forEach(x => {

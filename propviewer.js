@@ -43,7 +43,7 @@ function editObject(obj, datablock) {
         console.log(obj);
         if (PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
-            var handlers = getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, ''));
+            var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
             handlers.forEach(opt => {
                 var option = document.createElement("option");
                 option.value = opt;
@@ -57,7 +57,7 @@ function editObject(obj, datablock) {
             input.updateHandlerList = function () {
                 var val = input.value;
                 input.innerHTML = "";
-                var handlers = getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, ''));
+                var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
                 handlers.forEach(opt => {
                     var option = document.createElement("option");
                     option.value = opt;
