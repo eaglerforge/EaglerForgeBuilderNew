@@ -1,4 +1,3 @@
-// Todo: add support for more events, and returning stuff in events.
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
     uses: ["fixup_block_ids"],
@@ -11,7 +10,8 @@ PRIMITIVES["block_advanced"] = {
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
     },
     asJavaScript: function () {
-        var constructorHandler = javascript.javascriptGenerator.blockToCode(getHandler("BlockConstructor", this.tags.Constructor));
+        console.log(this);
+        var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor);
         return `(function AdvancedBlockDatablock() {
     const blockTexture = "${this.tags.texture}";
 

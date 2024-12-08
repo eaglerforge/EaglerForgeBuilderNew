@@ -30,10 +30,30 @@ const proc_returnvalue = {
 };
 Blockly.common.defineBlocks({ proc_returnvalue: proc_returnvalue });
 
-
-
 javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
     const code = 'return ' + value + ';';
+    return code;
+}
+
+
+
+const proc_returnbool = {
+    init: function () {
+        this.appendValueInput('VALUE').setCheck('Boolean')
+            .appendField('return boolean');
+        this.setInputsInline(false)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(false, null);
+        this.setTooltip('');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ proc_returnbool: proc_returnbool });
+
+javascript.javascriptGenerator.forBlock['proc_returnbool'] = function () {
+    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = `return (${value}) ? 1 : 0;`;
     return code;
 }

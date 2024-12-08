@@ -19,6 +19,17 @@ function getHandlers(type) {
 function getHandler(type, name) {
     return handlerMapDict["handle_" + type]?.[name] || null;
 }
+function getHandlerCode(type, tag) {
+    var handler = getHandler(type, tag);
+    var usedVariableSet = new Set();
+    handler.getDescendants(true).forEach(block => {
+        block.getVars().forEach(varId => {
+            usedVariableSet.add(varId);
+        });
+    });
+    var variableCode = "var " + [...usedVariableSet].map(varId => { return javascript.javascriptGenerator.getVariableName(varId) }).join(",") + ";"
+    return variableCode + javascript.javascriptGenerator.blockToCode(handler);
+}
 const supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
     Blockly.Events.BLOCK_CREATE,
@@ -37,7 +48,7 @@ function updateHandlers() {
             handlers[block.type] = [id];
             handlerMapDict[block.type] = Object.fromEntries([[id, block]]);
         } else {
-            
+
             if (handlers[block.type].includes(id)) {
                 return;
             }

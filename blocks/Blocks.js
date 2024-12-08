@@ -49,6 +49,8 @@ javascript.javascriptGenerator.forBlock['blocks_blockproperty'] = function() {
   return code;
 }
 
+
+
 const blocks_blockswitch = {
   init: function() {
     this.appendDummyInput('PROPERTY')
@@ -77,4 +79,24 @@ javascript.javascriptGenerator.forBlock['blocks_blockswitch'] = function() {
   const checkbox_value = this.getFieldValue('VALUE') ? 1 : 0;
   const code = `this["$${dropdown_property}"] = ${checkbox_value};`;
   return code;
+}
+
+
+const handle_BlockBreak = {
+  init: function() {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block break 1'), 'ID');
+    this.appendStatementInput('CODE')
+      .appendField('Block Break Handler');
+    this.setInputsInline(false)
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({handle_BlockBreak: handle_BlockBreak});
+javascript.javascriptGenerator.forBlock['handle_BlockBreak'] = function (block) {
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return statement;
 }
