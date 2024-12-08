@@ -24,7 +24,7 @@ PRIMITIVES["block_advanced"] = {
         var nmb_AdvancedBlock = function nmb_AdvancedBlock() {
             blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
             this.$defaultBlockState = this.$blockState.$getBaseState();
-            ${constructorHandler}
+            ${constructorHandler.code}
         }
         ModAPI.reflect.prototypeStack(blockClass, nmb_AdvancedBlock);
         nmb_AdvancedBlock.prototype.$isOpaqueCube = function () {

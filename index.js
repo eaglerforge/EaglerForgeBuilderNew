@@ -28,7 +28,9 @@ function getHandlerCode(type, tag) {
         });
     });
     var variableCode = "var " + [...usedVariableSet].map(varId => { return javascript.javascriptGenerator.getVariableName(varId) }).join(",") + ";"
-    return variableCode + javascript.javascriptGenerator.blockToCode(handler);
+    var generatedCode = javascript.javascriptGenerator.forBlock[handler.type].apply(handler, []);
+    generatedCode.code = variableCode + generatedCode.code;
+    return generatedCode;
 }
 const supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
