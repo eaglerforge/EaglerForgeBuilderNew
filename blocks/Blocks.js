@@ -28,7 +28,7 @@ const blocks_blockproperty = {
           ['light opacity', 'lightOpacity'],
           ['light value', 'lightValue'],
           ['blast resistance', 'blockResistance'],
-          ['block hardness', 'blockHardness']
+          ['hardness', 'blockHardness']
         ]), 'PROPERTY');
     this.appendValueInput('VALUE')
     .setCheck('Number')
