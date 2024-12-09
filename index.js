@@ -9,7 +9,16 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     theme: "dark",
     trashcan: true,
     readOnly: false,
-    toolbox: document.querySelector("#toolbox")
+    toolbox: document.querySelector("#toolbox"),
+    zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2,
+        pinch: true
+    },
 });
 var handlers = {};
 var handlerMapDict = {};
@@ -19,16 +28,20 @@ function getHandlers(type) {
 function getHandler(type, name) {
     return handlerMapDict["handle_" + type]?.[name] || null;
 }
-function getHandlerCode(type, tag) {
+function getHandlerCode(type, tag, defaultArgs) {
     var handler = getHandler(type, tag);
+    if (!handler) { return { code: "", args: defaultArgs } };
     var usedVariableSet = new Set();
     handler.getDescendants(true).forEach(block => {
         block.getVars().forEach(varId => {
             usedVariableSet.add(varId);
         });
     });
-    var variableCode = "var " + [...usedVariableSet].map(varId => { return javascript.javascriptGenerator.getVariableName(varId) }).join(",") + ";"
     var generatedCode = javascript.javascriptGenerator.forBlock[handler.type].apply(handler, []);
+
+    var variableCode = [...usedVariableSet].map(varId => { return javascript.javascriptGenerator.getVariableName(varId) }).join(",");
+    variableCode = variableCode ? ("var " + variableCode + ";") : "";
+
     generatedCode.code = variableCode + generatedCode.code;
     return generatedCode;
 }

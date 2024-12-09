@@ -1,3 +1,4 @@
+//TODO: tickRate/getTickRate, quantityDropped, onBlockDestroyedByExplosion, onEntityCollidedWithBlock, onBlockActivated, onEntityCollidedWithBlock
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
     uses: ["fixup_block_ids"],
@@ -8,59 +9,82 @@ PRIMITIVES["block_advanced"] = {
         texture: VALUE_ENUMS.IMG,
         material: ['air', 'grass', 'ground', 'wood', 'rock', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
+        Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
+        Added: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockAdded",
+        NeighborChange: VALUE_ENUMS.ABSTRACT_HANDLER + "NeighborChange",
     },
     asJavaScript: function () {
         console.log(this);
-        var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor);
+        var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor, []);
+        var breakHandler = getHandlerCode("BlockBreak", this.tags.Break, ["$$world", "$$blockpos", "$$blockstate"]);
+        var addedHandler = getHandlerCode("BlockAdded", this.tags.Added, ["$$world", "$$blockpos", "$$blockstate"]);
+        var neighborHandler = getHandlerCode("NeighborChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"]);
         return `(function AdvancedBlockDatablock() {
-    const blockTexture = "${this.tags.texture}";
+    const $$blockTexture = "${this.tags.texture}";
 
     function ServersideBlocks() {
-        var itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
-        var blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
-        var iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;
-        var makeBlockState = ModAPI.reflect.getClassById("net.minecraft.block.state.BlockState").constructors.find(x => x.length === 2);
-        var blockSuper = ModAPI.reflect.getSuper(blockClass, (x) => x.length === 2);
-        var nmb_AdvancedBlock = function nmb_AdvancedBlock() {
-            blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
+        var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
+        var $$blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
+        var $$iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;
+        var $$makeBlockState = ModAPI.reflect.getClassById("net.minecraft.block.state.BlockState").constructors.find(x => x.length === 2);
+        var $$blockSuper = ModAPI.reflect.getSuper($$blockClass, (x) => x.length === 2);
+
+        var $$breakBlockMethod = $$blockClass.methods.breakBlock.method;
+        var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
+        var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
+
+        var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
+            $$blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
             this.$defaultBlockState = this.$blockState.$getBaseState();
-            ${constructorHandler.code}
+            ${constructorHandler.code};
         }
-        ModAPI.reflect.prototypeStack(blockClass, nmb_AdvancedBlock);
-        nmb_AdvancedBlock.prototype.$isOpaqueCube = function () {
+        ModAPI.reflect.prototypeStack($$blockClass, $$nmb_AdvancedBlock);
+        $$nmb_AdvancedBlock.prototype.$isOpaqueCube = function () {
             return 1;
         }
-        nmb_AdvancedBlock.prototype.$createBlockState = function () {
-            return makeBlockState(this, ModAPI.array.object(iproperty, 0));
+        $$nmb_AdvancedBlock.prototype.$createBlockState = function () {
+            return $$makeBlockState(this, ModAPI.array.object($$iproperty, 0));
+        }
+        $$nmb_AdvancedBlock.prototype.$breakBlock = function (${breakHandler.args.join(", ")}) {
+            ${breakHandler.code};
+            return $$breakBlockMethod(this, ${breakHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$onBlockAdded = function (${addedHandler.args.join(", ")}) {
+            ${addedHandler.code};
+            return $$onBlockAddedMethod(this, ${addedHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${neighborHandler.args.join(", ")}) {
+            ${neighborHandler.code};
+            return $$onNeighborBlockChangeMethod(this, ${neighborHandler.args.join(", ")});
         }
 
-        function internal_reg() {
-            var cblock = (new nmb_AdvancedBlock()).$setUnlocalizedName(
+        function $$internal_reg() {
+            var $$cblock = (new $$nmb_AdvancedBlock()).$setUnlocalizedName(
                 ModAPI.util.str("${this.tags.id}")
             );
-            blockClass.staticMethods.registerBlock0.method(
+            $$blockClass.staticMethods.registerBlock0.method(
                 ModAPI.keygen.block("${this.tags.id}"),
                 ModAPI.util.str("${this.tags.id}"),
-                cblock
+                $$cblock
             );
-            itemClass.staticMethods.registerItemBlock0.method(cblock);
+            $$itemClass.staticMethods.registerItemBlock0.method($$cblock);
             efb2__fixupBlockIds();
-            ModAPI.blocks["${this.tags.id}"] = cblock;
+            ModAPI.blocks["${this.tags.id}"] = $$cblock;
             
-            return cblock;
+            return $$cblock;
         }
 
         if (ModAPI.materials) {
-            return internal_reg();
+            return $$internal_reg();
         } else {
-            ModAPI.addEventListener("bootstrap", internal_reg);
+            ModAPI.addEventListener("bootstrap", $$internal_reg);
         }
     }
     ModAPI.dedicatedServer.appendCode(ServersideBlocks);
-    var cblock = ServersideBlocks();
+    var $$cblock = ServersideBlocks();
     ModAPI.addEventListener("lib:asyncsink", async () => {
         ModAPI.addEventListener("custom:asyncsink_reloaded", ()=>{
-            ModAPI.mc.renderItem.registerBlock(cblock, ModAPI.util.str("${this.tags.id}"));
+            ModAPI.mc.renderItem.registerBlock($$cblock, ModAPI.util.str("${this.tags.id}"));
         });
         AsyncSink.L10N.set("tile.${this.tags.id}.name", "${this.tags.name}");
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/models/block/${this.tags.id}.json", JSON.stringify(
@@ -93,7 +117,7 @@ PRIMITIVES["block_advanced"] = {
             }
         ));
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/textures/blocks/${this.tags.id}.png", await (await fetch(
-            blockTexture
+            $$blockTexture
         )).arrayBuffer());
     });
 })();`;

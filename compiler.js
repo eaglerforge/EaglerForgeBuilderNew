@@ -11,6 +11,9 @@ function getCompiledCode() {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
+    workspace.getAllBlocks().forEach(block => {
+        functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
+    });
     functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
     functionPrereqs.forEach(fn => {
         prereq_contents += getFunctionCode(FUNCTIONS[fn]);

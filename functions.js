@@ -26,6 +26,34 @@ FUNCTIONS["fixup_block_ids"] = {
         EFB2__defineFixupGlobal();
     },
 };
+
+FUNCTIONS["execute_command"] = {
+    identifier: "execute_command",
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineExecCmdGlobal() {
+            globalThis.efb2__executeCommand = function efb2__executeCommand($world, $blockpos, commandStr) {
+                var fakeEntity = (new new ModAPI.reflect.getClassByName("Entity").class);
+                fakeEntity.$setPosition($blockpos.$x, $blockpos.$y, $blockpos.$z);
+                var vector = ModAPI.reflect.getClassByName("Vec3").constructors[0]($blockpos.$x, $blockpos.$y, $blockpos.$z);
+                var cmd = Object.assign((new new ModAPI.reflect.getClassByName("CommandBlockLogic").class), {
+                    $func_145751_f: ()=>{return 1},
+                    $updateCommand: ()=>{},
+                    $func_145757_a: ()=>{},
+                    $getPosition: ()=>{return $blockpos},
+                    $getPositionVector: ()=>{return vector},
+                    $getEntityWorld: ()=>{return $world},
+                    $getCommandSenderEntity: ()=>{return fakeEntity}
+                });
+                cmd.$setCommand(ModAPI.util.str(commandStr));
+                cmd.$trigger($world);
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineExecCmdGlobal);
+        EFB2__defineExecCmdGlobal();
+    },
+};
+
 function getFunctionCode(fn) {
     return fn.code.toString().match(codeGrabberRegex)?.[0] 
     || (()=>{console.error("Malformed function: ", fn); return "";})();

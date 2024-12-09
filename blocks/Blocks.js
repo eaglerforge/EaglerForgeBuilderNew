@@ -105,5 +105,59 @@ javascript.javascriptGenerator.forBlock['handle_BlockBreak'] = function () {
   const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
   const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
   const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$blockstate"] };
+  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
+}
+
+
+
+const handle_BlockAdded = {
+  init: function () {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block added 1'), 'ID');
+    this.appendDummyInput('')
+      .appendField('Block Placed Handler with:')
+      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
+      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+    this.appendStatementInput('CODE');
+    this.setInputsInline(false)
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ handle_BlockAdded: handle_BlockAdded });
+
+javascript.javascriptGenerator.forBlock['handle_BlockAdded'] = function () {
+  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
+}
+
+
+
+const handle_BlockNeighbourChange = {
+  init: function () {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block neighbour update 1'), 'ID');
+    this.appendDummyInput('')
+      .appendField('Block Neighbour Changed Handler with:')
+      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
+      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+    this.appendStatementInput('CODE');
+    this.setInputsInline(false)
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ handle_BlockNeighbourChange: handle_BlockNeighbourChange });
+
+javascript.javascriptGenerator.forBlock['handle_BlockNeighbourChange'] = function () {
+  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
 }

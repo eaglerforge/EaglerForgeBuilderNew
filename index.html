@@ -376,6 +376,12 @@
         </block>
         <block type="blocks_blockswitch"> </block>
         <block type="handle_BlockBreak"> </block>
+        <block type="handle_BlockAdded"> </block>
+        <block type="handle_BlockNeighbourChange"> </block>
+      </category>
+      <category name="World" colour="#22aabb">
+        <block type="world_explosion"> </block>
+        <block type="world_command"> </block>
       </category>
     </xml>
   </head>
@@ -429,7 +435,11 @@
         </td>
       </tr>
     </table>
+    <!-- Blockly block libmap builder -->
+    <script src="block_libmap.js"></script>
+
     <!-- Additional blocks -->
+    <script src="blocks/World.js"></script>
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Events.js"></script>
     <script src="blocks/ReturnBlock.js"></script>
