@@ -9,7 +9,11 @@ function serialise() {
 }
 function deserialise(data) {
     var data = JSON.parse(data);
-    Blockly.serialization.workspaces.load(data.blockly || {}, workspace);
+    try {
+        Blockly.serialization.workspaces.load(data.blockly || {}, workspace);
+    } catch (error) {
+        
+    }
     globalThis.state = data;
     reloadUI();
 }

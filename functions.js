@@ -33,20 +33,30 @@ FUNCTIONS["execute_command"] = {
     code: function () {
         function EFB2__defineExecCmdGlobal() {
             globalThis.efb2__executeCommand = function efb2__executeCommand($world, $blockpos, commandStr) {
-                var fakeEntity = (new new ModAPI.reflect.getClassByName("Entity").class);
-                fakeEntity.$setPosition($blockpos.$x, $blockpos.$y, $blockpos.$z);
-                var vector = ModAPI.reflect.getClassByName("Vec3").constructors[0]($blockpos.$x, $blockpos.$y, $blockpos.$z);
-                var cmd = Object.assign((new new ModAPI.reflect.getClassByName("CommandBlockLogic").class), {
-                    $func_145751_f: ()=>{return 1},
-                    $updateCommand: ()=>{},
-                    $func_145757_a: ()=>{},
-                    $getPosition: ()=>{return $blockpos},
-                    $getPositionVector: ()=>{return vector},
-                    $getEntityWorld: ()=>{return $world},
-                    $getCommandSenderEntity: ()=>{return fakeEntity}
-                });
+                if ($world.$isRemote) {
+                    return;
+                }
+                function x() {
+                    ModAPI.reflect.getSuper(ModAPI.reflect.getClassByName("CommandBlockLogic"))(this);
+                }
+                ModAPI.reflect.prototypeStack(ModAPI.reflect.getClassByName("CommandBlockLogic"), x);
+                var vector = ModAPI.reflect.getClassByName("Vec3").constructors[0]($blockpos.$x + 0.5, $blockpos.$y + 0.5, $blockpos.$z + 0.5);
+                x.prototype.$getEntityWorld = ()=>{return $world};
+                x.prototype.$getCommandSenderEntity = ()=>{return null};
+                x.prototype.$updateCommand = ()=>{};
+                x.prototype.$func_145757_a = ()=>{};
+                x.prototype.$getPosition = ()=>{return $blockpos};
+                x.prototype.$getPositionVector = ()=>{return vector};
+                x.prototype.$func_145751_f = ()=>{return 0};
+                var cmd = new x();
                 cmd.$setCommand(ModAPI.util.str(commandStr));
-                cmd.$trigger($world);
+                
+                try {
+                    debugger;
+                    cmd.$trigger($world);
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
         ModAPI.dedicatedServer.appendCode(EFB2__defineExecCmdGlobal);

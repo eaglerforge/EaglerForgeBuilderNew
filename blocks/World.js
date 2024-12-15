@@ -12,7 +12,7 @@ const world_explosion = {
             .appendField('Fire:');
         this.appendValueInput('SMOKE')
             .setCheck('Boolean')
-            .appendField('Particles:');
+            .appendField('Break Blocks:');
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -46,7 +46,7 @@ const world_command = {
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip('');
+        this.setTooltip('NOTICE: @selectors do NOT work');
         this.setHelpUrl('');
         this.setColour(195);
     },
