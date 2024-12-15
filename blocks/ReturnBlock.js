@@ -1,3 +1,20 @@
+const local_this = {
+    init: function () {
+        this.appendDummyInput('NAME')
+            .appendField('this');
+        this.setInputsInline(false)
+        this.setOutput(true, null);
+        this.setTooltip('The object the handler is running on.');
+        this.setHelpUrl('');
+        this.setColour(330);
+    }
+};
+Blockly.common.defineBlocks({ local_this: local_this });
+javascript.javascriptGenerator.forBlock['local_this'] = function () {
+    return 'this';
+}
+
+
 const proc_return = {
     init: function () {
         this.appendDummyInput('NAME')

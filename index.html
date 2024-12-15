@@ -337,6 +337,7 @@
       </category>
       <sep></sep>
       <category name="Return" colour="#008855">
+        <block type="local_this"> </block>
         <block type="proc_return"> </block>
         <block type="proc_returnvalue">
           <value name="VALUE">
@@ -365,19 +366,19 @@
       <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
       <!-- <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category> -->
       <sep></sep>
-      <category name="Blocks" colour="#ff00ff">
+      <category name="Blocks (H)" colour="#ff00ff">
         <block type="handle_BlockConstructor"> </block>
-        <block type="blocks_blockproperty">
-          <value name="VALUE">
-            <block type="logic_boolean">
-              <field name="BOOL">TRUE</field>
-            </block>
-          </value>
-        </block>
-        <block type="blocks_blockswitch"> </block>
         <block type="handle_BlockBreak"> </block>
         <block type="handle_BlockAdded"> </block>
         <block type="handle_BlockNeighbourChange"> </block>
+        <block type="handle_BlockBrokenByPlayer"> </block>
+        <block type="handle_BlockUpdateTick"> </block>
+      </category>
+      <category name="Blocks (C)" colour="#ff00ff">
+        <block type="blocks_blockproperty"> </block>
+        <block type="blocks_blockswitch"> </block>
+        <block type="blocks_boundingbox"> </block>
+        <block type="blocks_creativetab"> </block>
       </category>
       <category name="World" colour="#22aabb">
         <block type="world_explosion"> </block>

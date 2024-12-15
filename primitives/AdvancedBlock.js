@@ -12,6 +12,9 @@ PRIMITIVES["block_advanced"] = {
         Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
         Added: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockAdded",
         NeighborChange: VALUE_ENUMS.ABSTRACT_HANDLER + "NeighborChange",
+        Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
+        BrokenByPlayer: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBrokenByPlayer",
+        UpdateTick: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockUpdateTick",
     },
     asJavaScript: function () {
         console.log(this);
@@ -19,6 +22,8 @@ PRIMITIVES["block_advanced"] = {
         var breakHandler = getHandlerCode("BlockBreak", this.tags.Break, ["$$world", "$$blockpos", "$$blockstate"]);
         var addedHandler = getHandlerCode("BlockAdded", this.tags.Added, ["$$world", "$$blockpos", "$$blockstate"]);
         var neighborHandler = getHandlerCode("NeighborChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"]);
+        var brokenByPlayerHandler = getHandlerCode("BrokenByPlayer", this.tags.BrokenByPlayer, ["$$world", "$$blockpos", "$$blockstate"]);
+        var updateTickHandler = getHandlerCode("UpdateTick", this.tags.UpdateTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
         return `(function AdvancedBlockDatablock() {
     const $$blockTexture = "${this.tags.texture}";
 
@@ -32,6 +37,8 @@ PRIMITIVES["block_advanced"] = {
         var $$breakBlockMethod = $$blockClass.methods.breakBlock.method;
         var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
         var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
+        var $$onBlockDestroyedByPlayerMethod = $$blockClass.methods.onBlockDestroyedByPlayer.method;
+        var $$updateTickMethod = $$blockClass.methods.updateTick.method;
 
         var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
             $$blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
@@ -56,6 +63,14 @@ PRIMITIVES["block_advanced"] = {
         $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${neighborHandler.args.join(", ")}) {
             ${neighborHandler.code};
             return $$onNeighborBlockChangeMethod(this, ${neighborHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$onBlockDestroyedByPlayer = function (${brokenByPlayerHandler.args.join(", ")}) {
+            ${brokenByPlayerHandler.code};
+            return $$onBlockDestroyedByPlayerMethod(this, ${brokenByPlayerHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$updateTick = function (${updateTickHandler.args.join(", ")}) {
+            ${updateTickHandler.code};
+            return $$updateTickMethod(this, ${updateTickHandler.args.join(", ")});
         }
 
         function $$internal_reg() {

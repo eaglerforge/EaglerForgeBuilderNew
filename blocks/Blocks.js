@@ -7,7 +7,7 @@ const handle_BlockConstructor = {
       .setAlign(Blockly.inputs.Align.LEFT)
       .appendField('Block Constructor Handler');
     this.appendStatementInput('CODE');
-    this.setTooltip('');
+    this.setTooltip('Runs when the block type is initialised.\nNo return value expected.');
     this.setHelpUrl('');
     this.setColour(0);
   }
@@ -16,7 +16,7 @@ Blockly.common.defineBlocks({ handle_BlockConstructor: handle_BlockConstructor }
 
 javascript.javascriptGenerator.forBlock['handle_BlockConstructor'] = function (block) {
   const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return {code: statement, args: []};
+  return { code: statement, args: [] };
 }
 
 
@@ -94,7 +94,7 @@ const handle_BlockBreak = {
       .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
-    this.setTooltip('');
+    this.setTooltip('Runs when the block is removed from the world.\nNo return value expected.');
     this.setHelpUrl('');
     this.setColour(0);
   }
@@ -121,7 +121,7 @@ const handle_BlockAdded = {
       .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
-    this.setTooltip('');
+    this.setTooltip('Runs when the block is added to the world.\nNo return value expected.');
     this.setHelpUrl('');
     this.setColour(0);
   }
@@ -148,7 +148,7 @@ const handle_BlockNeighbourChange = {
       .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
-    this.setTooltip('');
+    this.setTooltip('Runs when a block\'s neighbor is changed.\nNo return value expected.');
     this.setHelpUrl('');
     this.setColour(0);
   }
@@ -160,4 +160,130 @@ javascript.javascriptGenerator.forBlock['handle_BlockNeighbourChange'] = functio
   const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
   const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
   return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
+}
+
+
+
+const handle_BlockBrokenByPlayer = {
+  init: function () {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block broken by player 1'), 'ID');
+    this.appendDummyInput('')
+      .appendField('Block Broken By Player Handler with:')
+      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
+      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+    this.appendStatementInput('CODE');
+    this.setInputsInline(false)
+    this.setTooltip('Runs when a block is broken by a player.\nNo return value expected.');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ handle_BlockBrokenByPlayer: handle_BlockBrokenByPlayer });
+
+javascript.javascriptGenerator.forBlock['handle_BlockBrokenByPlayer'] = function () {
+  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
+}
+
+
+const handle_BlockUpdateTick = {
+  init: function () {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block update tick 1'), 'ID');
+    this.appendDummyInput('')
+      .appendField('Block Update Tick Handler with:')
+      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
+      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+    this.appendStatementInput('CODE');
+    this.setInputsInline(false)
+    this.setTooltip('Runs when a block is ticked.\nNo return value expected.');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ handle_BlockUpdateTick: handle_BlockUpdateTick });
+
+javascript.javascriptGenerator.forBlock['handle_BlockUpdateTick'] = function () {
+  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate", "$$random"] };
+}
+
+
+
+
+const blocks_boundingbox = {
+  init: function () {
+    this.appendDummyInput('MIN')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('Set block bounds to min:')
+      .appendField(new Blockly.FieldNumber(0), 'MINX')
+      .appendField(new Blockly.FieldNumber(0), 'MINY')
+      .appendField(new Blockly.FieldNumber(0), 'MINZ');
+    this.appendDummyInput('MAX')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('max:')
+      .appendField(new Blockly.FieldNumber(1), 'MAXX')
+      .appendField(new Blockly.FieldNumber(1), 'MAXY')
+      .appendField(new Blockly.FieldNumber(1), 'MAXZ');
+    this.setInputsInline(false)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('Sets the block\'s bounding box');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ blocks_boundingbox: blocks_boundingbox });
+javascript.javascriptGenerator.forBlock['blocks_boundingbox'] = function () {
+  const number_minx = block.getFieldValue('MINX');
+  const number_miny = block.getFieldValue('MINY');
+  const number_minz = block.getFieldValue('MINZ');
+  const number_maxx = block.getFieldValue('MAXX');
+  const number_maxy = block.getFieldValue('MAXY');
+  const number_maxz = block.getFieldValue('MAXZ');
+  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz})`;
+  return code;
+}
+
+
+
+const blocks_creativetab = {
+  init: function () {
+    this.appendDummyInput('TAB')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('Set block creative tab to')
+      .appendField(new Blockly.FieldDropdown([
+        ["tabBlock", "tabBlock"],
+        ["tabDecorations", "tabDecorations"],
+        ["tabRedstone", "tabRedstone"],
+        ["tabTransport", "tabTransport"],
+        ["tabMisc", "tabMisc"],
+        ["tabAllSearch", "tabAllSearch"],
+        ["tabFood", "tabFood"],
+        ["tabTools", "tabTools"],
+        ["tabCombat", "tabCombat"],
+        ["tabBrewing", "tabBrewing"],
+        ["tabMaterials", "tabMaterials"],
+        ["tabInventory", "tabInventory"]
+      ]), 'TAB');
+    this.setInputsInline(false)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('Set the creative tab of the block');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ blocks_creativetab: blocks_creativetab });
+javascript.javascriptGenerator.forBlock['blocks_creativetab'] = function() {
+  const dropdown_tab = this.getFieldValue('TAB');
+  const code = `this.$setCreativeTab(ModAPI.reflect.getClassById("net.minecraft.creativetab.CreativeTabs").staticVariables.${dropdown_tab});`;
+  return code;
 }
