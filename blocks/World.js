@@ -60,3 +60,68 @@ javascript.javascriptGenerator.forBlock['world_command'] = function () {
     const code = `efb2__executeCommand(${value_world}, ${value_pos}, ${value_cmd});`;
     return code;
 }
+
+
+
+const world_is_not_remote = {
+    init: function () {
+        this.appendValueInput('WORLD')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('world is on the server');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Boolean');
+        this.setTooltip('Check if the world is running on the server.');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ world_is_not_remote: world_is_not_remote });
+
+javascript.javascriptGenerator.forBlock['world_is_not_remote'] = function () {
+    const value_world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
+    const code = `!(${value_world}).$isRemote`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const world_get_loaded_entities = {
+    init: function () {
+        this.appendValueInput('WORLD')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get list of entities in world');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Array');
+        this.setTooltip('Returns an array of entities in the world');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ world_get_loaded_entities: world_get_loaded_entities });
+
+javascript.javascriptGenerator.forBlock['world_get_loaded_entities'] = function () {
+    const value_world = generator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
+    const code = `(${value_world}).loadedEntityList.toArray1().getRef().data`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const world_get_player_entities = {
+    init: function () {
+        this.appendValueInput('WORLD')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get list of players in world');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Array');
+        this.setTooltip('Returns an array of player entities in the world');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ world_get_player_entities: world_get_player_entities });
+javascript.javascriptGenerator.forBlock['world_get_player_entities'] = function () {
+    const value_world = javascript.javascriptGenerator.valueToCode(thiss, 'WORLD', javascript.Order.ATOMIC);
+    const code = `(${value_world}).playerEntities.toArray1().getRef().data`;
+    return [code, javascript.Order.NONE];
+}

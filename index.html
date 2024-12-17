@@ -366,7 +366,7 @@
       <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
       <!-- <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category> -->
       <sep></sep>
-      <category name="Blocks (H)" colour="#ff00ff">
+      <category name="Blocks (H)" colour="#dd11dd">
         <block type="handle_BlockConstructor"> </block>
         <block type="handle_BlockBreak"> </block>
         <block type="handle_BlockAdded"> </block>
@@ -374,15 +374,38 @@
         <block type="handle_BlockBrokenByPlayer"> </block>
         <block type="handle_BlockUpdateTick"> </block>
       </category>
-      <category name="Blocks (C)" colour="#ff00ff">
+      <category name="Blocks (C)" colour="#dd11dd">
         <block type="blocks_blockproperty"> </block>
         <block type="blocks_blockswitch"> </block>
         <block type="blocks_boundingbox"> </block>
         <block type="blocks_creativetab"> </block>
       </category>
+      <category name="Items (H)" colour="#0033dd">
+        
+      </category>
+      <category name="Items (C)" colour="#0033dd">
+
+      </category>
+      <category name="ItemStack (C)" colour="#44eebb">
+        
+      </category>
+      <category name="BlockPos (C)" colour="#6633cc">
+        <block type="blockpos_fromxyz"> </block>
+        <block type="blockpos_getxyz"> </block>
+      </category>
+      <category name="Vec3  (C)" colour="#6633cc">
+        <block type="vec3_fromxyz"> </block>
+        <block type="vec3_getxyz"> </block>
+      </category>
       <category name="World (C)" colour="#22aabb">
+        <block type="world_is_not_remote"> </block>
         <block type="world_explosion"> </block>
         <block type="world_command"> </block>
+        <block type="world_get_loaded_entities"> </block>
+        <block type="world_get_player_entities"> </block>
+      </category>
+      <category name="Entity (C)" colour="#ff8811">
+        
       </category>
     </xml>
   </head>
@@ -442,7 +465,9 @@
     <!-- Additional blocks -->
     <script src="blocks/World.js"></script>
     <script src="blocks/Blocks.js"></script>
-    <script src="blocks/Events.js"></script>
+    <script src="blocks/Vec3.js"></script>
+    <script src="blocks/BlockPos.js"></script>
+    <script src="blocks/Events.js"></script> <!-- Currently unused -->
     <script src="blocks/ReturnBlock.js"></script>
 
     <!-- The datablock types -->

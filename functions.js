@@ -64,6 +64,36 @@ FUNCTIONS["execute_command"] = {
     },
 };
 
+FUNCTIONS["construct_vec3"] = {
+    identifier: "construct_vec3",
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineMakeVec3() {
+            var mkVec3 = ModAPI.reflect.getClassById("net.minecraft.util.Vec3").constructors.find(x=>x.length===3);
+            globalThis.efb2__makeVec3 = function efb2__makeVec3(x, y, z) {
+                return mkVec3(x, y, z);
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineMakeVec3);
+        EFB2__defineMakeVec3();
+    },
+};
+
+FUNCTIONS["construct_blockpos"] = {
+    identifier: "construct_blockpos",
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineMakeBlockPos() {
+            var mkBlockPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors.find(x=>x.length===3);
+            globalThis.efb2__makeBlockPos = function efb2__makeBlockPos(x, y, z) {
+                return mkBlockPos(x, y, z);
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineMakeBlockPos);
+        EFB2__defineMakeBlockPos();
+    },
+};
+
 function getFunctionCode(fn) {
     return fn.code.toString().match(codeGrabberRegex)?.[0] 
     || (()=>{console.error("Malformed function: ", fn); return "";})();
