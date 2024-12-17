@@ -210,3 +210,127 @@ javascript.javascriptGenerator.forBlock['entity_get_switch'] = function () {
     const code = `((${value_entity})["${dropdown_prop}"] ? true : false)`;
     return [code, javascript.Order.NONE];
 }
+
+
+
+const entity_get_world = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get world of entity');
+        this.setInputsInline(true)
+        this.setOutput(true, null);
+        this.setTooltip('Gets the entity\'s world object.');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_get_world: entity_get_world });
+
+javascript.javascriptGenerator.forBlock['entity_get_world'] = function () {
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const code = `(${value_entity}).$worldObj`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_get_position = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get position of entity');
+        this.appendDummyInput('AS')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('as')
+            .appendField(new Blockly.FieldDropdown([
+                ['BlockPos', '$getPosition'],
+                ['Vec3', '$getPositionVector']
+            ]), 'AS');
+        this.setInputsInline(true)
+        this.setOutput(true, null);
+        this.setTooltip('Gets the entity\'s position object.');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_get_position: entity_get_position });
+javascript.javascriptGenerator.forBlock['entity_get_position'] = function () {
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const dropdown_as = this.getFieldValue('AS');
+    const code = `(${value_entity})["${dropdown_as}"]()`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_distance = {
+    init: function () {
+        this.appendValueInput('A')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('distance from entity');
+        this.appendValueInput('B')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('to entity');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Get the distance between two entities');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_distance: entity_distance });
+javascript.javascriptGenerator.forBlock['entity_distance'] = function () {
+    const value_a = javascript.javascriptGenerator.valueToCode(this, 'A', javascript.Order.ATOMIC);
+    const value_b = javascript.javascriptGenerator.valueToCode(this, 'B', javascript.Order.ATOMIC);
+    const code = `(${value_a}).$getDistanceToEntity(${value_b})`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_distance_vec3 = {
+    init: function () {
+        this.appendValueInput('A')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('distance from entity');
+        this.appendValueInput('B')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('to Vec3');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Get the distance from an entity to a Vec3 position');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_distance_vec3: entity_distance_vec3 });
+
+javascript.javascriptGenerator.forBlock['entity_distance_vec3'] = function () {
+    const value_a = javascript.javascriptGenerator.valueToCode(this, 'A', javascript.Order.ATOMIC);
+    const value_b = javascript.javascriptGenerator.valueToCode(this, 'B', javascript.Order.ATOMIC);
+    const code = `(($$efb2_arg_a, $$efb2_arg_b)=>$$efb2_arg_a.$getDistance($$efb2_arg_b.$x,$$efb2_arg_b.$y,$$efb2_arg_b.$z))(${value_a}, ${value_b})`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_get_lookvec = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get look vector of entity');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Get\'s an entity\'s look vector (Vec3)');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_get_lookvec: entity_get_lookvec });
+
+javascript.javascriptGenerator.forBlock['entity_get_lookvec'] = function () {
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const code = `(${value_entity}).$getLook(1)`;
+    return [code, javascript.Order.NONE];
+}

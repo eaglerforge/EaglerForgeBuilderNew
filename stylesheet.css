@@ -112,6 +112,7 @@ td {
   overflow-y: scroll;
   border-bottom: 1px solid white;
   resize: vertical;
+  overflow-x: visible;
 }
 .datablock.selected {
   outline: 4px solid rgba(255, 255, 255, 0.4);
