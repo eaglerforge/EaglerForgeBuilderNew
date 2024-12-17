@@ -20,6 +20,7 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
         pinch: true
     },
 });
+blocklyDeveloperTools();
 var handlers = {};
 var handlerMapDict = {};
 function getHandlers(type) {

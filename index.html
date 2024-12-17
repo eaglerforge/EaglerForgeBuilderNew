@@ -16,6 +16,8 @@
     <script src="./libs/blockly/en.js"></script>
     <!-- Load dark mode -->
     <script src="./libs/blockly/darktheme.js"></script>
+    <!-- Load dark mode -->
+    <script src="./libs/blockly/blockly_dev_tools.js"></script>
 
     <xml
       xmlns="https://developers.google.com/blockly/xml"
@@ -405,7 +407,7 @@
         <block type="world_get_player_entities"> </block>
       </category>
       <category name="Entity (C)" colour="#ff8811">
-        
+        <block type="entity_set_position"> </block>
       </category>
     </xml>
   </head>
@@ -465,6 +467,7 @@
     <!-- Additional blocks -->
     <script src="blocks/World.js"></script>
     <script src="blocks/Blocks.js"></script>
+    <script src="blocks/Entity.js"></script>
     <script src="blocks/Vec3.js"></script>
     <script src="blocks/BlockPos.js"></script>
     <script src="blocks/Events.js"></script> <!-- Currently unused -->

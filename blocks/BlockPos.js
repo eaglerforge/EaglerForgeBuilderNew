@@ -60,6 +60,6 @@ javascript.javascriptGenerator.forBlock['blockpos_fromxyz'] = function () {
     const value_y = javascript.javascriptGenerator.valueToCode(this, 'Y', javascript.Order.ATOMIC);
     const value_z = javascript.javascriptGenerator.valueToCode(this, 'Z', javascript.Order.ATOMIC);
 
-    const code = `efb2__makeBlockPos(${value_x},${value_y},${value_z})`;
+    const code = `efb2__makeBlockPos(Math.floor(${value_x}),Math.floor(${value_y}),Math.floor(${value_z}))`;
     return [code, javascript.Order.NONE];
 }
