@@ -22,7 +22,7 @@ Blockly.common.defineBlocks({ vec3_getxyz: vec3_getxyz });
 
 
 javascript.javascriptGenerator.forBlock['vec3_getxyz'] = function () {
-    const dropdown_tab = block.getFieldValue('TAB');
+    const dropdown_tab = this.getFieldValue('TAB');
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
 
     const code = `(${value_value})["${dropdown_tab}"]`;

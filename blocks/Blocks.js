@@ -242,12 +242,12 @@ const blocks_boundingbox = {
 };
 Blockly.common.defineBlocks({ blocks_boundingbox: blocks_boundingbox });
 javascript.javascriptGenerator.forBlock['blocks_boundingbox'] = function () {
-  const number_minx = block.getFieldValue('MINX');
-  const number_miny = block.getFieldValue('MINY');
-  const number_minz = block.getFieldValue('MINZ');
-  const number_maxx = block.getFieldValue('MAXX');
-  const number_maxy = block.getFieldValue('MAXY');
-  const number_maxz = block.getFieldValue('MAXZ');
+  const number_minx = this.getFieldValue('MINX');
+  const number_miny = this.getFieldValue('MINY');
+  const number_minz = this.getFieldValue('MINZ');
+  const number_maxx = this.getFieldValue('MAXX');
+  const number_maxy = this.getFieldValue('MAXY');
+  const number_maxz = this.getFieldValue('MAXZ');
   const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz})`;
   return code;
 }
