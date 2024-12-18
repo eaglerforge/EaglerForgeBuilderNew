@@ -7,7 +7,7 @@ PRIMITIVES["block_advanced"] = {
         id: "advanced_block",
         name: "Advanced Block",
         texture: VALUE_ENUMS.IMG,
-        material: ['air', 'grass', 'ground', 'wood', 'rock', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
+        material: ['rock', 'air', 'grass', 'ground', 'wood', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
         Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
         Added: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockAdded",
