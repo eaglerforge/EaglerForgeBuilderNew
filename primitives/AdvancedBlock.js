@@ -1,4 +1,4 @@
-//TODO: tickRate/getTickRate, quantityDropped, onBlockDestroyedByExplosion, onEntityCollidedWithBlock, onBlockActivated, onEntityCollidedWithBlock
+//TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
     uses: ["fixup_block_ids"],
