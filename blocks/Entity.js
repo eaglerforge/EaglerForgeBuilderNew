@@ -322,7 +322,7 @@ const entity_get_lookvec = {
             .appendField('get look vector of entity');
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
-        this.setTooltip('Get\'s an entity\'s look vector (Vec3)');
+        this.setTooltip('Gets an entity\'s look vector (Vec3)');
         this.setHelpUrl('');
         this.setColour(30);
     }
@@ -333,4 +333,75 @@ javascript.javascriptGenerator.forBlock['entity_get_lookvec'] = function () {
     const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
     const code = `(${value_entity}).$getLook(1)`;
     return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_get_eye_pos = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get eye position vector of entity');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Gets an entity\'s eye position (Vec3)');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_get_eye_pos: entity_get_eye_pos });
+javascript.javascriptGenerator.forBlock['entity_get_eye_pos'] = function () {
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const code = `(${value_entity}).$getPositionEyes(1)`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+
+const entity_raytrace = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('hit position from ray cast with entity');
+        this.appendValueInput('DIST')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Number')
+            .appendField('with max distance');
+        this.setInputsInline(false)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Cast a ray from an entity and return the hit position as a Vec3.');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_raytrace: entity_raytrace });
+
+javascript.javascriptGenerator.forBlock['entity_raytrace'] = function () {
+    const value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
+    const value_dist = generator.valueToCode(block, 'DIST', javascript.Order.ATOMIC);
+    const code = `(${value_entity}).$rayTrace((${value_dist}), 1).$hitVec`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const entity_setdead = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('set entity to dead');
+        this.setInputsInline(true)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Sets an entity\'s state to \'dead\'');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ entity_setdead: entity_setdead });
+javascript.javascriptGenerator.forBlock['entity_setdead'] = function () {
+    const value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
+    const code = `(${value_entity}).$setDead()`;
+    return code;
 }

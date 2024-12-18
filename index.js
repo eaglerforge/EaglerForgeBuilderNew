@@ -21,6 +21,12 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
     },
 });
 blocklyDeveloperTools();
+const oldScrub = javascript.javascriptGenerator.scrub_;
+var rippedCode = null; //Used to decompile function definitions later.
+javascript.javascriptGenerator.scrub_ = function (...args) {
+    rippedCode = args[1];
+    return oldScrub.apply(this, args);
+}
 var handlers = {};
 var handlerMapDict = {};
 function getHandlers(type) {
@@ -29,21 +35,49 @@ function getHandlers(type) {
 function getHandler(type, name) {
     return handlerMapDict["handle_" + type]?.[name] || null;
 }
+function depsgraph_search(blck, enounteredFunctions, usedVariableSet, procMap) {
+    const FN_PROCCODES = ["procedures_callreturn", "procedures_callnoreturn"];
+    const FN_DEFCODES = ["procedures_defreturn", "procedures_defnoreturn"];
+    enounteredFunctions ||= new Set();
+    usedVariableSet ||= new Set();
+    procMap ||= Object.fromEntries(workspace.getAllBlocks().filter(x=>FN_DEFCODES.includes(x.type)).map(x=>[x.getProcedureDef()[0], x]));
+
+    var descendants = blck.getDescendants(true);
+    for (let i = 0; i < descendants.length; i++) {
+        const descendant = descendants[i];
+        if (FN_PROCCODES.includes(descendant.type) && !enounteredFunctions.has(descendant.getProcedureCall())) {
+            var proccode = descendant.getProcedureCall();
+            enounteredFunctions.add(proccode);
+            depsgraph_search(procMap[proccode], enounteredFunctions, usedVariableSet, procMap);
+            continue;
+        }
+        descendant.getVars().forEach(varId => {
+            usedVariableSet.add(varId);
+        });
+    }
+
+    return {
+        usedVariableSet,
+        enounteredFunctions,
+        procMap
+    }
+}
+function getProcedureCode(name, procMap) {
+    javascript.javascriptGenerator.blockToCode(procMap[name]); //for some *stupid* reason, is hardcoded to always return null.
+    return rippedCode;
+}
 function getHandlerCode(type, tag, defaultArgs) {
     var handler = getHandler(type, tag);
     if (!handler) { return { code: "", args: defaultArgs } };
-    var usedVariableSet = new Set();
-    handler.getDescendants(true).forEach(block => {
-        block.getVars().forEach(varId => {
-            usedVariableSet.add(varId);
-        });
-    });
+    var { usedVariableSet, enounteredFunctions, procMap } = depsgraph_search(handler);
     var generatedCode = javascript.javascriptGenerator.forBlock[handler.type].apply(handler, []);
 
     var variableCode = [...usedVariableSet].map(varId => { return javascript.javascriptGenerator.getVariableName(varId) }).join(",");
     variableCode = variableCode ? ("var " + variableCode + ";") : "";
 
-    generatedCode.code = variableCode + generatedCode.code;
+    var procedureCode = [...enounteredFunctions].map(x => getProcedureCode(x, procMap)).join(";");
+
+    generatedCode.code = variableCode + procedureCode + generatedCode.code;
     return generatedCode;
 }
 const supportedEvents = new Set([

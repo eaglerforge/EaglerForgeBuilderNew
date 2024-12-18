@@ -282,8 +282,37 @@ const blocks_creativetab = {
   }
 };
 Blockly.common.defineBlocks({ blocks_creativetab: blocks_creativetab });
-javascript.javascriptGenerator.forBlock['blocks_creativetab'] = function() {
+javascript.javascriptGenerator.forBlock['blocks_creativetab'] = function () {
   const dropdown_tab = this.getFieldValue('TAB');
   const code = `this.$setCreativeTab(ModAPI.reflect.getClassById("net.minecraft.creativetab.CreativeTabs").staticVariables.${dropdown_tab});`;
   return code;
+}
+
+
+
+const handle_BlockEntityCollision = {
+  init: function () {
+    this.appendDummyInput('ID')
+      .appendField('Handler ID:')
+      .appendField(new Blockly.FieldTextInput('block entity collision 1'), 'ID');
+    this.appendDummyInput('')
+      .appendField('Block Entity Collision Handler with:')
+      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
+      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS')
+      .appendField(new Blockly.FieldVariable('entity'), 'ENTITY');
+    this.appendStatementInput('CODE');
+    this.setInputsInline(false)
+    this.setTooltip('Runs when an entity collides with the block.');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ handle_BlockEntityCollision: handle_BlockEntityCollision });
+
+javascript.javascriptGenerator.forBlock['handle_BlockEntityCollision'] = function () {
+  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+  const variable_entity = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ENTITY'));
+  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+  return { code: statement, args: [variable_world, variable_blockpos, variable_entity] };
 }
