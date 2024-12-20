@@ -1,3 +1,7 @@
+Math.clamp = function clamp(x, min, max) {
+    return Math.max(Math.min(x, max), min);
+}
+
 const codeGrabberRegex = /(?<=function \(\) {)[\s\S]+(?=}$)/gm; //regex to get the contents of a stringified function
 const FUNCTIONS = {};
 

@@ -7,6 +7,7 @@ PRIMITIVES["block_advanced"] = {
         id: "advanced_block",
         name: "Advanced Block",
         texture: VALUE_ENUMS.IMG,
+        tickRatio: 10,
         material: ['rock', 'air', 'grass', 'ground', 'wood', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
         Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
@@ -14,17 +15,16 @@ PRIMITIVES["block_advanced"] = {
         NeighborChange: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockNeighbourChange",
         Break: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBreak",
         BrokenByPlayer: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBrokenByPlayer",
-        UpdateTick: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockUpdateTick",
+        RandomTick: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockRandomTick",
         EntityCollided: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockEntityCollision",
     },
     asJavaScript: function () {
-        console.log(this);
         var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor, []);
         var breakHandler = getHandlerCode("BlockBreak", this.tags.Break, ["$$world", "$$blockpos", "$$blockstate"]);
         var addedHandler = getHandlerCode("BlockAdded", this.tags.Added, ["$$world", "$$blockpos", "$$blockstate"]);
         var neighborHandler = getHandlerCode("BlockNeighbourChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"]);
         var brokenByPlayerHandler = getHandlerCode("BlockBrokenByPlayer", this.tags.BrokenByPlayer, ["$$world", "$$blockpos", "$$blockstate"]);
-        var updateTickHandler = getHandlerCode("BlockUpdateTick", this.tags.UpdateTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
+        var randomTickHandler = getHandlerCode("BlockRandomTick", this.tags.RandomTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
         var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"]);
         return `(function AdvancedBlockDatablock() {
     const $$blockTexture = "${this.tags.texture}";
@@ -40,7 +40,7 @@ PRIMITIVES["block_advanced"] = {
         var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
         var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
         var $$onBlockDestroyedByPlayerMethod = $$blockClass.methods.onBlockDestroyedByPlayer.method;
-        var $$updateTickMethod = $$blockClass.methods.updateTick.method;
+        var $$randomTickMethod = $$blockClass.methods.randomTick.method;
         var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
 
         var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
@@ -71,9 +71,12 @@ PRIMITIVES["block_advanced"] = {
             ${brokenByPlayerHandler.code};
             return $$onBlockDestroyedByPlayerMethod(this, ${brokenByPlayerHandler.args.join(", ")});
         }
-        $$nmb_AdvancedBlock.prototype.$updateTick = function (${updateTickHandler.args.join(", ")}) {
-            ${updateTickHandler.code};
-            return $$updateTickMethod(this, ${updateTickHandler.args.join(", ")});
+        $$nmb_AdvancedBlock.prototype.$randomTick = function (${randomTickHandler.args.join(", ")}) {
+            ${randomTickHandler.code};
+            return $$randomTickMethod(this, ${randomTickHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$tickRate = function () {
+            return ${Math.max(1, Math.floor(this.tags.tickRatio || 10))};
         }
         $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${entityCollisionHandler.args.join(", ")}) {
             ${entityCollisionHandler.code};

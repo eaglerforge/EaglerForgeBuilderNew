@@ -15,6 +15,10 @@ function deserialise(data) {
         
     }
     globalThis.state = data;
+    data.nodes.forEach(node => {
+        var prim = getPrimitive(node.type);
+        node.tags = Object.assign(prim.tags, node.tags); //load new tags
+    });
     reloadUI();
 }
 function fileRead(handler) {

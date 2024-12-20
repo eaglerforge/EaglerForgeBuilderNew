@@ -374,7 +374,7 @@
         <block type="handle_BlockAdded"> </block>
         <block type="handle_BlockNeighbourChange"> </block>
         <block type="handle_BlockBrokenByPlayer"> </block>
-        <block type="handle_BlockUpdateTick"> </block>
+        <block type="handle_BlockRandomTick"> </block>
         <block type="handle_BlockEntityCollision"> </block>
       </category>
       <category name="Blocks (C)" colour="#dd11dd">
@@ -390,7 +390,13 @@
 
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
-        
+        <block type="itemstack_stacksize"> </block>
+        <block type="itemstack_setstacksize"> </block>
+        <block type="itemstack_displayname"> </block>
+        <block type="itemstack_setdisplayname"> </block>
+        <block type="itemstack_enchant"> </block>
+        <block type="itemstack_repaircost"> </block>
+        <block type="itemstack_setrepaircost"> </block>
       </category>
       <category name="BlockPos (C)" colour="#6633cc">
         <block type="blockpos_fromxyz"> </block>
@@ -480,6 +486,7 @@
 
     <!-- Additional blocks -->
     <script src="blocks/World.js"></script>
+    <script src="blocks/ItemStack.js"></script>
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Entity.js"></script>
     <script src="blocks/Vec3.js"></script>
@@ -494,6 +501,7 @@
     <script src="primitives/Metadata.js"></script>
     <script src="primitives/Icon.js"></script>
     <script src="primitives/AdvancedBlock.js"></script>
+    <script src="primitives/Item.js"></script>
 
     <!-- Web App GUI and Engine -->
     <script src="functions.js"></script>

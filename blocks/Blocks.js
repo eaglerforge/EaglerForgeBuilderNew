@@ -60,7 +60,7 @@ const blocks_blockswitch = {
         ['full block', 'fullBlock'],
         ['translucent', 'translucent'],
         ['use neighbor brightness', 'useNeighborBrightness'],
-        ['needs random tick', 'blockHardness']
+        ['needs random tick', 'needsRandomTick']
       ]), 'PROPERTY');
     this.appendDummyInput('VALUE')
       .setAlign(Blockly.inputs.Align.CENTRE)
@@ -190,13 +190,13 @@ javascript.javascriptGenerator.forBlock['handle_BlockBrokenByPlayer'] = function
 }
 
 
-const handle_BlockUpdateTick = {
+const handle_BlockRandomTick = {
   init: function () {
     this.appendDummyInput('ID')
       .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block update tick 1'), 'ID');
+      .appendField(new Blockly.FieldTextInput('block random tick 1'), 'ID');
     this.appendDummyInput('')
-      .appendField('Block Update Tick Handler with:')
+      .appendField('Block Random Tick Handler with:')
       .appendField(new Blockly.FieldVariable('world'), 'WORLD')
       .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
@@ -206,9 +206,9 @@ const handle_BlockUpdateTick = {
     this.setColour(0);
   }
 };
-Blockly.common.defineBlocks({ handle_BlockUpdateTick: handle_BlockUpdateTick });
+Blockly.common.defineBlocks({ handle_BlockRandomTick: handle_BlockRandomTick });
 
-javascript.javascriptGenerator.forBlock['handle_BlockUpdateTick'] = function () {
+javascript.javascriptGenerator.forBlock['handle_BlockRandomTick'] = function () {
   const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
   const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
   const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');

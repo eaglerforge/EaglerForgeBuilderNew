@@ -101,7 +101,7 @@ Blockly.common.defineBlocks({ world_get_loaded_entities: world_get_loaded_entiti
 
 javascript.javascriptGenerator.forBlock['world_get_loaded_entities'] = function () {
     const value_world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
-    const code = `(${value_world}).loadedEntityList.toArray1().getRef().data`;
+    const code = `(${value_world}).$loadedEntityList.$toArray1().data`;
     return [code, javascript.Order.NONE];
 }
 
