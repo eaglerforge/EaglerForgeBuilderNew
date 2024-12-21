@@ -29,7 +29,7 @@ PRIMITIVES["block_advanced"] = {
         return `(function AdvancedBlockDatablock() {
     const $$blockTexture = "${this.tags.texture}";
 
-    function ServersideBlocks() {
+    function $$ServersideBlocks() {
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
         var $$iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;
@@ -105,8 +105,8 @@ PRIMITIVES["block_advanced"] = {
             ModAPI.addEventListener("bootstrap", $$internal_reg);
         }
     }
-    ModAPI.dedicatedServer.appendCode(ServersideBlocks);
-    var $$cblock = ServersideBlocks();
+    ModAPI.dedicatedServer.appendCode($$ServersideBlocks);
+    var $$cblock = $$ServersideBlocks();
     ModAPI.addEventListener("lib:asyncsink", async () => {
         ModAPI.addEventListener("custom:asyncsink_reloaded", ()=>{
             ModAPI.mc.renderItem.registerBlock($$cblock, ModAPI.util.str("${this.tags.id}"));
