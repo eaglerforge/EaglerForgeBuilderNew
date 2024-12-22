@@ -3,7 +3,7 @@ const world_explosion = {
         this.appendValueInput('WORLD')
             .appendField('Spawn explosion in world:');
         this.appendValueInput('POS')
-            .appendField('Position:');
+            .appendField('BlockPos:');
         this.appendValueInput('STRENGTH')
             .setCheck('Number')
             .appendField('Strength:');
@@ -39,7 +39,7 @@ const world_command = {
         this.appendValueInput('WORLD')
             .appendField('Execute command in world');
         this.appendValueInput('POS')
-            .appendField('Position:');
+            .appendField('BlockPos:');
         this.appendValueInput('CMD')
             .setCheck('String')
             .appendField('Command:');

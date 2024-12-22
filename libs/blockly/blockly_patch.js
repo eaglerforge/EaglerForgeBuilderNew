@@ -22,7 +22,7 @@ function createAndDragVar(workspace, j, varId, parentBlock, inputOffset) {
         e.stopImmediatePropagation();
         e.stopPropagation();
         var diff = Blockly.utils.Coordinate.difference(e, initialPixels);
-        block.drag(Blockly.utils.Coordinate.sum(startPos, Blockly.dragging.Dragger.prototype.pixelsToWorkspaceUnits.apply({workspace}, [diff])));
+        block.drag(Blockly.utils.Coordinate.sum(startPos, Blockly.dragging.Dragger.prototype.pixelsToWorkspaceUnits.apply({ workspace }, [diff])));
     };
     var upHandler = (e) => {
         e.preventDefault();
@@ -36,6 +36,7 @@ function createAndDragVar(workspace, j, varId, parentBlock, inputOffset) {
     window.addEventListener("pointerup", upHandler, true);
     return block;
 }
+
 const oldGetVariablesOfType = Blockly.Workspace.prototype.getVariablesOfType;
 Blockly.Workspace.prototype.getVariablesOfType = function (type, bypass) {
     var ret = oldGetVariablesOfType.apply(this, [type]);
@@ -71,7 +72,7 @@ Blockly.FieldEFB2Variable = class FieldEFB2Variable extends Blockly.FieldVariabl
             e.stopImmediatePropagation();
             var fieldAABB = this.fieldGroup_.getBoundingClientRect();
             var blockAABB = this.fieldGroup_.closest("g.blocklyDraggable").getBoundingClientRect();
-            var offset = Blockly.dragging.Dragger.prototype.pixelsToWorkspaceUnits.apply({workspace}, [{x:fieldAABB.x - blockAABB.x,y:fieldAABB.y - blockAABB.y}]);
+            var offset = Blockly.dragging.Dragger.prototype.pixelsToWorkspaceUnits.apply({ workspace }, [{ x: fieldAABB.x - blockAABB.x, y: fieldAABB.y - blockAABB.y }]);
             createAndDragVar(workspace, e, this.getVariable().id, workspace.getBlockById(this.fieldGroup_.closest("g.blocklyDraggable").getAttribute("data-id")), offset);
         }, true);
         this.fieldGroup_.querySelector("rect").style.fill = "rgb(153, 91, 165)";
@@ -84,7 +85,7 @@ Blockly.FieldVariable.prototype.getText = function (...args) {
 const oldBlockRender = Blockly.BlockSvg.prototype.renderEfficiently;
 Blockly.BlockSvg.prototype.renderEfficiently = function (...args) {
     oldBlockRender.apply(this, args);
-    if (this.type === "variables_get" && workspace.getVariableById(this.getFieldValue("VAR")).name.startsWith("$_efb2_arg_")) {
+    if ((this.type === "variables_get") && (workspace.getVariableById(this.getFieldValue("VAR"))?.name?.startsWith("$_efb2_arg_"))) {
         patchVariableField(this.svgGroup);
         this.svgGroup.querySelector("path").setAttribute("fill", "rgb(153, 91, 165)");
         if (!this.svgGroup.$$patched) {

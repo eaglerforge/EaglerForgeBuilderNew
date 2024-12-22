@@ -34,7 +34,7 @@ javascript.javascriptGenerator.forBlock['items_creativetab'] = function () {
 
 
 
-const items_setrarity = {
+const items_setmaxstacksize = {
     init: function () {
         this.appendValueInput('SIZE')
             .setAlign(Blockly.inputs.Align.RIGHT)
@@ -48,9 +48,9 @@ const items_setrarity = {
         this.setColour(225);
     }
 };
-Blockly.common.defineBlocks({ items_setrarity: items_setrarity });
-javascript.javascriptGenerator.forBlock['items_setrarity'] = function () {
-    const value_size = generator.valueToCode(block, 'SIZE', javascript.Order.ATOMIC);
+Blockly.common.defineBlocks({ items_setmaxstacksize: items_setmaxstacksize });
+javascript.javascriptGenerator.forBlock['items_setmaxstacksize'] = function () {
+    const value_size = javascript.javascriptGenerator.valueToCode(this, 'SIZE', javascript.Order.ATOMIC);
     const code = `this.$maxStackSize = (${value_size});`;
     return code;
 }
@@ -91,7 +91,7 @@ const handle_ItemRightClick = {
             .appendField(new Blockly.FieldEFB2Variable('player'), 'PLAYER');
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
-        this.setTooltip('Runs when the item is right-clicked.\nNo return value expected.');
+        this.setTooltip('Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.');
         this.setHelpUrl('');
         this.setColour(225);
     }
@@ -101,7 +101,7 @@ Blockly.common.defineBlocks({ handle_ItemRightClick: handle_ItemRightClick });
 javascript.javascriptGenerator.forBlock['handle_ItemRightClick'] = function () {
     const variable_itemstack = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ITEM_STACK'));
     const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-    const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+    const variable_player = javascript.javascriptGenerator.getVariableName(this.getFieldValue('PLAYER'));
     const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-    return { code: statement, args: [variable_itemstack, variable_world, variable_blockpos] };
+    return { code: statement, args: [variable_itemstack, variable_world, variable_player] };
 }

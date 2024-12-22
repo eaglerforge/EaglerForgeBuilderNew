@@ -13,7 +13,7 @@ PRIMITIVES["item"] = {
     },
     asJavaScript: function () {
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
-        var rightClickHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
+        var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"]);
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -26,7 +26,8 @@ PRIMITIVES["item"] = {
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
         $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
-            ${rightClickHandler.code}
+            ${rightClickHandler.code};
+            return (${rightClickHandler.args[0]});
         }
         function $$internal_reg() {
             var $$custom_item = (new $$CustomItem()).$setUnlocalizedName(

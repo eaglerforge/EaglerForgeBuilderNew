@@ -378,8 +378,8 @@ const entity_raytrace = {
 Blockly.common.defineBlocks({ entity_raytrace: entity_raytrace });
 
 javascript.javascriptGenerator.forBlock['entity_raytrace'] = function () {
-    const value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
-    const value_dist = generator.valueToCode(block, 'DIST', javascript.Order.ATOMIC);
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const value_dist = javascript.javascriptGenerator.valueToCode(this, 'DIST', javascript.Order.ATOMIC);
     const code = `(${value_entity}).$rayTrace((${value_dist}), 1).$hitVec`;
     return [code, javascript.Order.NONE];
 }
@@ -401,7 +401,7 @@ const entity_setdead = {
 };
 Blockly.common.defineBlocks({ entity_setdead: entity_setdead });
 javascript.javascriptGenerator.forBlock['entity_setdead'] = function () {
-    const value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
     const code = `(${value_entity}).$setDead()`;
     return code;
 }
