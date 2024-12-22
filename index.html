@@ -8,16 +8,24 @@
 
     <!-- Load Blockly core -->
     <script src="./libs/blockly/blockly_compressed.js"></script>
+
     <!-- Load the default blocks -->
     <script src="./libs/blockly/blocks_compressed.js"></script>
+
     <!-- Load a generator -->
     <script src="./libs/blockly/javascript_compressed.js"></script>
+
     <!-- Load a message file -->
     <script src="./libs/blockly/en.js"></script>
+
     <!-- Load dark mode -->
     <script src="./libs/blockly/darktheme.js"></script>
-    <!-- Load dark mode -->
+
+    <!-- Load blockly dev tools -->
     <script src="./libs/blockly/blockly_dev_tools.js"></script>
+
+    <!-- Load procedure and handler argument patch -->
+    <script src="./libs/blockly/blockly_patch.js"></script>
 
     <xml
       xmlns="https://developers.google.com/blockly/xml"
@@ -384,10 +392,12 @@
         <block type="blocks_creativetab"> </block>
       </category>
       <category name="Items (H)" colour="#0033dd">
-        
+        <block type="handle_ItemConstructor"> </block>
+        <block type="handle_ItemRightClick"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
-
+        <block type="items_creativetab"> </block>
+        <block type="items_setrarity"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
         <block type="itemstack_stacksize"> </block>
@@ -488,6 +498,7 @@
     <script src="blocks/World.js"></script>
     <script src="blocks/ItemStack.js"></script>
     <script src="blocks/Blocks.js"></script>
+    <script src="blocks/Items.js"></script>
     <script src="blocks/Entity.js"></script>
     <script src="blocks/Vec3.js"></script>
     <script src="blocks/BlockPos.js"></script>

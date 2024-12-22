@@ -38,7 +38,7 @@ function editObject(obj, datablock) {
 
         if (val === VALUE_ENUMS.IMG) {
             input.type = "file";
-            input.accept = "image/*";
+            input.accept = "image/png";
         }
         if ((typeof PRIMITIVES[obj.type].tags[k] === "string") && PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");

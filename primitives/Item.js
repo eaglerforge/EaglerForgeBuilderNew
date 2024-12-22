@@ -6,10 +6,14 @@ PRIMITIVES["item"] = {
         id: "custom_item",
         name: "Custom Item",
         texture: VALUE_ENUMS.IMG,
+        firstPersonScale: 1.7,
+        thirdPersonScale: 0.55,
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemConstructor",
+        RightClick: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemRightClick",
     },
     asJavaScript: function () {
-        var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor, []);
+        var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
+        var rightClickHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -21,11 +25,14 @@ PRIMITIVES["item"] = {
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
+        $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
+            ${rightClickHandler.code}
+        }
         function $$internal_reg() {
             var $$custom_item = (new $$CustomItem()).$setUnlocalizedName(
                 ModAPI.util.str("${this.tags.id}")
             );
-            itemClass.staticMethods.registerItem.method(ModAPI.keygen.item("${this.tags.id}"), ModAPI.util.str("${this.tags.id}"), $$custom_item);
+            $$itemClass.staticMethods.registerItem.method(ModAPI.keygen.item("${this.tags.id}"), ModAPI.util.str("${this.tags.id}"), $$custom_item);
             ModAPI.items["${this.tags.id}"] = $$custom_item;
             return $$custom_item;
         }
@@ -54,12 +61,12 @@ PRIMITIVES["item"] = {
                     "thirdperson": {
                         "rotation": [ -90, 0, 0 ],
                         "translation": [ 0, 1, -3 ],
-                        "scale": [ 0.55, 0.55, 0.55 ]
+                        "scale": [ ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale} ]
                     },
                     "firstperson": {
                         "rotation": [ 0, -135, 25 ],
                         "translation": [ 0, 4, 2 ],
-                        "scale": [ 1.7, 1.7, 1.7 ]
+                        "scale": [ ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale} ]
                     }
                 }
             }

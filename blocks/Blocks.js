@@ -90,8 +90,8 @@ const handle_BlockBreak = {
       .appendField(new Blockly.FieldTextInput('block break 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Break Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when the block is removed from the world.\nNo return value expected.');
@@ -117,8 +117,8 @@ const handle_BlockAdded = {
       .appendField(new Blockly.FieldTextInput('block added 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Placed Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when the block is added to the world.\nNo return value expected.');
@@ -144,8 +144,8 @@ const handle_BlockNeighbourChange = {
       .appendField(new Blockly.FieldTextInput('block neighbour update 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Neighbour Changed Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when a block\'s neighbor is changed.\nNo return value expected.');
@@ -171,8 +171,8 @@ const handle_BlockBrokenByPlayer = {
       .appendField(new Blockly.FieldTextInput('block broken by player 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Broken By Player Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when a block is broken by a player.\nNo return value expected.');
@@ -197,8 +197,8 @@ const handle_BlockRandomTick = {
       .appendField(new Blockly.FieldTextInput('block random tick 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Random Tick Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when a block is ticked.\nNo return value expected.');
@@ -297,9 +297,9 @@ const handle_BlockEntityCollision = {
       .appendField(new Blockly.FieldTextInput('block entity collision 1'), 'ID');
     this.appendDummyInput('')
       .appendField('Block Entity Collision Handler with:')
-      .appendField(new Blockly.FieldVariable('world'), 'WORLD')
-      .appendField(new Blockly.FieldVariable('position'), 'BLOCKPOS')
-      .appendField(new Blockly.FieldVariable('entity'), 'ENTITY');
+      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS')
+      .appendField(new Blockly.FieldEFB2Variable('entity'), 'ENTITY');
     this.appendStatementInput('CODE');
     this.setInputsInline(false)
     this.setTooltip('Runs when an entity collides with the block.');

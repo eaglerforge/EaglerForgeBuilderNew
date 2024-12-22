@@ -20,6 +20,7 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
         pinch: true
     },
 });
+workspace.addChangeListener(removeUnusedArgumentVariables);
 blocklyDeveloperTools();
 const oldScrub = javascript.javascriptGenerator.scrub_;
 var rippedCode = null; //Used to decompile function definitions later.
@@ -85,6 +86,7 @@ const supportedEvents = new Set([
     Blockly.Events.BLOCK_CREATE,
     Blockly.Events.BLOCK_DELETE
 ]);
+
 function updateHandlers() {
     if (workspace.isDragging()) return;
     handlers = {};
