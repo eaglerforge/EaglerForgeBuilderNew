@@ -43,6 +43,9 @@ const world_command = {
         this.appendValueInput('CMD')
             .setCheck('String')
             .appendField('Command:');
+        this.appendValueInput('FEEDBACK')
+            .setCheck('Boolean')
+            .appendField('Feedback:');
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -57,7 +60,8 @@ javascript.javascriptGenerator.forBlock['world_command'] = function () {
     const value_world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
     const value_pos = javascript.javascriptGenerator.valueToCode(this, 'POS', javascript.Order.ATOMIC);
     const value_cmd = javascript.javascriptGenerator.valueToCode(this, 'CMD', javascript.Order.ATOMIC);
-    const code = `efb2__executeCommand(${value_world}, ${value_pos}, ${value_cmd});`;
+    const value_feedback = javascript.javascriptGenerator.valueToCode(this, 'FEEDBACK', javascript.Order.ATOMIC);
+    const code = `efb2__executeCommand(${value_world}, ${value_pos}, ${value_cmd}, ${value_feedback});`;
     return code;
 }
 

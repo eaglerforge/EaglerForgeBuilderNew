@@ -36,7 +36,7 @@ FUNCTIONS["execute_command"] = {
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineExecCmdGlobal() {
-            globalThis.efb2__executeCommand = function efb2__executeCommand($world, $blockpos, commandStr) {
+            globalThis.efb2__executeCommand = function efb2__executeCommand($world, $blockpos, commandStr, feedback) {
                 if ($world.$isRemote) {
                     return;
                 }
@@ -48,15 +48,17 @@ FUNCTIONS["execute_command"] = {
                 x.prototype.$getEntityWorld = ()=>{return $world};
                 x.prototype.$getCommandSenderEntity = ()=>{return null};
                 x.prototype.$updateCommand = ()=>{};
+                x.prototype.$addChatMessage = (e)=>{console.log(e)};
                 x.prototype.$func_145757_a = ()=>{};
                 x.prototype.$getPosition = ()=>{return $blockpos};
+                x.prototype.$getPosition0 = ()=>{return $blockpos};
                 x.prototype.$getPositionVector = ()=>{return vector};
                 x.prototype.$func_145751_f = ()=>{return 0};
+                x.prototype.$sendCommandFeedback = ()=>{return feedback ? 1 : 0}
                 var cmd = new x();
                 cmd.$setCommand(ModAPI.util.str(commandStr));
                 
                 try {
-                    debugger;
                     cmd.$trigger($world);
                 } catch (error) {
                     console.error(error);

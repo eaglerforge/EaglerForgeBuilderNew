@@ -184,7 +184,7 @@ const handle_ItemBlockUse = {
             .appendField(new Blockly.FieldEFB2Variable('blockpos'), 'BLOCKPOS')
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
-        this.setTooltip('Runs when the .\nA boolean is expected as a return value.');
+        this.setTooltip('Runs when the item is used on a block.\nA boolean is expected as a return value.');
         this.setHelpUrl('');
         this.setColour(225);
     }
