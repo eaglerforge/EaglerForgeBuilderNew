@@ -105,3 +105,65 @@ javascript.javascriptGenerator.forBlock['handle_ItemRightClick'] = function () {
     const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
     return { code: statement, args: [variable_itemstack, variable_world, variable_player] };
 }
+
+
+
+const handle_ItemUsed = {
+    init: function () {
+        this.appendDummyInput('ID')
+            .appendField('Handler ID:')
+            .appendField(new Blockly.FieldTextInput('item used 1'), 'ID');
+        this.appendDummyInput('')
+            .appendField('Item Used Handler with:')
+            .appendField(new Blockly.FieldEFB2Variable('itemstack'), 'ITEM_STACK')
+            .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+            .appendField(new Blockly.FieldEFB2Variable('player'), 'PLAYER');
+        this.appendStatementInput('CODE');
+        this.setInputsInline(false)
+        this.setTooltip('Runs when the item is used. Not called when the player stops using the item early.\nThe itemstack argument is expected as a return value.');
+        this.setHelpUrl('');
+        this.setColour(225);
+    }
+};
+Blockly.common.defineBlocks({ handle_ItemUsed: handle_ItemUsed });
+
+javascript.javascriptGenerator.forBlock['handle_ItemUsed'] = function () {
+    const variable_itemstack = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ITEM_STACK'));
+    const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+    const variable_player = javascript.javascriptGenerator.getVariableName(this.getFieldValue('PLAYER'));
+    const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+    return { code: statement, args: [variable_itemstack, variable_world, variable_player] };
+}
+
+
+
+const handle_ItemTicked = {
+    init: function () {
+        this.appendDummyInput('ID')
+            .appendField('Handler ID:')
+            .appendField(new Blockly.FieldTextInput('item ticked 1'), 'ID');
+        this.appendDummyInput('')
+            .appendField('Item Ticked Handler with:')
+            .appendField(new Blockly.FieldEFB2Variable('itemstack'), 'ITEM_STACK')
+            .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+            .appendField(new Blockly.FieldEFB2Variable('player'), 'PLAYER')
+            .appendField(new Blockly.FieldEFB2Variable('slot index'), 'SLOT_INDEX')
+            .appendField(new Blockly.FieldEFB2Variable('is held?'), 'IS_ITEM_HELD');
+        this.appendStatementInput('CODE');
+        this.setInputsInline(false)
+        this.setTooltip('Runs every tick when the item is in a player\'s inventory.\nThe itemstack argument is expected as a return value.\n`slot index` is a number representing inventory location, `is held` is a boolean.');
+        this.setHelpUrl('');
+        this.setColour(225);
+    }
+};
+Blockly.common.defineBlocks({ handle_ItemTicked: handle_ItemTicked });
+
+javascript.javascriptGenerator.forBlock['handle_ItemTicked'] = function () {
+    const variable_itemstack = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ITEM_STACK'));
+    const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+    const variable_player = javascript.javascriptGenerator.getVariableName(this.getFieldValue('PLAYER'));
+    const variable_slot_index = javascript.javascriptGenerator.getVariableName(this.getFieldValue('SLOT_INDEX'));
+    const variable_is_held = javascript.javascriptGenerator.getVariableName(this.getFieldValue('IS_ITEM_HELD'));
+    const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+    return { code: statement, args: [variable_itemstack, variable_world, variable_player, variable_slot_index, variable_is_held] };
+}
