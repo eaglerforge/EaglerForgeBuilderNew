@@ -167,3 +167,35 @@ javascript.javascriptGenerator.forBlock['handle_ItemTicked'] = function () {
     const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
     return { code: statement, args: [variable_itemstack, variable_world, variable_player, variable_slot_index, variable_is_held] };
 }
+
+
+
+
+const handle_ItemBlockUse = {
+    init: function () {
+        this.appendDummyInput('ID')
+            .appendField('Handler ID:')
+            .appendField(new Blockly.FieldTextInput('item block use 1'), 'ID');
+        this.appendDummyInput('')
+            .appendField('Item Used On Block Handler with:')
+            .appendField(new Blockly.FieldEFB2Variable('itemstack'), 'ITEM_STACK')
+            .appendField(new Blockly.FieldEFB2Variable('player'), 'PLAYER')
+            .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
+            .appendField(new Blockly.FieldEFB2Variable('blockpos'), 'BLOCKPOS')
+        this.appendStatementInput('CODE');
+        this.setInputsInline(false)
+        this.setTooltip('Runs when the .\nA boolean is expected as a return value.');
+        this.setHelpUrl('');
+        this.setColour(225);
+    }
+};
+Blockly.common.defineBlocks({ handle_ItemBlockUse: handle_ItemBlockUse });
+
+javascript.javascriptGenerator.forBlock['handle_ItemBlockUse'] = function () {
+    const variable_itemstack = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ITEM_STACK'));
+    const variable_player = javascript.javascriptGenerator.getVariableName(this.getFieldValue('PLAYER'));
+    const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
+    const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
+    const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+    return { code: statement, args: [variable_itemstack, variable_player, variable_world, variable_blockpos] };
+}

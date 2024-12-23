@@ -106,7 +106,7 @@ td {
 #propnav {
   width: 100%;
   min-height: 5rem;
-  height: 4rem;
+  height: 16rem;
   max-height: 80vh;
   margin-bottom: 1rem;
   overflow-y: scroll;
