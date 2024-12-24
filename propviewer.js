@@ -32,6 +32,11 @@ function editObject(obj, datablock) {
 
         input.value = obj.tags[k];
 
+        if (typeof val === "boolean") {
+            input.type = "checkbox";
+            input.checked = val;
+        }
+
         if (val === VALUE_ENUMS.FILE) {
             input.type = "file";
         }
@@ -92,7 +97,7 @@ function editObject(obj, datablock) {
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
-                obj.tags[k] = input.value;
+                obj.tags[k] = (input.type === "checkbox") ? input.checked : input.value;
             }
         });
 
