@@ -8,7 +8,8 @@ PRIMITIVES["item"] = {
         texture: VALUE_ENUMS.IMG,
         firstPersonScale: 1.7,
         thirdPersonScale: 0.55,
-        useDurationTicks: 0,
+        useDurationTicks: 32,
+        useItemOnRightClick: true,
         itemUseAnimation: ["NONE", "EAT", "DRINK", "BLOCK", "BOW"],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemConstructor",
         RightClick: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemRightClick",
@@ -29,12 +30,16 @@ PRIMITIVES["item"] = {
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$itemSuper = ModAPI.reflect.getSuper($$itemClass, (x) => x.length === 1);
         var $$itemUseAnimation = ModAPI.reflect.getClassById("net.minecraft.item.EnumAction").staticVariables["${this.tags.itemUseAnimation}"];
+        console.log($$itemUseAnimation);
         function $$CustomItem() {
             $$itemSuper(this);
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
         $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
+            ${this.tags.useItemOnRightClick?
+                `(${rightClickHandler.args[2]}).$setItemInUse(${rightClickHandler.args[0]},${this.tags.useDurationTicks});`
+            :""}
             ${rightClickHandler.code};
             return (${rightClickHandler.args[0]});
         }
@@ -53,7 +58,7 @@ PRIMITIVES["item"] = {
             ${tickedHandler.code};
             return (${tickedHandler.args[0]});
         }
-        $$CustomItem.prototype.$onItemUse = function (${blockUseHandler.args.join(", ")}) {
+        $$CustomItem.prototype.$onItemUse0 = function (${blockUseHandler.args.join(", ")}) {
             ${blockUseHandler.code};
             return 0;
         }
