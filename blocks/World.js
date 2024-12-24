@@ -49,7 +49,7 @@ const world_command = {
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip('NOTICE: @selectors do NOT work');
+        this.setTooltip('NOTICE: @selectors (probably) do NOT work');
         this.setHelpUrl('');
         this.setColour(195);
     },

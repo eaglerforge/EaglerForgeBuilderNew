@@ -402,6 +402,6 @@ const entity_setdead = {
 Blockly.common.defineBlocks({ entity_setdead: entity_setdead });
 javascript.javascriptGenerator.forBlock['entity_setdead'] = function () {
     const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
-    const code = `(${value_entity}).$setDead()`;
+    const code = `(${value_entity}).$setDead();`;
     return code;
 }
