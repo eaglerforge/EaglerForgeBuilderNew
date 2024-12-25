@@ -30,7 +30,6 @@ PRIMITIVES["item"] = {
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$itemSuper = ModAPI.reflect.getSuper($$itemClass, (x) => x.length === 1);
         var $$itemUseAnimation = ModAPI.reflect.getClassById("net.minecraft.item.EnumAction").staticVariables["${this.tags.itemUseAnimation}"];
-        console.log($$itemUseAnimation);
         function $$CustomItem() {
             $$itemSuper(this);
             ${constructorHandler.code};

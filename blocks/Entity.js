@@ -149,7 +149,7 @@ javascript.javascriptGenerator.forBlock['entity_set_prop'] = function () {
     const dropdown_prop = this.getFieldValue('PROP');
     const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_entity})["${dropdown_prop}"] = ${value_value}`;
+    const code = `(${value_entity})["${dropdown_prop}"] = ${value_value};`;
     return code;
 }
 
@@ -182,7 +182,7 @@ javascript.javascriptGenerator.forBlock['entity_set_switch'] = function () {
     const dropdown_prop = this.getFieldValue('PROP');
     const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_entity})["${dropdown_prop}"] = ((${value_value}) ? 1 : 0)`;
+    const code = `(${value_entity})["${dropdown_prop}"] = ((${value_value}) ? 1 : 0);`;
     return code;
 }
 
