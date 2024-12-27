@@ -434,8 +434,17 @@
         <block type="entity_raytrace"> </block>
         <block type="entity_setdead"> </block>
       </category>
-      <category name="Command (H)" colour="#ed120e"></category>
-      <category name="Command (C)" colour="#ed120e"></category>
+      <category name="Command (H)" colour="#ed120e">
+        <block type="handle_CommandCalledByPlayer"> </block>
+        <block type="handle_CommandCalled"> </block>
+      </category>
+      <category name="Command (C)" colour="#ed120e">
+        <block type="command_sendmessage"> </block>
+        <block type="command_get_position"> </block>
+        <block type="command_get_world"> </block>
+        <block type="command_get_entity"> </block>
+        <block type="command_get_name"> </block>
+      </category>
     </xml>
   </head>
 
@@ -493,6 +502,7 @@
 
     <!-- Additional blocks -->
     <script src="blocks/World.js"></script>
+    <script src="blocks/Commands.js"></script>
     <script src="blocks/ItemStack.js"></script>
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Items.js"></script>
