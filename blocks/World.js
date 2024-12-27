@@ -129,3 +129,40 @@ javascript.javascriptGenerator.forBlock['world_get_player_entities'] = function 
     const code = `(${value_world}).playerEntities.toArray1().getRef().data`;
     return [code, javascript.Order.NONE];
 }
+
+
+
+const world_execute_command_as_entity = {
+    libs: ["execute_command_as"],
+    init: function () {
+        this.appendValueInput('MESSAGE')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('String')
+            .appendField('execute command');
+        this.appendValueInput('SENDER')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('as')
+            .appendField(new Blockly.FieldDropdown([
+                ['command sender', 'command_sender'],
+                ['entity', 'entity']
+            ]), 'TYPE');
+        this.appendValueInput('FEEDBACK')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Boolean')
+            .appendField('feedback');
+        this.setInputsInline(false)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Executes a command as a command sender or entity.');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ world_execute_command_as_entity: world_execute_command_as_entity });
+javascript.javascriptGenerator.forBlock['world_execute_command_as_entity'] = function() {
+    const value_message = javascript.javascriptGenerator.valueToCode(this, 'MESSAGE', javascript.Order.ATOMIC);
+    const value_sender = javascript.javascriptGenerator.valueToCode(this, 'SENDER', javascript.Order.ATOMIC);
+    const value_feedback = javascript.javascriptGenerator.valueToCode(this, 'FEEDBACK', javascript.Order.ATOMIC);
+    const code = `efb2__executeCommandAs(${value_sender}, ${value_message}, ${value_feedback})`;
+    return code;
+  }

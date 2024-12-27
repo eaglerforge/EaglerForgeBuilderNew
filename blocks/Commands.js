@@ -61,7 +61,6 @@ const command_sendmessage = {
             .setCheck('String')
             .appendField('send message');
         this.appendValueInput('SENDER')
-            .setCheck('String')
             .appendField('to command sender');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
