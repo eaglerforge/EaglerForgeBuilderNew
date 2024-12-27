@@ -50,7 +50,7 @@ const world_command = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('NOTICE: @selectors (probably) do NOT work');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://legacy.mcstacker.net/mcstacker1.10.php');
         this.setColour(195);
     },
     libs: ["execute_command"]
@@ -154,7 +154,7 @@ const world_execute_command_as_entity = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Executes a command as a command sender or entity.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://legacy.mcstacker.net/mcstacker1.10.php');
         this.setColour(195);
     }
 };
