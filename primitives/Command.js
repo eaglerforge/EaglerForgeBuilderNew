@@ -12,19 +12,21 @@ PRIMITIVES["command"] = {
     asJavaScript: function () {
         var escaped = this.tags.Command.replaceAll("\"", "\\\"");
         var len = this.tags.Command.length;
+        var callHandler = getHandlerCode("CommandCalled", this.tags.Called, ["$$args", "$$sender"]);
+        var callPlayerHandler = getHandlerCode("CommandCalled", this.tags.CalledByPlayer, ["$$args", "$$player"]);
         return `
 (function CommandDatablock() {
     PluginAPI.dedicatedServer.appendCode(function () {
         PluginAPI.addEventListener("processcommand", ($$event) => {
-            if ($$event.command.toLowerCase().startsWith("${escaped}")) {
-                var message = $$event.command.substring(${len + 1});
-                var isPlayer = ModAPI.reflect.getClassById("net.minecraft.entity.player.EntityPlayerMP").instanceOf(event.sender.getRef());
+            if ($$event.command${this.tags.caseSensitive ? "" : ".toLowerCase()"}.startsWith("${escaped}")) {
+                var $$arguments = $$event.command.substring(${len + 1}).trim().split(" ").filter(x=>!!x);
+                var $$isPlayer = ModAPI.reflect.getClassById("net.minecraft.entity.player.EntityPlayerMP").instanceOf($$event.sender.getRef());
                 if (
-                    isPlayer
+                    $$isPlayer
                 ) {
-                    $$event.sender.addChatMessage(ModAPI.reflect.getClassById("net.minecraft.util.ChatComponentText").constructors[0](ModAPI.util.str(message.toUpperCase())));
+                    (function (${callPlayerHandler.args.join(",")}) {${callPlayerHandler.code}})($$arguments, $$event.sender.getRef());
                 }${this.tags.PlayersOnly ? "" : ` else {
-                
+                    (function (${callHandler.args.join(",")}) {${callHandler.code}})($$arguments, $$event.sender.getRef());
                 }`}
                 $$event.preventDefault = true;
             }
