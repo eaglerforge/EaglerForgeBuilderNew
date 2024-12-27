@@ -14,8 +14,8 @@ const logic_a_or_b = {
 };
 Blockly.common.defineBlocks({ logic_a_or_b: logic_a_or_b });
 javascript.javascriptGenerator.forBlock['logic_a_or_b'] = function () {
-    const value_a = generator.valueToCode(block, 'A', javascript.Order.ATOMIC);
-    const value_b = generator.valueToCode(block, 'B', javascript.Order.ATOMIC);
+    const value_a = javascript.javascriptGenerator.valueToCode(this, 'A', javascript.Order.ATOMIC);
+    const value_b = javascript.javascriptGenerator.valueToCode(this, 'B', javascript.Order.ATOMIC);
     const code = `((${value_a})??(${value_b}))`;
     return [code, javascript.Order.NONE];
 }
