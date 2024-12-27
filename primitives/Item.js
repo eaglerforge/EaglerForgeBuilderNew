@@ -16,6 +16,7 @@ PRIMITIVES["item"] = {
         Used: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemUsed",
         Tick: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemTicked",
         UsedOnBlock: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockUse",
+        Crafted: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemCrafted",
     },
     asJavaScript: function () {
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
@@ -23,6 +24,7 @@ PRIMITIVES["item"] = {
         var usedHandler = getHandlerCode("ItemUsed", this.tags.Used, ["$$itemstack", "$$world", "$$player"]);
         var tickedHandler = getHandlerCode("ItemTicked", this.tags.Tick, ["$$itemstack", "$$world", "$$player", "$$hotbar_slot", "$$is_held"]);
         var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player","$$world", "$$blockpos"]);
+        var craftedHandler = getHandlerCode("ItemCrafted", this.tags.Crafted, ["$$itemstack", "$$world", "$$player"]);
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -60,6 +62,9 @@ PRIMITIVES["item"] = {
         $$CustomItem.prototype.$onItemUse0 = function (${blockUseHandler.args.join(", ")}) {
             ${blockUseHandler.code};
             return 0;
+        }
+        $$CustomItem.prototype.$onCreated = function (${craftedHandler.args.join(", ")}) {
+            ${craftedHandler.code};
         }
         function $$internal_reg() {
             var $$custom_item = (new $$CustomItem()).$setUnlocalizedName(

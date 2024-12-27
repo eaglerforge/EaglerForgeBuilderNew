@@ -6,7 +6,6 @@ const codeGrabberRegex = /(?<=function \(\) {)[\s\S]+(?=}$)/gm; //regex to get t
 const FUNCTIONS = {};
 
 FUNCTIONS["fixup_block_ids"] = {
-    identifier: "fixup_block_ids",
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineFixupGlobal() {
@@ -32,7 +31,6 @@ FUNCTIONS["fixup_block_ids"] = {
 };
 
 FUNCTIONS["execute_command"] = {
-    identifier: "execute_command",
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineExecCmdGlobal() {
@@ -71,7 +69,6 @@ FUNCTIONS["execute_command"] = {
 };
 
 FUNCTIONS["construct_vec3"] = {
-    identifier: "construct_vec3",
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineMakeVec3() {
@@ -86,7 +83,6 @@ FUNCTIONS["construct_vec3"] = {
 };
 
 FUNCTIONS["construct_blockpos"] = {
-    identifier: "construct_blockpos",
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineMakeBlockPos() {
@@ -97,6 +93,20 @@ FUNCTIONS["construct_blockpos"] = {
         }
         ModAPI.dedicatedServer.appendCode(EFB2__defineMakeBlockPos);
         EFB2__defineMakeBlockPos();
+    },
+};
+
+FUNCTIONS["message_command_sender"] = {
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineMessageCommandSender() {
+            var chatComponentText = ModAPI.reflect.getClassById("net.minecraft.util.ChatComponentText").constructors[0];
+            globalThis.efb2__messageCommandSender = function efb2__messageCommandSender(cmdSender, str) {
+                return cmdSender.$addChatMessage(chatComponentText(ModAPI.util.str(str)));
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineMessageCommandSender);
+        EFB2__defineMessageCommandSender();
     },
 };
 

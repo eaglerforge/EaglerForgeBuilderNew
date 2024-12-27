@@ -20,6 +20,7 @@ var workspace = globalThis.workspace = Blockly.inject('blockly', {
         pinch: true
     },
 });
+javascript.javascriptGenerator.addReservedWords("ModAPI", "PluginAPI", "window", "globalThis");
 workspace.addChangeListener(removeUnusedArgumentVariables);
 blocklyDeveloperTools();
 const oldScrub = javascript.javascriptGenerator.scrub_;
