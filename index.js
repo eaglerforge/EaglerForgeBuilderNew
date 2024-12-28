@@ -82,13 +82,14 @@ function getHandlerCode(type, tag, defaultArgs) {
     generatedCode.code = variableCode + procedureCode + generatedCode.code;
     return generatedCode;
 }
-const supportedEvents = new Set([
-    Blockly.Events.BLOCK_CHANGE,
-    Blockly.Events.BLOCK_CREATE,
-    Blockly.Events.BLOCK_DELETE
-]);
-
-function updateHandlers() {
+const supportedEvents = [
+    Blockly.Events.BlockFieldIntermediateChange,
+    Blockly.Events.BlockChange,
+    Blockly.Events.BlockCreate,
+    Blockly.Events.BlockDelete
+];
+function updateHandlers(e) {
+    if (!supportedEvents.reduce((acc, x)=>acc||(e instanceof x))) {return}
     if (workspace.isDragging()) return;
     handlers = {};
     handlerMapDict = {};
@@ -110,7 +111,7 @@ function updateHandlers() {
         }
     });
     document.querySelectorAll(".handler_select").forEach(x => {
-        x.updateHandlerList();
+        x.updateHandlerList(e instanceof Blockly.Events.BlockFieldIntermediateChange);
     });
 }
 workspace.addChangeListener(updateHandlers);
@@ -125,11 +126,11 @@ function updatePropsUI() {
 }
 function reloadUI(sel) {
     if (!state.nodes.includes(sel)) {
-        sel = null;
+        sel = document.querySelector(".datablock.selected")?.datablock;
     }
     document.querySelector("#propnav").innerHTML = "";
     document.querySelectorAll(".datablock").forEach(elem => {
-        elem.remove()
+        elem.remove();
     });
     document.querySelector("#search").value = "";
     var datablockContainer = document.querySelector("#datablock_container");
@@ -140,6 +141,7 @@ function reloadUI(sel) {
 
         if (node === sel) {
             datablock.classList.add("selected");
+            editObject(node, datablock);
         }
 
         datablock.addEventListener("click", (e) => {
@@ -171,6 +173,7 @@ function reloadUI(sel) {
             e.stopPropagation();
 
             state.nodes.splice(index, 1);
+            updateDynamics(false);
             reloadUI();
         });
         controls.appendChild(deleteButton);
@@ -182,6 +185,7 @@ function reloadUI(sel) {
 }
 document.querySelector("#newdatablock").addEventListener("click", (e) => {
     state.nodes.push(getPrimitive(document.querySelector("#addtype").value));
+    updateDynamics(false);
     reloadUI(document.querySelector(".datablock.selected")?.datablock);
 });
 reloadUI();

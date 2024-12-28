@@ -10,13 +10,15 @@ const PRIMITIVES = {};
 
 function getPrimitive(type) {
     var cloned = Object.assign({}, PRIMITIVES[type]);
-    delete cloned.asJavaScript;
-    cloned = structuredClone(cloned);
+    var tags = Object.assign({}, cloned.tags);
+    cloned.tags = tags;
     Object.keys(cloned.tags).forEach(key => {
         if (Array.isArray(cloned.tags[key])) {
             cloned.tags[key] = cloned.tags[key][0];
         }
     });
+    delete cloned.asJavaScript;
+    cloned = structuredClone(cloned);
     return cloned;
 }
 

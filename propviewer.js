@@ -58,15 +58,16 @@ function editObject(obj, datablock) {
                 input.appendChild(option);
             });
             input.classList.add("handler_select");
-            input.updateHandlerList = function () {
+            input.updateHandlerList = function (useIndexMethod) {
+                var selectedIdx = input.selectedIndex;
                 var val = input.value;
                 input.innerHTML = "";
                 var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
-                handlers.forEach(opt => {
+                handlers.forEach((opt, i) => {
                     var option = document.createElement("option");
                     option.value = opt;
                     option.innerText = opt;
-                    if (opt === val) {
+                    if (useIndexMethod ? (i === selectedIdx) : (opt === val)) {
                         option.selected = true;
                     }
                     input.appendChild(option);
@@ -77,6 +78,9 @@ function editObject(obj, datablock) {
         if (Array.isArray(PRIMITIVES[obj.type].tags[k])) {
             input = document.createElement("select");
             var handlers = PRIMITIVES[obj.type].tags[k];
+            if (handlers.useDynamic) {
+                input.classList.add("dynamic_select");
+            }
             handlers.forEach(opt => {
                 var option = document.createElement("option");
                 option.value = opt;
@@ -86,6 +90,22 @@ function editObject(obj, datablock) {
                 }
                 input.appendChild(option);
             });
+            input.dynamicUpdate = function (useIndexMethod) {
+                var selectedIdx = input.selectedIndex;
+                var val = input.value;
+                input.innerHTML = "";
+
+                var handlers = PRIMITIVES[obj.type].tags[k].calculate();
+                handlers.forEach((opt, i) => {
+                    var option = document.createElement("option");
+                    option.value = opt;
+                    option.innerText = opt;
+                    if (useIndexMethod ? (i === selectedIdx) : (opt === val)) {
+                        option.selected = true;
+                    }
+                    input.appendChild(option);
+                });
+            }
         }
 
         input.addEventListener("input", () => {
@@ -99,10 +119,26 @@ function editObject(obj, datablock) {
             } else {
                 obj.tags[k] = (input.type === "checkbox") ? input.checked : input.value;
             }
+            updateDynamics(true);
         });
 
         propnav.appendChild(input);
 
         propnav.appendChild(document.createElement("br"));
+    });
+}
+
+function updateDynamics(r) {
+    document.querySelectorAll(".dynamic_select").forEach(x => x.dynamicUpdate(r));
+    state.nodes.forEach(x => {
+        var parent = PRIMITIVES[x.type];
+        Object.keys(x.tags).forEach(tag => {
+            if (parent.tags[tag].useDynamic) {
+                var val = x.tags[tag];
+                var selectedIdx = parent.tags[tag].indexOf(val);
+                parent.tags[tag].calculate();
+                x.tags[tag] = r ? parent.tags[tag][selectedIdx] : val;
+            }
+        });
     });
 }

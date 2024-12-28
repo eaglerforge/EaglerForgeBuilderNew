@@ -171,3 +171,7 @@ select option {
 .blocklyMenu, .blocklyEditableText > .blocklyText:not(.blocklyDropdownText) {
   text-shadow: none;
 }
+
+.selectSearch {
+  border: 2px solid purple !important;
+}
