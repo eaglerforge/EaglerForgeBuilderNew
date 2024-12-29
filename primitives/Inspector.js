@@ -17,6 +17,11 @@ inspectorFrame.style.border = "0";
 inspectorFrame.style.display = "none";
 inspectorFrame.style.pointerEvents = "none";
 inspectorFrame.style.backgroundColor = "white";
+inspectorFrame.allowFullscreen = true;
+inspectorFrame.tabIndex = 0;
+inspectorFrame.addEventListener("mouseover", ()=>{
+    inspectorFrame.focus();
+});
 var propnav = document.querySelector("#propnav");
 function positionInspectorFrame() {
     var aabb = propnav.getBoundingClientRect();
