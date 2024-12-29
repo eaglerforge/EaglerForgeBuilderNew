@@ -121,9 +121,7 @@ var state = globalThis.state = {
         getPrimitive("icon"),
     ]
 };
-function updatePropsUI() {
-
-}
+var inspector = getPrimitive("inspector");
 function reloadUI(sel) {
     if (!state.nodes.includes(sel)) {
         sel = document.querySelector(".datablock.selected")?.datablock;
@@ -134,10 +132,11 @@ function reloadUI(sel) {
     });
     document.querySelector("#search").value = "";
     var datablockContainer = document.querySelector("#datablock_container");
-    state.nodes.forEach((node, index) => {
+    state.nodes.concat(inspector).forEach((node, index) => {
         var datablock = document.createElement("span");
         datablock.datablock = node;
         datablock.classList.add("datablock");
+        datablock.setAttribute("data-dtype", node.type);
 
         if (node === sel) {
             datablock.classList.add("selected");

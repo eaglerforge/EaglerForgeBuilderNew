@@ -1,4 +1,16 @@
 function editObject(obj, datablock) {
+    if (obj.type === "inspector") {
+        inspectorFrame.style.display = "block";
+        inspectorFrame.style.pointerEvents = "all";
+        inspectorFrameReposTimer = setInterval(positionInspectorFrame, 1000 / 15);
+    } else {
+        inspectorFrame.style.display = "none";
+        inspectorFrame.style.pointerEvents = "none";
+        if (inspectorFrameReposTimer === null) {
+            inspectorFrameReposTimer = null;
+            clearInterval(inspectorFrameReposTimer);
+        }
+    }
     var propnav = document.querySelector("#propnav");
     propnav.innerHTML = "";
 

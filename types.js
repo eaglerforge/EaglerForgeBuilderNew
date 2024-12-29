@@ -24,7 +24,7 @@ function getPrimitive(type) {
 
 window.addEventListener("load", ()=>{
     var addtype = document.querySelector("#addtype");
-    Object.keys(PRIMITIVES).forEach(type => {
+    Object.keys(PRIMITIVES).filter(x=>!PRIMITIVES[x].hidden).forEach(type => {
         var option = document.createElement("option");
         option.value = type;
         option.innerText = PRIMITIVES[type].name;
