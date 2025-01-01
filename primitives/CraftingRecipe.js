@@ -18,7 +18,9 @@ PRIMITIVES["recipe"] = {
         lf2: VALUE_ENUMS.NEWLINE,
         lf3: VALUE_ENUMS.NEWLINE,
         resultQuantity: 1,
-        result: VALUE_ENUMS.ABSTRACT_ITEM
+        result: VALUE_ENUMS.ABSTRACT_ITEM,
+        lf4: VALUE_ENUMS.NEWLINE,
+        GenerateResultItem: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
     },
     asJavaScript: function () {
         return "";
