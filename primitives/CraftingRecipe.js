@@ -20,7 +20,7 @@ PRIMITIVES["recipe"] = {
         resultQuantity: 1,
         result: VALUE_ENUMS.ABSTRACT_ITEM,
         lf4: VALUE_ENUMS.NEWLINE,
-        GenerateResultItem: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
+        ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
@@ -112,6 +112,7 @@ PRIMITIVES["recipe"] = {
             }
             $$recipePattern += ",";
         }
+        var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
         return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
@@ -141,7 +142,9 @@ PRIMITIVES["recipe"] = {
             var $$resultItem = $$resultItemArg.startsWith("block/") ?
                 $$itemStackFromBlockWithMeta(ModAPI.blocks[$$resultItemArg.replace("block/", "").split("@")[0]].getRef(),${this.tags.resultQuantity},$$resultItemArg.replace("block/", "").split("@")[1] || 0)
                 : $$itemStackFromItem(ModAPI.items[$$resultItemArg.replace("item/", "")].getRef(), ${this.tags.resultQuantity})
-
+            
+            (function (${modifyResultHandler.args.join(",")}) {${modifyResultHandler.code}})($$resultItem);
+            
             var $$craftingManager = ModAPI.reflect.getClassById("net.minecraft.item.crafting.CraftingManager").staticMethods.getInstance.method();
             ModAPI.hooks.methods.nmic_CraftingManager_addRecipe($$craftingManager, $$resultItem, $$recipe);
         }
