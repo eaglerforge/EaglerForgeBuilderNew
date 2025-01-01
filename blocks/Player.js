@@ -91,6 +91,42 @@ javascript.javascriptGenerator.forBlock['player_get_food_stats'] = function () {
     return [code, javascript.Order.NONE];
 }
 
+const PLAYER_XP_STATS = [
+    ["experience", "experience"],
+    ["experience level", "experienceLevel"],
+    ["total experience", "experienceTotal"],
+    ["experience points", "experiencePoints"]
+];
+
+const player_get_xp_stats = {
+    init: function () {
+        this.appendDummyInput('STAT')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField( new Blockly.FieldDropdown(PLAYER_XP_STATS), 'STAT');
+        this.appendValueInput('PLAYER')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('of player');
+        this.setInputsInline(true)
+        this.setOutput(true, "Number");
+        this.setTooltip('Gets the experience stats of a player.');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ player_get_xp_stats: player_get_xp_stats });
+
+javascript.javascriptGenerator.forBlock['player_get_xp_stats'] = function () {
+    const dropdown_stat = this.getFieldValue('STAT');
+    const value_player = javascript.javascriptGenerator.valueToCode(this, 'PLAYER', javascript.Order.ATOMIC);
+    let code;
+    if (dropdown_stat === "experiencePoints") {
+        code = `${value_player}.$getExperiencePoints()`;
+    } else {
+        code = `${value_player}["$"+${dropdown_stat}]`;
+    }
+    return [code, javascript.Order.NONE];
+}
+
 
 const PLAYER_ITEM_TYPE = [
     ["ItemStack", "ItemStack"],
