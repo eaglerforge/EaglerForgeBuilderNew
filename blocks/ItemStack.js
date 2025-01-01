@@ -6,7 +6,7 @@ const itemstack_stacksize = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Gets the stacksize of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -33,7 +33,7 @@ const itemstack_setstacksize = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets the stacksize of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -55,7 +55,7 @@ const itemstack_displayname = {
         this.setInputsInline(true)
         this.setOutput(true, 'String');
         this.setTooltip('Gets the display name of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -81,7 +81,7 @@ const itemstack_setdisplayname = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets the display name of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -138,7 +138,7 @@ const itemstack_enchant = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Adds an enchantment to an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -162,7 +162,7 @@ const itemstack_repaircost = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Gets the repair cost of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };
@@ -189,7 +189,7 @@ const itemstack_setrepaircost = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets the repair cost of an ItemStack');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/ItemStackData.html');
         this.setColour(165);
     }
 };

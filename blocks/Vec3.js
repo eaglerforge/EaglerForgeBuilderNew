@@ -13,7 +13,7 @@ const vec3_getxyz = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Get a component of a Vec3');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/Vec3.html');
         this.setColour(270);
     }
 };
@@ -48,7 +48,7 @@ const vec3_fromxyz = {
         this.setInputsInline(true)
         this.setOutput(true, null);
         this.setTooltip('Create a Vec3 from components');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/Vec3.html');
         this.setColour(270);
     },
     libs: ["construct_vec3"]

@@ -45,7 +45,7 @@ const entity_set_position = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets the position of the entity to a vector, and sends a packet.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -77,7 +77,7 @@ const entity_set_position_xyz = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets the position of the entity to a vector, and sends a packet.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -107,7 +107,7 @@ const entity_get_prop = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets a property of the entity. yaw and pitch are in radians, not degrees.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -139,7 +139,7 @@ const entity_set_prop = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets a property of the entity. yaw and pitch are in radians, not degrees.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -173,7 +173,7 @@ const entity_set_switch = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets a boolean property of the entity.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -199,7 +199,7 @@ const entity_get_switch = {
         this.setInputsInline(true)
         this.setOutput(true, 'Boolean');
         this.setTooltip('Sets a boolean property of the entity.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -221,7 +221,7 @@ const entity_get_world = {
         this.setInputsInline(true)
         this.setOutput(true, null);
         this.setTooltip('Gets the entity\'s world object.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -250,7 +250,7 @@ const entity_get_position = {
         this.setInputsInline(true)
         this.setOutput(true, null);
         this.setTooltip('Gets the entity\'s position object.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -275,7 +275,7 @@ const entity_distance = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Get the distance between two entities');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -300,7 +300,7 @@ const entity_distance_vec3 = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Get the distance from an entity to a Vec3 position');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -323,7 +323,7 @@ const entity_get_lookvec = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Gets an entity\'s look vector (Vec3)');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -345,7 +345,7 @@ const entity_get_eye_pos = {
         this.setInputsInline(true)
         this.setOutput(true, 'Number');
         this.setTooltip('Gets an entity\'s eye position (Vec3)');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -371,7 +371,7 @@ const entity_raytrace = {
         this.setInputsInline(false)
         this.setOutput(true, 'Number');
         this.setTooltip('Cast a ray from an entity and return the hit position as a Vec3.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
@@ -395,7 +395,7 @@ const entity_setdead = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets an entity\'s state to \'dead\'');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/EntityData.html');
         this.setColour(30);
     }
 };
