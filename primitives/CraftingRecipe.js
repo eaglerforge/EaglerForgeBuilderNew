@@ -89,10 +89,10 @@ PRIMITIVES["recipe"] = {
                 newGrid[y - minY][x - minX] = grid[y][x];
             }
         }
-        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].flat((x, i) => {
+        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].map((x, i) => {
             return [x, String.fromCharCode(65 + i)];
         }));
-        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].flat((x, i) => {
+        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].map((x, i) => {
             return [String.fromCharCode(65 + i), x];
         }));
         var legendStr = "";
