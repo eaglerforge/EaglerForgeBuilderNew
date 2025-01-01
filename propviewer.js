@@ -1,3 +1,7 @@
+const InlineValues = [
+    VALUE_ENUMS.ABSTRACT_BLOCK,
+    VALUE_ENUMS.ABSTRACT_ITEM
+];
 function editObject(obj, datablock) {
     if (obj.type === "inspector") {
         inspectorFrame.style.display = "block";
@@ -29,9 +33,18 @@ function editObject(obj, datablock) {
 
     var keys = Object.keys(obj.tags);
     keys.forEach(k => {
-        var label = document.createElement("label");
-        label.innerText = k + ": ";
-        propnav.appendChild(label);
+        const parentValue = PRIMITIVES[obj.type].tags[k];
+        const isInline = InlineValues.includes(parentValue);
+
+        if (parentValue === VALUE_ENUMS.NEWLINE) {
+            return propnav.appendChild(document.createElement("br"));;
+        }
+
+        if (!isInline) {
+            var label = document.createElement("label");
+            label.innerText = k + ": ";
+            propnav.appendChild(label);
+        }
 
         var input = document.createElement("input");
         var val = obj.tags[k];
@@ -42,7 +55,7 @@ function editObject(obj, datablock) {
             input.type = "text";
         }
 
-        input.value = obj.tags[k];
+        input.value = val;
 
         if (typeof val === "boolean") {
             input.type = "checkbox";
@@ -57,9 +70,15 @@ function editObject(obj, datablock) {
             input.type = "file";
             input.accept = "image/png";
         }
-        if ((typeof PRIMITIVES[obj.type].tags[k] === "string") && PRIMITIVES[obj.type].tags[k].startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
+        if (parentValue === VALUE_ENUMS.ABSTRACT_ITEM) {
+            input = makeItemSelector(val);
+        }
+        if (parentValue === VALUE_ENUMS.ABSTRACT_BLOCK) {
+            input = makeBlockSelector(val, true);
+        }
+        if ((typeof parentValue === "string") && parentValue.startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
-            var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
+            var handlers = ["None"].concat(getHandlers(parentValue.replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
             handlers.forEach(opt => {
                 var option = document.createElement("option");
                 option.value = opt;
@@ -74,7 +93,7 @@ function editObject(obj, datablock) {
                 var selectedIdx = input.selectedIndex;
                 var val = input.value;
                 input.innerHTML = "";
-                var handlers = ["None"].concat(getHandlers(PRIMITIVES[obj.type].tags[k].replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
+                var handlers = ["None"].concat(getHandlers(parentValue.replace(VALUE_ENUMS.ABSTRACT_HANDLER, '')));
                 handlers.forEach((opt, i) => {
                     var option = document.createElement("option");
                     option.value = opt;
@@ -87,9 +106,9 @@ function editObject(obj, datablock) {
             }
         }
 
-        if (Array.isArray(PRIMITIVES[obj.type].tags[k])) {
+        if (Array.isArray(parentValue)) {
             input = document.createElement("select");
-            var handlers = PRIMITIVES[obj.type].tags[k];
+            var handlers = parentValue;
             if (handlers.useDynamic) {
                 input.classList.add("dynamic_select");
             }
@@ -107,7 +126,7 @@ function editObject(obj, datablock) {
                 var val = input.value;
                 input.innerHTML = "";
 
-                var handlers = PRIMITIVES[obj.type].tags[k].calculate();
+                var handlers = parentValue.calculate();
                 handlers.forEach((opt, i) => {
                     var option = document.createElement("option");
                     option.value = opt;
@@ -136,7 +155,9 @@ function editObject(obj, datablock) {
 
         propnav.appendChild(input);
 
-        propnav.appendChild(document.createElement("br"));
+        if (!isInline) {
+            propnav.appendChild(document.createElement("br"));
+        }
     });
 }
 

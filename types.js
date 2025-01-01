@@ -1,7 +1,10 @@
 const VALUE_ENUMS = {
     FILE: "efb::val__file",
     IMG: "efb::val__img",
-    ABSTRACT_HANDLER: "efb::handler/"
+    ABSTRACT_HANDLER: "efb::handler/",
+    ABSTRACT_ITEM: "efb::val__item",
+    ABSTRACT_BLOCK: "efb::val__block",
+    NEWLINE: "efb::lf"
 }
 
 

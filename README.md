@@ -1,5 +1,4 @@
 # EaglerForgeBuilderNew
-
 ## [Try it here](https://eaglerforge.github.io/EaglerForgeBuilderNew/)
 
 This is a complete rewrite and redesign of @OeildeLynx31's [eaglerforge builder](https://eaglerforge-builder.vercel.app/) [(repo)](https://github.com/OeildeLynx31/eaglerforge-builder), a tool that allows you to easily develop [Eaglercraft](https://git.eaglercraft.rip/eaglercraft/eaglercraft-1.8/src/branch/main/README.md) mods using the EaglerForge modding API.

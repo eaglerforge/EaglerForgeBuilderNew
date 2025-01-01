@@ -42,7 +42,12 @@ function getEfiBuild() {
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onload = (e) => {
-                //efiBuild = URL.createObjectURL(new Blob([reader.result], { type: "text/html" }));
+                if (!reader.result.includes("__eaglerforgeinjector_installation_flag__")) {
+                    if (window.confirm("This file is not a EaglerForgeInjector build, or is too old.\nOpen the EaglerForgeInjector page?")) {
+                        window.open("https://eaglerforge.github.io/EaglerForgeInjector");
+                    }
+                    rej();
+                }
                 efiBuild = reader.result;
                 res();
             };
