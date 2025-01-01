@@ -14,7 +14,11 @@ PRIMITIVES["recipe"] = {
         lf1: VALUE_ENUMS.NEWLINE,
         slot6: VALUE_ENUMS.ABSTRACT_ITEM,
         slot7: VALUE_ENUMS.ABSTRACT_ITEM,
-        slot8: VALUE_ENUMS.ABSTRACT_ITEM
+        slot8: VALUE_ENUMS.ABSTRACT_ITEM,
+        lf2: VALUE_ENUMS.NEWLINE,
+        lf3: VALUE_ENUMS.NEWLINE,
+        resultQuantity: 1,
+        result: VALUE_ENUMS.ABSTRACT_ITEM
     },
     asJavaScript: function () {
         return "";

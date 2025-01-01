@@ -2727,7 +2727,7 @@ function getImageLocation(id) {
     }
     return `https://minecraft.wiki/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id)?"gif":"png"}`;
 }
-function makeItemSelector(selected, useBlocks) {
+function makeItemSelector(selected, useBlocks, triggerFn) {
     const list = (useBlocks ? blocks : items.concat(blocks)).bake();
     list.dynamicConcat("block_advanced", "id", (x) => {
         return {id: x, type: "block", meta: 0, name: x}
@@ -2737,9 +2737,9 @@ function makeItemSelector(selected, useBlocks) {
             return {id: x, type: "item", name: x}
         });
     }
-    list.calculate();
     if (!list.map(itemToRep).includes(selected)) {
         selected = "item/air";
+        triggerFn();
     }
     var div = document.createElement("div");
     div._useInline = true;
@@ -2751,6 +2751,7 @@ function makeItemSelector(selected, useBlocks) {
     div.style.backgroundRepeat = "no-repeat";
     div.style.backgroundSize = "cover";
     div.style.imageRendering = "pixelated";
+    div.classList.add("dynamic_itemsel");
     div.style.marginRight = "4px";
     div.style.borderRadius = "4px";
     div.value = selected;
@@ -2790,7 +2791,7 @@ function makeItemSelector(selected, useBlocks) {
     });
     searchBox.appendChild(searchBar);
     searchBox.appendChild(document.createElement("br"));
-    function recalculateList() {
+    div.recalculateList = function () {
         searchBox.querySelectorAll(".itemoption").forEach(x => x.remove());
         list.calculate();
         list.forEach((item, idx) => {
@@ -2800,16 +2801,18 @@ function makeItemSelector(selected, useBlocks) {
             div2.style.width = div2.style.height = "4rem";
             div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
-            if (itemToRep(item) === selected) {
-                div2.setAttribute("data-sel", "yes");
-                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
-            }
             div2.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
             div2.style.backgroundRepeat = "no-repeat";
             div2.style.backgroundSize = "cover";
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
+            if (itemToRep(item) === selected) {
+                div.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
+                div2.setAttribute("data-sel", "yes");
+                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
+                div.value = itemToRep(item);
+            }
             div2.addEventListener("click", (e) => {
                 e.stopPropagation();
                 searchBox.querySelectorAll(".itemoption[data-sel=yes]").forEach(x => {
@@ -2820,6 +2823,7 @@ function makeItemSelector(selected, useBlocks) {
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div.value = itemToRep(item);
                 selected = div.value;
+                triggerFn();
                 div.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
             });
             var label = document.createElement("label");
@@ -2831,7 +2835,7 @@ function makeItemSelector(selected, useBlocks) {
             searchBox.appendChild(div2);
         });
     }
-    recalculateList();
+    div.recalculateList();
     div.addEventListener("click", () => {
         searchBox.style.display = "block";
     });

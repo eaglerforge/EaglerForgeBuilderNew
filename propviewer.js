@@ -71,10 +71,14 @@ function editObject(obj, datablock) {
             input.accept = "image/png";
         }
         if (parentValue === VALUE_ENUMS.ABSTRACT_ITEM) {
-            input = makeItemSelector(val);
+            input = makeItemSelector(val, false, function () {
+                obj.tags[k] = input.value;
+            });
         }
         if (parentValue === VALUE_ENUMS.ABSTRACT_BLOCK) {
-            input = makeBlockSelector(val, true);
+            input = makeItemSelector(val, true, function () {
+                obj.tags[k] = input.value;
+            });
         }
         if ((typeof parentValue === "string") && parentValue.startsWith(VALUE_ENUMS.ABSTRACT_HANDLER)) {
             input = document.createElement("select");
@@ -174,4 +178,5 @@ function updateDynamics(r) {
             }
         });
     });
+    document.querySelectorAll(".dynamic_itemsel").forEach(x => x.recalculateList());
 }
