@@ -106,10 +106,12 @@ PRIMITIVES["recipe"] = {
         var $$recipePattern = "";
         for (let y = 0; y < newGrid.length; y++) {
             const row = newGrid[y];
+            $$recipePattern += '"';
             for (let x = 0; x < row.length; x++) {
                 const cell = row[x];
                 $$recipePattern += `${cell === "item/air" ? " " : uniqueTypesMap[cell]}`
             }
+            $$recipePattern += '"';
             $$recipePattern += ",";
         }
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
