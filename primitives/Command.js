@@ -9,6 +9,9 @@ PRIMITIVES["command"] = {
         CalledByPlayer: VALUE_ENUMS.ABSTRACT_HANDLER + "CommandCalledByPlayer",
         CalledByOther: VALUE_ENUMS.ABSTRACT_HANDLER + "CommandCalled",
     },
+    getDependencies: function () {
+        return [];
+    },
     asJavaScript: function () {
         var escaped = this.tags.command.replaceAll("\"", "\\\"");
         var len = this.tags.command.length;

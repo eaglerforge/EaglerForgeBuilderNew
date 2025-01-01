@@ -75,7 +75,7 @@ const itemstack_setdisplayname = {
             .appendField('set itemstack display name');
         this.appendValueInput('VALUE')
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .setCheck('Number')
+            .setCheck('String')
             .appendField('to');
         this.setInputsInline(true)
         this.setPreviousStatement(true, null);

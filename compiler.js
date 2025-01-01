@@ -8,6 +8,24 @@ function getCompiledCode() {
     var prereq_contents = "";
     let functionPrereqs = [];
     state.nodes.forEach(node => {
+        delete node._deps;
+        node._deps = PRIMITIVES[node.type].getDependencies.apply(node, []);
+    });
+    state.nodes.sort((a, b) => {
+        var bDepends = b._deps.includes(a);
+        var aDepends = a._deps.includes(b);
+        if (bDepends && aDepends) {
+            alert(`Failed to compile:\nCircular dependency between ${a.name} and ${b.name}`);
+        }
+        if (bDepends) {
+            return -1;
+        }
+        if (aDepends) {
+            return 1;
+        }
+        return 0;
+    });
+    state.nodes.forEach(node => {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });

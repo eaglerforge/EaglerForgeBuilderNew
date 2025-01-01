@@ -18,6 +18,9 @@ PRIMITIVES["item"] = {
         UsedOnBlock: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockUse",
         Crafted: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemCrafted",
     },
+    getDependencies: function () {
+        return [];
+    },
     asJavaScript: function () {
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
         var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"]);
