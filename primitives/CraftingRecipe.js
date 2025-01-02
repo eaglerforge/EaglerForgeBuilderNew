@@ -89,10 +89,10 @@ PRIMITIVES["recipe"] = {
                 newGrid[y - minY][x - minX] = grid[y][x];
             }
         }
-        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].map((x, i) => {
+        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
             return [x, String.fromCharCode(65 + i)];
         }));
-        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].map((x, i) => {
+        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
             return [String.fromCharCode(65 + i), x];
         }));
         var legendStr = "";
@@ -115,14 +115,16 @@ PRIMITIVES["recipe"] = {
             $$recipePattern += ",";
         }
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
+        console.log(modifyResultHandler);
         return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
+            debugger;
             var $$ObjectClass = ModAPI.reflect.getClassById("java.lang.Object").class;
             function $$ToChar(char) {
                 return ModAPI.reflect.getClassById("java.lang.Character").staticMethods.valueOf.method(char[0].charCodeAt(0));
             }
-            var $$resultItemArg = ${this.tags.result.replace("item/air", "block/air")};
+            var $$resultItemArg = "${this.tags.result.replace("item/air", "block/air")}";
             var $$recipeLegend = {
                 ${legendStr}
             };
@@ -149,6 +151,7 @@ PRIMITIVES["recipe"] = {
             
             var $$craftingManager = ModAPI.reflect.getClassById("net.minecraft.item.crafting.CraftingManager").staticMethods.getInstance.method();
             ModAPI.hooks.methods.nmic_CraftingManager_addRecipe($$craftingManager, $$resultItem, $$recipe);
+            debugger;
         }
 
         if (ModAPI.items) {
