@@ -148,7 +148,7 @@ javascript.javascriptGenerator.forBlock['itemstack_enchant'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const dropdown_enchantment = this.getFieldValue('ENCHANTMENT');
     const value_level = javascript.javascriptGenerator.valueToCode(this, 'LEVEL', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$addEnchantment(ModAPI.enchantments["${dropdown_enchantment}"], (${value_level}));`;
+    const code = `(${value_itemstack}).$addEnchantment(ModAPI.enchantments["${dropdown_enchantment}"].getRef(), (${value_level}));`;
     return code;
 }
 
