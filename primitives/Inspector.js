@@ -5,6 +5,9 @@ PRIMITIVES["inspector"] = {
     hidden: true,
     tags: {
     },
+    getDependencies: function () {
+        return [];
+    },
     asJavaScript: function () {
         return ``;
     }

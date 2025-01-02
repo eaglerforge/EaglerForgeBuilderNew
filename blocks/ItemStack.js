@@ -42,7 +42,7 @@ Blockly.common.defineBlocks({ itemstack_setstacksize: itemstack_setstacksize });
 javascript.javascriptGenerator.forBlock['itemstack_setstacksize'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$stackSize = (${value_value})`;
+    const code = `(${value_itemstack}).$stackSize = (${value_value});`;
     return code;
 }
 
@@ -75,7 +75,7 @@ const itemstack_setdisplayname = {
             .appendField('set itemstack display name');
         this.appendValueInput('VALUE')
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .setCheck('Number')
+            .setCheck('String')
             .appendField('to');
         this.setInputsInline(true)
         this.setPreviousStatement(true, null);
@@ -90,7 +90,7 @@ Blockly.common.defineBlocks({ itemstack_setdisplayname: itemstack_setdisplayname
 javascript.javascriptGenerator.forBlock['itemstack_setdisplayname'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$setStackDisplayName(ModAPI.util.str(${value_value}))`;
+    const code = `(${value_itemstack}).$setStackDisplayName(ModAPI.util.str(${value_value}));`;
     return code;
 }
 
@@ -148,7 +148,7 @@ javascript.javascriptGenerator.forBlock['itemstack_enchant'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const dropdown_enchantment = this.getFieldValue('ENCHANTMENT');
     const value_level = javascript.javascriptGenerator.valueToCode(this, 'LEVEL', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$addEnchantment(ModAPI.enchantments["${dropdown_enchantment}"], (${value_level}))`;
+    const code = `(${value_itemstack}).$addEnchantment(ModAPI.enchantments["${dropdown_enchantment}"].getRef(), (${value_level}));`;
     return code;
 }
 
@@ -198,6 +198,6 @@ Blockly.common.defineBlocks({ itemstack_setrepaircost: itemstack_setrepaircost }
 javascript.javascriptGenerator.forBlock['itemstack_setrepaircost'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$setRepairCost(${value_value})`;
+    const code = `(${value_itemstack}).$setRepairCost(${value_value});`;
     return code;
 }

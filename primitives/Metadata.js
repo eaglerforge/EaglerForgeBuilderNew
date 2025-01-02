@@ -8,6 +8,9 @@ PRIMITIVES["metadata"] = {
         Description: "Does literally nothing",
         Credits: "By <author>"
     },
+    getDependencies: function () {
+        return [];
+    },
     asJavaScript: function () {
         return `
 (function MetadataDatablock() {
