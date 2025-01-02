@@ -18,6 +18,9 @@ PRIMITIVES["block_advanced"] = {
         RandomTick: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockRandomTick",
         EntityCollided: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockEntityCollision",
     },
+    getDependencies: function () {
+        return [];
+    },
     asJavaScript: function () {
         var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor, []);
         var breakHandler = getHandlerCode("BlockBreak", this.tags.Break, ["$$world", "$$blockpos", "$$blockstate"]);

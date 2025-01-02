@@ -21,6 +21,7 @@ function getPrimitive(type) {
         }
     });
     delete cloned.asJavaScript;
+    delete cloned.getDependencies;
     cloned = structuredClone(cloned);
     return cloned;
 }

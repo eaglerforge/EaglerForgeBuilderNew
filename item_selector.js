@@ -2537,7 +2537,8 @@ const blocks = [
     }
 ];
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
-const missingTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
+const missingTexture = "https://minecraft.wiki/images/Missing_Texture_JE4.png";
 var itemToRep = (item)=>(item.type==="block")?"block/"+item.id+"@"+item.meta:"item/"+item.id;
 function blockL10NToId(thisSentence, noReverse) {
     function camelToSnake(str) {
@@ -2551,6 +2552,9 @@ function blockL10NToId(thisSentence, noReverse) {
     return reversedSnakeCase;
 }
 function getImageLocationItem(item, display) {
+    if ((item.name === "missingno") && !display) {
+        return "missingno";
+    }
     item = Object.assign({}, item);
     item.id = item.id.replace("record", "music_disc");
     item.id = item.id.replace("banner", "white_banner");
@@ -2592,6 +2596,9 @@ function getImageLocationItem(item, display) {
     return item.id;
 }
 function getImageLocationBlock(block, display) {
+    if ((block.name === "missingno") && !display) {
+        return "missingno";
+    }
     block = Object.assign({}, block);
     block.name = block.name.replaceAll("big_oak", "dark_oak");
     block.name = block.name.replaceAll("houstonia", "azure_bluet");
@@ -2723,6 +2730,9 @@ function getImageLocationBlock(block, display) {
 }
 function getImageLocation(id) {
     if (id === "item/air") {
+        return emptyTexture;
+    }
+    if (id === "missingno") {
         return missingTexture;
     }
     return `https://minecraft.wiki/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id)?"gif":"png"}`;
@@ -2730,11 +2740,11 @@ function getImageLocation(id) {
 function makeItemSelector(selected, useBlocks, triggerFn) {
     const list = (useBlocks ? blocks : items.concat(blocks)).bake();
     list.dynamicConcat("block_advanced", "id", (x) => {
-        return {id: x, type: "block", meta: 0, name: x}
+        return {id: x, type: "block", meta: 0, name: "missingno"}
     });
     if (!useBlocks) {
         list.dynamicConcat("item", "id", (x) => {
-            return {id: x, type: "item", name: x}
+            return {id: x, type: "item", name: "missingno"}
         });
     }
     if (!list.map(itemToRep).includes(selected)) {
@@ -2812,15 +2822,22 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
                 div.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
                 div2.setAttribute("data-sel", "yes");
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
+                div2.style.transform = "scale(1.2)";
+                div2.style.zIndex = 1;
                 div.value = itemToRep(item);
             }
             div2.addEventListener("click", (e) => {
                 e.stopPropagation();
                 searchBox.querySelectorAll(".itemoption[data-sel=yes]").forEach(x => {
                     x.setAttribute("data-sel", "no");
+                    x.style.border = "1px solid var(--col)";
                     x.style.backgroundColor = "";
+                    x.style.transform = "";
+                    x.style.zIndex = 0;
                 });
                 div2.setAttribute("data-sel", "yes");
+                div2.style.transform = "scale(1.2)";
+                div2.style.zIndex = 1;
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div.value = itemToRep(item);
                 selected = div.value;
