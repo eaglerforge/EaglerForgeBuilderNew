@@ -13,7 +13,7 @@ const blockpos_getxyz = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Get a component of a block pos');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/util/BlockPos.html');
         this.setColour(270);
     }
 };
@@ -48,7 +48,7 @@ const blockpos_fromxyz = {
         this.setInputsInline(true)
         this.setOutput(true, null);
         this.setTooltip('Create a BlockPos from components');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/util/BlockPos.html');
         this.setColour(270);
     },
     libs: ["construct_blockpos"]
