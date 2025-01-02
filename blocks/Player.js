@@ -2,8 +2,10 @@ const PLAYER_CAPABILITIES_BOOLEAN = [
     ["can fly", "allowFlying"],
     ["is flying", "isFlying"],
     ["disable damage", "disableDamage"],
-    ["is in creative mode", "isCreativeMode"],
+    ["is in creative", "isCreativeMode"],
     ["allow edit", "allowEdit"],
+    ["is invulnerable", "invulnerable"],
+    ["is in spectator", "isSpectatorMode"],
 ];
 
 const player_get_capability_boolean = {
@@ -26,7 +28,14 @@ Blockly.common.defineBlocks({ player_get_capability_boolean: player_get_capabili
 javascript.javascriptGenerator.forBlock['player_get_capability_boolean'] = function () {
     const dropdown_capability = this.getFieldValue('CAPABILITY');
     const value_player = javascript.javascriptGenerator.valueToCode(this, 'PLAYER', javascript.Order.ATOMIC);
-    const code = `Boolean((${value_player}).$capabilities["${dropdown_capability}"])`;
+    let code;
+    if (dropdown_capability === invulnerable) {
+        code = `Boolean((${value_player}).$invulnerable)`;
+    } else if (dropdown_capability === isSpectatorMode) {
+        code = `Boolean((${value_player}).$isSpectator()`;
+    } else {
+        code = `Boolean((${value_player}).$capabilities["${dropdown_capability}"])`;
+    }
     return [code, javascript.Order.NONE];
 }
 
@@ -222,5 +231,47 @@ javascript.javascriptGenerator.forBlock['player_get_player_inventory'] = functio
     } else {
         code = `(${value_player}).$getInventoryEnderChest().$inventoryContents.data`
     }
+    return [code, javascript.Order.NONE];
+}
+
+const player_is_entity_player = {
+    init: function () {
+        this.appendValueInput('ENTITY')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('is entity');
+        this.appendDummyInput()
+            .appendField('a player');
+        this.setInputsInline(true);
+        this.setOutput(true, "Boolean");
+        this.setTooltip('Checks if an entity is a player or not');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ player_is_entity_player: player_is_entity_player });
+
+javascript.javascriptGenerator.forBlock['player_is_entity_player'] = function () {
+    const value_entity = javascript.javascriptGenerator.valueToCode(this, 'ENTITY', javascript.Order.ATOMIC);
+    const code = `Boolean(Minecraft.$thePlayer.$isPlayer())`;
+    return [code, javascript.Order.NONE];
+}
+
+const player_get_player_name = {
+    init: function () {
+        this.appendValueInput('PLAYER')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get the name of player');
+        this.setInputsInline(true);
+        this.setOutput(true, "String");
+        this.setTooltip('Gets the name a player.');
+        this.setHelpUrl('');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ player_get_player_name: player_get_player_name });
+
+javascript.javascriptGenerator.forBlock['player_get_player_name'] = function () {
+    const value_player = javascript.javascriptGenerator.valueToCode(this, 'PLAYER', javascript.Order.ATOMIC);
+    const code = `ModAPI.util.ustr((${value_player}).$getName())`;
     return [code, javascript.Order.NONE];
 }
