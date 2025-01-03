@@ -21,7 +21,7 @@ const items_creativetab = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Set the creative tab of the item');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.htmlhttps://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.htmlhttps://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -44,7 +44,7 @@ const items_setmaxstacksize = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Sets an items max stack size.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -66,7 +66,7 @@ const handle_ItemConstructor = {
             .appendField('Item Constructor Handler');
         this.appendStatementInput('CODE');
         this.setTooltip('Runs when the item type is initialised.\nNo return value expected.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -92,7 +92,7 @@ const handle_ItemRightClick = {
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
         this.setTooltip('Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -121,7 +121,7 @@ const handle_ItemUsed = {
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
         this.setTooltip('Runs when the item is used. Not called when the player stops using the item early.\nThe itemstack argument is expected as a return value.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -152,7 +152,7 @@ const handle_ItemTicked = {
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
         this.setTooltip('Runs every tick when the item is in a player\'s inventory.\nThe itemstack argument is expected as a return value.\n`slot index` is a number representing inventory location, `is held` is a boolean.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -185,7 +185,7 @@ const handle_ItemBlockUse = {
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
         this.setTooltip('Runs when the item is used on a block.\nA boolean is expected as a return value.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -215,7 +215,7 @@ const handle_ItemCrafted = {
         this.appendStatementInput('CODE');
         this.setInputsInline(false)
         this.setTooltip('Runs when the item is crafted or smelted.\nNo return value is expected.');
-        this.setHelpURL('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
