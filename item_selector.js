@@ -2747,6 +2747,7 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
             return {id: x, type: "item", name: "missingno"}
         });
     }
+    list.calculate();
     if (!list.map(itemToRep).includes(selected)) {
         selected = "item/air";
         triggerFn();
