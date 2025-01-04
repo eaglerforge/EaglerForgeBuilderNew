@@ -119,7 +119,6 @@ PRIMITIVES["recipe"] = {
         return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
-            debugger;
             var $$ObjectClass = ModAPI.reflect.getClassById("java.lang.Object").class;
             function $$ToChar(char) {
                 return ModAPI.reflect.getClassById("java.lang.Character").staticMethods.valueOf.method(char[0].charCodeAt(0));
@@ -151,7 +150,7 @@ PRIMITIVES["recipe"] = {
             
             var $$craftingManager = ModAPI.reflect.getClassById("net.minecraft.item.crafting.CraftingManager").staticMethods.getInstance.method();
             ModAPI.hooks.methods.nmic_CraftingManager_addRecipe($$craftingManager, $$resultItem, $$recipe);
-            debugger;
+            
         }
 
         if (ModAPI.items) {

@@ -2739,19 +2739,24 @@ function getImageLocation(id) {
 }
 function makeItemSelector(selected, useBlocks, triggerFn) {
     const list = (useBlocks ? blocks : items.concat(blocks)).bake();
+    
     list.dynamicConcat("block_advanced", "id", (x) => {
         return {id: x, type: "block", meta: 0, name: "missingno"}
     });
+
     if (!useBlocks) {
         list.dynamicConcat("item", "id", (x) => {
             return {id: x, type: "item", name: "missingno"}
         });
     }
+
     list.calculate();
+
     if (!list.map(itemToRep).includes(selected)) {
         selected = "item/air";
         triggerFn();
     }
+
     var div = document.createElement("div");
     div._useInline = true;
     div.style.width = div.style.height = "4rem";
