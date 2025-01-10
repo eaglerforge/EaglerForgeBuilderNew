@@ -9,6 +9,6 @@ You can use blocks to write custom event handlers, which you can select in your 
 ### Changes
 - Now using the new [EaglerForgeInjector](https://github.com/eaglerforge/EaglerForgeInjector/) API architecture rather than [Legacy](https://github.com/eaglerforge/EaglerForge-old)
 - Mods are now no longer limited to being client-side only.
-- You can now easily add blocks, items, and commands.
+- You can now easily add blocks, items, commands and recipes.
 - Dark mode
 - Higher-level design
