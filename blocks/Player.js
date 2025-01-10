@@ -3,9 +3,9 @@ const PLAYER_CAPABILITIES_BOOLEAN = [
     ["is flying", "isFlying"],
     ["disable damage", "disableDamage"],
     ["is in creative", "isCreativeMode"],
+    ["is in spectator", "isSpectatorMode"],
     ["allow edit", "allowEdit"],
     ["is invulnerable", "invulnerable"],
-    ["is in spectator", "isSpectatorMode"],
 ];
 
 const player_get_capability_boolean = {
@@ -19,7 +19,7 @@ const player_get_capability_boolean = {
         this.setInputsInline(true)
         this.setOutput(true, "Boolean");
         this.setTooltip('Gets a capability of a player.');
-        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
         this.setColour(30);
     }
 };
@@ -56,7 +56,7 @@ const player_get_capability_number = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets a capability of a player.');
-        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
         this.setColour(30);
     }
 };
@@ -87,7 +87,7 @@ const player_get_food_stats = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets the food stats of a player.');
-        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
         this.setColour(30);
     }
 };
@@ -118,7 +118,7 @@ const player_get_xp_stats = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets the experience stats of a player.');
-        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
         this.setColour(30);
     }
 };
@@ -155,7 +155,7 @@ const player_get_item_hand = {
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip('Gets the item in the hand of a player.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
@@ -182,7 +182,7 @@ const player_get_current_item_pos = {
         this.setInputsInline(true);
         this.setOutput(true, "Number");
         this.setTooltip('Gets the selected item index of a player.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
@@ -214,7 +214,7 @@ const player_get_player_inventory = {
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip('Gets the inventory of a player as list.');
-        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/InventoryPlayerData.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
@@ -244,7 +244,7 @@ const player_is_entity_player = {
         this.setInputsInline(true);
         this.setOutput(true, "Boolean");
         this.setTooltip('Checks if an entity is a player or not');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
@@ -264,7 +264,7 @@ const player_get_player_name = {
         this.setInputsInline(true);
         this.setOutput(true, "String");
         this.setTooltip('Gets the name a player.');
-        this.setHelpUrl('');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
@@ -273,5 +273,29 @@ Blockly.common.defineBlocks({ player_get_player_name: player_get_player_name });
 javascript.javascriptGenerator.forBlock['player_get_player_name'] = function () {
     const value_player = javascript.javascriptGenerator.valueToCode(this, 'PLAYER', javascript.Order.ATOMIC);
     const code = `ModAPI.util.ustr((${value_player}).$getName())`;
+    return [code, javascript.Order.NONE];
+}
+
+const player_get_player_by_name = {
+    init: function () {
+        this.appendValueInput('NAME')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get player by name');
+        this.appendValueInput('WORLD')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('in world');
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip('Gets a player by his name. Can be null.');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
+        this.setColour(30);
+    }
+};
+Blockly.common.defineBlocks({ player_get_player_by_name: player_get_player_by_name });
+
+javascript.javascriptGenerator.forBlock['player_get_player_by_name'] = function () {
+    const value_name = javascript.javascriptGenerator.valueToCode(this, 'NAME', javascript.Order.ATOMIC);
+    const world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
+    const code = `(${world}).$playerEntities.$array1.data.find((player) => player.$getName()??(player.$getName() === String(${value_name})))`;
     return [code, javascript.Order.NONE];
 }

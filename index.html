@@ -439,6 +439,8 @@
         <block type="entity_raytrace"> </block>
       </category>
       <category name="Player (C)" colour="#ff8811">
+        <button text="Help" callbackKey="playerHelpButton"></button>
+        <sep gap="30"></sep>
         <block type="player_get_capability_boolean"> </block>
         <block type="player_get_capability_number"> </block>
         <block type="player_get_food_stats"> </block>
@@ -449,6 +451,7 @@
         <block type="player_get_current_item_pos"> </block>
         <sep gap="40"></sep>
         <block type="player_get_player_name"> </block>
+        <block type="player_get_player_by_name"> </block>
         <block type="player_is_entity_player"> </block>
       </category>
       <category name="Command (H)" colour="#ed120e">
@@ -555,5 +558,13 @@
     <script src="index.js"></script>
     <script src="serialise.js"></script>
     <script src="compiler.js"></script>
+
+    <!-- Button script -->
+    <script>
+      function playerHelpButton() {
+        alert("Players are entities, by consequence all the blocks for entities also work for players, but not the contrary.");
+      }
+      Blockly.getMainWorkspace().registerButtonCallback("playerHelpButton", playerHelpButton)
+    </script>
   </body>
 </html>
