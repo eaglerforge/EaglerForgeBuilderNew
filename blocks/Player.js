@@ -190,7 +190,7 @@ Blockly.common.defineBlocks({ player_get_current_item_pos: player_get_current_it
 
 javascript.javascriptGenerator.forBlock['player_get_current_item_pos'] = function () {
     const value_player = javascript.javascriptGenerator.valueToCode(this, 'PLAYER', javascript.Order.ATOMIC);
-    const code = `${value_player}.$inventory.$currentItem+1`;
+    const code = `(${value_player}.$inventory.$currentItem+1)`;
     return [code, javascript.Order.NONE];
 }
 
@@ -296,6 +296,6 @@ Blockly.common.defineBlocks({ player_get_player_by_name: player_get_player_by_na
 javascript.javascriptGenerator.forBlock['player_get_player_by_name'] = function () {
     const value_name = javascript.javascriptGenerator.valueToCode(this, 'NAME', javascript.Order.ATOMIC);
     const world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
-    const code = `(${world}).$playerEntities.$array1.data.find((player) => player.$getName()??(player.$getName() === String(${value_name})))`;
+    const code = `(${world}).$playerEntities.$array1.data.find((player) => player.$getName() and ModAPI.util.ustr(player.$getName()) === String(${value_name}))`;
     return [code, javascript.Order.NONE];
 }
