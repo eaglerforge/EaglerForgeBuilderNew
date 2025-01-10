@@ -19,7 +19,7 @@ const player_get_capability_boolean = {
         this.setInputsInline(true)
         this.setOutput(true, "Boolean");
         this.setTooltip('Gets a capability of a player.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
         this.setColour(30);
     }
 };
@@ -56,7 +56,7 @@ const player_get_capability_number = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets a capability of a player.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/PlayerCapabilities.html');
         this.setColour(30);
     }
 };
@@ -87,7 +87,7 @@ const player_get_food_stats = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets the food stats of a player.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
         this.setColour(30);
     }
 };
@@ -118,7 +118,7 @@ const player_get_xp_stats = {
         this.setInputsInline(true)
         this.setOutput(true, "Number");
         this.setTooltip('Gets the experience stats of a player.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
+        this.setHelpUrl('https://eaglerforge.github.io/apidocs/globals/FoodStatsData.html');
         this.setColour(30);
     }
 };
@@ -214,7 +214,7 @@ const player_get_player_inventory = {
         this.setInputsInline(true);
         this.setOutput(true);
         this.setTooltip('Gets the inventory of a player as list.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.htmlhttps://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
         this.setColour(30);
     }
 };
