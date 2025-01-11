@@ -280,7 +280,8 @@ const player_get_player_by_name = {
     init: function () {
         this.appendValueInput('NAME')
             .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField('get player by name');
+            .appendField('get player by name')
+            .setCheck('String');
         this.appendValueInput('WORLD')
             .setAlign(Blockly.inputs.Align.RIGHT)
             .appendField('in world');
