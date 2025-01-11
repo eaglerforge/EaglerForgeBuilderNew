@@ -34,7 +34,7 @@ h6 {
   padding-bottom: 0.2rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  border-bottom: 2px solid var(--col);
+  border-bottom: 2px solid rgb(79, 79, 79);
   height: 3rem;
   display: inline-flex;
   align-items: center;
@@ -74,7 +74,6 @@ button:hover {
   padding: 0.5rem;
   width: 5rem;
 }
-
 #toolbar button:active {
   margin-left: 0.5rem;
   padding: 0.5rem;
@@ -152,7 +151,7 @@ td {
   height: 16rem;
   max-height: 80vh;
   margin-bottom: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-bottom: 1px solid white;
   resize: vertical;
   overflow-x: visible;
