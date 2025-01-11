@@ -3,10 +3,34 @@ const InlineValues = [
     VALUE_ENUMS.ABSTRACT_ITEM
 ];
 function editObject(obj, datablock) {
+    var propnav = document.querySelector("#propnav");
+    propnav.innerHTML = "";
+
     if (obj.type === "inspector") {
         inspectorFrame.style.display = "block";
         inspectorFrame.style.pointerEvents = "all";
+        inspectorFrame.style.zIndex = "70";
         inspectorFrameReposTimer = setInterval(positionInspectorFrame, 1000 / 15);
+        propnav.style.height = (propnav.offsetWidth/16)*10+"px"; // 10:16 scale
+
+        let fullscreenButton = document.createElement('button');
+        fullscreenButton.id = "fullscreen";
+        fullscreenButton.innerText = "⟰";
+        fullscreenButton.onclick = function() {
+            fullscreenButton.toggleAttribute("fullscreen");
+            if (fullscreenButton.hasAttribute("fullscreen")) {
+                fullscreenButton.style.transitionProperty = "initial";
+                fullscreenButton.style.position = "fixed";
+                fullscreenButton.style.scale = "2";
+                
+            } else {
+                fullscreenButton.style.transitionProperty = "background-color";
+                fullscreenButton.style.position = "absolute";
+                fullscreenButton.style.scale = "1";
+            }
+        }
+        propnav.appendChild(fullscreenButton);
+
     } else {
         inspectorFrame.style.display = "none";
         inspectorFrame.style.pointerEvents = "none";
@@ -15,8 +39,6 @@ function editObject(obj, datablock) {
             clearInterval(inspectorFrameReposTimer);
         }
     }
-    var propnav = document.querySelector("#propnav");
-    propnav.innerHTML = "";
 
     var nameField = document.createElement("input");
     nameField.placeholder = "Datablock Name";

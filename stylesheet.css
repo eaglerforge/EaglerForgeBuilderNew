@@ -40,7 +40,7 @@ h6 {
   align-items: center;
 }
 #blockly {
-  width: 60vw;
+  width: 65vw;
   height: calc(100vh - 2.9rem - 2px);
 }
 table,
@@ -69,11 +69,33 @@ button:active {
 button:hover {
   background-color: rgba(255, 255, 255, 0.13);
 }
-
 #toolbar button {
   margin-left: 0.5rem;
   padding: 0.5rem;
   width: 5rem;
+}
+
+#toolbar button:active {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  width: 5rem;
+}
+#fullscreen {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.22);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0px 0px 0px 0.3rem;
+  transform-origin: right top;
+}
+#fullscreen:hover {
+  background-color: rgba(0, 0, 0, 0.44);
+}
+#fullscreen:active {
+  background-color: rgba(0, 0, 0, 0.66)!important;
 }
 #run {
   position: absolute;
@@ -113,7 +135,7 @@ td {
   text-align: left;
   justify-content: start;
   align-items: start;
-  width: calc(40vw - 8px);
+  width: calc(35vw - 8px);
   height: calc(100vh - 2.9rem);
   overflow-y: auto;
   display: inline-block;
