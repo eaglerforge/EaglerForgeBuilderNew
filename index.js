@@ -165,21 +165,34 @@ function reloadUI(sel) {
         var controls = document.createElement("div");
         controls.classList.add("controls");
 
-        var deleteButton = document.createElement("button");
-        deleteButton.innerText = "Delete";
-        deleteButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+        if (node.name !== "Inspector") {
+            var deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
 
-            state.nodes.splice(index, 1);
-            updateDynamics(false);
-            reloadUI();
-        });
-        controls.appendChild(deleteButton);
+                state.nodes.splice(index, 1);
+                updateDynamics(false);
+                reloadUI();
+            });
+            controls.appendChild(deleteButton);
+        }
 
         datablock.appendChild(controls);
 
         datablockContainer.appendChild(datablock);
+    });
+
+    var optionTypesList = Array.from(document.querySelectorAll("#addtype option"));
+    optionTypesList.forEach((type, index, list) => {
+        if ((type.value === "metadata") && state.nodes.find(element => element.type === "metadata") || (type.value === "icon") && state.nodes.find(element => element.type === "icon")) {
+            type.disabled = true;
+            type.selected = false;
+        } else {
+            type.disabled = false;
+        }
+        list[index] = type;
     });
 }
 document.querySelector("#newdatablock").addEventListener("click", (e) => {
