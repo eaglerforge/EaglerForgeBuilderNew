@@ -112,8 +112,7 @@ button:hover {
   border: 1px solid white;
   border-radius: 0.5rem;
   padding: 0.5rem;
-  margin-left: 0.5rem;
-  margin-top: 0.3rem;
+  margin: 0.5rem 0.4rem;
   overflow: hidden;
   transition: 0.3s;
 }
@@ -136,8 +135,8 @@ td {
   align-items: start;
   width: calc(35vw - 8px);
   height: calc(100vh - 2.9rem);
-  overflow-y: auto;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 }
 #right input[type="search"] {
   display: block;
@@ -169,6 +168,12 @@ td {
   padding-left: 0.5rem;
   color: var(--background);
   background-color: var(--col);
+}
+#datablock_container {
+  overflow-y: auto;
+  width: 100%;
+  height: auto;
+  padding-bottom: 1rem;
 }
 .hidden {
   display: none !important;
