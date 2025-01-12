@@ -177,6 +177,11 @@ function reloadUI(sel) {
                 reloadUI();
             });
             controls.appendChild(deleteButton);
+        } else {
+            var runButton = document.createElement("button");
+            runButton.innerText = "Run";
+            runButton.addEventListener("click", runMod);
+            controls.appendChild(runButton);
         }
 
         datablock.appendChild(controls);
@@ -200,4 +205,19 @@ document.querySelector("#newdatablock").addEventListener("click", (e) => {
     updateDynamics(false);
     reloadUI(document.querySelector(".datablock.selected")?.datablock);
 });
+
+document.getElementById('search').addEventListener("input", () => {
+    let searchValue = document.getElementById('search').value.toLowerCase();
+    elementList = Array.from(document.querySelectorAll(".datablock"));
+    elementList.forEach((element, index, list) => {
+        let type = element.getAttribute('data-dtype').toLowerCase();
+        let title = element.firstElementChild.innerText.toLowerCase();
+        if (type.indexOf(searchValue) > -1 || title.indexOf(searchValue) > -1 || searchValue === "") {
+            element.style.display = "inline-block";
+        } else {
+            element.style.display = "none";
+        }
+        list[index] = element;
+    })
+})
 reloadUI();
