@@ -111,8 +111,8 @@ PRIMITIVES["block_advanced"] = {
     ModAPI.dedicatedServer.appendCode($$ServersideBlocks);
     var $$cblock = $$ServersideBlocks();
     ModAPI.addEventListener("lib:asyncsink", async () => {
-        ModAPI.addEventListener("custom:asyncsink_reloaded", ()=>{
-            ModAPI.mc.renderItem.registerBlock($$cblock, ModAPI.util.str("${this.tags.id}"));
+        ModAPI.addEventListener("lib:asyncsink:registeritems", ($$renderItem)=>{
+            $$renderItem.registerItem($$cblock, ModAPI.util.str("${this.tags.id}"));
         });
         AsyncSink.L10N.set("tile.${this.tags.id}.name", "${this.tags.name}");
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/models/block/${this.tags.id}.json", JSON.stringify(

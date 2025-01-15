@@ -88,8 +88,8 @@ PRIMITIVES["item"] = {
     var $$custom_item = $$ServersideItem();
 
     ModAPI.addEventListener("lib:asyncsink", async () => {
-        ModAPI.addEventListener("custom:asyncsink_reloaded", ()=>{
-            ModAPI.mc.renderItem.registerItem($$custom_item, ModAPI.util.str("${this.tags.id}"));
+        ModAPI.addEventListener("lib:asyncsink:registeritems", ($$renderItem)=>{
+            $$renderItem.registerItem($$custom_item, ModAPI.util.str("${this.tags.id}"));
         });
         AsyncSink.L10N.set("item.${this.tags.id}.name", "${this.tags.name}");
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/models/item/${this.tags.id}.json", JSON.stringify(
