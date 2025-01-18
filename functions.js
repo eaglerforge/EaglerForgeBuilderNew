@@ -146,7 +146,7 @@ FUNCTIONS["java_logger"] = {
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineJavaLogger() {
-            var logger = ModAPI.reflect.getClassByName("LogManager").staticMethods.getLogger.method();
+            var logger = ModAPI.reflect.getClassByName("LogManager").staticMethods.getLogger0.method();
             globalThis.efb2__jlog = function efb2__jlog(log) {
                 if (typeof log === "string") {
                     logger.$log(ModAPI.util.str(log));
