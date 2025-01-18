@@ -142,6 +142,30 @@ FUNCTIONS["message_command_sender"] = {
     },
 };
 
+FUNCTIONS["java_logger"] = {
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineJavaLogger() {
+            var logger = ModAPI.reflect.getClassByName("LogManager").staticMethods.getLogger.method();
+            globalThis.efb2__jlog = function efb2__jlog(log) {
+                if (typeof log === "string") {
+                    logger.$log(ModAPI.util.str(log));
+                } else {
+                    console.log(log);
+                }
+            }
+            globalThis.efb2__jwarn = function efb2__jwarn(log) {
+                logger.$warn(ModAPI.util.str(log));
+            }
+            globalThis.efb2__jerr = function efb2__jerr(log) {
+                logger.$error(ModAPI.util.str(log));
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineJavaLogger);
+        EFB2__defineJavaLogger();
+    },
+};
+
 function getFunctionCode(fn) {
     return fn.code.toString().match(codeGrabberRegex)?.[0]
         || (() => { console.error("Malformed function: ", fn); return ""; })();
