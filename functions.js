@@ -149,7 +149,7 @@ FUNCTIONS["java_logger"] = {
             var logger = ModAPI.reflect.getClassByName("LogManager").staticMethods.getLogger0.method();
             globalThis.efb2__jlog = function efb2__jlog(log) {
                 if (typeof log === "string") {
-                    logger.$log(ModAPI.util.str(log));
+                    logger.$info(ModAPI.util.str(log));
                 } else {
                     console.log(log);
                 }
