@@ -159,10 +159,36 @@ const world_execute_command_as_entity = {
     }
 };
 Blockly.common.defineBlocks({ world_execute_command_as_entity: world_execute_command_as_entity });
-javascript.javascriptGenerator.forBlock['world_execute_command_as_entity'] = function() {
+javascript.javascriptGenerator.forBlock['world_execute_command_as_entity'] = function () {
     const value_message = javascript.javascriptGenerator.valueToCode(this, 'MESSAGE', javascript.Order.ATOMIC);
     const value_sender = javascript.javascriptGenerator.valueToCode(this, 'SENDER', javascript.Order.ATOMIC);
     const value_feedback = javascript.javascriptGenerator.valueToCode(this, 'FEEDBACK', javascript.Order.ATOMIC);
     const code = `efb2__executeCommandAs(${value_sender}, ${value_message}, ${value_feedback})`;
     return code;
-  }
+}
+
+
+const world_get_player_by_name = {
+    init: function () {
+        this.appendValueInput('NAME')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get player by name')
+            .setCheck('String');
+        this.appendValueInput('WORLD')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('in world');
+        this.setInputsInline(true);
+        this.setOutput(true);
+        this.setTooltip('Gets a player by his name. Can be null.');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ world_get_player_by_name: world_get_player_by_name });
+
+javascript.javascriptGenerator.forBlock['world_get_player_by_name'] = function () {
+    const value_name = javascript.javascriptGenerator.valueToCode(this, 'NAME', javascript.Order.ATOMIC);
+    const world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
+    const code = `(${world}).$playerEntities.$array1.data.find((player) => player.$getName() and ModAPI.util.ustr(player.$getName()) === String(${value_name}))`;
+    return [code, javascript.Order.NONE];
+}

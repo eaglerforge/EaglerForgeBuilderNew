@@ -275,28 +275,3 @@ javascript.javascriptGenerator.forBlock['player_get_player_name'] = function () 
     const code = `ModAPI.util.ustr((${value_player}).$getName())`;
     return [code, javascript.Order.NONE];
 }
-
-const player_get_player_by_name = {
-    init: function () {
-        this.appendValueInput('NAME')
-            .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField('get player by name')
-            .setCheck('String');
-        this.appendValueInput('WORLD')
-            .setAlign(Blockly.inputs.Align.RIGHT)
-            .appendField('in world');
-        this.setInputsInline(true);
-        this.setOutput(true);
-        this.setTooltip('Gets a player by his name. Can be null.');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/entity/player/EntityPlayer.html');
-        this.setColour(30);
-    }
-};
-Blockly.common.defineBlocks({ player_get_player_by_name: player_get_player_by_name });
-
-javascript.javascriptGenerator.forBlock['player_get_player_by_name'] = function () {
-    const value_name = javascript.javascriptGenerator.valueToCode(this, 'NAME', javascript.Order.ATOMIC);
-    const world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
-    const code = `(${world}).$playerEntities.$array1.data.find((player) => player.$getName() and ModAPI.util.ustr(player.$getName()) === String(${value_name}))`;
-    return [code, javascript.Order.NONE];
-}
