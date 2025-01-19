@@ -167,6 +167,7 @@ FUNCTIONS["java_logger"] = {
 };
 
 function getFunctionCode(fn) {
+    if (!fn) return "";
     return fn.code.toString().match(codeGrabberRegex)?.[0]
         || (() => { console.error("Malformed function: ", fn); return ""; })();
 }
