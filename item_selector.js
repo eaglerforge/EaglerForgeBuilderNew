@@ -2738,7 +2738,7 @@ function getImageLocation(id) {
     return `https://minecraft.wiki/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id)?"gif":"png"}`;
 }
 function makeItemSelector(selected, useBlocks, triggerFn) {
-    const list = (useBlocks ? blocks : items.concat(blocks)).bake();
+    const list = (useBlocks ? blocks.concat() : items.concat(blocks)).bake();
     
     list.dynamicConcat("block_advanced", "id", (x) => {
         return {id: x, type: "block", meta: 0, name: "missingno"}
