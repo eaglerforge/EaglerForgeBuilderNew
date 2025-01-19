@@ -163,7 +163,7 @@ javascript.javascriptGenerator.forBlock['world_execute_command_as_entity'] = fun
     const value_message = javascript.javascriptGenerator.valueToCode(this, 'MESSAGE', javascript.Order.ATOMIC);
     const value_sender = javascript.javascriptGenerator.valueToCode(this, 'SENDER', javascript.Order.ATOMIC);
     const value_feedback = javascript.javascriptGenerator.valueToCode(this, 'FEEDBACK', javascript.Order.ATOMIC);
-    const code = `efb2__executeCommandAs(${value_sender}, ${value_message}, ${value_feedback})`;
+    const code = `efb2__executeCommandAs(${value_sender}, ${value_message}, ${value_feedback});`;
     return code;
 }
 
