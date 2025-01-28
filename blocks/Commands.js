@@ -1,57 +1,21 @@
-const handle_CommandCalled = {
-    init: function () {
-        this.appendDummyInput('ID')
-            .appendField('Handler ID:')
-            .appendField(new Blockly.FieldTextInput('command called by other 1'), 'ID');
-        this.appendDummyInput('')
-            .appendField('Command Called By Other Handler with:')
-            .appendField(new Blockly.FieldEFB2Variable('argument list'), 'ARGS')
-            .appendField(new Blockly.FieldEFB2Variable('command sender'), 'COMMAND_SENDER')
-        this.appendStatementInput('CODE');
-        this.setInputsInline(false)
-        this.setTooltip('Runs when the command is called by a non-player.');
-        this.setHelpUrl('');
-        this.setColour(0);
-    }
-};
-Blockly.common.defineBlocks({ handle_CommandCalled: handle_CommandCalled });
+registerHandler("CommandCalled", "command called by other", {
+    "ARGS": "argument list",
+    "COMMAND_SENDER": "command sender",
+}, function () {
+    this.setTooltip('Runs when the command is called by a non-player.');
+    this.setHelpUrl('');
+    this.setColour(0);
+});
 
-javascript.javascriptGenerator.forBlock['handle_CommandCalled'] = function () {
-    const variable_args = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ARGS'));
-    const variable_cmdsender = javascript.javascriptGenerator.getVariableName(this.getFieldValue('COMMAND_SENDER'));
-    const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-    return { code: statement, args: [variable_args, variable_cmdsender] };
-}
-
-
-
-const handle_CommandCalledByPlayer = {
-    init: function () {
-        this.appendDummyInput('ID')
-            .appendField('Handler ID:')
-            .appendField(new Blockly.FieldTextInput('command called by player 1'), 'ID');
-        this.appendDummyInput('')
-            .appendField('Command Called By Player Handler with:')
-            .appendField(new Blockly.FieldEFB2Variable('argument list'), 'ARGS')
-            .appendField(new Blockly.FieldEFB2Variable('player'), 'PLAYER')
-            .appendField(new Blockly.FieldEFB2Variable('command sender'), 'COMMAND_SENDER')
-        this.appendStatementInput('CODE');
-        this.setInputsInline(false)
-        this.setTooltip('Runs when the command is called by a player.');
-        this.setHelpUrl('');
-        this.setColour(0);
-    }
-};
-Blockly.common.defineBlocks({ handle_CommandCalledByPlayer: handle_CommandCalledByPlayer });
-
-javascript.javascriptGenerator.forBlock['handle_CommandCalledByPlayer'] = function () {
-    const variable_args = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ARGS'));
-    const variable_player = javascript.javascriptGenerator.getVariableName(this.getFieldValue('PLAYER'));
-    const variable_cmdsender = javascript.javascriptGenerator.getVariableName(this.getFieldValue('COMMAND_SENDER'));
-    const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-    return { code: statement, args: [variable_args, variable_player, variable_cmdsender] };
-}
-
+registerHandler("CommandCalled", "command called by other", {
+    "ARGS": "argument list",
+    "player": "player",
+    "COMMAND_SENDER": "command sender",
+}, function () {
+    this.setTooltip('Runs when the command is called by a player.');
+    this.setHelpUrl('');
+    this.setColour(0);
+});
 
 
 const command_sendmessage = {
