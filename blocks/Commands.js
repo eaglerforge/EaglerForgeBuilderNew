@@ -7,7 +7,7 @@ registerHandler("CommandCalled", "command called by other", {
     this.setColour(0);
 });
 
-registerHandler("CommandCalled", "command called by other", {
+registerHandler("CommandCalledByPlayer", "command called by player", {
     "ARGS": "argument list",
     "player": "player",
     "COMMAND_SENDER": "command sender",
