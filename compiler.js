@@ -80,7 +80,7 @@ async function runMod() {
         await getEfiBuild();
     }
     var insp = document.querySelector("#inspector");
-    insp.srcdoc = efiBuild + `<script>eaglercraftXOpts.noInitialModGui = true; eaglercraftXOpts.Mods = ["${url}"];</script>`;
+    insp.srcdoc = efiBuild + `<script>eaglercraftXOpts.noInitialModGui = false; eaglercraftXOpts.Mods = ["${url}"];</script>`;
     if (document.querySelector(".datablock[data-dtype=inspector]")) {
         document.querySelector(".datablock[data-dtype=inspector]").click();
     }
