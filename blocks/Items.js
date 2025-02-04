@@ -142,3 +142,15 @@ registerHandler("ItemCrafted", "item crafted", {
     this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
     this.setColour(225);
 });
+
+registerHandler("ItemBlockBroken", "item block broken", {
+    "ITEM_STACK": "itemstack",
+    "WORLD": "world",
+    "BLOCK": "block",
+    "BLOCKPOS": "blockpos",
+    "ENTITY": "entity",
+}, function () {
+    this.setTooltip('Runs when a block is broken with this item.\nA boolean is expected as a return value.');
+    this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+    this.setColour(225);
+});

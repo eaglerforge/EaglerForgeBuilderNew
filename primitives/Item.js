@@ -17,6 +17,7 @@ PRIMITIVES["item"] = {
         Tick: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemTicked",
         UsedOnBlock: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockUse",
         Crafted: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemCrafted",
+        BlockBroken: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockBroken",
     },
     getDependencies: function () {
         return [];
@@ -26,8 +27,9 @@ PRIMITIVES["item"] = {
         var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"]);
         var usedHandler = getHandlerCode("ItemUsed", this.tags.Used, ["$$itemstack", "$$world", "$$player"]);
         var tickedHandler = getHandlerCode("ItemTicked", this.tags.Tick, ["$$itemstack", "$$world", "$$player", "$$hotbar_slot", "$$is_held"]);
-        var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player","$$world", "$$blockpos"]);
+        var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"]);
         var craftedHandler = getHandlerCode("ItemCrafted", this.tags.Crafted, ["$$itemstack", "$$world", "$$player"]);
+        var blockBrokenHandler = getHandlerCode("ItemBlockBroken", this.tags.BlockBroken, ["$$itemstack", "$$world", "$$block", "$$blockpos", "$$entity"]);
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -41,9 +43,9 @@ PRIMITIVES["item"] = {
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
         $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
-            ${this.tags.useItemOnRightClick?
+            ${this.tags.useItemOnRightClick ?
                 `(${rightClickHandler.args[2]}).$setItemInUse(${rightClickHandler.args[0]},${this.tags.useDurationTicks});`
-            :""}
+                : ""}
             ${rightClickHandler.code};
             return (${rightClickHandler.args[0]});
         }
@@ -68,6 +70,10 @@ PRIMITIVES["item"] = {
         }
         $$CustomItem.prototype.$onCreated = function (${craftedHandler.args.join(", ")}) {
             ${craftedHandler.code};
+        }
+        $$CustomItem.prototype.$onBlockDestroyed = function (${blockBrokenHandler.args.join(", ")}) {
+            ${blockBrokenHandler.code};
+            return 0;
         }
         function $$internal_reg() {
             var $$custom_item = (new $$CustomItem()).$setUnlocalizedName(
