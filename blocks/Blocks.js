@@ -138,9 +138,9 @@ Blockly.common.defineBlocks({ blocks_block: blocks_block });
 javascript.javascriptGenerator.forBlock['blocks_block'] = function () {
   const block_primitive = this.getFieldValue('BLOCK');
   const object = {
-    id: block_primitive.split("/")[0].split("@")[0]
+    id: block_primitive.split("/")[1].split("@")[0]
   }
-  return `(ModAPI.blocks["${object.id}"]?.getRef() || null)`;
+  return [`(ModAPI.blocks["${object.id}"]?.getRef() || null)`, javascript.Order.NONE];
 }
 
 

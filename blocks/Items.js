@@ -50,12 +50,12 @@ javascript.javascriptGenerator.forBlock['items_item'] = function () {
     const item_primitive = this.getFieldValue('ITEM');
     const object = {
         type: item_primitive.split("/")[0],
-        id: item_primitive.split("/")[0].split("@")[0]
+        id: item_primitive.split("/")[1].split("@")[0]
     }
     if (object.type === "item") {
-        return `(ModAPI.items["${object.id}"]?.getRef() || null)`
+        return [`(ModAPI.items["${object.id}"]?.getRef() || null)`, javascript.Order.NONE]
     } else {
-        return `ModAPI.util.getItemFromBlock(ModAPI.blocks["${object.id}"]?.getRef() || null)`
+        return [`ModAPI.util.getItemFromBlock(ModAPI.blocks["${object.id}"]?.getRef() || null)`, javascript.Order.NONE]
     }
 }
 
