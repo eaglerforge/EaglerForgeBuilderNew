@@ -27,6 +27,9 @@
     <!-- Load handler argument patch -->
     <script src="./libs/blockly/blockly_patch.js"></script>
 
+    <!-- Load item and block selector patch -->
+    <script src="./libs/blockly/blockly_minecraft_item_selector.js"></script>
+
     <xml
       xmlns="https://developers.google.com/blockly/xml"
       id="toolbox"
@@ -378,6 +381,7 @@
         <block type="handle_BlockEntityCollision"> </block>
       </category>
       <category name="Blocks (C)" colour="#dd11dd">
+        <block type="blocks_block"> </block>
         <block type="blocks_blockproperty"> </block>
         <block type="blocks_blockswitch"> </block>
         <block type="blocks_boundingbox"> </block>
@@ -392,10 +396,14 @@
         <block type="handle_ItemCrafted"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
+        <block type="items_item"> </block>
         <block type="items_creativetab"> </block>
         <block type="items_setmaxstacksize"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
+        <block type="itemstack_meta"> </block>
+        <block type="itemstack_setmeta"> </block>
+        <block type="itemstack_getitem"> </block>
         <block type="itemstack_stacksize"> </block>
         <block type="itemstack_setstacksize"> </block>
         <block type="itemstack_displayname"> </block>

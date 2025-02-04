@@ -61,7 +61,6 @@ PRIMITIVES["recipe"] = {
             [this.tags.slot3, this.tags.slot4, this.tags.slot5],
             [this.tags.slot6, this.tags.slot7, this.tags.slot8]
         ];
-        debugger;
         var minX = 2;
         var minY = 2;
         var maxX = 0;

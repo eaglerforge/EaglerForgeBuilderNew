@@ -120,6 +120,30 @@ registerHandler("BlockRandomTick", "block random tick", {
   this.setColour(0);
 });
 
+
+const blocks_block = {
+  init: function () {
+    this.appendDummyInput('BLOCK')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('block')
+      .appendField(new Blockly.FieldMinecraftItemInput(true, true), 'BLOCK');
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setTooltip('Returns an Block instance (for comparisons)');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ blocks_block: blocks_block });
+javascript.javascriptGenerator.forBlock['blocks_block'] = function () {
+  const block_primitive = this.getFieldValue('BLOCK');
+  const object = {
+    id: block_primitive.split("/")[0].split("@")[0]
+  }
+  return `(ModAPI.blocks["${object.id}"]?.getRef() || null)`;
+}
+
+
 const blocks_boundingbox = {
   init: function () {
     this.appendDummyInput('MIN')
