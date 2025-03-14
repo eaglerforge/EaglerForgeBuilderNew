@@ -4,6 +4,7 @@ function toFunctionName(str) {
 
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
+    console.log(javascript.javascriptGenerator.functionNames_, javascript.javascriptGenerator.definitions_);
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
@@ -31,6 +32,9 @@ function getCompiledCode() {
     });
     workspace.getAllBlocks().forEach(block => {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
+    });
+    Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
+        prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
     functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
     functionPrereqs.forEach(fn => {
