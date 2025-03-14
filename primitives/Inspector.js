@@ -28,11 +28,18 @@ inspectorFrame.addEventListener("mouseover", ()=>{
 });
 var propnav = document.querySelector("#propnav");
 function positionInspectorFrame() {
-    var aabb = propnav.getBoundingClientRect();
-    inspectorFrame.style.top = aabb.top + "px";
-    inspectorFrame.style.left = aabb.left + "px";
-    inspectorFrame.style.width = aabb.width + "px";
-    inspectorFrame.style.height = aabb.height + "px";
+    if (document.querySelector("#fullscreen") && document.querySelector("#fullscreen").hasAttribute("fullscreen")) {
+        inspectorFrame.style.top = "0px";
+        inspectorFrame.style.left = "0px";
+        inspectorFrame.style.width = "100%";
+        inspectorFrame.style.height = "100%";
+    } else {
+        var aabb = propnav.getBoundingClientRect();
+        inspectorFrame.style.top = aabb.top + "px";
+        inspectorFrame.style.left = aabb.left + "px";
+        inspectorFrame.style.width = aabb.width + "px";
+        inspectorFrame.style.height = aabb.height + "px";
+    }
 }
 positionInspectorFrame();
 var inspectorFrameReposTimer = null;
