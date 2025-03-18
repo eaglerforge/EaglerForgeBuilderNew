@@ -2553,7 +2553,11 @@ function blockL10NToId(thisSentence, noReverse) {
 }
 function getImageLocationItem(item, display) {
     if ((item.name === "missingno") && !display) {
-        return "missingno";
+        var tex = state.nodes.find(x => x.type === "item" && x.tags.id == item.id)?.tags?.texture;
+        if (!tex || tex.startsWith("efb::")) {
+            return "missingno";
+        }
+        return tex;
     }
     item = Object.assign({}, item);
     item.id = item.id.replace("record", "music_disc");
@@ -2597,7 +2601,11 @@ function getImageLocationItem(item, display) {
 }
 function getImageLocationBlock(block, display) {
     if ((block.name === "missingno") && !display) {
-        return "missingno";
+        var tex = state.nodes.find(x => x.type === "block_advanced" && x.tags.id == block.id)?.tags?.texture;
+        if (!tex || tex.startsWith("efb::")) {
+            return "missingno";
+        }
+        return tex;
     }
     block = Object.assign({}, block);
     block.name = block.name.replaceAll("big_oak", "dark_oak");
@@ -2729,6 +2737,9 @@ function getImageLocationBlock(block, display) {
     }
 }
 function getImageLocation(id) {
+    if (id.startsWith("data:")) {
+        return id;
+    }
     if (id === "item/air") {
         return emptyTexture;
     }
