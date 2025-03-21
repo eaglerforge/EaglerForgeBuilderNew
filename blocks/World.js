@@ -125,8 +125,8 @@ const world_get_player_entities = {
 };
 Blockly.common.defineBlocks({ world_get_player_entities: world_get_player_entities });
 javascript.javascriptGenerator.forBlock['world_get_player_entities'] = function () {
-    const value_world = javascript.javascriptGenerator.valueToCode(thiss, 'WORLD', javascript.Order.ATOMIC);
-    const code = `(${value_world}).playerEntities.$toArray1().data`;
+    const value_world = javascript.javascriptGenerator.valueToCode(this, 'WORLD', javascript.Order.ATOMIC);
+    const code = `(${value_world}).$playerEntities.$toArray1().data`;
     return [code, javascript.Order.NONE];
 }
 
