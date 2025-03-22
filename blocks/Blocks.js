@@ -174,7 +174,7 @@ javascript.javascriptGenerator.forBlock['blocks_boundingbox'] = function () {
   const number_maxx = this.getFieldValue('MAXX');
   const number_maxy = this.getFieldValue('MAXY');
   const number_maxz = this.getFieldValue('MAXZ');
-  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz})`;
+  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz});`;
   return code;
 }
 
