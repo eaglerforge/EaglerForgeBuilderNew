@@ -2819,14 +2819,24 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBox.style.display = "none";
     searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
     searchBox.style.overflowY = "scroll";
+    
     var closeButton = document.createElement("button");
     closeButton.innerText = "Close";
     closeButton.addEventListener("click", (e) => {
         searchBox.style.display = "none";
         e.stopPropagation();
     });
+    
+   
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            searchBox.style.display = "none";
+        }
+    });
+    
     searchBox.appendChild(closeButton);
     searchBox.appendChild(document.createElement("br"));
+    
     var searchBar = document.createElement("input");
     searchBar.type = "search";
     searchBar.addEventListener("input", (e) => {
@@ -2840,6 +2850,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
         });
     });
+    
+    
     searchBox.appendChild(searchBar);
     searchBox.appendChild(document.createElement("br"));
     div.recalculateList = function () {
