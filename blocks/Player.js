@@ -131,7 +131,7 @@ javascript.javascriptGenerator.forBlock['player_get_xp_stats'] = function () {
     if (dropdown_stat === "experiencePoints") {
         code = `${value_player}.$getExperiencePoints()`;
     } else {
-        code = `${value_player}["$"+${dropdown_stat}]`;
+        code = `${value_player}[${"$" + dropdown_stat}]`;
     }
     return [code, javascript.Order.NONE];
 }
