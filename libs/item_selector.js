@@ -2827,7 +2827,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
         e.stopPropagation();
     });
     
-    // Close search box when Esc is pressed
+   
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             searchBox.style.display = "none";
