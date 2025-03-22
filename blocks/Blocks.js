@@ -174,7 +174,7 @@ javascript.javascriptGenerator.forBlock['blocks_boundingbox'] = function () {
   const number_maxx = this.getFieldValue('MAXX');
   const number_maxy = this.getFieldValue('MAXY');
   const number_maxz = this.getFieldValue('MAXZ');
-  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz})`;
+  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz});`;
   return code;
 }
 
@@ -220,6 +220,25 @@ registerHandler("BlockEntityCollision", "block entity collision", {
   "ENTITY": "entity",
 }, function () {
   this.setTooltip('Runs when an entity collides with the block.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+registerHandler("BlockGetDroppedItem", "block get dropped item", {
+  "$$blockstate": null,
+  "$$random": null,
+  "FORTURE": "forture",
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped item.\nItem return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+registerHandler("BlockQuantityDropped", "block get dropped quantity", {
+  "FORTURE": "forture",
+  "$$random": null,
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped quantity.\nInteger return value expected.');
   this.setHelpUrl('');
   this.setColour(0);
 });

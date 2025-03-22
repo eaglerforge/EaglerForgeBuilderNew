@@ -17,6 +17,8 @@ PRIMITIVES["block_advanced"] = {
         BrokenByPlayer: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockBrokenByPlayer",
         RandomTick: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockRandomTick",
         EntityCollided: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockEntityCollision",
+        GetDroppedItem: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockGetDroppedItem",
+        QuantityDropped: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockQuantityDropped",
     },
     getDependencies: function () {
         return [];
@@ -29,6 +31,8 @@ PRIMITIVES["block_advanced"] = {
         var brokenByPlayerHandler = getHandlerCode("BlockBrokenByPlayer", this.tags.BrokenByPlayer, ["$$world", "$$blockpos", "$$blockstate"]);
         var randomTickHandler = getHandlerCode("BlockRandomTick", this.tags.RandomTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
         var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"]);
+        var getDroppedItemHandler = getHandlerCode("BlockGetDroppedItem", this.tags.GetDroppedItem, ["$$blockstate", "$$random", "$$forture"]);
+        var quantityDroppedHandler = getHandlerCode("BlockQuantityDropped", this.tags.QuantityDropped, ["$$random", "$$fortune"]);
         return `(function AdvancedBlockDatablock() {
     const $$blockTexture = "${this.tags.texture}";
 
@@ -45,6 +49,8 @@ PRIMITIVES["block_advanced"] = {
         var $$onBlockDestroyedByPlayerMethod = $$blockClass.methods.onBlockDestroyedByPlayer.method;
         var $$randomTickMethod = $$blockClass.methods.randomTick.method;
         var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
+        var $$getDroppedItem = $$blockClass.methods.getItemDropped.method;
+        var $$quantityDropped = $$blockClass.methods.quantityDropped.method;
 
         var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
             $$blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
@@ -84,6 +90,19 @@ PRIMITIVES["block_advanced"] = {
         $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${entityCollisionHandler.args.join(", ")}) {
             ${entityCollisionHandler.code};
             return $$entityCollisionMethod(this, ${entityCollisionHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$getItemDropped = function (${getDroppedItemHandler.args.join(", ")}) {
+            ${getDroppedItemHandler.code};
+            return $$getDroppedItem(this, ${getDroppedItemHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$quantityDropped = function (${quantityDroppedHandler.args.join(", ")}) {
+            ${quantityDroppedHandler.args[0]} ||= 0;
+            ${quantityDroppedHandler.code};
+            return $$quantityDropped(this, ${quantityDroppedHandler.args.join(", ")});
+        }
+        $$nmb_AdvancedBlock.prototype.$quantityDroppedWithBonus = function (${quantityDroppedHandler.args.join(", ")}) {
+            ${quantityDroppedHandler.code};
+            return $$quantityDropped(this, ${quantityDroppedHandler.args.join(", ")});
         }
 
         function $$internal_reg() {
