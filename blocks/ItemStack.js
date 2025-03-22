@@ -1,3 +1,24 @@
+const itemstack_getitem = {
+    init: function () {
+        this.appendValueInput('ITEMSTACK')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get itemstack item');
+        this.setInputsInline(true)
+        this.setOutput(true, null);
+        this.setTooltip('Gets the Item of an ItemStack');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/ItemStack.html');
+        this.setColour(165);
+    }
+};
+Blockly.common.defineBlocks({ itemstack_getitem: itemstack_getitem });
+
+javascript.javascriptGenerator.forBlock['itemstack_getitem'] = function () {
+    const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
+    const code = `(${value_itemstack}).$item`;
+    return [code, javascript.Order.NONE];
+}
+
+
 const itemstack_stacksize = {
     init: function () {
         this.appendValueInput('ITEMSTACK')
@@ -39,10 +60,53 @@ const itemstack_setstacksize = {
 };
 Blockly.common.defineBlocks({ itemstack_setstacksize: itemstack_setstacksize });
 
-javascript.javascriptGenerator.forBlock['itemstack_setstacksize'] = function () {
+
+const itemstack_meta = {
+    init: function () {
+        this.appendValueInput('ITEMSTACK')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('get itemstack metadata');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Number');
+        this.setTooltip('Gets the metadata integer of an ItemStack (itemDamage)');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/ItemStack.html');
+        this.setColour(165);
+    }
+};
+Blockly.common.defineBlocks({ itemstack_meta: itemstack_meta });
+
+javascript.javascriptGenerator.forBlock['itemstack_meta'] = function () {
+    const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
+    const code = `(${value_itemstack}).$itemDamage`;
+    return [code, javascript.Order.NONE];
+}
+
+
+
+const itemstack_setmeta = {
+    init: function () {
+        this.appendValueInput('ITEMSTACK')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .appendField('set itemstack metadata');
+        this.appendValueInput('VALUE')
+            .setAlign(Blockly.inputs.Align.RIGHT)
+            .setCheck('Number')
+            .appendField('to');
+        this.setInputsInline(true)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Sets the metadata of an ItemStack (itemDamage)');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/ItemStack.html');
+        this.setColour(165);
+    }
+};
+Blockly.common.defineBlocks({ itemstack_setmeta: itemstack_setmeta });
+
+
+javascript.javascriptGenerator.forBlock['itemstack_setmeta'] = function () {
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `(${value_itemstack}).$stackSize = (${value_value});`;
+    const code = `(${value_itemstack}).$itemDamage = (${value_value});`;
     return code;
 }
 

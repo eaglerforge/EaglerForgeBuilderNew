@@ -2536,10 +2536,11 @@ const blocks = [
         "type": "block"
     }
 ];
+const IMAGE_HOST = "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/"; //https://minecraft.wiki/images/;
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-const missingTexture = "https://minecraft.wiki/images/Missing_Texture_JE4.png";
-var itemToRep = (item)=>(item.type==="block")?"block/"+item.id+"@"+item.meta:"item/"+item.id;
+const missingTexture = IMAGE_HOST + "Missing_Texture_JE4.png";
+var itemToRep = (item) => (item.type === "block") ? "block/" + item.id + "@" + item.meta : "item/" + item.id;
 function blockL10NToId(thisSentence, noReverse) {
     function camelToSnake(str) {
         return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
@@ -2548,12 +2549,16 @@ function blockL10NToId(thisSentence, noReverse) {
         return str.split('_').reverse().join('_');
     }
     let snakeCase = camelToSnake(thisSentence);
-    let reversedSnakeCase = noReverse?snakeCase:reverseString(snakeCase);
+    let reversedSnakeCase = noReverse ? snakeCase : reverseString(snakeCase);
     return reversedSnakeCase;
 }
 function getImageLocationItem(item, display) {
     if ((item.name === "missingno") && !display) {
-        return "missingno";
+        var tex = state.nodes.find(x => x.type === "item" && x.tags.id == item.id)?.tags?.texture;
+        if (!tex || tex.startsWith("efb::")) {
+            return "missingno";
+        }
+        return tex;
     }
     item = Object.assign({}, item);
     item.id = item.id.replace("record", "music_disc");
@@ -2566,38 +2571,42 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("writable_book", "book_and_quill");
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
-    item.id = !display?item.id.replace("dye", "lime_dye"):item.id;
-    item.id = !display?item.id.replace("spawn_egg", "blank_spawn_egg"):item.id;
+    item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
+    item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
     item.id = item.id.replace("slime_ball", "slimeball");
     item.id = item.id.replace("sign", "oak_sign");
-    item.id = (item.id==="porkchop")?"raw_porkchop":item.id;
-    item.id = (item.id==="fish")?"raw_fish":item.id;
-    item.id = (item.id==="map")?"empty_map":item.id;
-    item.id = (item.id==="filled_map")?"map":item.id;
-    item.id = (item.id==="mutton")?"raw_mutton":item.id;
-    item.id = (item.id==="beef")?"raw_beef":item.id;
-    item.id = (item.id==="rabbit")?"raw_rabbit":item.id;
-    item.id = (item.id==="rabbit_foot")?"rabbit%27s_foot":item.id;
-    item.id = (item.id==="experience_bottle")?"Bottle_o%27_Enchanting":item.id;
-    item.id = (item.id==="chicken")?"raw_chicken":item.id;
-    item.id = (item.id==="ender_eye")?"eye_of_ender":item.id;
-    item.id = (item.id==="skull")?"skeleton_skull":item.id;
-    item.id = (item.id==="speckled_melon")?"glistering_melon_slice":item.id;
-    item.id = (item.id==="firework_charge")?"firework_star":item.id;
-    item.id = (item.id==="fireworks")?"firework_rocket":item.id;
-    item.id = (!display)?item.id.replace("potionitem", "water_bottle"):item.id.replace("potionitem", "potion");
+    item.id = (item.id === "porkchop") ? "raw_porkchop" : item.id;
+    item.id = (item.id === "fish") ? "raw_fish" : item.id;
+    item.id = (item.id === "map") ? "empty_map" : item.id;
+    item.id = (item.id === "filled_map") ? "map" : item.id;
+    item.id = (item.id === "mutton") ? "raw_mutton" : item.id;
+    item.id = (item.id === "beef") ? "raw_beef" : item.id;
+    item.id = (item.id === "rabbit") ? "raw_rabbit" : item.id;
+    item.id = (item.id === "rabbit_foot") ? "rabbit%27s_foot" : item.id;
+    item.id = (item.id === "experience_bottle") ? "Bottle_o%27_Enchanting" : item.id;
+    item.id = (item.id === "chicken") ? "raw_chicken" : item.id;
+    item.id = (item.id === "ender_eye") ? "eye_of_ender" : item.id;
+    item.id = (item.id === "skull") ? "skeleton_skull" : item.id;
+    item.id = (item.id === "speckled_melon") ? "glistering_melon_slice" : item.id;
+    item.id = (item.id === "firework_charge") ? "firework_star" : item.id;
+    item.id = (item.id === "fireworks") ? "firework_rocket" : item.id;
+    item.id = (!display) ? item.id.replace("potionitem", "water_bottle") : item.id.replace("potionitem", "potion");
     item.id = item.id.replace("leather_helmet", "leather_cap");
     item.id = item.id.replace("leather_chestplate", "leather_tunic");
     item.id = item.id.replace("leather_leggings", "leather_pants");
-    item.id = (item.id==="netherbrick")?"nether_brick":item.id;
-    item.id = (item.id==="quartz")?"nether_quartz":item.id;
+    item.id = (item.id === "netherbrick") ? "nether_brick" : item.id;
+    item.id = (item.id === "quartz") ? "nether_quartz" : item.id;
     return item.id;
 }
 function getImageLocationBlock(block, display) {
     if ((block.name === "missingno") && !display) {
-        return "missingno";
+        var tex = state.nodes.find(x => x.type === "block_advanced" && x.tags.id == block.id)?.tags?.texture;
+        if (!tex || tex.startsWith("efb::")) {
+            return "missingno";
+        }
+        return tex;
     }
     block = Object.assign({}, block);
     block.name = block.name.replaceAll("big_oak", "dark_oak");
@@ -2606,7 +2615,7 @@ function getImageLocationBlock(block, display) {
     block.id = block.id.replaceAll("log2", "log");
     block.id = block.id.replaceAll("leaves2", "leaves");
     block.id = block.id.replaceAll("lapis", "lapis_lazuli");
-    const blockOfBanlist = ["brown_mushroom_block","red_mushroom_block", "command_block", "slime_block"];
+    const blockOfBanlist = ["brown_mushroom_block", "red_mushroom_block", "command_block", "slime_block"];
     switch (block.id) {
         case "stone":
             return blockL10NToId(block.name).replaceAll("smooth", "polished");
@@ -2614,17 +2623,17 @@ function getImageLocationBlock(block, display) {
             if (block.name === "podzol") {
                 return block.name;
             }
-            return ((block.meta===0) ? "" : block.name + "_") + "dirt";
+            return ((block.meta === 0) ? "" : block.name + "_") + "dirt";
         case "planks":
             return block.name + "_planks";
         case "cobblestone_wall":
-            return ((block.name==="normal")?block.id:block.name+"_"+block.id);
+            return ((block.name === "normal") ? block.id : block.name + "_" + block.id);
         case "sapling":
-            return block.name+"_"+block.id;
+            return block.name + "_" + block.id;
         case "sand":
-            return ((block.name==="default")?block.id:block.name+"_"+block.id);
+            return ((block.name === "default") ? block.id : block.name + "_" + block.id);
         case "tallgrass":
-            return ((block.name==="fern")?"fern":"tall_grass");
+            return ((block.name === "fern") ? "fern" : "tall_grass");
         case "double_plant":
             block.name = block.name.replace("rose", "rose_bush");
             block.name = block.name.replace("syringa", "lilac");
@@ -2635,9 +2644,9 @@ function getImageLocationBlock(block, display) {
             }
             return block.name;
         case "log":
-            return block.name+"_"+block.id;
+            return block.name + "_" + block.id;
         case "leaves":
-            return block.name+"_"+block.id;
+            return block.name + "_" + block.id;
         case "grass":
             return block.id + "_block";
         case "noteblock":
@@ -2673,7 +2682,7 @@ function getImageLocationBlock(block, display) {
         case "deadbush":
             return "dead_bush";
         case "snow":
-                return "snow_block";
+            return "snow_block";
         case "snow_layer":
             return "snow";
         case "mob_spawner":
@@ -2713,10 +2722,10 @@ function getImageLocationBlock(block, display) {
             block.name = block.name.replace("mossy", "mossy_stone_");
             block.name = block.name.replace("cracked", "cracked_stone_");
             block.name = block.name.replace("chiseled", "chiseled_stone_");
-            
-            return (display?"infested_":"") + blockL10NToId(block.name, true);
+
+            return (display ? "infested_" : "") + blockL10NToId(block.name, true);
         case "stonebrick":
-            return ((block.name === "default")?"":blockL10NToId(block.name, true)+"_") + "stone_bricks"
+            return ((block.name === "default") ? "" : blockL10NToId(block.name, true) + "_") + "stone_bricks"
         case "stone_slab2":
             block.name = block.name.replace("cobble", "cobblestone");
             block.name = block.name.replace("smoothStone", "stone");
@@ -2729,24 +2738,49 @@ function getImageLocationBlock(block, display) {
     }
 }
 function getImageLocation(id) {
+    if (id.startsWith("data:")) {
+        return id;
+    }
     if (id === "item/air") {
         return emptyTexture;
     }
     if (id === "missingno") {
         return missingTexture;
     }
-    return `https://minecraft.wiki/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id)?"gif":"png"}`;
+    return `${IMAGE_HOST}Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id) ? "gif" : "png"}`;
 }
-function makeItemSelector(selected, useBlocks, triggerFn) {
-    const list = (useBlocks ? blocks : items.concat(blocks)).bake();
-    
+function makeItemSelector(selected, useBlocks, triggerFn, options) {
+    options ||= {};
+    var conf = {
+        popoverMethod: "fixed",
+        width: "80vw",
+        height: "80vh",
+        top: "10vh",
+        left: "10vw",
+        noMeta: false
+    }
+    Object.assign(conf, options);
+    const list = (useBlocks ?
+        blocks
+            .concat()
+            .filter(block => {
+                return (!conf.noMeta) || (block.meta === 0);
+            })
+        : items.concat(
+            blocks
+                .filter(block => {
+                    return (!conf.noMeta) || (block.meta === 0);
+                })
+        ))
+        .bake();
+
     list.dynamicConcat("block_advanced", "id", (x) => {
-        return {id: x, type: "block", meta: 0, name: "missingno"}
+        return { id: x, type: "block", meta: 0, name: "missingno" }
     });
 
     if (!useBlocks) {
         list.dynamicConcat("item", "id", (x) => {
-            return {id: x, type: "item", name: "missingno"}
+            return { id: x, type: "item", name: "missingno" }
         });
     }
 
@@ -2773,14 +2807,14 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
     div.value = selected;
 
     var searchBox = document.createElement("div");
-    searchBox.style.position = "fixed";
+    searchBox.style.position = conf.popoverMethod;
     searchBox.style.backgroundColor = "var(--background)";
     searchBox.style.border = "1px solid var(--col)";
     searchBox.style.borderRadius = "6px";
-    searchBox.style.width = "80vw";
-    searchBox.style.height = "80vh";
-    searchBox.style.top = "10vh";
-    searchBox.style.left = "10vw";
+    searchBox.style.width = conf.width;
+    searchBox.style.height = conf.height;
+    searchBox.style.top = conf.top;
+    searchBox.style.left = conf.left;
     searchBox.style.zIndex = "255";
     searchBox.style.display = "none";
     searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
@@ -2799,7 +2833,7 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
         e.stopPropagation();
         var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
-            if (opt.getAttribute("data-item").toLowerCase().includes(lookFor)) {
+            if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
                 opt.style.display = "inline-block";
             } else {
                 opt.style.display = "none";
@@ -2813,19 +2847,19 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
         list.calculate();
         list.forEach((item, idx) => {
             var div2 = document.createElement("div");
-            div2.setAttribute("data-item", (item.type==="block")?getImageLocationBlock(item,true):getImageLocationItem(item,true));
+            div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
             div2.style.width = div2.style.height = "4rem";
             div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
-            div2.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
+            div2.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
             div2.style.backgroundRepeat = "no-repeat";
             div2.style.backgroundSize = "cover";
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
-                div.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
+                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
                 div2.setAttribute("data-sel", "yes");
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div2.style.transform = "scale(1.2)";
@@ -2848,10 +2882,13 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
-                div.style.backgroundImage = `url(${getImageLocation((item.type==="block")?getImageLocationBlock(item):getImageLocationItem(item))})`;
+                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
             });
             var label = document.createElement("label");
-            label.innerText = (item.type==="block")?getImageLocationBlock(item,true).replaceAll("%27", "'"):getImageLocationItem(item,true);
+            label.innerText = (item.type === "block") ? getImageLocationBlock(item, true).replaceAll("%27", "'") : getImageLocationItem(item, true);
+            if (conf.noMeta) {
+                label.innerText = item.id;
+            }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
@@ -2866,5 +2903,9 @@ function makeItemSelector(selected, useBlocks, triggerFn) {
         searchBox.style.display = "block";
     });
     div.appendChild(searchBox);
+    ["pointerdown", "scroll", "wheel"].forEach(x => div.addEventListener(x, (e) => {
+        e.stopPropagation();
+    }, true));
+
     return div;
 }

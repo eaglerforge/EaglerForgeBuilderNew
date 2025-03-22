@@ -4,6 +4,7 @@ function toFunctionName(str) {
 
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
+    console.log(javascript.javascriptGenerator.functionNames_, javascript.javascriptGenerator.definitions_);
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
@@ -31,6 +32,9 @@ function getCompiledCode() {
     });
     workspace.getAllBlocks().forEach(block => {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
+    });
+    Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
+        prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
     functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
     functionPrereqs.forEach(fn => {
@@ -80,7 +84,7 @@ async function runMod() {
         await getEfiBuild();
     }
     var insp = document.querySelector("#inspector");
-    insp.srcdoc = efiBuild + `<script>eaglercraftXOpts.noInitialModGui = true; eaglercraftXOpts.Mods = ["${url}"];</script>`;
+    insp.srcdoc = efiBuild + `<script>eaglercraftXOpts.noInitialModGui = false; eaglercraftXOpts.Mods = ["${url}"];</script>`;
     if (document.querySelector(".datablock[data-dtype=inspector]")) {
         document.querySelector(".datablock[data-dtype=inspector]").click();
     }

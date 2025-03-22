@@ -18,6 +18,9 @@
     <!-- Load a message file -->
     <script src="./libs/blockly/en.js"></script>
 
+    <!-- Load eruda console -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda" onload="eruda.init()"></script>
+
     <!-- Load dark mode -->
     <script src="./libs/blockly/darktheme.js"></script>
 
@@ -26,6 +29,9 @@
 
     <!-- Load handler argument patch -->
     <script src="./libs/blockly/blockly_patch.js"></script>
+
+    <!-- Load item and block selector patch -->
+    <script src="./libs/blockly/blockly_minecraft_item_selector.js"></script>
 
     <xml
       xmlns="https://developers.google.com/blockly/xml"
@@ -376,8 +382,11 @@
         <block type="handle_BlockBrokenByPlayer"> </block>
         <block type="handle_BlockRandomTick"> </block>
         <block type="handle_BlockEntityCollision"> </block>
+        <block type="handle_BlockGetDroppedItem"> </block>
+        <block type="handle_BlockQuantityDropped"> </block>
       </category>
       <category name="Blocks (C)" colour="#dd11dd">
+        <block type="blocks_block"> </block>
         <block type="blocks_blockproperty"> </block>
         <block type="blocks_blockswitch"> </block>
         <block type="blocks_boundingbox"> </block>
@@ -390,12 +399,17 @@
         <block type="handle_ItemTicked"> </block>
         <block type="handle_ItemBlockUse"> </block>
         <block type="handle_ItemCrafted"> </block>
+        <block type="handle_ItemBlockBroken"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
+        <block type="items_item"> </block>
         <block type="items_creativetab"> </block>
         <block type="items_setmaxstacksize"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
+        <block type="itemstack_meta"> </block>
+        <block type="itemstack_setmeta"> </block>
+        <block type="itemstack_getitem"> </block>
         <block type="itemstack_stacksize"> </block>
         <block type="itemstack_setstacksize"> </block>
         <block type="itemstack_displayname"> </block>
@@ -412,6 +426,13 @@
       <category name="Vec3  (C)" colour="#6633cc">
         <block type="vec3_fromxyz"> </block>
         <block type="vec3_getxyz"> </block>
+        <block type="vec3_dist"> </block>
+      </category>
+      <category name="Debugger (C)" colour="#4422aa">
+        <block type="debug_log"> </block>
+        <block type="debug_warn"> </block>
+        <block type="debug_err"> </block>
+        <block type="debug_debugger"> </block>
       </category>
       <category name="World (C)" colour="#22aabb">
         <block type="world_is_not_remote"> </block>
@@ -420,6 +441,7 @@
         <block type="world_execute_command_as_entity"> </block>
         <block type="world_get_loaded_entities"> </block>
         <block type="world_get_player_entities"> </block>
+        <block type="world_get_player_by_name"> </block>
       </category>
       <category name="Entity (C)" colour="#ff8811">
         <block type="entity_set_position"> </block>
@@ -451,7 +473,6 @@
         <block type="player_get_current_item_pos"> </block>
         <sep gap="40"></sep>
         <block type="player_get_player_name"> </block>
-        <block type="player_get_player_by_name"> </block>
         <block type="player_is_entity_player"> </block>
       </category>
       <category name="Command (H)" colour="#ed120e">
@@ -526,7 +547,8 @@
     <!-- Blockly block libmap builder -->
     <script src="block_libmap.js"></script>
     <script src="libs/upatch.js"></script>
-    <script src="item_selector.js"></script>
+    <script src="libs/item_selector.js"></script>
+    <script src="libs/handler_register.js"></script>
 
     <!-- Additional blocks -->
     <script src="blocks/World.js"></script>
@@ -539,6 +561,7 @@
     <script src="blocks/Player.js"></script>
     <script src="blocks/Vec3.js"></script>
     <script src="blocks/BlockPos.js"></script>
+    <script src="blocks/Debug.js"></script>
     <script src="blocks/Events.js"></script> <!-- Currently unused -->
     <script src="blocks/ReturnBlock.js"></script>
     <script src="blocks/Utils.js"></script>
@@ -550,6 +573,7 @@
     <script src="primitives/Inspector.js"></script>
     <script src="primitives/Metadata.js"></script>
     <script src="primitives/Icon.js"></script>
+    <script src="primitives/OreGeneration.js"></script>
     <script src="primitives/AdvancedBlock.js"></script>
     <script src="primitives/Item.js"></script>
     <script src="primitives/Command.js"></script>

@@ -1,23 +1,8 @@
-const handle_BlockConstructor = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block constructor 1'), 'ID');
-    this.appendDummyInput('')
-      .setAlign(Blockly.inputs.Align.LEFT)
-      .appendField('Block Constructor Handler');
-    this.appendStatementInput('CODE');
-    this.setTooltip('Runs when the block type is initialised.\nNo return value expected.');
-    this.setHelpUrl('');
-    this.setColour(0);
-  }
-};
-Blockly.common.defineBlocks({ handle_BlockConstructor: handle_BlockConstructor });
-
-javascript.javascriptGenerator.forBlock['handle_BlockConstructor'] = function (block) {
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [] };
-}
+registerHandler("BlockConstructor", "block constructor", {}, function () {
+  this.setTooltip('Runs when the block type is initialised.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
 
 
 const blocks_blockproperty = {
@@ -82,140 +67,81 @@ javascript.javascriptGenerator.forBlock['blocks_blockswitch'] = function () {
   return code;
 }
 
+registerHandler("BlockBreak", "block break", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "$$blockstate": null
+}, function () {
+  this.setTooltip('Runs when the block is removed from the world.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
 
-const handle_BlockBreak = {
+
+registerHandler("BlockAdded", "block added", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "$$blockstate": null
+}, function () {
+  this.setTooltip('Runs when the block is added to the world.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+
+registerHandler("BlockNeighbourChange", "block neighbor update", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "$$blockstate": null
+}, function () {
+  this.setTooltip('Runs when a block\'s neighbor is changed.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+registerHandler("BlockBrokenByPlayer", "block broken by player", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "$$blockstate": null
+}, function () {
+  this.setTooltip('Runs when a block is broken by a player.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+registerHandler("BlockRandomTick", "block random tick", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "$$blockstate": null,
+  "$$random": null
+}, function () {
+  this.setTooltip('Runs when a block is ticked.\nNo return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+
+const blocks_block = {
   init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block break 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Break Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when the block is removed from the world.\nNo return value expected.');
+    this.appendDummyInput('BLOCK')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('block')
+      .appendField(new Blockly.FieldMinecraftItemInput(true, true), 'BLOCK');
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setTooltip('Returns an Block instance (for comparisons)');
     this.setHelpUrl('');
     this.setColour(0);
   }
 };
-Blockly.common.defineBlocks({ handle_BlockBreak: handle_BlockBreak });
-
-javascript.javascriptGenerator.forBlock['handle_BlockBreak'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
-}
-
-
-
-const handle_BlockAdded = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block added 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Placed Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when the block is added to the world.\nNo return value expected.');
-    this.setHelpUrl('');
-    this.setColour(0);
+Blockly.common.defineBlocks({ blocks_block: blocks_block });
+javascript.javascriptGenerator.forBlock['blocks_block'] = function () {
+  const block_primitive = this.getFieldValue('BLOCK');
+  const object = {
+    id: block_primitive.split("/")[1].split("@")[0]
   }
-};
-Blockly.common.defineBlocks({ handle_BlockAdded: handle_BlockAdded });
-
-javascript.javascriptGenerator.forBlock['handle_BlockAdded'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
+  return [`(ModAPI.blocks["${object.id}"]?.getRef() || null)`, javascript.Order.NONE];
 }
-
-
-
-const handle_BlockNeighbourChange = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block neighbour update 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Neighbour Changed Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when a block\'s neighbor is changed.\nNo return value expected.');
-    this.setHelpUrl('');
-    this.setColour(0);
-  }
-};
-Blockly.common.defineBlocks({ handle_BlockNeighbourChange: handle_BlockNeighbourChange });
-
-javascript.javascriptGenerator.forBlock['handle_BlockNeighbourChange'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
-}
-
-
-
-const handle_BlockBrokenByPlayer = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block broken by player 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Broken By Player Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when a block is broken by a player.\nNo return value expected.');
-    this.setHelpUrl('');
-    this.setColour(0);
-  }
-};
-Blockly.common.defineBlocks({ handle_BlockBrokenByPlayer: handle_BlockBrokenByPlayer });
-
-javascript.javascriptGenerator.forBlock['handle_BlockBrokenByPlayer'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate"] };
-}
-
-
-const handle_BlockRandomTick = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block random tick 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Random Tick Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when a block is ticked.\nNo return value expected.');
-    this.setHelpUrl('');
-    this.setColour(0);
-  }
-};
-Blockly.common.defineBlocks({ handle_BlockRandomTick: handle_BlockRandomTick });
-
-javascript.javascriptGenerator.forBlock['handle_BlockRandomTick'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, "$$blockstate", "$$random"] };
-}
-
-
 
 
 const blocks_boundingbox = {
@@ -248,7 +174,7 @@ javascript.javascriptGenerator.forBlock['blocks_boundingbox'] = function () {
   const number_maxx = this.getFieldValue('MAXX');
   const number_maxy = this.getFieldValue('MAXY');
   const number_maxz = this.getFieldValue('MAXZ');
-  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz})`;
+  const code = `this.$setBlockBounds(${number_minx}, ${number_miny}, ${number_minz}, ${number_maxx}, ${number_maxy}, ${number_maxz});`;
   return code;
 }
 
@@ -288,31 +214,31 @@ javascript.javascriptGenerator.forBlock['blocks_creativetab'] = function () {
   return code;
 }
 
+registerHandler("BlockEntityCollision", "block entity collision", {
+  "WORLD": "world",
+  "BLOCKPOS": "blockpos",
+  "ENTITY": "entity",
+}, function () {
+  this.setTooltip('Runs when an entity collides with the block.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
 
+registerHandler("BlockGetDroppedItem", "block get dropped item", {
+  "$$blockstate": null,
+  "$$random": null,
+  "FORTURE": "forture",
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped item.\nItem return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
 
-const handle_BlockEntityCollision = {
-  init: function () {
-    this.appendDummyInput('ID')
-      .appendField('Handler ID:')
-      .appendField(new Blockly.FieldTextInput('block entity collision 1'), 'ID');
-    this.appendDummyInput('')
-      .appendField('Block Entity Collision Handler with:')
-      .appendField(new Blockly.FieldEFB2Variable('world'), 'WORLD')
-      .appendField(new Blockly.FieldEFB2Variable('position'), 'BLOCKPOS')
-      .appendField(new Blockly.FieldEFB2Variable('entity'), 'ENTITY');
-    this.appendStatementInput('CODE');
-    this.setInputsInline(false)
-    this.setTooltip('Runs when an entity collides with the block.');
-    this.setHelpUrl('');
-    this.setColour(0);
-  }
-};
-Blockly.common.defineBlocks({ handle_BlockEntityCollision: handle_BlockEntityCollision });
-
-javascript.javascriptGenerator.forBlock['handle_BlockEntityCollision'] = function () {
-  const variable_world = javascript.javascriptGenerator.getVariableName(this.getFieldValue('WORLD'));
-  const variable_blockpos = javascript.javascriptGenerator.getVariableName(this.getFieldValue('BLOCKPOS'));
-  const variable_entity = javascript.javascriptGenerator.getVariableName(this.getFieldValue('ENTITY'));
-  const statement = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-  return { code: statement, args: [variable_world, variable_blockpos, variable_entity] };
-}
+registerHandler("BlockQuantityDropped", "block get dropped quantity", {
+  "FORTURE": "forture",
+  "$$random": null,
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped quantity.\nInteger return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});

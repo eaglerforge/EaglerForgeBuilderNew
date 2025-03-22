@@ -132,6 +132,15 @@ function editObject(obj, datablock) {
             }
         }
 
+        if (typeof parentValue === "string" && ["efb::val__file", "efb::val__img"].includes(parentValue)) {
+            var resetBtn = document.createElement("button");
+            resetBtn.innerText = "Reset";
+            resetBtn.addEventListener("click", ()=>{
+                obj.tags[k] = parentValue;
+                editObject(obj, datablock);
+            });
+        }
+
         if (Array.isArray(parentValue)) {
             input = document.createElement("select");
             var handlers = parentValue;
@@ -180,6 +189,10 @@ function editObject(obj, datablock) {
         });
 
         propnav.appendChild(input);
+
+        if (resetBtn) {
+            propnav.appendChild(resetBtn);
+        }
 
         if (!isInline) {
             propnav.appendChild(document.createElement("br"));
