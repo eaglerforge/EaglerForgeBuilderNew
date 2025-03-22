@@ -166,6 +166,24 @@ FUNCTIONS["java_logger"] = {
     },
 };
 
+FUNCTIONS["str2ab"] = {
+    //Very important that there is no name and a whitespace before and after the parantheses
+    code: function () {
+        function EFB2__defineStr2Ab() {
+            globalThis.efb2__str2ab = function efb2__str2ab(str) {
+                var buf = new ArrayBuffer(str.length);
+                var bufView = new Uint8Array(buf);
+                for (var i = 0, strLen = str.length; i < strLen; i++) {
+                    bufView[i] = str.charCodeAt(i);
+                }
+                return buf;
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2__defineStr2Ab);
+        EFB2__defineStr2Ab();
+    },
+}
+
 function getFunctionCode(fn) {
     if (!fn) return "";
     return fn.code.toString().match(codeGrabberRegex)?.[0]

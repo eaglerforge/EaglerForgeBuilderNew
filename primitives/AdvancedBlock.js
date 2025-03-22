@@ -1,12 +1,15 @@
 //TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
 PRIMITIVES["block_advanced"] = {
     name: "Advanced Block",
-    uses: ["fixup_block_ids"],
+    uses: ["fixup_block_ids", "str2ab"],
     type: "block_advanced",
     tags: {
         id: "advanced_block",
         name: "Advanced Block",
         texture: VALUE_ENUMS.IMG,
+        animatedSpritesheetTexture: false, // https://sheeptester.github.io/words-go-here/misc/animated-painting-maker.html
+        animatedTextureFrameDuration: 1,
+        animatedTextureInterpolate: false,
         tickRatio: 10,
         material: ['rock', 'air', 'grass', 'ground', 'wood', 'iron', 'anvil', 'water', 'lava', 'leaves', 'plants', 'vine', 'sponge', 'cloth', 'fire', 'sand', 'circuits', 'carpet', 'glass', 'redstoneLight', 'tnt', 'coral', 'ice', 'packedIce', 'snow', 'craftedSnow', 'cactus', 'clay', 'gourd', 'dragonEgg', 'portal', 'cake', 'web', 'piston', 'barrier'],
         Constructor: VALUE_ENUMS.ABSTRACT_HANDLER + "BlockConstructor",
@@ -33,6 +36,17 @@ PRIMITIVES["block_advanced"] = {
         var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"]);
         var getDroppedItemHandler = getHandlerCode("BlockGetDroppedItem", this.tags.GetDroppedItem, ["$$blockstate", "$$random", "$$forture"]);
         var quantityDroppedHandler = getHandlerCode("BlockQuantityDropped", this.tags.QuantityDropped, ["$$random", "$$fortune"]);
+        
+        var animationCode = `
+        AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/textures/blocks/${this.tags.id}.png.mcmeta", efb2__str2ab(
+\`{
+    "animation": {
+        "frametime": ${Math.max(1, Math.round(this.tags.animatedTextureFrameDuration)) || 1},
+        "interpolate": ${this.tags.animatedTextureInterpolate}
+    }
+}\`));
+        `;
+
         return `(function AdvancedBlockDatablock() {
     const $$blockTexture = "${this.tags.texture}";
 
@@ -166,6 +180,7 @@ PRIMITIVES["block_advanced"] = {
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/textures/blocks/${this.tags.id}.png", await (await fetch(
             $$blockTexture
         )).arrayBuffer());
+        ${this.tags.animatedSpritesheetTexture ? animationCode : ""}
     });
 })();`;
     }
