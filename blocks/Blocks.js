@@ -223,3 +223,22 @@ registerHandler("BlockEntityCollision", "block entity collision", {
   this.setHelpUrl('');
   this.setColour(0);
 });
+
+registerHandler("BlockGetDroppedItem", "block get dropped item", {
+  "$$blockstate": null,
+  "$$random": null,
+  "FORTURE": "forture",
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped item.\nItem return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
+
+registerHandler("BlockQuantityDropped", "block get dropped quantity", {
+  "FORTURE": "forture",
+  "$$random": null,
+}, function () {
+  this.setTooltip('Runs when a block is broken to get the dropped quantity.\nInteger return value expected.');
+  this.setHelpUrl('');
+  this.setColour(0);
+});
