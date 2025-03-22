@@ -2536,9 +2536,10 @@ const blocks = [
         "type": "block"
     }
 ];
+const IMAGE_HOST = "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/"; //https://minecraft.wiki/images/;
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
-const missingTexture = "https://minecraft.wiki/images/Missing_Texture_JE4.png";
+const missingTexture = IMAGE_HOST + "Missing_Texture_JE4.png";
 var itemToRep = (item) => (item.type === "block") ? "block/" + item.id + "@" + item.meta : "item/" + item.id;
 function blockL10NToId(thisSentence, noReverse) {
     function camelToSnake(str) {
@@ -2746,7 +2747,7 @@ function getImageLocation(id) {
     if (id === "missingno") {
         return missingTexture;
     }
-    return `https://minecraft.wiki/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id) ? "gif" : "png"}`;
+    return `${IMAGE_HOST}Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id) ? "gif" : "png"}`;
 }
 function makeItemSelector(selected, useBlocks, triggerFn, options) {
     options ||= {};
