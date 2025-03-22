@@ -2746,7 +2746,7 @@ function getImageLocation(id) {
     if (id === "missingno") {
         return missingTexture;
     }
-    return `https://github.com/21cookej/Images-For-Eaglerforge-Builder/blob/main/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id) ? "gif" : "png"}`;
+    return `https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/Invicon_${id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('_').replaceAll("Of", "of").replaceAll("O%27", "o%27").replaceAll("With", "with").replace("_And_", "_and_").replace("On_A", "on_a")}.${animatedList.includes(id) ? "gif" : "png"}`;
 }
 function makeItemSelector(selected, useBlocks, triggerFn, options) {
     options ||= {};
