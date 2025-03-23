@@ -99,6 +99,7 @@ button:hover {
   height: 1.5rem;
   border-radius: 0px 0px 0px 0.3rem;
   transform-origin: right top;
+  pointer-events: all!important;
 }
 #fullscreen:hover {
   background-color: rgba(0, 0, 0, 0.44);
@@ -227,6 +228,7 @@ select option {
 }
 
 ::-webkit-resizer {
+    pointer-events: all;
     background-image: url('assets/resize.svg');
 }
 

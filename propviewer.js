@@ -9,6 +9,7 @@ function editObject(obj, datablock) {
     if (obj.type === "inspector") {
         inspectorFrame.style.display = "block";
         inspectorFrame.style.pointerEvents = "all";
+        propnav.style.pointerEvents = "none";
         inspectorFrame.style.zIndex = "70";
         inspectorFrameReposTimer = setInterval(positionInspectorFrame, 1000 / 15);
         propnav.style.height = (propnav.offsetWidth/16)*10+"px"; // 10:16 scale
@@ -16,6 +17,7 @@ function editObject(obj, datablock) {
         let fullscreenButton = document.createElement('button');
         fullscreenButton.id = "fullscreen";
         fullscreenButton.innerHTML = "⇙";
+        fullscreenButton.style.pointerEvents = "all";
         fullscreenButton.onclick = function() {
             fullscreenButton.toggleAttribute("fullscreen");
             if (fullscreenButton.hasAttribute("fullscreen")) {
@@ -31,10 +33,11 @@ function editObject(obj, datablock) {
             }
         }
         propnav.appendChild(fullscreenButton);
-
+        
     } else {
         inspectorFrame.style.display = "none";
         inspectorFrame.style.pointerEvents = "none";
+        propnav.style.pointerEvents = "all";
         if (inspectorFrameReposTimer === null) {
             inspectorFrameReposTimer = null;
             clearInterval(inspectorFrameReposTimer);
