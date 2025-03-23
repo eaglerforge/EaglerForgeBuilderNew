@@ -85,10 +85,26 @@ FUNCTIONS["execute_command_as"] = {
                 var y = $commandsender.$sendCommandFeedback;
                 $commandsender.$sendCommandFeedback = feedback ? () => 1 : () => 0;
 
+                const notifyOps0 = ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0;
+                const notifyOps = ModAPI.hooks.methods.nmc_CommandBase_notifyOperators;
+                const addChatMsg = $commandsender.$addChatMessage;
+
+                if (!feedback) {
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = ()=>{};
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = ()=>{};
+                    $commandsender.$addChatMessage = ()=>{};
+                }
+
                 try {
                     commandManager.$executeCommand($commandsender, ModAPI.util.str(command));
                 } catch (error) {
                     console.error(error);
+                }
+
+                if (!feedback) {
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = notifyOps0;
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = notifyOps;
+                    $commandsender.$addChatMessage = addChatMsg;
                 }
 
                 $commandsender.$canCommandSenderUseCommand = x;
