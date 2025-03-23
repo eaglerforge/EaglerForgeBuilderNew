@@ -41,6 +41,7 @@ function editObject(obj, datablock) {
         }
     }
 
+    if (obj.type !== "inspector") {
     var nameField = document.createElement("input");
     nameField.placeholder = "Datablock Name";
     nameField.type = "text";
@@ -49,7 +50,8 @@ function editObject(obj, datablock) {
         obj.name = nameField.value || "No name";
         datablock.querySelector("h4").innerText = obj.name;
     });
-    propnav.appendChild(nameField);
+        propnav.appendChild(nameField);
+    }
 
     propnav.appendChild(document.createElement("br"));
     propnav.appendChild(document.createElement("br"));

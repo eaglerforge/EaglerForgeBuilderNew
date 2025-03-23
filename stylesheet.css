@@ -167,6 +167,7 @@ td {
   border-bottom: 1px solid white;
   resize: vertical;
   overflow-x: visible;
+  z-index: 100;
 }
 .datablock.selected {
   outline: 4px solid var(--input-border);
