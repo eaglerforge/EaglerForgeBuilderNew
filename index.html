@@ -338,9 +338,17 @@
             </shadow>
           </value>
         </block>
-        <block type="lists_sort">
-          <field name="TYPE">NUMERIC</field>
-          <field name="DIRECTION">1</field>
+        <block type="list_includes">
+          <value name="LIST">
+            <block type="variables_get">
+              <field name="VAR" id="k8|hQIbGNUm?zO%Na,Da">list</field>
+            </block>
+          </value>
+          <value name="VALUE">
+            <shadow type="text">
+              <field name="TEXT">apple</field>
+            </shadow>
+          </value>
         </block>
       </category>
       <sep></sep>
@@ -401,11 +409,13 @@
         <block type="handle_ItemCrafted"> </block>
         <block type="handle_ItemBlockBroken"> </block>
         <block type="handle_ItemGetAttributes"> </block>
+        <block type="handle_ItemGetEfficiency"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
         <block type="items_item"> </block>
         <block type="items_creativetab"> </block>
         <block type="items_setmaxstacksize"> </block>
+        <block type="items_get_applicable_blocks"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
         <block type="itemstack_meta"> </block>

@@ -19,3 +19,26 @@ javascript.javascriptGenerator.forBlock['logic_a_or_b'] = function () {
     const code = `((${value_a})??(${value_b}))`;
     return [code, javascript.Order.NONE];
 }
+
+const list_includes = {
+    init: function () {
+        this.appendValueInput('LIST')
+            .setCheck('Array')
+            .appendField('list');
+        this.appendValueInput('VALUE')
+            .appendField('includes');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Boolean');
+        this.setTooltip('Checks if a list contains an item.');
+        this.setHelpUrl('');
+        this.setColour(255);
+    }
+};
+Blockly.common.defineBlocks({ list_includes: list_includes });
+
+javascript.javascriptGenerator.forBlock['list_includes'] = function () {
+    const value_list = javascript.javascriptGenerator.valueToCode(this, 'LIST', javascript.Order.ATOMIC);
+    const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = `${value_list}.includes(${value_value})`;
+    return [code, javascript.Order.NONE];
+}

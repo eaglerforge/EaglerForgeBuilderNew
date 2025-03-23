@@ -155,8 +155,37 @@ registerHandler("ItemBlockBroken", "item block broken", {
     this.setColour(225);
 });
 
-registerHandler("ItemGetAttributes", "item get attributes", {"ATTRIBUTEMAP": "attribute map"}, function () {
+registerHandler("ItemGetAttributes", "item get attributes", { "ATTRIBUTEMAP": "attribute map" }, function () {
     this.setTooltip('Runs when an item\'s attributes are calculated.\nAn AttributeMap is expected as a return value, but is automatically returned.');
     this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
     this.setColour(225);
 });
+
+registerHandler("ItemGetEfficiency", "item get efficiency vs block", { "ITEMSTACK": "itemstack", "BLOCK": "block" }, function () {
+    this.setTooltip('Runs to get the item\'s strength when breaking a block.\nA number is expected as an output. Default response is 1.0');
+    this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+    this.setColour(225);
+});
+
+const items_get_applicable_blocks = {
+    init: function () {
+        this.appendDummyInput('GROUP')
+            .appendField('get applicable blocks of')
+            .appendField(new Blockly.FieldDropdown([
+                ['ItemAxe', 'ItemAxe'],
+                ['ItemPickaxe', 'ItemPickaxe'],
+                ['ItemSpade', 'ItemSpade']
+            ]), 'GROUP');
+        this.setInputsInline(true)
+        this.setOutput(true, null);
+        this.setTooltip('Returns an array of blocks that the item group is effective on.');
+        this.setHelpUrl('');
+        this.setColour(225);
+    }
+};
+Blockly.common.defineBlocks({ items_get_applicable_blocks: items_get_applicable_blocks });
+javascript.javascriptGenerator.forBlock['items_get_applicable_blocks'] = function() {
+    const dropdown_group = this.getFieldValue('GROUP');
+    const code = `(ModAPI.reflect.getClassByName("${dropdown_group}").staticVariables.EFFECTIVE_ON?.$backingMap?.$elementData?.data?.filter(x => !!x)?.map(x => x.$key) || [])`;
+    return [code, javascript.Order.NONE];
+  }
