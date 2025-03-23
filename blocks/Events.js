@@ -67,7 +67,7 @@ Blockly.Blocks['events_onModLoads'] = {
         this.setHelpUrl('');
     }
 };
-
+Blockly.common.defineBlocks({ events_onModLoads: events_onModLoads });
 Blockly.Blocks['events_onClientTick'] = {
     init: function() {
         this.appendDummyInput()
@@ -80,7 +80,7 @@ Blockly.Blocks['events_onClientTick'] = {
         this.setHelpUrl('');
     }
 };
-
+Blockly.common.defineBlocks({ events_onClientTick: events_onClientTick });
 Blockly.Blocks['events_onClientFrame'] = {
     init: function() {
         this.appendDummyInput()
@@ -93,7 +93,7 @@ Blockly.Blocks['events_onClientFrame'] = {
         this.setHelpUrl('');
     }
 };
-
+Blockly.common.defineBlocks({ events_onClientFrame: events_onClientFrame });
 Blockly.Blocks['events_onKeyPressed'] = {
     init: function() {
         this.appendDummyInput()
@@ -108,7 +108,7 @@ Blockly.Blocks['events_onKeyPressed'] = {
         this.setHelpUrl('');
     }
 };
-
+Blockly.common.defineBlocks({ events_onKeyPressed: events_onKeyPressed });
 Blockly.Blocks['events_onKeyReleased'] = {
     init: function() {
         this.appendDummyInput()
@@ -123,6 +123,7 @@ Blockly.Blocks['events_onKeyReleased'] = {
         this.setHelpUrl('');
     }
 };
+Blockly.common.defineBlocks({ events_onKeyReleased: events_onKeyReleased });
 Blockly.Blocks['events_onJoinWorld'] = {
     init: function() {
         this.appendDummyInput()
@@ -135,6 +136,7 @@ Blockly.Blocks['events_onJoinWorld'] = {
         this.setHelpUrl('');
     }
 };
+Blockly.common.defineBlocks({ events_onJoinWorld: events_onJoinWorld });
 
 javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
