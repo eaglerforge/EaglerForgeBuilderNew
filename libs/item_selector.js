@@ -2806,50 +2806,51 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.style.borderRadius = "4px";
     div.value = selected;
 
-    var searchBox = document.createElement("div");
-    searchBox.style.position = conf.popoverMethod;
-    searchBox.style.backgroundColor = "var(--background)";
-    searchBox.style.border = "1px solid var(--col)";
-    searchBox.style.borderRadius = "6px";
-    searchBox.style.width = conf.width;
-    searchBox.style.height = conf.height;
-    searchBox.style.top = conf.top;
-    searchBox.style.left = conf.left;
-    searchBox.style.zIndex = "255";
+var searchBox = document.createElement("div");
+searchBox.style.position = conf.popoverMethod;
+searchBox.style.backgroundColor = "var(--background)";
+searchBox.style.border = "1px solid var(--col)";
+searchBox.style.borderRadius = "6px";
+searchBox.style.width = conf.width;
+searchBox.style.height = conf.height;
+searchBox.style.top = conf.top;
+searchBox.style.left = conf.left;
+searchBox.style.zIndex = "255";
+searchBox.style.display = "none";
+searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
+searchBox.style.overflowY = "scroll";
+
+var closeButton = document.createElement("button");
+closeButton.innerText = "Close";
+closeButton.addEventListener("click", (e) => {
     searchBox.style.display = "none";
-    searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
-    searchBox.style.overflowY = "scroll";
+    e.stopPropagation();
+});
+
     
-    var closeButton = document.createElement("button");
-    closeButton.innerText = "Close";
-    closeButton.addEventListener("click", (e) => {
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
         searchBox.style.display = "none";
-        e.stopPropagation();
-    });
-    
-   
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            searchBox.style.display = "none";
+    }
+});
+
+searchBox.appendChild(closeButton);
+searchBox.appendChild(document.createElement("br"));
+
+var searchBar = document.createElement("input");
+searchBar.type = "search";
+searchBar.addEventListener("input", (e) => {
+    e.stopPropagation();
+    var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
+    searchBox.querySelectorAll(".itemoption").forEach(opt => {
+        if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
+            opt.style.display = "inline-block";
+        } else {
+            opt.style.display = "none";
         }
     });
-    
-    searchBox.appendChild(closeButton);
-    searchBox.appendChild(document.createElement("br"));
-    
-    var searchBar = document.createElement("input");
-    searchBar.type = "search";
-    searchBar.addEventListener("input", (e) => {
-        e.stopPropagation();
-        var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
-        searchBox.querySelectorAll(".itemoption").forEach(opt => {
-            if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
-                opt.style.display = "inline-block";
-            } else {
-                opt.style.display = "none";
-            }
-        });
-    });
+});
+
     
     
     searchBox.appendChild(searchBar);
