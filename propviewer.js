@@ -15,18 +15,19 @@ function editObject(obj, datablock) {
 
         let fullscreenButton = document.createElement('button');
         fullscreenButton.id = "fullscreen";
-        fullscreenButton.innerText = "⟰";
+        fullscreenButton.innerHTML = "⇙";
         fullscreenButton.onclick = function() {
             fullscreenButton.toggleAttribute("fullscreen");
             if (fullscreenButton.hasAttribute("fullscreen")) {
                 fullscreenButton.style.transitionProperty = "initial";
                 fullscreenButton.style.position = "fixed";
                 fullscreenButton.style.scale = "2";
-                
+                fullscreenButton.innerHTML = "&#10799;";
             } else {
                 fullscreenButton.style.transitionProperty = "background-color";
                 fullscreenButton.style.position = "absolute";
                 fullscreenButton.style.scale = "1";
+                fullscreenButton.innerHTML = "⇙";
             }
         }
         propnav.appendChild(fullscreenButton);
