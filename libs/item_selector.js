@@ -2540,6 +2540,8 @@ const IMAGE_HOST = "https://21cookej.github.io/Images-For-Eaglerforge-Builder/im
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 const missingTexture = IMAGE_HOST + "Missing_Texture_JE4.png";
+const slotTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAV5JREFUOE9lU4mNwyAQnG0KCjFIKSMnTBuXkjea2QVzOikyOOBhPqzW6gDgDpjlyD/gcNMA4wLfYbC1EY7X6wWrtXi72rGZW4kEcBBAPAI2Ad0d856wUqv31p6jHXDjSRz1CBxLIMIJxDHGDaul+tVbnKJFKXrkSFYeT26JRkHzFkARAD/W2mabGqTGYQskWfH1JkAp1ZsYhOztJiGdn6aJyUz+iJAnQC3er556wyilEdPgRStCYOZj2iMG4cElinmeDNpuL1YHIM3l/jETgBKSv+gt04LJ0h/maI0/d9xTMZaIcSWwIswa7EIcYCvS+4nxirwzBm2gJDoex6qNW2K4jZsSSinee5PmXbc9zU4c5Tor/vSgdSHuuhwTGapIs8orGwPGGLwLNe7CdvmcMI2UlpcpqYpsxsgm9n86H8TwQaVKb6Iajjkm7Pfz8Z/3O3qYXVh936T/NOsxlq5/AZq752ttJpdqAAAAAElFTkSuQmCC";
+const selectedSlotTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWRJREFUOE9VU0t2gzAMlC5lL5KeIbBqS84Q2qxCzgBJj6w+aUY2sMDG6DOaGWutxSQexSIiZv7lr3jHHmexw6oi31+foqVUG6eVqUxQ6YmtrDcwUZNI9iKP21m0lmKX6QUM6p001qiQD3IjERA9XWSZz6KlFhum7Zjgv1vwbkBv4I3MRzBZ5g8giAIOm5URxhrKedAY52ZiqrLkCMP0iooBjOiB2s84s3dtY8YmC1QbrmtEgRyo0DeJBJWAAmQ+ggNX4bqxXyeoy8VxksQmusoyn3YcQPmDGtFpr0R+RWCSWKsN09rlA5uYwXGSzjiiuWKRHKHSSEEeSIi8nfbOOienQxH7vJ2cg2LjtDXhwkx7EzQLp65URqgCrOwkps7dhTQvnElI7hX4WeT5QyeObmVY7GimMFHioYSc33GGlStJPA7NG5k88Go1U9ErIeP7/Wf3++/uCoNs6slLBMjh1OQI91v+Acpv1mNmaRAcAAAAAElFTkSuQmCC";
 var itemToRep = (item) => (item.type === "block") ? "block/" + item.id + "@" + item.meta : "item/" + item.id;
 function blockL10NToId(thisSentence, noReverse) {
     function camelToSnake(str) {
@@ -2794,16 +2796,19 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var div = document.createElement("div");
     div._useInline = true;
     div.style.width = div.style.height = "4rem";
-    div.style.border = "1px solid var(--col)";
     div.style.display = "inline-block";
     div.style.overflow = "hidden";
-    div.style.backgroundImage = `url(${getImageLocation(selected)})`;
+    div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${slotTexture})`;
     div.style.backgroundRepeat = "no-repeat";
-    div.style.backgroundSize = "cover";
+    div.style.backgroundSize = "70%, 90%";
+    div.style.cursor = "pointer";
+    if (!useBlocks) {
+        div.style.backgroundPosition = "45% 45%, center center";
+    } else {
+        div.style.backgroundPosition = "center" 
+    }
     div.style.imageRendering = "pixelated";
     div.classList.add("dynamic_itemsel");
-    div.style.marginRight = "4px";
-    div.style.borderRadius = "4px";
     div.value = selected;
 
     var searchBox = document.createElement("div");
@@ -2819,6 +2824,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBox.style.display = "none";
     searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
     searchBox.style.overflowY = "scroll";
+    searchBox.style.flexWrap = "wrap";
+    searchBox.style.justifyContent = "center";
     var closeButton = document.createElement("button");
     closeButton.innerText = "Close";
     closeButton.addEventListener("click", (e) => {
@@ -2829,6 +2836,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBox.appendChild(document.createElement("br"));
     var searchBar = document.createElement("input");
     searchBar.type = "search";
+    searchBar.style.width = "100%";
     searchBar.addEventListener("input", (e) => {
         e.stopPropagation();
         var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
@@ -2850,39 +2858,39 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
             div2.style.width = div2.style.height = "4rem";
-            div2.style.border = "1px solid var(--col)";
-            div2.style.marginRight = "4px";
-            div2.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+            div2.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${slotTexture})`;
             div2.style.backgroundRepeat = "no-repeat";
-            div2.style.backgroundSize = "cover";
+            div2.style.backgroundSize = "80%, cover";
+            div2.style.backgroundPosition = "center";
+            div2.style.cursor = "pointer";
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
-                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${slotTexture})`;
                 div2.setAttribute("data-sel", "yes");
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
-                div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div.value = itemToRep(item);
             }
             div2.addEventListener("click", (e) => {
                 e.stopPropagation();
                 searchBox.querySelectorAll(".itemoption[data-sel=yes]").forEach(x => {
+                    const item = x.getAttribute('data-item');
                     x.setAttribute("data-sel", "no");
-                    x.style.border = "1px solid var(--col)";
+                    x.style.backgroundImage = x.style.backgroundImage.replace(selectedSlotTexture, slotTexture);
                     x.style.backgroundColor = "";
                     x.style.transform = "";
                     x.style.zIndex = 0;
                 });
                 div2.setAttribute("data-sel", "yes");
-                div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
+                div2.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${selectedSlotTexture})`;
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
-                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${selectedSlotTexture})`;
             });
             var label = document.createElement("label");
             label.innerText = (item.type === "block") ? getImageLocationBlock(item, true).replaceAll("%27", "'") : getImageLocationItem(item, true);
@@ -2892,15 +2900,18 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
+            label.style.cursor = "pointer";
             label.style.backgroundColor = "rgba(0,0,0,0.6)";
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
+            label.style.fontSize = "smaller";
+            label.style.textAlign = "center";
             div2.appendChild(label);
             searchBox.appendChild(div2);
         });
     }
     div.recalculateList();
     div.addEventListener("click", () => {
-        searchBox.style.display = "block";
+        searchBox.style.display = "flex";
     });
     div.appendChild(searchBox);
     ["pointerdown", "scroll", "wheel"].forEach(x => div.addEventListener(x, (e) => {
