@@ -55,7 +55,7 @@ const keyCodes = [
     ["F12", "123"],
 ];
 
-Blockly.Blocks['events_onModLoads'] = {
+const 'events_onModLoads' = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when all mods finished loading'));
@@ -68,7 +68,7 @@ Blockly.Blocks['events_onModLoads'] = {
     }
 };
 Blockly.common.defineBlocks({ events_onModLoads: events_onModLoads });
-Blockly.Blocks['events_onClientTick'] = {
+const 'events_onClientTick' = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client tick'));
@@ -81,7 +81,7 @@ Blockly.Blocks['events_onClientTick'] = {
     }
 };
 Blockly.common.defineBlocks({ events_onClientTick: events_onClientTick });
-Blockly.Blocks['events_onClientFrame'] = {
+const 'events_onClientFrame' = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client frame'));
@@ -94,7 +94,7 @@ Blockly.Blocks['events_onClientFrame'] = {
     }
 };
 Blockly.common.defineBlocks({ events_onClientFrame: events_onClientFrame });
-Blockly.Blocks['events_onKeyPressed'] = {
+const 'events_onKeyPressed' = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -109,7 +109,7 @@ Blockly.Blocks['events_onKeyPressed'] = {
     }
 };
 Blockly.common.defineBlocks({ events_onKeyPressed: events_onKeyPressed });
-Blockly.Blocks['events_onKeyReleased'] = {
+const 'events_onKeyReleased' = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -124,7 +124,7 @@ Blockly.Blocks['events_onKeyReleased'] = {
     }
 };
 Blockly.common.defineBlocks({ events_onKeyReleased: events_onKeyReleased });
-Blockly.Blocks['events_onJoinWorld'] = {
+const 'events_onJoinWorld' = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when HOST joins world'));
