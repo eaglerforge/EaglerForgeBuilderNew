@@ -18,6 +18,7 @@ PRIMITIVES["item"] = {
         UsedOnBlock: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockUse",
         Crafted: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemCrafted",
         BlockBroken: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemBlockBroken",
+        GetAttributes: VALUE_ENUMS.ABSTRACT_HANDLER + "ItemGetAttributes",
     },
     getDependencies: function () {
         return [];
@@ -30,6 +31,7 @@ PRIMITIVES["item"] = {
         var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"]);
         var craftedHandler = getHandlerCode("ItemCrafted", this.tags.Crafted, ["$$itemstack", "$$world", "$$player"]);
         var blockBrokenHandler = getHandlerCode("ItemBlockBroken", this.tags.BlockBroken, ["$$itemstack", "$$world", "$$block", "$$blockpos", "$$entity"]);
+        var getAttributes = getHandlerCode("ItemGetAttributes", this.tags.GetAttributes, ["$$attributemap"]);
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -37,6 +39,7 @@ PRIMITIVES["item"] = {
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$itemSuper = ModAPI.reflect.getSuper($$itemClass, (x) => x.length === 1);
         var $$itemUseAnimation = ModAPI.reflect.getClassById("net.minecraft.item.EnumAction").staticVariables["${this.tags.itemUseAnimation}"];
+        var $$itemGetAttributes = ModAPI.reflect.getClassById("net.minecraft.item.Item").methods.getItemAttributeModifiers.method;
         function $$CustomItem() {
             $$itemSuper(this);
             ${constructorHandler.code};
@@ -74,6 +77,11 @@ PRIMITIVES["item"] = {
         $$CustomItem.prototype.$onBlockDestroyed = function (${blockBrokenHandler.args.join(", ")}) {
             ${blockBrokenHandler.code};
             return 0;
+        }
+        $$CustomItem.prototype.$getItemAttributeModifiers = function () {
+            ${getAttributes.args[0]} = $$itemGetAttributes.apply(this, []);
+            ${getAttributes.code};
+            return ${getAttributes.args[0]};
         }
         function $$internal_reg() {
             var $$custom_item = (new $$CustomItem()).$setUnlocalizedName(

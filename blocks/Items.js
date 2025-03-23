@@ -21,7 +21,7 @@ const items_creativetab = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('Set the creative tab of the item');
-        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.htmlhttps://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+        this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
         this.setColour(225);
     }
 };
@@ -151,6 +151,12 @@ registerHandler("ItemBlockBroken", "item block broken", {
     "ENTITY": "entity",
 }, function () {
     this.setTooltip('Runs when a block is broken with this item.\nA boolean is expected as a return value.');
+    this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
+    this.setColour(225);
+});
+
+registerHandler("ItemGetAttributes", "item get attributes", {"ATTRIBUTEMAP": "attribute map"}, function () {
+    this.setTooltip('Runs when an item\'s attributes are calculated.\nAn AttributeMap is expected as a return value, but is automatically returned.');
     this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
     this.setColour(225);
 });

@@ -60,8 +60,8 @@ FUNCTIONS["execute_command"] = {
                 const notifyOps = ModAPI.hooks.methods.nmc_CommandBase_notifyOperators;
 
                 if (!feedback) {
-                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = ()=>{};
-                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = ()=>{};
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = () => { };
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = () => { };
                 }
 
                 try {
@@ -103,9 +103,9 @@ FUNCTIONS["execute_command_as"] = {
                 const addChatMsg = $commandsender.$addChatMessage;
 
                 if (!feedback) {
-                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = ()=>{};
-                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = ()=>{};
-                    $commandsender.$addChatMessage = ()=>{};
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = () => { };
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = () => { };
+                    $commandsender.$addChatMessage = () => { };
                 }
 
                 try {
@@ -211,6 +211,20 @@ FUNCTIONS["str2ab"] = {
         ModAPI.dedicatedServer.appendCode(EFB2__defineStr2Ab);
         EFB2__defineStr2Ab();
     },
+}
+
+FUNCTIONS["attribute_map_set"] = {
+    code: function () {
+        function EFB2_defineAttrMapSet() {
+            const AttributeModifier = ModAPI.reflect.getClassByName("AttributeModifier").constructors.find(x => x.length === 4);
+            const secretUUID = ModAPI.reflect.getClassByName("Item").staticVariables.itemModifierUUID;
+            globalThis.efb2__attrMapSet = function efb2__attrMapSet(map, key, value) {
+                map.$put(ModAPI.util.str(key), AttributeModifier(secretUUID, ModAPI.util.str("Tool modifier"), value, 0));
+            }
+        }
+        ModAPI.dedicatedServer.appendCode(EFB2_defineAttrMapSet);
+        EFB2_defineAttrMapSet();
+    }
 }
 
 function getFunctionCode(fn) {
