@@ -1,6 +1,11 @@
 :root {
-  --background: rgba(20, 20, 20);
+  --background: rgb(20, 20, 20);
   --col: rgb(179, 179, 179);
+  --btn-background: rgba(255, 255, 255, 0.1);
+  --btn-background-darker: rgba(255, 255, 255, 0.05);
+  --btn-bg-hover: rgba(255, 255, 255, 0.13);
+  --btn-bg-active: rgba(255, 255, 255, 0.2);
+  --input-border: rgba(255, 255, 255, 0.4);
 }
 
 html,
@@ -53,7 +58,7 @@ td {
   position: relative;
 }
 button {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--btn-background);
   color: white;
   border: 0;
   font-size: 1rem;
@@ -64,11 +69,11 @@ button {
   padding: 0.2rem 0.3rem;
 }
 button:active {
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: var(--btn-bg-active) !important;
   transition: 0.1s;
 }
 button:hover {
-  background-color: rgba(255, 255, 255, 0.13);
+  background-color: var(--btn-bg-hover);
 }
 #toolbar button {
   margin-left: 0.5rem;
@@ -164,8 +169,8 @@ td {
   overflow-x: visible;
 }
 .datablock.selected {
-  outline: 4px solid rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.05);
+  outline: 4px solid var(--input-border);
+  background-color: var(--btn-background-darker);
 }
 .datablock.selected h4 {
   position: absolute;
@@ -187,7 +192,7 @@ td {
   display: none !important;
 }
 select {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--btn-background-darker);
   color: white;
   outline: 0 !important;
   border: 1px solid white;
@@ -206,12 +211,12 @@ select option {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--btn-background);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--btn-background);
   border-radius: 6px;
   transition: 0.3s;
 }
