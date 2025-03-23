@@ -55,7 +55,7 @@ const keyCodes = [
     ["F12", "123"],
 ];
 
-const 'events_onModLoads' = {
+const events_onModLoads = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when all mods finished loading'));
@@ -67,8 +67,8 @@ const 'events_onModLoads' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onModLoads: events_onModLoads });
-const 'events_onClientTick' = {
+
+const events_onClientTick = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client tick'));
@@ -80,8 +80,8 @@ const 'events_onClientTick' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onClientTick: events_onClientTick });
-const 'events_onClientFrame' = {
+
+const events_onClientFrame = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client frame'));
@@ -93,8 +93,8 @@ const 'events_onClientFrame' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onClientFrame: events_onClientFrame });
-const 'events_onKeyPressed' = {
+
+const events_onKeyPressed = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -108,8 +108,8 @@ const 'events_onKeyPressed' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onKeyPressed: events_onKeyPressed });
-const 'events_onKeyReleased' = {
+
+const events_onKeyReleased = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -123,8 +123,8 @@ const 'events_onKeyReleased' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onKeyReleased: events_onKeyReleased });
-const 'events_onJoinWorld' = {
+
+const events_onJoinWorld = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when HOST joins world'));
@@ -136,8 +136,18 @@ const 'events_onJoinWorld' = {
         this.setHelpUrl('');
     }
 };
-Blockly.common.defineBlocks({ events_onJoinWorld: events_onJoinWorld });
 
+// Now define all blocks after the block definitions
+Blockly.common.defineBlocks({
+    events_onModLoads: events_onModLoads,
+    events_onClientTick: events_onClientTick,
+    events_onClientFrame: events_onClientFrame,
+    events_onKeyPressed: events_onKeyPressed,
+    events_onKeyReleased: events_onKeyReleased,
+    events_onJoinWorld: events_onJoinWorld
+});
+
+// JavaScript generators for each event block
 javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
@@ -191,3 +201,4 @@ window.addEventListener("keyup", event => {
     ${keyCode !== ""?"}":""}`;
     return code;
 }
+
