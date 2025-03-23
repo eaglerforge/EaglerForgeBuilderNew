@@ -56,10 +56,23 @@ FUNCTIONS["execute_command"] = {
                 var cmd = new x();
                 cmd.$setCommand(ModAPI.util.str(commandStr));
 
+                const notifyOps0 = ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0;
+                const notifyOps = ModAPI.hooks.methods.nmc_CommandBase_notifyOperators;
+
+                if (!feedback) {
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = ()=>{};
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = ()=>{};
+                }
+
                 try {
                     cmd.$trigger($world);
                 } catch (error) {
                     console.error(error);
+                }
+
+                if (!feedback) {
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators0 = notifyOps0;
+                    ModAPI.hooks.methods.nmc_CommandBase_notifyOperators = notifyOps;
                 }
             }
         }
