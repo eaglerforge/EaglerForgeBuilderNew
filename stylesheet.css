@@ -169,6 +169,7 @@ td {
   resize: vertical;
   overflow-x: visible;
   z-index: 100;
+  pointer-events: all;
 }
 .datablock.selected {
   outline: 4px solid var(--input-border);
@@ -228,7 +229,6 @@ select option {
 }
 
 ::-webkit-resizer {
-    pointer-events: all;
     background-image: url('assets/resize.svg');
 }
 

@@ -4,14 +4,16 @@ const InlineValues = [
 ];
 function editObject(obj, datablock) {
     var propnav = document.querySelector("#propnav");
-    propnav.innerHTML = "";
+    Array.from(propnav.childNodes).forEach(element => {
+        if (element.tagName != "IFRAME") {
+            element.remove();
+        }
+    });
 
     if (obj.type === "inspector") {
         inspectorFrame.style.display = "block";
         inspectorFrame.style.pointerEvents = "all";
-        propnav.style.pointerEvents = "none";
         inspectorFrame.style.zIndex = "70";
-        inspectorFrameReposTimer = setInterval(positionInspectorFrame, 1000 / 15);
         propnav.style.height = (propnav.offsetWidth/16)*10+"px"; // 10:16 scale
 
         let fullscreenButton = document.createElement('button');
@@ -25,23 +27,21 @@ function editObject(obj, datablock) {
                 fullscreenButton.style.position = "fixed";
                 fullscreenButton.style.scale = "2";
                 fullscreenButton.innerHTML = "&#10799;";
+                propnav.style.resize = "none";
             } else {
                 fullscreenButton.style.transitionProperty = "background-color";
                 fullscreenButton.style.position = "absolute";
                 fullscreenButton.style.scale = "1";
                 fullscreenButton.innerHTML = "⇙";
+                propnav.style.resize = "vertical";
             }
+            updateFullscreen(fullscreenButton.hasAttribute("fullscreen"))
         }
         propnav.appendChild(fullscreenButton);
-        
+
     } else {
         inspectorFrame.style.display = "none";
         inspectorFrame.style.pointerEvents = "none";
-        propnav.style.pointerEvents = "all";
-        if (inspectorFrameReposTimer === null) {
-            inspectorFrameReposTimer = null;
-            clearInterval(inspectorFrameReposTimer);
-        }
     }
 
     if (obj.type !== "inspector") {
@@ -54,10 +54,9 @@ function editObject(obj, datablock) {
         datablock.querySelector("h4").innerText = obj.name;
     });
         propnav.appendChild(nameField);
+        propnav.appendChild(document.createElement("br"));
+        propnav.appendChild(document.createElement("br"));
     }
-
-    propnav.appendChild(document.createElement("br"));
-    propnav.appendChild(document.createElement("br"));
 
     var keys = Object.keys(obj.tags);
     keys.forEach(k => {

@@ -126,7 +126,6 @@ function reloadUI(sel) {
     if (!state.nodes.includes(sel)) {
         sel = document.querySelector(".datablock.selected")?.datablock;
     }
-    document.querySelector("#propnav").innerHTML = "";
     document.querySelectorAll(".datablock").forEach(elem => {
         elem.remove();
     });
