@@ -180,7 +180,9 @@ function reloadUI(sel) {
         } else {
             var runButton = document.createElement("button");
             runButton.innerText = "Run";
-            runButton.addEventListener("click", runMod);
+            if (typeof runMod !== "undefined") {
+                runButton.addEventListener("click", runMod);
+            }
             controls.appendChild(runButton);
         }
 
