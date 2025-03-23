@@ -123,6 +123,26 @@ Blockly.Blocks['events_onKeyReleased'] = {
         this.setHelpUrl('');
     }
 };
+Blockly.Blocks['events_onJoinWorld'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('when HOST joins world'));
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Is executed when player joins a world, runs once.');
+        this.setHelpUrl('');
+    }
+};
+
+javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("serverstart", () => { 
+    ${statement} })`;
+    return code;
+}
 
 javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
