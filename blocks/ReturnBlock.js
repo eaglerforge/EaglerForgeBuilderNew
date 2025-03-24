@@ -54,6 +54,25 @@ javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
 }
 
 
+const proc_wait = {
+    init: function () {
+        this.appendValueInput('VALUE')
+            .appendField('waits set amount of time');
+        this.setInputsInline(false)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(false, null);
+        this.setTooltip('');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ proc_wait: proc_wait });
+javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
+    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = 'await' + 'wait(' + value + ')';
+    return code;
+}
 
 const proc_returnbool = {
     init: function () {
@@ -74,22 +93,4 @@ javascript.javascriptGenerator.forBlock['proc_returnbool'] = function () {
     const code = `return (${value}) ? 1 : 0;`;
     return code;
 }
-const proc_wait = {
-    init: function () {
-        this.appendValueInput('VALUE')
-            .appendField('waits set amount of time');
-        this.setInputsInline(false)
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(false, null);
-        this.setTooltip('');
-        this.setHelpUrl('');
-        this.setColour(195);
-    }
-};
-Blockly.common.defineBlocks({ proc_wait: proc_wait });
-javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
-    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
-    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = 'await' + 'wait(' + value + ');';
-    return code;
-}
+
