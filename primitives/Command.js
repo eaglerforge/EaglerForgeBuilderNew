@@ -27,9 +27,13 @@ PRIMITIVES["command"] = {
                 if (
                     $$isPlayer
                 ) {
-                    (function (${callPlayerHandler.args.join(",")}) {${callPlayerHandler.code}})($$arguments, $$event.sender.getRef(), $$event.sender.getRef());
+                    (function (${callPlayerHandler.args.join(",")}) function wait(wait_time, callback) {
+        setTimeout(callback, wait_time);
+    }; {${callPlayerHandler.code}})($$arguments, $$event.sender.getRef(), $$event.sender.getRef());
                 }${this.tags.playersOnly ? "" : ` else {
-                    (function (${callHandler.args.join(",")}) {${callHandler.code}})($$arguments, $$event.sender.getRef());
+                    (function (${callHandler.args.join(",")}) function wait(wait_time, callback) {
+        setTimeout(callback, wait_time);
+    }; {${callHandler.code}})($$arguments, $$event.sender.getRef());
                 }`}
                 $$event.preventDefault = true;
             }
