@@ -59,6 +59,16 @@ function editObject(obj, datablock) {
     }
 
     var keys = Object.keys(obj.tags);
+
+    const validValues = {
+        'metadata': {
+            "Title": {"maxlength": 20},
+            "Version": {"maxlength": 7},
+        },
+        'ore_generation': {
+            "veinSize": {"min": 0},
+        },
+    }
     keys.forEach(k => {
         const parentValue = PRIMITIVES[obj.type].tags[k];
         const isInline = InlineValues.includes(parentValue);
@@ -192,6 +202,12 @@ function editObject(obj, datablock) {
             }
             updateDynamics(true);
         });
+
+        if (typeof validValues[obj.type] !== "undefined" && typeof validValues[obj.type][k] !== "undefined") {
+            Object.keys(validValues[obj.type][k]).forEach(attribute => {
+                input.setAttribute(attribute, validValues[obj.type][k][attribute]);
+            })
+        }
 
         propnav.appendChild(input);
 
