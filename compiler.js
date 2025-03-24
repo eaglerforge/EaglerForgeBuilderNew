@@ -4,7 +4,6 @@ function toFunctionName(str) {
 
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
-    console.log(javascript.javascriptGenerator.functionNames_, javascript.javascriptGenerator.definitions_);
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];

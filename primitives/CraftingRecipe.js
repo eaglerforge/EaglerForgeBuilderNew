@@ -44,7 +44,7 @@ PRIMITIVES["recipe"] = {
             if (x.startsWith("block/")) {
                 x = x.replace("block/", "").split("@");
                 x = x[0];
-                return state.nodes.find(y => (y.type === "advanced_block") && (y.tags.id === x))
+                return state.nodes.find(y => (y.type === "block_advanced") && (y.tags.id === x))
             } else {
                 x = x.replace("item/", "");
                 return state.nodes.find(y => (y.type === "item") && (y.tags.id === x))
@@ -114,7 +114,6 @@ PRIMITIVES["recipe"] = {
             $$recipePattern += ",";
         }
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
-        console.log(modifyResultHandler);
         return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
