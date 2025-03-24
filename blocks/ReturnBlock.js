@@ -9,7 +9,6 @@ const local_this = {
         this.setColour(330);
     }
 };
-
 Blockly.common.defineBlocks({ local_this: local_this });
 javascript.javascriptGenerator.forBlock['local_this'] = function () {
     return 'this';
@@ -89,11 +88,14 @@ const proc_wait = {
 };
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
 const wait_package = {
-    import wait from 'https://cdn.jsdelivr.net/npm/wait@0.4.2/dist/wait.min.js';
+    import wait from 'https://cdn.jsdelivr.net/npm/wait';
+};
+async function awaait(timee) {
+  await wait(time);
 
 };
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = wait_package +'await wait(' + value + ');';
+    const code = 'awaait(' + value + ');';
     return code;
 }
