@@ -20,7 +20,7 @@ PRIMITIVES["ore_generation"] = {
         const deps = [...matchesList.intersection(possibleDepsList)].map(x => {
             x = x.replace("block/", "").split("@");
             x = x[0];
-            return state.nodes.find(y => (y.type === "advanced_block") && (y.tags.id === x))
+            return state.nodes.find(y => (y.type === "block_advanced") && (y.tags.id === x))
         });
         return deps;
     },
