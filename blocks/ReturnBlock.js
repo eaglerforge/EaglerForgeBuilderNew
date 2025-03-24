@@ -9,15 +9,15 @@ const local_this = {
         this.setColour(330);
     }
 };
-const wait_package ={
-    import wait from 'https://cdn.jsdelivr.net/npm/wait@0.4.2/dist/wait.min.js';
 
-}
 Blockly.common.defineBlocks({ local_this: local_this });
 javascript.javascriptGenerator.forBlock['local_this'] = function () {
     return 'this';
 }
+const wait_package ={
+    import wait from 'https://cdn.jsdelivr.net/npm/wait@0.4.2/dist/wait.min.js';
 
+};
 
 const proc_return = {
     init: function () {
