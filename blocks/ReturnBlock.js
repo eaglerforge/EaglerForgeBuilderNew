@@ -14,6 +14,7 @@ javascript.javascriptGenerator.forBlock['local_this'] = function () {
     return 'this';
 }
 
+
 const proc_return = {
     init: function () {
         this.appendDummyInput('NAME')
@@ -31,6 +32,7 @@ javascript.javascriptGenerator.forBlock['proc_return'] = function () {
     return 'return;';
 }
 
+
 const proc_returnvalue = {
     init: function () {
         this.appendValueInput('VALUE')
@@ -47,17 +49,19 @@ Blockly.common.defineBlocks({ proc_returnvalue: proc_returnvalue });
 
 javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    return 'return ' + value + ';';
+    const code = 'return ' + value + ';';
+    return code;
 }
+
 
 const proc_wait = {
     init: function () {
         this.appendValueInput('VALUE')
-            .appendField('wait');
+            .appendField('waits set amount of time');
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip('waits set amount of time');
+        this.setTooltip('');
         this.setHelpUrl('');
         this.setColour(195);
     }
@@ -65,17 +69,14 @@ const proc_wait = {
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
 
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
+    async function wait(wait_time) {
+        const wait2 = (ms) => new Promise((res) => setTimeout(res, ms));
+        await wait2(wait_time);
+    }
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `
-        (function(callback) {
-            setTimeout(function() {
-                callback();
-            }, ${value});
-        })(function() {});
-    `;
+    const code = 'wait(' + value + ');';
     return code;
 }
-
 
 const proc_returnbool = {
     init: function () {
@@ -93,6 +94,7 @@ Blockly.common.defineBlocks({ proc_returnbool: proc_returnbool });
 
 javascript.javascriptGenerator.forBlock['proc_returnbool'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    return `return (${value}) ? 1 : 0;`;
+    const code = `return (${value}) ? 1 : 0;`;
+    return code;
 }
 
