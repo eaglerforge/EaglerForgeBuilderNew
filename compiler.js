@@ -35,23 +35,24 @@ function getCompiledCode() {
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
         prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
-    functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
+    functionPrereqs = [...new Set(functionPrereqs)]; // Deduplicate the list
     functionPrereqs.forEach(fn => {
         prereq_contents += getFunctionCode(FUNCTIONS[fn]);
     });
 
-    //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
-
     return `(function EFB2Mod() {
-    async function wait(wait_time) {
-        const wait2 = (ms) => new Promise((res) => setTimeout(res, ms));
-        await wait2(wait_time);
+    function wait(wait_time, callback) {
+        setTimeout(callback, wait_time);
     };
-${prereq_contents}
-${datablock_contents}
-})();
-`;
+
+    ${prereq_contents}
+    ${datablock_contents}
+    
+
+    })();
+    `;
 }
+
 
 function exportMod() {
     let output = getCompiledCode()
