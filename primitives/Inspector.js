@@ -24,7 +24,7 @@ inspectorFrame.style.pointerEvents = "none";
 inspectorFrame.style.backgroundColor = "white";
 inspectorFrame.allowFullscreen = true;
 inspectorFrame.tabIndex = 0;
-inspectorFrame.srcdoc = "<h3>Use the 'Run' button and select an EaglerForge build.</h3>";
+inspectorFrame.srcdoc = "<h3 style='text-align: center'>Use the 'Run' button and select an EaglerForge build.</h3>";
 inspectorFrame.addEventListener("mouseover", () => {
     inspectorFrame.focus();
 });
