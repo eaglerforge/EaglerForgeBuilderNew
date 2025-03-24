@@ -9,6 +9,10 @@ const local_this = {
         this.setColour(330);
     }
 };
+const wait_package ={
+    import wait from 'https://cdn.jsdelivr.net/npm/wait@0.4.2/dist/wait.min.js';
+
+}
 Blockly.common.defineBlocks({ local_this: local_this });
 javascript.javascriptGenerator.forBlock['local_this'] = function () {
     return 'this';
@@ -72,5 +76,24 @@ Blockly.common.defineBlocks({ proc_returnbool: proc_returnbool });
 javascript.javascriptGenerator.forBlock['proc_returnbool'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
     const code = `return (${value}) ? 1 : 0;`;
+    return code;
+}
+const proc_wait = {
+    init: function () {
+        this.appendValueInput('VALUE')
+            .appendField('waits set amount of time');
+        this.setInputsInline(false)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(false, null);
+        this.setTooltip('');
+        this.setHelpUrl('');
+        this.setColour(195);
+    }
+};
+Blockly.common.defineBlocks({ proc_wait: proc_wait });
+
+javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
+    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = wait_package +'await wait(' + value + ');';
     return code;
 }
