@@ -60,7 +60,7 @@ const proc_wait = {
             .appendField('waits set amount of time');
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
-        this.setNextStatement(false, null);
+        this.setNextStatement(true, null);
         this.setTooltip('');
         this.setHelpUrl('');
         this.setColour(195);
