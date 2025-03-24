@@ -87,14 +87,14 @@ const proc_wait = {
     }
 };
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
-const wait_package = {
-    import wait from 'https://cdn.jsdelivr.net/npm/wait';
-};
-async function awaait(timee) {
-  await wait(time);
-
-};
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
+    const wait_package = {
+        import wait from 'https://cdn.jsdelivr.net/npm/wait';
+    };
+    async function awaait(timee) {
+      await wait(time);
+
+    };
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
     const code = 'awaait(' + value + ');';
     return code;
