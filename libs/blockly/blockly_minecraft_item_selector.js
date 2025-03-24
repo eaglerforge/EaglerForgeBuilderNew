@@ -34,7 +34,6 @@ Blockly.FieldMinecraftItemInput = class FieldMinecraftItemInput extends Blockly.
             left: "4rem",
             noMeta: this.noMeta,
         });
-        console.log(input);
         devWrapper.appendChild(input);
         devWrapper.setAttributeNS(null, "width", 1);
         devWrapper.setAttributeNS(null, "height", 1);
