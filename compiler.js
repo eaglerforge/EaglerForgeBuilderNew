@@ -43,6 +43,10 @@ function getCompiledCode() {
     //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
 
     return `(function EFB2Mod() {
+    async function wait(wait_time) {
+        const wait2 = (ms) => new Promise((res) => setTimeout(res, ms));
+        await wait2(wait_time);
+    };
 ${prereq_contents}
 ${datablock_contents}
 })();
