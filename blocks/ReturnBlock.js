@@ -69,9 +69,12 @@ const proc_wait = {
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
 
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
-    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    async function wait(wait_time) {
+        const wait2 = (ms) => new Promise((res) => setTimeout(res, ms));
+        await wait2(wait_time);
+    }
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = 'await ' + 'wait(' + value + ');';
+    const code = 'wait(' + value + ');';
     return code;
 }
 
