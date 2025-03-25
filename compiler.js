@@ -56,3 +56,9 @@ function getCompiledCode() {
     })();
     `;
 }
+
+// Ensure init is called in other relevant functions as well
+function someOtherFunction() {
+    javascript.javascriptGenerator.init(workspace);
+    // Other code that calls blockToCode
+}
