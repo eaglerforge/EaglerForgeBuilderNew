@@ -55,7 +55,7 @@ const proc_wait = {
     init: function () {
         this.appendValueInput('VALUE')
             .appendField('wait');
-        this.setInputsInline(false)
+        this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('waits set amount of time');
@@ -75,7 +75,7 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
                 current = Date.now();
             }
         };
-        wait(${value});
+        wait(${value} * 1000); // Convert seconds to milliseconds
     `;
     return code;
 }
