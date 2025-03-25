@@ -35,9 +35,12 @@ function getCompiledCode() {
     // Compile all blocks, including event blocks
     workspace.getAllBlocks().forEach(block => {
         const blockType = block.type;
-        if (EVENTS[blockType]) {
-            functionPrereqs = functionPrereqs.concat(EVENTS[blockType].uses);
-            datablock_contents += EVENTS[blockType].asJavaScript.apply(block, []);
+        const blockCategory = block.getCategory && block.getCategory();
+        
+        // Check if the block is from the event category
+        if (blockCategory && blockCategory === 'Events') {
+            const code = javascript.javascriptGenerator.blockToCode(block);
+            datablock_contents += Array.isArray(code) ? code[0] : code; // Ensure code is added correctly
         } else {
             functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
             datablock_contents += javascript.javascriptGenerator.blockToCode(block);
