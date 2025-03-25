@@ -66,7 +66,7 @@ function editObject(obj, datablock) {
             "Version": {"maxlength": 7},
         },
         'ore_generation': {
-            "veinSize": {"min": 0},
+            "veinSize": {"min": 0, "max": 64},
         },
     }
     keys.forEach(k => {
