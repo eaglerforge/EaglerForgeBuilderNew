@@ -56,9 +56,6 @@ function getCompiledCode() {
     });
 
     return `(function EFB2Mod() {
-    function wait(wait_time, callback) {
-        setTimeout(callback, wait_time);
-    };
 
     ${prereq_contents}
     ${datablock_contents}
