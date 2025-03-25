@@ -67,13 +67,16 @@ Blockly.common.defineBlocks({ proc_wait: proc_wait });
 
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = `function wait(milliseconds) {
-  const start = Date.now();
-  let current = start;
-  while (current - start < milliseconds) {
-    current = Date.now();
-  }
-}; wait(${value});`;
+    const code = `
+        function wait(milliseconds) {
+            const start = Date.now();
+            let current = start;
+            while (current - start < milliseconds) {
+                current = Date.now();
+            }
+        };
+        wait(${value});
+    `;
     return code;
 }
 
