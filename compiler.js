@@ -7,8 +7,6 @@ function getCompiledCode() {
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
-    
-    // Compile node dependencies
     state.nodes.forEach(node => {
         delete node._deps;
         node._deps = PRIMITIVES[node.type].getDependencies.apply(node, []);
@@ -31,48 +29,33 @@ function getCompiledCode() {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
-
-    // Compile all blocks, including event blocks
     workspace.getAllBlocks().forEach(block => {
-        const blockType = block.type;
-        const blockCategory = block.getCategory && block.getCategory();
-        
-        // Check if the block is from the event category
-        if (blockCategory && blockCategory === 'Events') {
-            const code = javascript.javascriptGenerator.blockToCode(block);
-            datablock_contents += Array.isArray(code) ? code[0] : code; // Ensure code is added correctly
-        } else {
-            functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
-            datablock_contents += javascript.javascriptGenerator.blockToCode(block);
-        }
+        functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
     });
-
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
         prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
-    functionPrereqs = [...new Set(functionPrereqs)]; // Deduplicate the list
+    functionPrereqs = [...new Set(functionPrereqs)]; //dedupe the list
     functionPrereqs.forEach(fn => {
         prereq_contents += getFunctionCode(FUNCTIONS[fn]);
     });
 
+    //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
+
     return `(function EFB2Mod() {
-
-    ${prereq_contents}
-    ${datablock_contents}
-    
-
-    })();
-    `;
+${prereq_contents}
+${datablock_contents}
+})();
+`;
 }
 
 function exportMod() {
-    let output = getCompiledCode();
+    let output = getCompiledCode()
     fileSave(output, "mod.js");
 }
-
 var efiBuild = null;
 function getEfiBuild() {
-    return new Promise((res, rej) => {
+    return new Promise((res,rej)=>{
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = ".html";
@@ -94,7 +77,6 @@ function getEfiBuild() {
         fileInput.click();
     });
 }
-
 async function runMod() {
     var url = "data:text/javascript," + encodeURIComponent(getCompiledCode());
     if (!efiBuild) {
