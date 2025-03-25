@@ -1,5 +1,5 @@
 function getCompiledCode() {
-    javascript.javascriptGenerator.init(workspace);
+    javascript.javascriptGenerator.init(workspace); // Ensure this is called before blockToCode
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
@@ -27,8 +27,8 @@ function getCompiledCode() {
     });
     workspace.getAllBlocks().forEach(block => {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
-        
-        // Add processing for event blocks
+
+        // Ensure blockToCode is called after init
         if (block.type.startsWith("event_")) {
             datablock_contents += javascript.javascriptGenerator.blockToCode(block);
         }
