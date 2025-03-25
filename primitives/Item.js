@@ -81,7 +81,7 @@ PRIMITIVES["item"] = {
             return 0;
         }
         $$CustomItem.prototype.$getItemAttributeModifiers = function () {
-            ${getAttributes.args[0]} = $$itemGetAttributes.apply(this, []);
+            var ${getAttributes.args[0]} = $$itemGetAttributes.apply(this, []);
             ${getAttributes.code};
             return ${getAttributes.args[0]};
         }
