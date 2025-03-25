@@ -7,6 +7,8 @@ function getCompiledCode() {
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
+
+    // Compile node dependencies
     state.nodes.forEach(node => {
         delete node._deps;
         node._deps = PRIMITIVES[node.type].getDependencies.apply(node, []);
@@ -29,6 +31,13 @@ function getCompiledCode() {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
+
+    // Compile event blocks
+    state.events.forEach(event => {
+        functionPrereqs = functionPrereqs.concat(EVENTS[event.type].uses);
+        datablock_contents += EVENTS[event.type].asJavaScript.apply(event, []);
+    });
+
     workspace.getAllBlocks().forEach(block => {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
     });
@@ -53,14 +62,13 @@ function getCompiledCode() {
     `;
 }
 
-
 function exportMod() {
     let output = getCompiledCode()
     fileSave(output, "mod.js");
 }
 var efiBuild = null;
 function getEfiBuild() {
-    return new Promise((res,rej)=>{
+    return new Promise((res, rej) => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = ".html";
