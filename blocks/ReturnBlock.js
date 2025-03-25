@@ -54,11 +54,11 @@ javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
 const proc_wait = {
     init: function () {
         this.appendValueInput('VALUE')
-            .appendField('waits set amount of time');
+            .appendField('wait');
         this.setInputsInline(false)
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip('');
+        this.setTooltip('waits set amount of time');
         this.setHelpUrl('');
         this.setColour(195);
     }
