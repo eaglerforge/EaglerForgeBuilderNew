@@ -7,7 +7,7 @@ function getCompiledCode() {
     let datablock_contents = "";
     var prereq_contents = "";
     let functionPrereqs = [];
-
+    
     // Compile node dependencies
     state.nodes.forEach(node => {
         delete node._deps;
@@ -32,15 +32,18 @@ function getCompiledCode() {
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
 
-    // Compile event blocks
-    state.events.forEach(event => {
-        functionPrereqs = functionPrereqs.concat(EVENTS[event.type].uses);
-        datablock_contents += EVENTS[event.type].asJavaScript.apply(event, []);
+    // Compile all blocks, including event blocks
+    workspace.getAllBlocks().forEach(block => {
+        const blockType = block.type;
+        if (EVENTS[blockType]) {
+            functionPrereqs = functionPrereqs.concat(EVENTS[blockType].uses);
+            datablock_contents += EVENTS[blockType].asJavaScript.apply(block, []);
+        } else {
+            functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
+            datablock_contents += javascript.javascriptGenerator.blockToCode(block);
+        }
     });
 
-    workspace.getAllBlocks().forEach(block => {
-        functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
-    });
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
         prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
@@ -63,9 +66,10 @@ function getCompiledCode() {
 }
 
 function exportMod() {
-    let output = getCompiledCode()
+    let output = getCompiledCode();
     fileSave(output, "mod.js");
 }
+
 var efiBuild = null;
 function getEfiBuild() {
     return new Promise((res, rej) => {
@@ -90,6 +94,7 @@ function getEfiBuild() {
         fileInput.click();
     });
 }
+
 async function runMod() {
     var url = "data:text/javascript," + encodeURIComponent(getCompiledCode());
     if (!efiBuild) {
