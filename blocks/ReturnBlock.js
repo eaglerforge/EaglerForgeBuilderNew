@@ -74,7 +74,10 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
         await wait2(wait_time);
     }
     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-    const code = 'wait(' + value + ');';
+    const code = 'async function wait(wait_time) {
+    const wait2 = (ms) => new Promise((res) => setTimeout(res, ms));
+        await wait2(wait_time);
+    }; wait(' + value + `);`;
     return code;
 }
 
