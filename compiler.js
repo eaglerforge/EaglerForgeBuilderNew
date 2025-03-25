@@ -34,7 +34,7 @@ function getCompiledCode() {
     });
     // Adding event blocks compilation
     workspace.getTopBlocks(true).forEach(block => {
-        if (block.type.startsWith("event_")) {
+        if (block.type.startsWith("events_")) {
             datablock_contents += javascript.javascriptGenerator.blockToCode(block);
         }
     });
