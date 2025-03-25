@@ -338,17 +338,9 @@
             </shadow>
           </value>
         </block>
-        <block type="list_includes">
-          <value name="LIST">
-            <block type="variables_get">
-              <field name="VAR" id="k8|hQIbGNUm?zO%Na,Da">list</field>
-            </block>
-          </value>
-          <value name="VALUE">
-            <shadow type="text">
-              <field name="TEXT">apple</field>
-            </shadow>
-          </value>
+        <block type="lists_sort">
+          <field name="TYPE">NUMERIC</field>
+          <field name="DIRECTION">1</field>
         </block>
       </category>
       <sep></sep>
@@ -408,14 +400,11 @@
         <block type="handle_ItemBlockUse"> </block>
         <block type="handle_ItemCrafted"> </block>
         <block type="handle_ItemBlockBroken"> </block>
-        <block type="handle_ItemGetAttributes"> </block>
-        <block type="handle_ItemGetEfficiency"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
         <block type="items_item"> </block>
         <block type="items_creativetab"> </block>
         <block type="items_setmaxstacksize"> </block>
-        <block type="items_get_applicable_blocks"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
         <block type="itemstack_meta"> </block>
@@ -429,9 +418,6 @@
         <block type="itemstack_enchant"> </block>
         <block type="itemstack_repaircost"> </block>
         <block type="itemstack_setrepaircost"> </block>
-      </category>
-      <category name="SharedAttributes (C)" colour="#fcba03">
-        <block type="attributes_set"> </block>
       </category>
       <category name="BlockPos (C)" colour="#6633cc">
         <block type="blockpos_fromxyz"> </block>
@@ -528,17 +514,20 @@
               </td>
               <td id="right">
                 <div id="propnav">properties of datablock</div>
-                <select id="addtype"></select>
-                <button style="margin-bottom: 1rem" id="newdatablock">
-                  New
-                </button>
-                <div id="datablock_container">
+                <div style="width: 100%;">
+                  <select id="addtype"></select>
+                  <button style="margin-bottom: 1rem" id="newdatablock">
+                    New
+                  </button>
                   <input
                     id="search"
                     type="search"
                     value=""
                     placeholder="Search for content: "
-                  /><br />
+                  />
+                  <br/>
+                </div>
+                <div id="datablock_container">
                   <span class="datablock selected">
                     <h4>Dirt Block</h4>
                     <br />
@@ -565,7 +554,6 @@
     <script src="blocks/World.js"></script>
     <script src="blocks/Commands.js"></script>
     <script src="blocks/CraftingRecipe.js"></script>
-    <script src="blocks/SharedAttributes.js"></script>
     <script src="blocks/ItemStack.js"></script>
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Items.js"></script>
