@@ -51,31 +51,6 @@ javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
     return code;
 }
 
-const proc_wait = {
-    init: function () {
-        this.appendValueInput('VALUE')
-            .appendField('synchronous wait');
-        this.setInputsInline(false);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setTooltip('waits set amount of time');
-        this.setHelpUrl('');
-        this.setColour(195);
-    }
-};
-Blockly.common.defineBlocks({ proc_wait: proc_wait });
-
-javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
-     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-     const code = `
-        var start = Date.now();
-        var current = start;
-        while (current - start < (${value} * 1000)) {
-            current = Date.now();
-        };
-     `;
-     return code;
-}
 
 const proc_returnbool = {
     init: function () {
