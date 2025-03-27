@@ -26,24 +26,58 @@ const proc_wait = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip('waits set amount of time');
+        this.setTooltip('Waits set amount of time. Synchronous: (no frames or otehr code can be run while this is waiting)');
         this.setHelpUrl('');
-        this.setColour(210);
+        this.setColour(255);
     }
 };
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
 
 javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
-     const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
-     const code = `
+    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = `
         var start = Date.now();
         var current = start;
         while (current - start < (${value} * 1000)) {
             current = Date.now();
         };
      `;
-     return code;
+    return code;
 }
+
+const proc_asyncrun = {
+    init: function () {
+        this.appendValueInput('DELAY')
+            .setCheck('Number')
+            .appendField('in');
+        this.appendDummyInput('NIL')
+            .appendField('seconds, run:');
+        this.appendStatementInput('CODE');
+        this.setInputsInline(true)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Asynchronous wait. Runs code in a set amount of time. Other code can still run.');
+        this.setHelpUrl('');
+        this.setColour(255);
+    }
+};
+Blockly.common.defineBlocks({ proc_asyncrun: proc_asyncrun });
+
+javascript.javascriptGenerator.forBlock['proc_asyncrun'] = function () {
+    // TODO: change Order.ATOMIC to the correct operator precedence strength
+    const value_delay = javascript.javascriptGenerator.valueToCode(this, 'DELAY', javascript.Order.ATOMIC);
+
+    const statement_code = javascript.javascriptGenerator.statementToCode(this, 'CODE');
+
+    
+    const code = `setTimeout(()=>{
+        ModAPI.promisify(()=>{
+            ${statement_code};
+        })();
+    }, ${parseFloat(value_delay) * 1000});`;
+    return code;
+}
+
 const list_includes = {
     init: function () {
         this.appendValueInput('LIST')
