@@ -54,7 +54,7 @@ javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
 const proc_wait = {
     init: function () {
         this.appendValueInput('VALUE')
-            .appendField('wait');
+            .appendField('synchronous wait');
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
