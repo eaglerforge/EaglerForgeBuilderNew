@@ -55,7 +55,7 @@ const keyCodes = [
     ["F12", "123"],
 ];
 
-Blockly.Blocks['events_onModLoads'] = {
+const events_onModLoads = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when all mods finished loading'));
@@ -68,7 +68,7 @@ Blockly.Blocks['events_onModLoads'] = {
     }
 };
 
-Blockly.Blocks['events_onClientTick'] = {
+const events_onClientTick = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client tick'));
@@ -81,7 +81,7 @@ Blockly.Blocks['events_onClientTick'] = {
     }
 };
 
-Blockly.Blocks['events_onClientFrame'] = {
+const events_onClientFrame = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client frame'));
@@ -94,7 +94,7 @@ Blockly.Blocks['events_onClientFrame'] = {
     }
 };
 
-Blockly.Blocks['events_onKeyPressed'] = {
+const events_onKeyPressed = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -109,7 +109,7 @@ Blockly.Blocks['events_onKeyPressed'] = {
     }
 };
 
-Blockly.Blocks['events_onKeyReleased'] = {
+const events_onKeyReleased = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -123,6 +123,38 @@ Blockly.Blocks['events_onKeyReleased'] = {
         this.setHelpUrl('');
     }
 };
+
+const events_onJoinWorld = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('when HOST joins world'));
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Is executed when player joins a world, runs once.');
+        this.setHelpUrl('');
+    }
+};
+
+// Now define all blocks after the block definitions
+Blockly.common.defineBlocks({
+    events_onModLoads: events_onModLoads,
+    events_onClientTick: events_onClientTick,
+    events_onClientFrame: events_onClientFrame,
+    events_onKeyPressed: events_onKeyPressed,
+    events_onKeyReleased: events_onKeyReleased,
+    events_onJoinWorld: events_onJoinWorld
+});
+
+// JavaScript generators for each event block
+javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("serverstart", () => { 
+    ${statement} })`;
+    return code;
+}
 
 javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
@@ -169,3 +201,4 @@ window.addEventListener("keyup", event => {
     ${keyCode !== ""?"}":""}`;
     return code;
 }
+
