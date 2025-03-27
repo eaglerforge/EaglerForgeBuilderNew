@@ -33,11 +33,11 @@ function getCompiledCode() {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
     });
     // Adding event blocks compilation
-    workspace.getTopBlocks(true).forEach(block => {
-        if (block.type.startsWith("events_")) {
-            datablock_contents += javascript.javascriptGenerator.blockToCode(block);
-        }
-    });
+    //workspace.getTopBlocks(true).forEach(block => {
+        //if (block.type.startsWith("events_")) {
+            //datablock_contents += javascript.javascriptGenerator.blockToCode(block);
+        //}
+    //});
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
         prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
