@@ -28,7 +28,7 @@ const proc_wait = {
         this.setNextStatement(true, null);
         this.setTooltip('waits set amount of time');
         this.setHelpUrl('');
-        this.setColour(195);
+        this.setColour(210);
     }
 };
 Blockly.common.defineBlocks({ proc_wait: proc_wait });
