@@ -143,6 +143,23 @@ javascript.javascriptGenerator.forBlock['blocks_block'] = function () {
   return [`(ModAPI.blocks["${object.id}"]?.getRef() || null)`, javascript.Order.NONE];
 }
 
+const blocks_currentblock = {
+  init: function () {
+    this.appendDummyInput('BLOCK')
+      .setAlign(Blockly.inputs.Align.LEFT)
+      .appendField('current block')
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setTooltip('The current Block that the handler is executing on.');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ blocks_currentblock: blocks_currentblock });
+javascript.javascriptGenerator.forBlock['blocks_currentblock'] = function () {
+  return [`$$nmb_AdvancedBlock`, javascript.Order.NONE];
+}
+
 
 const blocks_boundingbox = {
   init: function () {
