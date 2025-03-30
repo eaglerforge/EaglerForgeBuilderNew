@@ -167,7 +167,7 @@ ModAPI.addEventListener("load", () => {
 javascript.javascriptGenerator.forBlock['events_onClientTick'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
-ModAPI.addEventListener("tick", () => { 
+ModAPI.addEventListener("update", () => { 
     ${statement} })`;
     return code;
 }
