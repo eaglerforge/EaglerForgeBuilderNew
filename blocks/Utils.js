@@ -69,7 +69,7 @@ javascript.javascriptGenerator.forBlock['proc_asyncrun'] = function () {
 
     const statement_code = javascript.javascriptGenerator.statementToCode(this, 'CODE');
 
-    
+
     const code = `setTimeout(()=>{
         ModAPI.promisify(()=>{
             ${statement_code};
@@ -98,5 +98,49 @@ javascript.javascriptGenerator.forBlock['list_includes'] = function () {
     const value_list = javascript.javascriptGenerator.valueToCode(this, 'LIST', javascript.Order.ATOMIC);
     const value_value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
     const code = `${value_list}.includes(${value_value})`;
+    return [code, javascript.Order.NONE];
+}
+
+const globals_set = {
+    init: function () {
+        this.appendDummyInput('VAR')
+            .appendField('global ')
+            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
+        this.appendValueInput('VAL')
+            .appendField('=');
+        this.setInputsInline(true)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Sets a global variable.');
+        this.setHelpUrl('');
+        this.setColour(150);
+    }
+};
+Blockly.common.defineBlocks({ globals_set: globals_set });
+javascript.javascriptGenerator.forBlock['globals_set'] = function () {
+    const text_var = this.getFieldValue('VAR');
+    const value_val = javascript.javascriptGenerator.valueToCode(this, 'VAL', javascript.Order.ATOMIC);
+    const code = `$$scoped_efb_globals["${text_var}"] = ${value_val};`;
+    return code;
+}
+
+const globals_get = {
+    init: function () {
+        this.appendDummyInput('VAR')
+            .appendField('global ')
+            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
+        this.setInputsInline(true)
+        this.setOutput(true, null);
+        this.setTooltip('Gets a global variable.');
+        this.setHelpUrl('');
+        this.setColour(150);
+    }
+};
+Blockly.common.defineBlocks({ globals_get: globals_get });
+
+
+javascript.javascriptGenerator.forBlock['globals_get'] = function () {
+    const text_var = this.getFieldValue('VAR');
+    const code = `$$scoped_efb_globals["${text_var}"]`;
     return [code, javascript.Order.NONE];
 }
