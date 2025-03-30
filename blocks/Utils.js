@@ -144,3 +144,46 @@ javascript.javascriptGenerator.forBlock['globals_get'] = function () {
     const code = `$$scoped_efb_globals["${text_var}"]`;
     return [code, javascript.Order.NONE];
 }
+
+const globals_delete = {
+    init: function () {
+        this.appendDummyInput('VAR')
+            .appendField('delete global')
+            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
+        this.setInputsInline(true)
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Deletes a global variable.');
+        this.setHelpUrl('');
+        this.setColour(150);
+    }
+};
+Blockly.common.defineBlocks({ globals_delete: globals_delete });
+
+
+javascript.javascriptGenerator.forBlock['globals_delete'] = function () {
+    const text_var = this.getFieldValue('VAR');
+    const code = `delete $$scoped_efb_globals["${text_var}"];`;
+    return code;
+}
+
+const globals_exists = {
+    init: function () {
+        this.appendDummyInput('VAR')
+            .appendField('global exists')
+            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
+        this.setInputsInline(true)
+        this.setOutput(true, 'Boolean');
+        this.setTooltip('Checks if a global is defined.');
+        this.setHelpUrl('');
+        this.setColour(150);
+    }
+};
+Blockly.common.defineBlocks({ globals_exists: globals_exists });
+
+
+javascript.javascriptGenerator.forBlock['globals_exists'] = function () {
+    const text_var = this.getFieldValue('VAR');
+    const code = `("${text_var}" in $$scoped_efb_globals)`;
+    return [code, javascript.Order.NONE];
+}
