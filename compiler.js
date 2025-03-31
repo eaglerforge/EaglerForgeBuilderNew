@@ -49,7 +49,6 @@ function getCompiledCode() {
     //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
 
     return `(function EFB2Mod() {
-    const $$scoped_efb_globals = {};
 ${prereq_contents}
 ${datablock_contents}
 })();
