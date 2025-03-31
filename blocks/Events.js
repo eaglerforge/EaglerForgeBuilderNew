@@ -152,7 +152,7 @@ javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, 
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("serverstart", () => { 
-     
+     var globals = {};
     ${statement} });`;
     return code;
 }
@@ -161,7 +161,7 @@ javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, g
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("load", () => { 
-     
+     var globals = {};
     ${statement} });`;
     return code;
 }
@@ -170,7 +170,7 @@ javascript.javascriptGenerator.forBlock['events_onClientTick'] = function(block,
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("update", () => {
-     
+     var globals = {};
     ${statement} });`;
     return code;
 }
@@ -179,7 +179,7 @@ javascript.javascriptGenerator.forBlock['events_onClientFrame'] = function(block
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("frame", () => { 
-     
+     var globals = {};
     ${statement} });`;
     return code;
 }
@@ -189,7 +189,7 @@ javascript.javascriptGenerator.forBlock['events_onKeyPressed'] = function(block,
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keydown", event => {
-     
+     var globals = {};
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;
@@ -201,7 +201,7 @@ javascript.javascriptGenerator.forBlock['events_onKeyReleased'] = function(block
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keyup", event => {
-     
+     var globals = {};
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;
