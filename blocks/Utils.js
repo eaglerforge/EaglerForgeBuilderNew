@@ -120,7 +120,7 @@ Blockly.common.defineBlocks({ globals_set: globals_set });
 javascript.javascriptGenerator.forBlock['globals_set'] = function () {
     const text_var = this.getFieldValue('VAR');
     const value_val = javascript.javascriptGenerator.valueToCode(this, 'VAL', javascript.Order.ATOMIC);
-    const code = `$$scoped_efb_globals["${text_var}"] = ${value_val};`;
+    const code = `var $$scoped_efb_globals["${text_var}"] = ${value_val};`;
     return code;
 }
 
