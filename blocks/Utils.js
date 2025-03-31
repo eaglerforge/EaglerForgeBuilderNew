@@ -108,7 +108,7 @@ javascript.javascriptGenerator.forBlock['globals_set'] = function () {
     const value_val = javascript.javascriptGenerator.valueToCode(this, 'VAL', javascript.Order.ATOMIC);
     const code = `
 if (!("${text_var}" in $$scoped_efb_globals)) {
-    var ${text_var};
+    var '${text_var}';
     $$scoped_efb_globals["${text_var}"] = undefined;
 }
 $$scoped_efb_globals["${text_var}"] = ${value_val};
