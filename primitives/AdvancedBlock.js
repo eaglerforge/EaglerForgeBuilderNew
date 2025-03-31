@@ -51,7 +51,7 @@ PRIMITIVES["block_advanced"] = {
     const $$blockTexture = "${this.tags.texture}";
 
     function $$ServersideBlocks() {
-         
+        var globals = {};
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
         var $$iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;

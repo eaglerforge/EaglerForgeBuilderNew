@@ -22,6 +22,7 @@ PRIMITIVES["command"] = {
     PluginAPI.dedicatedServer.appendCode(function () {
         PluginAPI.addEventListener("processcommand", ($$event) => {
             if ($$event.command${this.tags.caseSensitive ? "" : ".toLowerCase()"}.startsWith("${escaped}")) {
+                var globals = {};
                 var $$arguments = $$event.command.substring(${len + 1}).trim().split(" ").filter(x=>!!x);
                 var $$isPlayer = ModAPI.reflect.getClassById("net.minecraft.entity.player.EntityPlayerMP").instanceOf($$event.sender.getRef());
                 if (
