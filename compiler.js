@@ -49,7 +49,7 @@ function getCompiledCode() {
     //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
 
     return `(function EFB2Mod() {
-    var "globals" = {};
+    var globals = {};
 ${prereq_contents}
 ${datablock_contents}
 })();

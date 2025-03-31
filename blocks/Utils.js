@@ -119,8 +119,7 @@ javascript.javascriptGenerator.forBlock['globals_set'] = function () {
     const text_var = this.getFieldValue('VAR');
     const value_val = javascript.javascriptGenerator.valueToCode(this, 'VAL', javascript.Order.ATOMIC);
     const code = `
-    var "globals.`+`${text_var}" = "${value_val}";
-`;
+    var globals[${text_var}] = "${value_val}";`;
     return code.trim();
 };
 
@@ -140,7 +139,7 @@ Blockly.common.defineBlocks({ globals_get: globals_get });
 
 javascript.javascriptGenerator.forBlock['globals_get'] = function () {
     const text_var = this.getFieldValue('VAR');
-    const code = `globals.`+`${text_var}`;
+    const code = `globals[${text_var}]`;
    return [code, javascript.Order.NONE];
 };
 
@@ -161,7 +160,7 @@ Blockly.common.defineBlocks({ globals_delete: globals_delete });
 
 javascript.javascriptGenerator.forBlock['globals_delete'] = function () {
     const text_var = this.getFieldValue('VAR');
-    const code = `var "${text_var}" = undefined;`;
+    const code = `var globals[${text_var}] = undefined;`;
     return code;
 };
 
