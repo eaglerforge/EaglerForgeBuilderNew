@@ -144,10 +144,7 @@ Blockly.common.defineBlocks({ globals_get: globals_get });
 javascript.javascriptGenerator.forBlock['globals_get'] = function () {
     const text_var = this.getFieldValue('VAR');
     const code = `
-if (typeof $$scoped_efb_globals === "undefined") {
-    var $$scoped_efb_globals = {};
-}
-$$scoped_efb_globals["${text_var}"]
+$$scoped_efb_globals["${text_var}"];
 `;
     return [code.trim(), javascript.Order.NONE];
 };
