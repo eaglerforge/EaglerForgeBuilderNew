@@ -64,12 +64,8 @@ const proc_asyncrun = {
 Blockly.common.defineBlocks({ proc_asyncrun: proc_asyncrun });
 
 javascript.javascriptGenerator.forBlock['proc_asyncrun'] = function () {
-    // TODO: change Order.ATOMIC to the correct operator precedence strength
     const value_delay = javascript.javascriptGenerator.valueToCode(this, 'DELAY', javascript.Order.ATOMIC);
-
     const statement_code = javascript.javascriptGenerator.statementToCode(this, 'CODE');
-
-
     const code = `setTimeout(()=>{
         ModAPI.promisify(()=>{
             ${statement_code};
@@ -138,7 +134,6 @@ const globals_get = {
 };
 Blockly.common.defineBlocks({ globals_get: globals_get });
 
-
 javascript.javascriptGenerator.forBlock['globals_get'] = function () {
     const text_var = this.getFieldValue('VAR');
     const code = `$$scoped_efb_globals["${text_var}"]`;
@@ -160,7 +155,6 @@ const globals_delete = {
 };
 Blockly.common.defineBlocks({ globals_delete: globals_delete });
 
-
 javascript.javascriptGenerator.forBlock['globals_delete'] = function () {
     const text_var = this.getFieldValue('VAR');
     const code = `delete $$scoped_efb_globals["${text_var}"];`;
@@ -180,7 +174,6 @@ const globals_exists = {
     }
 };
 Blockly.common.defineBlocks({ globals_exists: globals_exists });
-
 
 javascript.javascriptGenerator.forBlock['globals_exists'] = function () {
     const text_var = this.getFieldValue('VAR');
