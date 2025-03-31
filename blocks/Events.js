@@ -162,7 +162,7 @@ Blockly.common.defineBlocks({
     events_onKeyPressed: events_onKeyPressed,
     events_onKeyReleased: events_onKeyReleased,
     events_onJoinWorld: events_onJoinWorld,
-    events_onClientTick: events_onClientTick
+    events_onServertTick: events_onServerTick
 });
 
 // JavaScript generators for each event block
