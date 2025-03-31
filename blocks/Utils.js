@@ -139,7 +139,7 @@ Blockly.common.defineBlocks({ globals_get: globals_get });
 
 javascript.javascriptGenerator.forBlock['globals_get'] = function () {
     const text_var = this.getFieldValue('VAR');
-    const code = `globals[${text_var}]`;
+    const code = `globals["${text_var}"]`;
    return [code, javascript.Order.NONE];
 };
 
