@@ -119,7 +119,7 @@ javascript.javascriptGenerator.forBlock['globals_set'] = function () {
     const text_var = this.getFieldValue('VAR');
     const value_val = javascript.javascriptGenerator.valueToCode(this, 'VAL', javascript.Order.ATOMIC);
     const code = `
-    var globals["${text_var}"] = "${value_val}";`;
+    var globals["${text_var}"] = ${value_val};`;
     return code.trim();
 };
 
