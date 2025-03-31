@@ -132,7 +132,8 @@ const events_onJoinWorld = {
             .setAlign(Blockly.inputs.Align.CENTRE)
             .appendField('do');
         this.appendDummyInput('function_namz')
-            .appendField('name of function!');
+            .appendField('name of function!')
+            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
         this.setColour(55);
         this.setTooltip('Is executed when player joins a world, runs once.');
         this.setHelpUrl('');
