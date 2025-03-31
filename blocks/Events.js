@@ -152,7 +152,7 @@ javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, 
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("serverstart", () => { 
-    ${statement} })`;
+    ${statement} });`;
     return code;
 }
 
@@ -160,7 +160,7 @@ javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, g
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("load", () => { 
-    ${statement} })`;
+    ${statement} });`;
     return code;
 }
 
@@ -168,7 +168,7 @@ javascript.javascriptGenerator.forBlock['events_onClientTick'] = function(block,
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("update", () => { 
-    ${statement} })`;
+    ${statement} });`;
     return code;
 }
 
@@ -176,7 +176,7 @@ javascript.javascriptGenerator.forBlock['events_onClientFrame'] = function(block
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("frame", () => { 
-    ${statement} })`;
+    ${statement} });`;
     return code;
 }
 
