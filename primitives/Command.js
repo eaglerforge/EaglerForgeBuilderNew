@@ -20,7 +20,6 @@ PRIMITIVES["command"] = {
         return `
 (function CommandDatablock() {
     PluginAPI.dedicatedServer.appendCode(function () {
-         
         PluginAPI.addEventListener("processcommand", ($$event) => {
             if ($$event.command${this.tags.caseSensitive ? "" : ".toLowerCase()"}.startsWith("${escaped}")) {
                 var $$arguments = $$event.command.substring(${len + 1}).trim().split(" ").filter(x=>!!x);
