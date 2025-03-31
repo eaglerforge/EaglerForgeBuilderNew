@@ -35,7 +35,7 @@ function getCompiledCode() {
     // Adding event blocks compilation
     workspace.getTopBlocks(true).forEach(block => {
         if (block.type.startsWith("events_")) {
-            datablock_contents += javascript.javascriptGenerator.blockToCode(block);
+            datablock_contents += `const $$scoped_efb_globals = {};\n` +  javascript.javascriptGenerator.blockToCode(block);
         }
     });
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
