@@ -133,7 +133,7 @@ const events_onJoinWorld = {
             .appendField('do');
         this.appendDummyInput('function_namz')
             .appendField('name of function!')
-            .appendField(new Blockly.FieldTextInput('x'), 'VAR');
+            .appendField(new Blockly.FieldTextInput('x'), 'function_namz2');
         this.setColour(55);
         this.setTooltip('Is executed when player joins a world, runs once.');
         this.setHelpUrl('');
@@ -168,13 +168,13 @@ Blockly.common.defineBlocks({
 // JavaScript generators for each event block
 javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
-    const code = `function ${block.getFieldValue('function_namz')}() {
+    const code = `function ${block.getFieldValue('function_namz2')}() {
         ModAPI.addEventListener("frame", () => { 
             var globals = {};
             ${statement} });
     };
-    ModAPI.dedicatedServer.appendCode(${block.getFieldValue('function_namz')});
-    ${block.getFieldValue('function_namz')}();`;
+    ModAPI.dedicatedServer.appendCode(${block.getFieldValue('function_namz2')});
+    ${block.getFieldValue('function_namz2')}();`;
     return code;
 }
 
