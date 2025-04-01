@@ -169,7 +169,7 @@ Blockly.common.defineBlocks({
 javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const code = `function ${block.getFieldValue('function_namz2')}() {
-        ModAPI.addEventListener("frame", () => { 
+        ModAPI.addEventListener("serverstart", () => { 
             var globals = {};
             ${statement} });
     };
