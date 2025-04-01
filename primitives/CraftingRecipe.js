@@ -116,8 +116,8 @@ PRIMITIVES["recipe"] = {
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
         return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
-        function $$internalRegister() {  
-            var globals = {};
+        function $$internalRegister() {
+            const $$scoped_efb_globals = {};
             var $$ObjectClass = ModAPI.reflect.getClassById("java.lang.Object").class;
             function $$ToChar(char) {
                 return ModAPI.reflect.getClassById("java.lang.Character").staticMethods.valueOf.method(char[0].charCodeAt(0));

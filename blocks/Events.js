@@ -54,7 +54,7 @@ const keyCodes = [
     ["F11", "122"],
     ["F12", "123"],
 ];
-const globals = `const $$scoped_efb_globals = {}`
+
 const events_onModLoads = {
     init: function() {
         this.appendDummyInput()
@@ -152,8 +152,7 @@ javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, 
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("serverstart", () => { 
-     
-    ${statement} });`;
+    ${statement} })`;
     return code;
 }
 
@@ -161,17 +160,15 @@ javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, g
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("load", () => { 
-     
-    ${statement} });`;
+    ${statement} })`;
     return code;
 }
 
 javascript.javascriptGenerator.forBlock['events_onClientTick'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
-ModAPI.addEventListener("update", () => {
-     
-    ${statement} });`;
+ModAPI.addEventListener("update", () => { 
+    ${statement} })`;
     return code;
 }
 
@@ -179,8 +176,7 @@ javascript.javascriptGenerator.forBlock['events_onClientFrame'] = function(block
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("frame", () => { 
-     
-    ${statement} });`;
+    ${statement} })`;
     return code;
 }
 
@@ -189,7 +185,6 @@ javascript.javascriptGenerator.forBlock['events_onKeyPressed'] = function(block,
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keydown", event => {
-     
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;
@@ -201,7 +196,6 @@ javascript.javascriptGenerator.forBlock['events_onKeyReleased'] = function(block
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keyup", event => {
-     
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;

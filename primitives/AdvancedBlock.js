@@ -51,12 +51,13 @@ PRIMITIVES["block_advanced"] = {
     const $$blockTexture = "${this.tags.texture}";
 
     function $$ServersideBlocks() {
-        var globals = {};
+        const $$scoped_efb_globals = {};
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
         var $$iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;
         var $$makeBlockState = ModAPI.reflect.getClassById("net.minecraft.block.state.BlockState").constructors.find(x => x.length === 2);
         var $$blockSuper = ModAPI.reflect.getSuper($$blockClass, (x) => x.length === 2);
+
         var $$breakBlockMethod = $$blockClass.methods.breakBlock.method;
         var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
         var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;

@@ -20,9 +20,9 @@ PRIMITIVES["command"] = {
         return `
 (function CommandDatablock() {
     PluginAPI.dedicatedServer.appendCode(function () {
+        const $$scoped_efb_globals = {};
         PluginAPI.addEventListener("processcommand", ($$event) => {
             if ($$event.command${this.tags.caseSensitive ? "" : ".toLowerCase()"}.startsWith("${escaped}")) {
-                var globals = {};
                 var $$arguments = $$event.command.substring(${len + 1}).trim().split(" ").filter(x=>!!x);
                 var $$isPlayer = ModAPI.reflect.getClassById("net.minecraft.entity.player.EntityPlayerMP").instanceOf($$event.sender.getRef());
                 if (
