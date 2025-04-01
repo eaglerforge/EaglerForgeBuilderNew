@@ -131,8 +131,25 @@ const events_onJoinWorld = {
         this.appendStatementInput('CODE')
             .setAlign(Blockly.inputs.Align.CENTRE)
             .appendField('do');
+        this.appendDummyInput('function_namz')
+            .appendField('name of function!')
+            .appendField(new Blockly.FieldTextInput('x'), 'function_namz2');
         this.setColour(55);
         this.setTooltip('Is executed when player joins a world, runs once.');
+        this.setHelpUrl('');
+    }
+};
+const events_onServerTick = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('when  SERVER ticks'));
+        this.appendDummyInput('function_namz')
+            .appendField('name of function!');
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Is executed when server ticks');
         this.setHelpUrl('');
     }
 };
@@ -144,15 +161,20 @@ Blockly.common.defineBlocks({
     events_onClientFrame: events_onClientFrame,
     events_onKeyPressed: events_onKeyPressed,
     events_onKeyReleased: events_onKeyReleased,
-    events_onJoinWorld: events_onJoinWorld
+    events_onJoinWorld: events_onJoinWorld,
+    events_onServerTick: events_onServerTick
 });
 
 // JavaScript generators for each event block
 javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
-    const code = `
-ModAPI.addEventListener("serverstart", () => { 
-    ${statement} })`;
+    const code = `function ${block.getFieldValue('function_namz2')}() {
+        ModAPI.addEventListener("serverstart", () => { 
+            var globals = {};
+            ${statement} });
+    };
+    ModAPI.dedicatedServer.appendCode(${block.getFieldValue('function_namz2')});
+    ${block.getFieldValue('function_namz2')}();`;
     return code;
 }
 
@@ -160,15 +182,17 @@ javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, g
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("load", () => { 
-    ${statement} })`;
+     var globals = {};
+    ${statement} });`;
     return code;
 }
 
 javascript.javascriptGenerator.forBlock['events_onClientTick'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
-ModAPI.addEventListener("update", () => { 
-    ${statement} })`;
+ModAPI.addEventListener("update", () => {
+     var globals = {};
+    ${statement} });`;
     return code;
 }
 
@@ -176,15 +200,28 @@ javascript.javascriptGenerator.forBlock['events_onClientFrame'] = function(block
     const statement = generator.statementToCode(block, 'CODE');
     const code = `
 ModAPI.addEventListener("frame", () => { 
-    ${statement} })`;
+     var globals = {};
+    ${statement} });`;
     return code;
 }
-
+javascript.javascriptGenerator.forBlock['events_onServerTick'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+    function ${block.getFieldValue('function_namz')}() {
+        ModAPI.addEventListener("frame", () => { 
+            var globals = {};
+            ${statement} });
+    };
+    ModAPI.dedicatedServer.appendCode(${block.getFieldValue('function_namz')});
+    ${block.getFieldValue('function_namz')}();`;
+    return code;
+}
 javascript.javascriptGenerator.forBlock['events_onKeyPressed'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keydown", event => {
+     var globals = {};
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;
@@ -196,6 +233,7 @@ javascript.javascriptGenerator.forBlock['events_onKeyReleased'] = function(block
     const keyCode = block.getFieldValue('KEYCODE');
     const code = `
 window.addEventListener("keyup", event => {
+     var globals = {};
     ${keyCode !== ""?"if (event.keyCode === '"+keyCode+"') {":""}
     ${statement}
     ${keyCode !== ""?"}":""}`;
