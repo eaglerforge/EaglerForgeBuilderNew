@@ -44,6 +44,27 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
      `;
     return code;
 }
+const comment = {
+    init: function () {
+        this.appendInput('VALUE')
+            .appendField('comment');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Adds a comment');
+        this.setHelpUrl('');
+        this.setColour(255);
+    }
+};
+Blockly.common.defineBlocks({ comment: comment });
+
+javascript.javascriptGenerator.forBlock['comment'] = function () {
+    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const code = `
+       // ${value}
+     `;
+    return code;
+}
 
 const proc_asyncrun = {
     init: function () {
