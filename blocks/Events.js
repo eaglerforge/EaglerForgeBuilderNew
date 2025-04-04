@@ -167,8 +167,8 @@ Blockly.common.defineBlocks({
     events_onModLoads: events_onModLoads,
     events_onClientTick: events_onClientTick,
     events_onClientFrame: events_onClientFrame,
-    events_onKeyPressed: events_onKeyPressed,
-    events_onKeyReleased: events_onKeyReleased,
+    //events_onKeyPressed: events_onKeyPressed,
+    //events_onKeyReleased: events_onKeyReleased,
     events_onJoinWorld: events_onJoinWorld
 });
 
