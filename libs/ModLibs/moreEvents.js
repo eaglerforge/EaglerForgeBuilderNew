@@ -1,21 +1,17 @@
-ModAPI.meta.title("Events+");
-ModAPI.meta.credits("By Oeildelynx31"); // with the help of ZXMushroom and Aleixdev (not enough place to add it)
-ModAPI.meta.description("This mod adds a lot of cool events to develop mods more easily.");
-ModAPI.meta.version("0.3.2");
-ModAPI.meta.icon("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAZtJREFUOE91U8tuwkAMHCMViWMPEB73lmv5lLZ/2Y/psSAElYJ4ZLmDYKGuPN4NQVWjSMnu2uPxjFfw3yMA1A8FAuVCAFF7+aSdRpCdpEOL9f/8Y19bNgAM744AY29bIgrVRn0BtGaVCyda50NgaJOXBRMkNeJ8fPXQKVrz+U+b5eJxr/FUJUhn4IEO6KS0oQVQLmZoP046YmdW/RIDqnWF3qjvfZGr908A4ydAWO/QGxUolzM8TV5blCEegsZYsULYbNEdDv6IacnVessClrNaTDGevNm2kMH1HBJjRSCTAuKlTQgESx5asj/l9xTjl3d2gHjYazwHEq42HrjfVOgaCICw2aFre2v7DrhXfn/heUIAQTwGvZwCwtbpi8vPflUUxbBfO+EgBVbLaQYwEfd6jVXS3V2geYaTbHZfzAn3wwGogZs2/fzwcNrsXqv4ECUbyIogKhSQ2PWMML22nkB5qu+mtV7cUonsYufRTS0kQPKgLplvmkffylYl6GQd+aU7WN8YO+NlEorrGmWRkmAUr3GV8yKLd3+JFb+Wfd57eOOP6wAAAABJRU5ErkJggg==");
+const MoreEvents = {
+    
+    ModAPI.events.newEvent("screenRender");       // Called each time the screen is rendering, both in the game screen and in the interface
+    ModAPI.events.newEvent("GUIScreenRender");    // Called each time the screen is rendering, but only in the interface (not in game)
+    ModAPI.events.newEvent("inGameScreenRender"); // Called each time the screen is rendering, but only in game (not in the interface)
+    ModAPI.events.newEvent("screenChange");       // Called when the screen changes, you can use event.previousScreenName
+    // For all these events, you can use event.screen to get the current screen, and event.screenName to get its name.
 
-ModAPI.events.newEvent("screenRender");       // Called each time the screen is rendering, both in the game screen and in the interface
-ModAPI.events.newEvent("GUIScreenRender");    // Called each time the screen is rendering, but only in the interface (not in game)
-ModAPI.events.newEvent("inGameScreenRender"); // Called each time the screen is rendering, but only in game (not in the interface)
-ModAPI.events.newEvent("screenChange");       // Called when the screen changes, you can use event.previousScreenName
-// For all these events, you can use event.screen to get the current screen, and event.screenName to get its name.
+    ModAPI.events.newEvent("openModManager");     // Called when the mod manager interface is opened
+    ModAPI.events.newEvent("refreshModManager");  // Called when the mod manager interface is updated
+    ModAPI.events.newEvent("closeModManager");    // Called when the mod manager interface is closed
+    // For all these events, you can use event.modList to obtain the loaded mods list with all their metadatas
 
-ModAPI.events.newEvent("openModManager");     // Called when the mod manager interface is opened
-ModAPI.events.newEvent("refreshModManager");  // Called when the mod manager interface is updated
-ModAPI.events.newEvent("closeModManager");    // Called when the mod manager interface is closed
-// For all these events, you can use event.modList to obtain the loaded mods list with all their metadatas
-
-ModAPI.events.newEvent("openLANSharing");     // Called when the client starts sharing his world using LAN, use event.code to get the access code, event.URL to get the relay URL, and event.world to get the client-side world
+    ModAPI.events.newEvent("openLANSharing");     // Called when the client starts sharing his world using LAN, use event.code to get the access code, event.URL to get the relay URL, and event.world to get the client-side world
 ModAPI.events.newEvent("closeLANSharing");    // Called when the client stops sharing his world using LAN
 
 ModAPI.events.newEvent("crash");              // Called when the client crashes, use event.crashReport to get the crash report
@@ -26,7 +22,6 @@ ModAPI.events.newEvent("settingsUpdate");     // Called when the settings are up
 
 ModAPI.events.newEvent("playerPosChange");    // Called when the player moves, use event.player to get the player, and event.posX posY posZ to get its position
 
-ModAPI.events.newEvent("leftClick");          // Called when the left button of the mouse is clicked, only in game
 ModAPI.events.newEvent("rightClick");         // Called when the right button of the mouse is clicked, only in game
 /* For these two events, you can use :
     event.heldItem to get the item in hand
@@ -213,17 +208,7 @@ ModAPI.hooks.methods.nmc_Minecraft_rightClickMouse = function (...args) {
     return x
 }
 
-const originalMethod9 = ModAPI.hooks.methods.nmc_Minecraft_clickMouse;
-ModAPI.hooks.methods.nmc_Minecraft_clickMouse = function (...args) {
-    let x = originalMethod9.apply(this, args);
-    ModAPI.events.callEvent("leftClick", {
-        "heldItem": Minecraft.$thePlayer.$getHeldItem(),
-        "entity": Minecraft.$objectMouseOver.$entityHit,
-        "block": Minecraft.$theWorld.$getBlockState(Minecraft.$objectMouseOver.$getBlockPos()).$block,
-        "blockPos": Minecraft.$objectMouseOver.$getBlockPos(),
-    });
-    return x
-}
+
 
 const originalMethod10 = ModAPI.hooks.methods.nlevp_EaglerProfile_save;
 ModAPI.hooks.methods.nlevp_EaglerProfile_save = function (...args) {
@@ -233,7 +218,7 @@ ModAPI.hooks.methods.nlevp_EaglerProfile_save = function (...args) {
     });
     return x
 }
-
+};
 
 /* Example:
 
