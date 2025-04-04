@@ -46,8 +46,9 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
 }
 const comment = {
     init: function () {
-        this.appendValueInput('VALUE')
+        this.appendDummyInput('VALUE')
             .appendField('comment ')
+            .appendField(new Blockly.FieldTextInput('x'), 'VALUE');
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -59,7 +60,7 @@ const comment = {
 Blockly.common.defineBlocks({ comment: comment });
 
 javascript.javascriptGenerator.forBlock['comment'] = function () {
-    const value = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
+    const value = this.getFieldValue('VALUE');
     const code = `
        // ${value}
      `;
