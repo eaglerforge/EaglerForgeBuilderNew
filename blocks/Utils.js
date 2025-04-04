@@ -46,8 +46,9 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
 }
 const comment = {
     init: function () {
-        this.appendInput('VALUE')
-            .appendField('comment');
+        this.appendDummyInput('VALUE')
+            .appendField('comment ')
+            .appendField(new Blockly.FieldTextInput('x'), 'VALUE');
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
