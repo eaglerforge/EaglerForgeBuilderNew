@@ -44,6 +44,28 @@ javascript.javascriptGenerator.forBlock['proc_wait'] = function () {
      `;
     return code;
 }
+const comment = {
+    init: function () {
+        this.appendDummyInput('VALUE')
+            .appendField('comment ')
+            .appendField(new Blockly.FieldTextInput('x'), 'VALUE');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('Adds a comment');
+        this.setHelpUrl('');
+        this.setColour(255);
+    }
+};
+Blockly.common.defineBlocks({ comment: comment });
+
+javascript.javascriptGenerator.forBlock['comment'] = function () {
+    const value = this.getFieldValue('VALUE');
+    const code = `
+       // ${value}
+     `;
+    return code;
+}
 
 const proc_asyncrun = {
     init: function () {
