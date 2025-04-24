@@ -49,9 +49,9 @@ const proc_asyncrun = {
     init: function () {
         this.appendValueInput('DELAY')
             .setCheck('Number')
-            .appendField('in');
+            .appendField('after');
         this.appendDummyInput('NIL')
-            .appendField('seconds, run:');
+            .appendField('seconds, do');
         this.appendStatementInput('CODE');
         this.setInputsInline(true)
         this.setPreviousStatement(true, null);
