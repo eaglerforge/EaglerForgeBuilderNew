@@ -14,7 +14,6 @@ javascript.javascriptGenerator.forBlock['local_this'] = function () {
     return 'this';
 }
 
-
 const proc_return = {
     init: function () {
         this.appendDummyInput('NAME')
@@ -31,7 +30,6 @@ Blockly.common.defineBlocks({ proc_return: proc_return });
 javascript.javascriptGenerator.forBlock['proc_return'] = function () {
     return 'return;';
 }
-
 
 const proc_returnvalue = {
     init: function () {
@@ -52,7 +50,6 @@ javascript.javascriptGenerator.forBlock['proc_returnvalue'] = function () {
     const code = 'return ' + value + ';';
     return code;
 }
-
 
 
 const proc_returnbool = {

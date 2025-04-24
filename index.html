@@ -89,6 +89,20 @@
         <block type="controls_flow_statements">
           <field name="FLOW">BREAK</field>
         </block>
+        <block type="proc_wait">
+          <value name="VALUE">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="proc_asyncrun">
+          <value name="DELAY">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
       </category>
       <category name="Math" colour="#5b67a5">
         <block type="math_number">
@@ -338,9 +352,17 @@
             </shadow>
           </value>
         </block>
-        <block type="lists_sort">
-          <field name="TYPE">NUMERIC</field>
-          <field name="DIRECTION">1</field>
+        <block type="list_includes">
+          <value name="LIST">
+            <block type="variables_get">
+              <field name="VAR" id="k8|hQIbGNUm?zO%Na,Da">list</field>
+            </block>
+          </value>
+          <value name="VALUE">
+            <shadow type="text">
+              <field name="TEXT">apple</field>
+            </shadow>
+          </value>
         </block>
       </category>
       <sep></sep>
@@ -358,20 +380,28 @@
           <field name="VALUE"> </field>
         </block>
       </category>
-      <!-- <category name="Events" colour="#a59f5b">
+     <category name="Events" colour="#a59f5b">
         <block type="events_onModLoads">
         </block>
-        <block type="events_onClientTick">
-        </block>
-        <block type="events_onClientFrame">
+        <block type="events_onJoinWorld">
         </block>
         <block type="events_onKeyPressed">
         </block>
         <block type="events_onKeyReleased">
+        </block> 
+        <block type="events_onClientTick">
+        </block>
+        <block type="events_onClientFrame">
         </block>
       </category>
-      <sep></sep> -->
+      <sep></sep>
       <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+      <category name="Globals" colour="#42f5bf">
+        <block type="globals_get"></block>
+        <block type="globals_set"></block>
+        <block type="globals_delete"></block>
+        <block type="globals_exists"></block>
+      </category>
       <category name="Functions" colour="#995ba5" custom="PROCEDURE"></category>
       <sep></sep>
       <category name="Blocks (H)" colour="#dd11dd">
@@ -386,6 +416,7 @@
         <block type="handle_BlockQuantityDropped"> </block>
       </category>
       <category name="Blocks (C)" colour="#dd11dd">
+        <block type="blocks_currentblock"> </block>
         <block type="blocks_block"> </block>
         <block type="blocks_blockproperty"> </block>
         <block type="blocks_blockswitch"> </block>
@@ -400,11 +431,15 @@
         <block type="handle_ItemBlockUse"> </block>
         <block type="handle_ItemCrafted"> </block>
         <block type="handle_ItemBlockBroken"> </block>
+        <block type="handle_ItemGetAttributes"> </block>
+        <block type="handle_ItemGetEfficiency"> </block>
       </category>
       <category name="Items (C)" colour="#0033dd">
+        <block type="items_currentitem"> </block>
         <block type="items_item"> </block>
         <block type="items_creativetab"> </block>
         <block type="items_setmaxstacksize"> </block>
+        <block type="items_get_applicable_blocks"> </block>
       </category>
       <category name="ItemStack (C)" colour="#44eebb">
         <block type="itemstack_meta"> </block>
@@ -418,6 +453,9 @@
         <block type="itemstack_enchant"> </block>
         <block type="itemstack_repaircost"> </block>
         <block type="itemstack_setrepaircost"> </block>
+      </category>
+      <category name="SharedAttributes (C)" colour="#fcba03">
+        <block type="attributes_set"> </block>
       </category>
       <category name="BlockPos (C)" colour="#6633cc">
         <block type="blockpos_fromxyz"> </block>
@@ -554,6 +592,7 @@
     <script src="blocks/World.js"></script>
     <script src="blocks/Commands.js"></script>
     <script src="blocks/CraftingRecipe.js"></script>
+    <script src="blocks/SharedAttributes.js"></script>
     <script src="blocks/ItemStack.js"></script>
     <script src="blocks/Blocks.js"></script>
     <script src="blocks/Items.js"></script>

@@ -2536,7 +2536,11 @@ const blocks = [
         "type": "block"
     }
 ];
-const IMAGE_HOST = "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/"; //https://minecraft.wiki/images/;
+const IMAGE_HOST = [
+    "https://images-for-eaglerforge-builder.vercel.app/images/",
+    "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
+    "https://minecraft.wiki/images/"
+][0];
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 const missingTexture = IMAGE_HOST + "Missing_Texture_JE4.png";
@@ -2790,7 +2794,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
     if (!list.map(itemToRep).includes(selected)) {
         selected = "item/air";
-        triggerFn();
+        setTimeout(triggerFn, 0);
     }
 
     var div = document.createElement("div");
@@ -2826,14 +2830,24 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBox.style.overflowY = "scroll";
     searchBox.style.flexWrap = "wrap";
     searchBox.style.justifyContent = "center";
+    
     var closeButton = document.createElement("button");
     closeButton.innerText = "Close";
     closeButton.addEventListener("click", (e) => {
         searchBox.style.display = "none";
         e.stopPropagation();
     });
+    
+   
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            searchBox.style.display = "none";
+        }
+    });
+    
     searchBox.appendChild(closeButton);
     searchBox.appendChild(document.createElement("br"));
+    
     var searchBar = document.createElement("input");
     searchBar.type = "search";
     searchBar.style.width = "100%";
@@ -2848,6 +2862,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
         });
     });
+    
+    
     searchBox.appendChild(searchBar);
     searchBox.appendChild(document.createElement("br"));
     div.recalculateList = function () {
