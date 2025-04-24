@@ -2851,6 +2851,11 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var searchBar = document.createElement("input");
     searchBar.type = "search";
     searchBar.style.width = "100%";
+    searchBar.style.position = "sticky";
+    searchBar.style.top = "0px";
+    searchBar.style.paddingLeft = ".3rem";
+    searchBar.style.height = "2em";
+    searchBar.placeholder = "Search";
     searchBar.addEventListener("input", (e) => {
         e.stopPropagation();
         var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");

@@ -64,6 +64,8 @@ function editObject(obj, datablock) {
         'metadata': {
             "Title": {"maxlength": 20},
             "Version": {"maxlength": 7},
+            "Credits": {"maxlength": 36},
+            "Description": {"maxlength": 160},
         },
         'ore_generation': {
             "veinSize": {"min": 0},

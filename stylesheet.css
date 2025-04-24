@@ -182,7 +182,7 @@ td {
   margin-bottom: 0.3rem;
 }
 #propnav input[placeholder="Datablock Name"] {
-  background-color: var(--btn-background-darker);
+  background-color: var(--btn-background);
   color: var(--col);
   border: none;
   border-bottom: 1px solid var(--);
@@ -195,10 +195,9 @@ td {
   transition: 0.5s;
 }
 #propnav input[placeholder="Datablock Name"]:hover {
-  background-color: var(--btn-background);
+  background-color: var(--btn-bg-hover);
 }
 #propnav input[placeholder="Datablock Name"]:focus {
-  background-color: var(--btn-bg-active);
   color: #dadada;
 }
 
@@ -241,6 +240,9 @@ select {
 select option {
   color: white;
   background-color: black;
+}
+#propnav label {
+  margin-left: .5rem;
 }
 #addtype {
   margin: 0rem 0.2rem;
