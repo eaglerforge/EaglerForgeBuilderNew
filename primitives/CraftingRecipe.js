@@ -1,4 +1,4 @@
-//TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
+// TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
 PRIMITIVES["recipe"] = {
     name: "Crafting Recipe",
     uses: [],
@@ -17,9 +17,9 @@ PRIMITIVES["recipe"] = {
         slot8: VALUE_ENUMS.ABSTRACT_ITEM,
         lf2: VALUE_ENUMS.NEWLINE,
         lf3: VALUE_ENUMS.NEWLINE,
-        resultQuantity: 1,
         result: VALUE_ENUMS.ABSTRACT_ITEM,
         lf4: VALUE_ENUMS.NEWLINE,
+        resultQuantity: 1,
         ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
     },
     getDependencies: function () {
@@ -88,10 +88,10 @@ PRIMITIVES["recipe"] = {
                 newGrid[y - minY][x - minX] = grid[y][x];
             }
         }
-        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
+        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].filter(x => x !== "item/air").map((x, i) => {
             return [x, String.fromCharCode(65 + i)];
         }));
-        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
+        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].filter(x => x !== "item/air").map((x, i) => {
             return [String.fromCharCode(65 + i), x];
         }));
         var legendStr = "";
@@ -108,7 +108,7 @@ PRIMITIVES["recipe"] = {
             $$recipePattern += '"';
             for (let x = 0; x < row.length; x++) {
                 const cell = row[x];
-                $$recipePattern += `${cell === "item/air" ? " " : uniqueTypesMap[cell]}`
+                $$recipePattern += `${cell === "item/air" ? " " : uniqueTypesMap[cell]}`;
             }
             $$recipePattern += '"';
             $$recipePattern += ",";
@@ -161,5 +161,46 @@ PRIMITIVES["recipe"] = {
     ModAPI.dedicatedServer.appendCode($$registerRecipe);
     $$registerRecipe();
 })();`;
+    },
+
+    renderCustomTagUI: function (key, value, updateTag) {
+        if (!key.startsWith("slot") && key !== "result") return null;
+
+        const container = document.createElement("div");
+        container.style.position = "relative";
+        container.style.width = "32px";
+        container.style.height = "32px";
+        container.style.backgroundImage = `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgYdXd3/welA0oBAJA5Rm+VVAN3AAAAAElFTkSuQmCC")`;
+        container.style.backgroundSize = "cover";
+        container.style.border = "none";
+        container.style.display = "flex";
+        container.style.alignItems = "center";
+        container.style.justifyContent = "center";
+
+        const img = document.createElement("img");
+        img.src = getItemIcon(value);
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+        img.style.pointerEvents = "none";
+
+        container.appendChild(img);
+
+        container.onclick = () => {
+            openItemPicker(value, (newVal) => {
+                updateTag(newVal);
+                img.src = getItemIcon(newVal);
+            });
+        };
+
+        return container;
     }
+};
+
+// Utility functions assumed available in global or utility scope:
+function getItemIcon(itemId) {
+    if (!itemId || itemId === "item/air") {
+        return ""; // Transparent or fallback image path if needed
+    }
+    const [type, id] = itemId.split("/");
+    return `/assets/${type}s/${id}.png`;
 }
