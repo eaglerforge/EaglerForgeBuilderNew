@@ -17,9 +17,9 @@ PRIMITIVES["recipe"] = {
         slot8: VALUE_ENUMS.ABSTRACT_ITEM,
         lf2: VALUE_ENUMS.NEWLINE,
         lf3: VALUE_ENUMS.NEWLINE,
-        resultQuantity: 1,
         result: VALUE_ENUMS.ABSTRACT_ITEM,
         lf4: VALUE_ENUMS.NEWLINE,
+        resultQuantity: 1,
         ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
     },
     getDependencies: function () {
