@@ -1,3 +1,4 @@
+//TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
 PRIMITIVES["recipe"] = {
     name: "Crafting Recipe",
     uses: [],
@@ -16,10 +17,10 @@ PRIMITIVES["recipe"] = {
         slot8: VALUE_ENUMS.ABSTRACT_ITEM,
         lf2: VALUE_ENUMS.NEWLINE,
         lf3: VALUE_ENUMS.NEWLINE,
+        resultQuantity: 1,
         result: VALUE_ENUMS.ABSTRACT_ITEM,
         lf4: VALUE_ENUMS.NEWLINE,
-        resultQuantity: 1, ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
-        
+        ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
@@ -95,11 +96,11 @@ PRIMITIVES["recipe"] = {
         }));
         var legendStr = "";
         Object.keys(uniqueTypesMapReverse).forEach(k => {
-            legendStr += "${k}": {
+            legendStr += `"${k}": {
                 type: "${uniqueTypesMapReverse[k].split("/")[0]}",
                 id: "${uniqueTypesMapReverse[k].split("/")[1].split("@")[0]}",
-                ${uniqueTypesMapReverse[k].includes("@") ? meta: ${parseInt(uniqueTypesMapReverse[k].split("/")[1].split("@")[1]) || 0} : ""}
-            },
+                ${uniqueTypesMapReverse[k].includes("@") ? `meta: ${parseInt(uniqueTypesMapReverse[k].split("/")[1].split("@")[1]) || 0}` : ""}
+            },`
         });
         var $$recipePattern = "";
         for (let y = 0; y < newGrid.length; y++) {
@@ -107,13 +108,13 @@ PRIMITIVES["recipe"] = {
             $$recipePattern += '"';
             for (let x = 0; x < row.length; x++) {
                 const cell = row[x];
-                $$recipePattern += ${cell === "item/air" ? " " : uniqueTypesMap[cell]}
+                $$recipePattern += `${cell === "item/air" ? " " : uniqueTypesMap[cell]}`
             }
             $$recipePattern += '"';
             $$recipePattern += ",";
         }
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
-        return (function CraftingRecipeDatablock() {
+        return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
             const $$scoped_efb_globals = {};
@@ -159,6 +160,6 @@ PRIMITIVES["recipe"] = {
     }
     ModAPI.dedicatedServer.appendCode($$registerRecipe);
     $$registerRecipe();
-})();;
+})();`;
     }
 }
