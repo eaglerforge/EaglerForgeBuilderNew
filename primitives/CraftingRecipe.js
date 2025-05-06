@@ -8,19 +8,18 @@ PRIMITIVES["recipe"] = {
         slot1: VALUE_ENUMS.ABSTRACT_ITEM,
         slot2: VALUE_ENUMS.ABSTRACT_ITEM,
         lf0: VALUE_ENUMS.NEWLINE,
-        slot3: VALUE_ENUMS.ABSTRACT_ITEM,
+        slot3: VALUE_ENUMS.ABSTRACT_ITEM,      result: VALUE_ENUMS.ABSTRACT_ITEM,
         slot4: VALUE_ENUMS.ABSTRACT_ITEM,
         slot5: VALUE_ENUMS.ABSTRACT_ITEM,
         lf1: VALUE_ENUMS.NEWLINE,
-        slot6: VALUE_ENUMS.ABSTRACT_ITEM,
+        slot6: VALUE_ENUMS.ABSTRACT_ITEM,        resultQuantity: 1, ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
         slot7: VALUE_ENUMS.ABSTRACT_ITEM,
         slot8: VALUE_ENUMS.ABSTRACT_ITEM,
         lf2: VALUE_ENUMS.NEWLINE,
         lf3: VALUE_ENUMS.NEWLINE,
-        result: VALUE_ENUMS.ABSTRACT_ITEM,
         lf4: VALUE_ENUMS.NEWLINE,
-        resultQuantity: 1,
-        ModifyResult: VALUE_ENUMS.ABSTRACT_HANDLER + "CraftingRecipeModifyResult",
+
+        
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
