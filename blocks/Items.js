@@ -184,8 +184,25 @@ const items_get_applicable_blocks = {
     }
 };
 Blockly.common.defineBlocks({ items_get_applicable_blocks: items_get_applicable_blocks });
-javascript.javascriptGenerator.forBlock['items_get_applicable_blocks'] = function() {
+javascript.javascriptGenerator.forBlock['items_get_applicable_blocks'] = function () {
     const dropdown_group = this.getFieldValue('GROUP');
     const code = `(ModAPI.reflect.getClassByName("${dropdown_group}").staticVariables.EFFECTIVE_ON?.$backingMap?.$elementData?.data?.filter(x => !!x)?.map(x => x.$key) || [])`;
     return [code, javascript.Order.NONE];
-  }
+}
+
+const items_currentitem = {
+    init: function () {
+        this.appendDummyInput('ITEM')
+            .setAlign(Blockly.inputs.Align.LEFT)
+            .appendField('current item')
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+        this.setTooltip('The current Item that the handler is executing on.');
+        this.setHelpUrl('');
+        this.setColour(0);
+    }
+};
+Blockly.common.defineBlocks({ items_currentitem: items_currentitem });
+javascript.javascriptGenerator.forBlock['items_currentitem'] = function () {
+    return [`$$CustomItem`, javascript.Order.NONE];
+}

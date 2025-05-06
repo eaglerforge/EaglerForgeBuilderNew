@@ -55,7 +55,7 @@ const keyCodes = [
     ["F12", "123"],
 ];
 
-Blockly.Blocks['events_onModLoads'] = {
+const events_onModLoads = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('when all mods finished loading'));
@@ -68,7 +68,7 @@ Blockly.Blocks['events_onModLoads'] = {
     }
 };
 
-Blockly.Blocks['events_onClientTick'] = {
+const events_onClientTick = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client tick'));
@@ -81,7 +81,7 @@ Blockly.Blocks['events_onClientTick'] = {
     }
 };
 
-Blockly.Blocks['events_onClientFrame'] = {
+const events_onClientFrame = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldLabel('each client frame'));
@@ -93,8 +93,8 @@ Blockly.Blocks['events_onClientFrame'] = {
         this.setHelpUrl('');
     }
 };
-
-Blockly.Blocks['events_onKeyPressed'] = {
+/*
+const events_onKeyPressed = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -109,7 +109,7 @@ Blockly.Blocks['events_onKeyPressed'] = {
     }
 };
 
-Blockly.Blocks['events_onKeyReleased'] = {
+const events_onKeyReleased = {
     init: function() {
         this.appendDummyInput()
             .appendField('when')
@@ -123,6 +123,111 @@ Blockly.Blocks['events_onKeyReleased'] = {
         this.setHelpUrl('');
     }
 };
+*/
+const events_onscreenRender = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('On Screen Render'));
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Called each time the screen is rendering, both in the game screen and in the interface.');
+        this.setHelpUrl('');
+    }
+};
+
+const events_onGUIScreenRender = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('On Gui Screen Render'));
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Called each time the screen is rendering, but only in the interface (not in game)');
+        this.setHelpUrl('');
+    }
+};
+
+const events_onJoinWorld = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldLabel('when HOST joins world'));
+        this.appendStatementInput('CODE')
+            .setAlign(Blockly.inputs.Align.CENTRE)
+            .appendField('do');
+        this.setColour(55);
+        this.setTooltip('Is executed when player joins a world, runs once.');
+        this.setHelpUrl('');
+    }
+};
+// Now define all blocks after the block definitions
+Blockly.common.defineBlocks({
+    events_onModLoads: events_onModLoads,
+    events_onClientTick: events_onClientTick,
+    events_onClientFrame: events_onClientFrame,
+    //events_onKeyPressed: events_onKeyPressed,
+    //events_onKeyReleased: events_onKeyReleased,
+    events_onJoinWorld: events_onJoinWorld
+});
+
+// JavaScript generators for each event block
+javascript.javascriptGenerator.forBlock['events_onJoinWorld'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("serverstart", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_onscreenRender'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("screenRender", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_onGUIScreenRender'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("GUIScreenRender", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_oninGameScreenRender'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("inGameScreenRender", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_onscreenChange'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("screenChange", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_onopenModManager'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("openModManager", () => { 
+    ${statement} })`;
+    return code;
+}
+
+javascript.javascriptGenerator.forBlock['events_onopenLANSharing'] = function(block, generator) {
+    const statement = generator.statementToCode(block, 'CODE');
+    const code = `
+ModAPI.addEventListener("openLANSharing", () => { 
+    ${statement} })`;
+    return code;
+}
 
 javascript.javascriptGenerator.forBlock['events_onModLoads'] = function(block, generator) {
     const statement = generator.statementToCode(block, 'CODE');
@@ -169,3 +274,4 @@ window.addEventListener("keyup", event => {
     ${keyCode !== ""?"}":""}`;
     return code;
 }
+

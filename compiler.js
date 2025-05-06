@@ -32,6 +32,12 @@ function getCompiledCode() {
     workspace.getAllBlocks().forEach(block => {
         functionPrereqs = functionPrereqs.concat(getBlockLibs(block));
     });
+    // Adding event blocks compilation
+    workspace.getTopBlocks(true).forEach(block => {
+        if (block.type.startsWith("events_")) {
+            datablock_contents += javascript.javascriptGenerator.blockToCode(block);
+        }
+    });
     Object.keys(javascript.javascriptGenerator.functionNames_).forEach(fn => {
         prereq_contents += javascript.javascriptGenerator.definitions_[fn];
     });
@@ -43,6 +49,7 @@ function getCompiledCode() {
     //let modCode = javascript.javascriptGenerator.workspaceToCode(workspace);
 
     return `(function EFB2Mod() {
+    const $$scoped_efb_globals = {};
 ${prereq_contents}
 ${datablock_contents}
 })();
@@ -55,7 +62,7 @@ function exportMod() {
 }
 var efiBuild = null;
 function getEfiBuild() {
-    return new Promise((res,rej)=>{
+    return new Promise((res, rej) => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = ".html";
