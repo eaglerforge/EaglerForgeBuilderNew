@@ -404,67 +404,63 @@ const items = [
         "type": "item"
     },
     {
-        "id": "white_dye",
+        "id": "dye_powder_white",
         "type": "item"
     },
     {
-        "id": "red_dye",
+        "id": "dye_powder_red",
         "type": "item"
     },
     {
-        "id": "orange_dye",
+        "id": "dye_powder_orange",
         "type": "item"
     },
     {
-        "id": "pink_dye",
+        "id": "dye_powder_pink",
         "type": "item"
     },
     {
-        "id": "yellow_dye",
+        "id": "dye_powder_yellow",
         "type": "item"
     },
     {
-        "id": "lime_dye",
+        "id": "dye_powder_lime",
         "type": "item"
     },
     {
-        "id": "green_dye",
+        "id": "dye_powder_green",
         "type": "item"
     },
     {
-        "id": "cyan_dye",
+        "id": "dye_powder_cyan",
         "type": "item"
     },
     {
-        "id": "blue_dye",
+        "id": "dye_powder_blue",
         "type": "item"
     },
     {
-        "id": "purple_dye",
+        "id": "dye_powder_purple",
         "type": "item"
     },
     {
-        "id": "magenta_dye",
+        "id": "dye_powder_magenta",
         "type": "item"
     },
     {
-        "id": "brown_dye",
+        "id": "dye_powder_brown",
         "type": "item"
     },
     {
-        "id": "black_dye",
+        "id": "dye_powder_black",
         "type": "item"
     },
     {
-        "id": "gray_dye",
+        "id": "dye_powder_gray",
         "type": "item"
     },
     {
-        "id": "light_gray_dye",
-        "type": "item"
-    },
-    {
-        "id": "lapis_lazuli",
+        "id": "dye_powder_silver",
         "type": "item"
     },
     {
