@@ -2593,7 +2593,6 @@ const blocks = [
     }
 ];
 const IMAGE_HOST = [
-    "https://images-for-eaglerforge-builder.vercel.app/images/",
     "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
     "https://minecraft.wiki/images/"
 ][0];
