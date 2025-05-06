@@ -405,14 +405,17 @@ const items = [
     },
     {
         "id": "white_dye",
+        "meta": 0,
         "type": "item"
     },
     {
         "id": "red_dye",
+        "meta": 1,
         "type": "item"
     },
     {
         "id": "orange_dye",
+        "meta": 2,
         "type": "item"
     },
     {
