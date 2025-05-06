@@ -404,7 +404,66 @@ const items = [
         "type": "item"
     },
     {
-        "id": "dye",
+        "id": "white_dye",
+        "meta": 0,
+        "type": "item"
+    },
+    {
+        "id": "red_dye",
+        "meta": 1,
+        "type": "item"
+    },
+    {
+        "id": "orange_dye",
+        "meta": 2,
+        "type": "item"
+    },
+    {
+        "id": "pink_dye",
+        "type": "item"
+    },
+    {
+        "id": "yellow_dye",
+        "type": "item"
+    },
+    {
+        "id": "lime_dye",
+        "type": "item"
+    },
+    {
+        "id": "green_dye",
+        "type": "item"
+    },
+    {
+        "id": "cyan_dye",
+        "type": "item"
+    },
+    {
+        "id": "purple_dye",
+        "type": "item"
+    },
+    {
+        "id": "magenta_dye",
+        "type": "item"
+    },
+    {
+        "id": "brown_dye",
+        "type": "item"
+    },
+    {
+        "id": "black_dye",
+        "type": "item"
+    },
+    {
+        "id": "gray_dye",
+        "type": "item"
+    },
+    {
+        "id": "silver_dye",
+        "type": "item"
+    },
+    {
+        "id": "lapis_lazuli",
         "type": "item"
     },
     {
@@ -2537,7 +2596,6 @@ const blocks = [
     }
 ];
 const IMAGE_HOST = [
-    "https://images-for-eaglerforge-builder.vercel.app/images/",
     "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
     "https://minecraft.wiki/images/"
 ][0];
@@ -2575,7 +2633,6 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("writable_book", "book_and_quill");
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
-    item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
     item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
