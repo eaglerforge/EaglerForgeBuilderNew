@@ -10,8 +10,11 @@ Object.defineProperty(flags, "target", {
 
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
+    const watermark = `// Built in EFBN targetting ${flags.target}
+// https://github.com/eaglerforge/EaglerForgeBuilderNew
+`;
     let datablock_contents = "";
-    var prereq_contents = "";
+    var prereq_contents = watermark;
     let functionPrereqs = [];
     state.nodes.forEach(node => {
         delete node._deps;
