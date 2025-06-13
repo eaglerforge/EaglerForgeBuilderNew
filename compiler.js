@@ -36,6 +36,7 @@ function getCompiledCode() {
     });
     state.nodes.forEach(node => {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
+        globalThis.__currentlyProcessingNode = node;
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
     workspace.getAllBlocks().forEach(block => {

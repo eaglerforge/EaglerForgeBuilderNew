@@ -69,7 +69,11 @@ function getProcedureCode(name, procMap) {
     return rippedCode;
 }
 function getHandlerCode(type, tag, defaultArgs, targetMapper) {
+    debugger;
     var handler = getHandler(type, tag);
+    if (!handler && targetMapper) {
+        return "";
+    }
     if (!handler) { return { code: "", args: defaultArgs } };
     var { usedVariableSet, enounteredFunctions, procMap } = depsgraph_search(handler);
     var generatedCode = javascript.javascriptGenerator.forBlock[handler.type].apply(handler, []);
@@ -87,7 +91,7 @@ function getHandlerCode(type, tag, defaultArgs, targetMapper) {
             alert("Mapping function for handler " + type + " not defined! Please contact developers.");
             throw Error("Mapping fn not defined!");
         }
-        return mappingFunction(generatedCode.args, generatedCode.code);
+        return mappingFunction.apply(globalThis.__currentlyProcessingNode, [generatedCode.args, generatedCode.code]);
     };
     return generatedCode;
 }

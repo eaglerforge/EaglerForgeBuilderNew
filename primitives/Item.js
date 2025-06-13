@@ -26,7 +26,35 @@ PRIMITIVES["item"] = {
     },
     asJavaScript: function () {
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
-        var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"]);
+        var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"], {
+            "1_8": function (argNames, code) {
+                return `
+                $$CustomItem.prototype.$onItemRightClick = function (${argNames.join(", ")}) {
+                    ${this.tags.useItemOnRightClick ?
+                        `(${argNames[2]}).$setItemInUse(${argNames[0]},${this.tags.useDurationTicks});`
+                        : ""}
+                    ${code};
+                    return (${argNames[0]});
+                }
+                `
+            },
+            "1_12": function (argNames, code) {
+                return `
+                var $$ResultEnum = ModAPI.reflect.getClassByName("EnumActionResult").staticVariables; //SUCCESS, PASS, FAIL
+                var $$ActionResult = ModAPI.reflect.getClassByName("ActionResult").constructors[0];
+                $$CustomItem.prototype.$onItemRightClick = function (${argNames.slice(1,3).join(", ")},$handEnum,$unused) {
+                    var ${argNames[0]} = (${argNames[2]}).$getHeldItem($handEnum);
+                    ${this.tags.useItemOnRightClick ?
+                        `
+                        (${argNames[2]}).$setActiveHand($handEnum);
+                        `
+                        : ""}
+                    ${code};
+                    return ($$ActionResult(${argNames[0]}, ${this.tags.useItemOnRightClick ? "$$ResultEnum.SUCCESS" : "$$ResultEnum.PASS"}));
+                }
+                `
+            }
+        });
         var usedHandler = getHandlerCode("ItemUsed", this.tags.Used, ["$$itemstack", "$$world", "$$player"]);
         var tickedHandler = getHandlerCode("ItemTicked", this.tags.Tick, ["$$itemstack", "$$world", "$$player", "$$hotbar_slot", "$$is_held"]);
         var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"]);
@@ -43,18 +71,13 @@ PRIMITIVES["item"] = {
         var $$itemSuper = ModAPI.reflect.getSuper($$itemClass, (x) => x.length === 1);
         var $$itemUseAnimation = ModAPI.reflect.getClassById("net.minecraft.item.EnumAction").staticVariables["${this.tags.itemUseAnimation}"];
         var $$itemGetAttributes = ModAPI.reflect.getClassById("net.minecraft.item.Item").methods.getItemAttributeModifiers.method;
+        
         function $$CustomItem() {
             $$itemSuper(this);
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
-        $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
-            ${this.tags.useItemOnRightClick ?
-                `(${rightClickHandler.args[2]}).$setItemInUse(${rightClickHandler.args[0]},${this.tags.useDurationTicks});`
-                : ""}
-            ${rightClickHandler.code};
-            return (${rightClickHandler.args[0]});
-        }
+        ${rightClickHandler}
         $$CustomItem.prototype.$getMaxItemUseDuration = function () {
             return ${this.tags.useDurationTicks};
         }
