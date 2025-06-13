@@ -199,7 +199,7 @@ const items_currentitem = {
         this.setOutput(true, null);
         this.setTooltip('The current Item that the handler is executing on.');
         this.setHelpUrl('');
-        this.setColour(0);
+        this.setColour(225);
     }
 };
 Blockly.common.defineBlocks({ items_currentitem: items_currentitem });
