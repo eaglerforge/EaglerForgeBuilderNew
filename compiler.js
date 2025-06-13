@@ -2,6 +2,12 @@ function toFunctionName(str) {
     return (/^[a-zA-Z_]/.test(str.replace(/[^a-zA-Z0-9_]/g, '')) ? '' : '_') + str.replace(/[^a-zA-Z0-9_]/g, '');
 }
 
+const flags = {};
+Object.defineProperty(flags, "target", {
+    get: ()=>document.querySelector("#compiler_target").value,
+    set: ()=>{}
+});
+
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
     let datablock_contents = "";
