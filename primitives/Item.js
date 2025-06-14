@@ -25,6 +25,8 @@ PRIMITIVES["item"] = {
         return [];
     },
     asJavaScript: function () {
+        const firstPersonScale = this.tags.firstPersonScale / (flags.target === "1_12" ? 1.7 : 1);
+        const thirdPersonScale = this.tags.thirdPersonScale / (flags.target === "1_12" ? 0.55 : 1);
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
         var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"], {
             "1_8": function (argNames, code) {
@@ -144,14 +146,14 @@ PRIMITIVES["item"] = {
                 },
                 "display": {
                     "thirdperson": {
-                        "rotation": [ -90, 0, 0 ],
-                        "translation": [ 0, 1, -3 ],
-                        "scale": [ ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale} ]
+                        "rotation": [ ${flags.target === "1_12" ? 0 : -90}, 0, 0 ],
+                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 1, -3 ]"},
+                        "scale": [ ${thirdPersonScale}, ${thirdPersonScale}, ${thirdPersonScale} ]
                     },
                     "firstperson": {
-                        "rotation": [ 0, -135, 25 ],
-                        "translation": [ 0, 4, 2 ],
-                        "scale": [ ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale} ]
+                        "rotation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, -135, 25 ]"},
+                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 4, 2 ]"},
+                        "scale": [ ${firstPersonScale}, ${firstPersonScale}, ${firstPersonScale} ]
                     }
                 }
             }
