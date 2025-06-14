@@ -50,7 +50,7 @@ PRIMITIVES["item"] = {
                         `
                         : ""}
                     ${code};
-                    return ($$ActionResult(${argNames[0]}, ${this.tags.useItemOnRightClick ? "$$ResultEnum.SUCCESS" : "$$ResultEnum.PASS"}));
+                    return ($$ActionResult(${this.tags.useItemOnRightClick ? "$$ResultEnum.SUCCESS" : "$$ResultEnum.PASS"}, ${argNames[0]}));
                 }
                 `
             }
