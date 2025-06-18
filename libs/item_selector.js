@@ -420,50 +420,62 @@ const items = [
     },
     {
         "id": "pink_dye",
+        "meta": 3,
         "type": "item"
     },
     {
         "id": "yellow_dye",
+        "meta": 4,
         "type": "item"
     },
     {
         "id": "lime_dye",
+        "meta": 5,
         "type": "item"
     },
     {
         "id": "green_dye",
+        "meta": 6,
         "type": "item"
     },
     {
         "id": "cyan_dye",
+        "meta": 7,
         "type": "item"
     },
     {
         "id": "purple_dye",
+        "meta": 8,
         "type": "item"
     },
     {
         "id": "magenta_dye",
+        "meta": 9,
         "type": "item"
     },
     {
         "id": "brown_dye",
+        "meta": 10,
         "type": "item"
     },
     {
         "id": "black_dye",
+        "meta": 11,
         "type": "item"
     },
     {
         "id": "gray_dye",
+        "meta": 12,
         "type": "item"
     },
     {
         "id": "silver_dye",
+        "meta": 13,
         "type": "item"
     },
     {
         "id": "lapis_lazuli",
+        "meta": 14,
         "type": "item"
     },
     {
@@ -2964,7 +2976,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
-            label.style.width = "2rem"; // change the size here
+            label.style.width = "4rem"; // change the size here
             label.style.backgroundColor = "rgba(0,0,0,0.6)"; change color here
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
             div2.appendChild(label);
