@@ -405,77 +405,62 @@ const items = [
     },
     {
         "id": "white_dye",
-        "meta": 0,
         "type": "item"
     },
     {
         "id": "red_dye",
-        "meta": 1,
         "type": "item"
     },
     {
         "id": "orange_dye",
-        "meta": 2,
         "type": "item"
     },
     {
         "id": "pink_dye",
-        "meta": 3,
         "type": "item"
     },
     {
         "id": "yellow_dye",
-        "meta": 4,
         "type": "item"
     },
     {
         "id": "lime_dye",
-        "meta": 5,
         "type": "item"
     },
     {
         "id": "green_dye",
-        "meta": 6,
         "type": "item"
     },
     {
         "id": "cyan_dye",
-        "meta": 7,
         "type": "item"
     },
     {
         "id": "purple_dye",
-        "meta": 8,
         "type": "item"
     },
     {
         "id": "magenta_dye",
-        "meta": 9,
         "type": "item"
     },
     {
         "id": "brown_dye",
-        "meta": 10,
         "type": "item"
     },
     {
         "id": "black_dye",
-        "meta": 11,
         "type": "item"
     },
     {
         "id": "gray_dye",
-        "meta": 12,
         "type": "item"
     },
     {
         "id": "silver_dye",
-        "meta": 13,
         "type": "item"
     },
     {
         "id": "lapis_lazuli",
-        "meta": 14,
         "type": "item"
     },
     {
