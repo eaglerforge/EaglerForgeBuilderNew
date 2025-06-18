@@ -3143,7 +3143,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBox.style.left = conf.left;
     searchBox.style.zIndex = "255";
     searchBox.style.display = "none";
-    searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
     searchBox.style.overflowY = "scroll";
     
     var closeButton = document.createElement("button");
@@ -3235,6 +3234,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             label.style.display = "inline-block";
             label.style.width = "4rem";
             label.style.backgroundColor = "rgba(0,0,0,0.6)";
+            label.style.color = "black";
+
             
             div2.appendChild(label);
             searchBox.appendChild(div2);
