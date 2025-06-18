@@ -2618,11 +2618,12 @@ function getImageLocationItem(item, display) {
         }
         return tex;
     }
-    item = Object.assign({}, item);
+    item = Object.assign({}, item); 
     item.id = item.id.replace("record", "music_disc");
     item.id = item.id.replace("banner", "white_banner");
     item.id = item.id.replace("command_block_minecart", "minecart_with_command_block");
     item.id = item.id.replace("chest_minecart", "minecart_with_chest");
+    item.id = item.id.replace("yellow_dye", "dandelion_yellow");
     item.id = item.id.replace("furnace_minecart", "minecart_with_furnace");
     item.id = item.id.replace("tnt_minecart", "minecart_with_TNT");
     item.id = item.id.replace("hopper_minecart", "minecart_with_hopper");
