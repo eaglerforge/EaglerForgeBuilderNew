@@ -2608,6 +2608,7 @@ const blocks = [
     }
 ];
 const IMAGE_HOST = [
+    "https://images-for-eaglerforge-builder.vercel.app/images/",
     "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
     "https://minecraft.wiki/images/"
 ][0];
@@ -2645,6 +2646,7 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("writable_book", "book_and_quill");
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
+    item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
     item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
@@ -2914,7 +2916,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBar.type = "search";
     searchBar.addEventListener("input", (e) => {
         e.stopPropagation();
-        var lookFor = searchBar.value.toLowerCase().trim().replaceAll("_", " ");
+        var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
             if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
                 opt.style.display = "inline-block";
@@ -2976,8 +2978,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
-            label.style.width = "4rem"; // change the size here
-            label.style.backgroundColor = "rgba(0,0,0,0.6)"; change color here
+            label.style.width = "4rem";
+            label.style.backgroundColor = "rgba(0,0,0,0.6)";
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
             div2.appendChild(label);
             searchBox.appendChild(div2);
