@@ -3187,7 +3187,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             var div2 = document.createElement("div");
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
-            div2.style.width = div2.style.height = "3.8rem"; // image size
+            div2.style.width = div2.style.height = "3rem"; // image size
             div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
 
@@ -3223,7 +3223,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
-                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+                 div.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             });
             var label = document.createElement("label");
             label.innerText = (item.type === "block") ? getImageLocationBlock(item, true).replaceAll("%27", "'") : getImageLocationItem(item, true);
@@ -3235,7 +3235,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             label.style.display = "inline-block";
             label.style.width = "4rem";
             label.style.backgroundColor = "rgba(0,0,0,0.6)";
-            label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
+            
             div2.appendChild(label);
             searchBox.appendChild(div2);
         });
