@@ -3201,7 +3201,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             if (itemToRep(item) === selected) {
                 div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
                 div2.setAttribute("data-sel", "yes");
-                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div.value = itemToRep(item);
