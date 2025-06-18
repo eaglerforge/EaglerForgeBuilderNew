@@ -1,407 +1,507 @@
 const items = [
     {
         "id": "air",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flint_and_steel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "apple",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bow",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "arrow",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "coal",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_ingot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gold_ingot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_sword",
-        "type": "item"
+        "type": "item",
     },
     {
         "id": "wooden_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_pickaxe",
         "type": "item"
+        "meta": 0
     },
     {
         "id": "diamond_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bowl",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "mushroom_stew",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "string",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "feather",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gunpowder",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wheat_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wheat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bread",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flint",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "porkchop",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_porkchop",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "painting",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_apple",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "sign",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "oak_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spruce_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "birch_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "jungle_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "acacia_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "dark_oak_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "water_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "lava_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "saddle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "redstone",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "snowball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "boat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "milk_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "brick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "clay_ball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "reeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "paper",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "slime_ball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chest_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "furnace_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "egg",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "compass",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fishing_rod",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "clock",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "glowstone_dust",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fish",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_fish",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "name": "orange",
@@ -495,347 +595,433 @@ const items = [
     },
     {
         "id": "bone",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "sugar",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cake",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bed",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "repeater",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cookie",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "filled_map",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "shears",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "melon",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "pumpkin_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "melon_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "beef",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_beef",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chicken",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_chicken",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "mutton",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_mutton",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_rabbit",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_stew",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_foot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_hide",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rotten_flesh",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ender_pearl",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "blaze_rod",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ghast_tear",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gold_nugget",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "nether_wart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "potionitem",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "glass_bottle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spider_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fermented_spider_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "blaze_powder",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "magma_cream",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "brewing_stand",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cauldron",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ender_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "speckled_melon",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spawn_egg",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "experience_bottle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fire_charge",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "writable_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "written_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "emerald",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "item_frame",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flower_pot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "carrot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "baked_potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "poisonous_potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "map",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_carrot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "skull",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "carrot_on_a_stick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "nether_star",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "pumpkin_pie",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fireworks",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "firework_charge",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "enchanted_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "comparator",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "netherbrick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "quartz",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "tnt_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "hopper_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "armor_stand",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "lead",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "name_tag",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "command_block_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_13",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_cat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_blocks",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_chirp",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_far",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_mall",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_mellohi",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_stal",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_strad",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_ward",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_11",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_wait",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "prismarine_shard",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "prismarine_crystals",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "banner",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     }
 ];
 const blocks = [
