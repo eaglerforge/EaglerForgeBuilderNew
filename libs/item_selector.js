@@ -405,91 +405,91 @@ const items = [
     },
     {
         "name": "orange",
-        "meta": 1,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "magenta",
-        "meta": 2,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "lightBlue",
-        "meta": 3,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "yellow",
-        "meta": 4,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "lime",
-        "meta": 5,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "pink",
-        "meta": 6,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "gray",
-        "meta": 7,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "silver",
-        "meta": 8,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "cyan",
-        "meta": 9,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "purple",
-        "meta": 10,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "blue",
-        "meta": 11,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "brown",
-        "meta": 12,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "green",
-        "meta": 13,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "name": "red",
         "meta": 14,
         "id": "dye",
         "type": "item"
     },
     {
+        "name": "magenta",
+        "meta": 13,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "light_blue",
+        "meta": 12,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "yellow",
+        "meta": 11,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "lime",
+        "meta": 10,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "pink",
+        "meta": 9,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "gray",
+        "meta": 8,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "silver",
+        "meta": 7,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "cyan",
+        "meta": 6,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "purple",
+        "meta": 5,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "blue",
+        "meta": 4,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "brown",
+        "meta": 3,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "green",
+        "meta": 2,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "red",
+        "meta": 1,
+        "id": "dye",
+        "type": "item"
+    },
+    {
         "name": "black",
-        "meta": 15,
+        "meta": 0,
         "id": "dye",
         "type": "item"
     },
@@ -2669,7 +2669,7 @@ function getImageLocationItem(item, display) {
         item.id = !display ? item.id.replace("dye", "magenta_dye") : item.id;
     }
     if (item.name == "lightBlue") {
-        item.id = !display ? item.id.replace("dye", "lightBlue_dye") : item.id;
+        item.id = !display ? item.id.replace("dye", "light_blue_dye") : item.id;
     }
     if (item.name == "yellow") {
         item.id = !display ? item.id.replace("dye", "yellow_dye") : item.id;
@@ -2693,7 +2693,7 @@ function getImageLocationItem(item, display) {
         item.id = !display ? item.id.replace("dye", "purple_dye") : item.id;
     }
     if (item.name == "blue") {
-        item.id = !display ? item.id.replace("dye", "blue_dye") : item.id;
+        item.id = !display ? item.id.replace("dye", "lapis_lazuli") : item.id;
     }
     if (item.name == "brown") {
         item.id = !display ? item.id.replace("dye", "brown_dye") : item.id;
