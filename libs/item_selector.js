@@ -2987,6 +2987,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             if (conf.noMeta) {
                 label.innerText = item.id;
             }
+            label.style.fontSize = "4px";
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
