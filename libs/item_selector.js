@@ -3218,7 +3218,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                 div2.setAttribute("data-sel", "yes");
                 div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
-                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
