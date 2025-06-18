@@ -3199,7 +3199,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
-                div.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
+                div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
                 div2.setAttribute("data-sel", "yes");
                 div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div2.style.transform = "scale(1.2)";
@@ -3222,7 +3222,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
-                 div.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
+                div.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             });
             var label = document.createElement("label");
             label.innerText = (item.type === "block") ? getImageLocationBlock(item, true).replaceAll("%27", "'") : getImageLocationItem(item, true);
