@@ -3233,7 +3233,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
-            label.style.backgroundColor = "rgba(0,0,0,0.6)";
             label.style.color = "black";
 
             
