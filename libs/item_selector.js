@@ -404,65 +404,90 @@ const items = [
         "type": "item"
     },
     {
-        "id": "white_dye",
-        "type": "item"
-    },
-    {
-        "id": "red_dye",
-        "type": "item"
-    },
-    {
-        "id": "orange_dye",
-        "type": "item"
-    },
-    {
-        "id": "pink_dye",
-        "type": "item"
-    },
-    {
-        "id": "dandelion_yellow",
+        "id": "dye",
+        "meta": 15,
+        "name": "white_dye",
         "type": "item"
     },
     {
         "id": "dye",
+        "meta": 1,
+        "name": "red_dye",
         "type": "item"
     },
     {
-        "id": "green_dye",
+        "id": "dye",
+        "meta": 14,
+        "name": "orange_dye",
         "type": "item"
     },
     {
-        "id": "cyan_dye",
+        "id": "dye",
+        "meta": 9,
+        "name": "pink_dye",
         "type": "item"
     },
     {
-        "id": "purple_dye",
+        "id": "dye",
+        "meta": 11,
+        "name": "yellow_dye",
         "type": "item"
     },
     {
-        "id": "magenta_dye",
+        "id": "dye",
+        "meta": 2,
+        "name": "green_dye",
         "type": "item"
     },
     {
-        "id": "brown_dye",
+        "id": "dye",
+        "meta": 6,
+        "name": "cyan_dye",
         "type": "item"
     },
     {
-        "id": "black_dye",
+        "id": "dye",
+        "meta": 5,
+        "name": "purple_dye",
         "type": "item"
     },
     {
-        "id": "gray_dye",
+        "id": "dye",
+        "meta": 13,
+        "name": "magenta_dye",
         "type": "item"
     },
     {
-        "id": "silver_dye",
+        "id": "dye",
+        "meta": 3,
+        "name": "brown_dye",
         "type": "item"
     },
     {
-        "id": "lapis_lazuli",
+        "id": "dye",
+        "meta": 0,
+        "name": "black_dye",
         "type": "item"
     },
+    {
+        "id": "dye",
+        "meta": 8,
+        "name": "gray_dye",
+        "type": "item"
+    },
+    {
+        "id": "dye",
+        "meta": 7,
+        "name": "light_gray_dye",
+        "type": "item"
+    },
+    {
+        "id": "dye",
+        "meta": 4,
+        "name": "blue_dye",
+        "type": "item"
+    }
+
     {
         "id": "bone",
         "type": "item"
@@ -2623,10 +2648,9 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("banner", "white_banner");
     item.id = item.id.replace("command_block_minecart", "minecart_with_command_block");
     item.id = item.id.replace("chest_minecart", "minecart_with_chest");
-    item.id = item.id.replace("yellow_dye", "dandelion_yellow");
     item.id = item.id.replace("furnace_minecart", "minecart_with_furnace");
+
     
-    item.id = item.id.replace("dye", "lime_dye");
     
     item.id = item.id.replace("tnt_minecart", "minecart_with_TNT");
     item.id = item.id.replace("hopper_minecart", "minecart_with_hopper");
@@ -2963,7 +2987,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
-            label.style.width = "2rem";
+            label.style.width = "4rem";
             label.style.backgroundColor = "rgba(0,0,0,0.6)";
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
             div2.appendChild(label);
