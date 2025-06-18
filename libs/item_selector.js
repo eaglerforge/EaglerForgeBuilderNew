@@ -3118,9 +3118,14 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.style.border = "1px solid var(--col)";
     div.style.display = "inline-block";
     div.style.overflow = "hidden";
-    div.style.backgroundImage = `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC'), url(${getImageLocation(selected)})`;
-    div.style.backgroundSize = "cover, contain";
+
+    const fallbackBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC"; // Example
+
+    div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${fallbackBase64})`;
     div.style.backgroundRepeat = "no-repeat, no-repeat";
+    div.style.backgroundSize = "cover, cover";
+
+    
     div.style.imageRendering = "pixelated";
     div.classList.add("dynamic_itemsel");
     div.style.marginRight = "4px";
@@ -3185,9 +3190,12 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.width = div2.style.height = "4rem";
             div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
-            div2.style.backgroundImage = `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC'), url(${getImageLocation(...))})`;
-            div2.style.backgroundSize = "cover, contain";
+
+            
+            div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             div2.style.backgroundRepeat = "no-repeat, no-repeat";
+            div2.style.backgroundSize = "cover, cover";
+
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
