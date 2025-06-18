@@ -404,89 +404,102 @@ const items = [
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 15,
         "name": "white_dye",
+        "meta": 15,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 1,
         "name": "red_dye",
+        "meta": 1,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 14,
         "name": "orange_dye",
+        "meta": 14,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 9,
         "name": "pink_dye",
+        "meta": 9,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 11,
         "name": "yellow_dye",
+        "meta": 11,
+        "id": "dye",
         "type": "item"
     },
     {
+        "name": "lime_dye",
+        "meta": 10,
         "id": "dye",
-        "meta": 2,
+        "type": "item"
+    },
+    {
         "name": "green_dye",
+        "meta": 2,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 6,
         "name": "cyan_dye",
+        "meta": 6,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 5,
         "name": "purple_dye",
+        "meta": 5,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 13,
         "name": "magenta_dye",
+        "meta": 13,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 3,
         "name": "brown_dye",
+        "meta": 3,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 0,
         "name": "black_dye",
+        "meta": 0,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 8,
         "name": "gray_dye",
+        "meta": 8,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 7,
         "name": "light_gray_dye",
+        "meta": 7,
+        "id": "dye",
         "type": "item"
     },
     {
-        "id": "dye",
-        "meta": 4,
         "name": "blue_dye",
+        "meta": 4,
+        "id": "dye",
         "type": "item"
-    }
+    },
+    {
+        "name": "light_blue_dye",
+        "meta": 12,
+        "id": "dye",
+        "type": "item"
+    },
+
 
     {
         "id": "bone",
