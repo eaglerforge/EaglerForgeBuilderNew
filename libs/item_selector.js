@@ -2646,7 +2646,6 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("writable_book", "book_and_quill");
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
-    item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
     item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
