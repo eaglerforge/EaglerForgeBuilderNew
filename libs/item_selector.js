@@ -435,8 +435,8 @@ const items = [
     },
     {
         "name": "pink",
-        "meta": 9,
-        "id": "dye",
+        "meta": 0,
+        "id": "pink_dye",
         "type": "item"
     },
     {
