@@ -3121,8 +3121,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.style.backgroundImage = `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC'), url(${getImageLocation(selected)})`;
     div.style.backgroundSize = "cover, contain";
     div.style.backgroundRepeat = "no-repeat, no-repeat";
-    div.style.backgroundRepeat = "no-repeat";
-    div.style.backgroundSize = "cover";
     div.style.imageRendering = "pixelated";
     div.classList.add("dynamic_itemsel");
     div.style.marginRight = "4px";
@@ -3190,8 +3188,6 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.backgroundImage = `url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC'), url(${getImageLocation(...))})`;
             div2.style.backgroundSize = "cover, contain";
             div2.style.backgroundRepeat = "no-repeat, no-repeat";
-            div2.style.backgroundRepeat = "no-repeat";
-            div2.style.backgroundSize = "cover";
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
