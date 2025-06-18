@@ -54,7 +54,6 @@ javascript.javascriptGenerator.forBlock['items_item'] = function () {
     const object = {
         type: item_primitive.split("/")[0],
         id: item_primitive.split("/")[1].split("@")[0],
-        meta: item_primitive.split("/")[2].split("@")[0]
 
     }
     if (object.type === "item") {
