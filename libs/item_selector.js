@@ -2960,7 +2960,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
-            label.style.width = "4rem";
+            label.style.width = "2rem";
             label.style.backgroundColor = "rgba(0,0,0,0.6)";
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
             div2.appendChild(label);
