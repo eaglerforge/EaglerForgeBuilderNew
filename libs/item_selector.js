@@ -2660,6 +2660,55 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
     item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
+    
+    
+    if (item.name == "orange") {
+        item.id = !display ? item.id.replace("dye", "orange_dye") : item.id;
+    }
+    if (item.name == "magenta") {
+        item.id = !display ? item.id.replace("dye", "magenta_dye") : item.id;
+    }
+    if (item.name == "lightBlue") {
+        item.id = !display ? item.id.replace("dye", "lightBlue_dye") : item.id;
+    }
+    if (item.name == "yellow") {
+        item.id = !display ? item.id.replace("dye", "yellow_dye") : item.id;
+    }
+    if (item.name == "lime") {
+        item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
+    }
+    if (item.name == "pink") {
+        item.id = !display ? item.id.replace("dye", "pink_dye") : item.id;
+    }
+    if (item.name == "gray") {
+        item.id = !display ? item.id.replace("dye", "gray_dye") : item.id;
+    }
+    if (item.name == "silver") {
+        item.id = !display ? item.id.replace("dye", "silver_dye") : item.id;
+    }
+    if (item.name == "cyan") {
+        item.id = !display ? item.id.replace("dye", "cyan_dye") : item.id;
+    }
+    if (item.name == "purple") {
+        item.id = !display ? item.id.replace("dye", "purple_dye") : item.id;
+    }
+    if (item.name == "blue") {
+        item.id = !display ? item.id.replace("dye", "blue_dye") : item.id;
+    }
+    if (item.name == "brown") {
+        item.id = !display ? item.id.replace("dye", "brown_dye") : item.id;
+    }
+    if (item.name == "green") {
+        item.id = !display ? item.id.replace("dye", "green_dye") : item.id;
+    }
+    if (item.name == "red") {
+        item.id = !display ? item.id.replace("dye", "red_dye") : item.id;
+    }
+    if (item.name == "black") {
+        item.id = !display ? item.id.replace("dye", "black_dye") : item.id;
+    }
+
+    
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
     item.id = item.id.replace("slime_ball", "slimeball");
@@ -2987,7 +3036,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             if (conf.noMeta) {
                 label.innerText = item.id;
             }
-            label.style.fontSize = "4px";
+            label.style.fontSize = "12px";
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
