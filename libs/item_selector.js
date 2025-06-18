@@ -2902,7 +2902,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     searchBar.type = "search";
     searchBar.addEventListener("input", (e) => {
         e.stopPropagation();
-        var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
+        var lookFor = searchBar.value.toLowerCase().trim().replaceAll("_", " ");
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
             if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
                 opt.style.display = "inline-block";
@@ -2964,8 +2964,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
-            label.style.width = "4rem";
-            label.style.backgroundColor = "rgba(0,0,0,0.6)";
+            label.style.width = "2rem"; // change the size here
+            label.style.backgroundColor = "rgba(0,0,0,0.6)"; change color here
             label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
             div2.appendChild(label);
             searchBox.appendChild(div2);
