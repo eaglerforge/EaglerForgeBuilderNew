@@ -420,11 +420,11 @@ const items = [
         "type": "item"
     },
     {
-        "id": "yellow_dye",
+        "id": "dandelion_yellow",
         "type": "item"
     },
     {
-        "id": "lime_dye",
+        "id": "dye",
         "type": "item"
     },
     {
@@ -2625,6 +2625,9 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("chest_minecart", "minecart_with_chest");
     item.id = item.id.replace("yellow_dye", "dandelion_yellow");
     item.id = item.id.replace("furnace_minecart", "minecart_with_furnace");
+    
+    item.id = item.id.replace("dye", "lime_dye");
+    
     item.id = item.id.replace("tnt_minecart", "minecart_with_TNT");
     item.id = item.id.replace("hopper_minecart", "minecart_with_hopper");
     item.id = item.id.replace("writable_book", "book_and_quill");
