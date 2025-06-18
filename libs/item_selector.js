@@ -404,88 +404,92 @@ const items = [
         "type": "item"
     },
     {
-        "meta": 15,
-        "id": "dye",
-        "type": "item"
-    },
-    {
+        "name": "orange",
         "meta": 1,
         "id": "dye",
         "type": "item"
     },
     {
-        "meta": 14,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "meta": 9,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "meta": 11,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "meta": 10,
-        "id": "dye",
-        "type": "item"
-    },
-    {
+        "name": "magenta",
         "meta": 2,
         "id": "dye",
         "type": "item"
     },
     {
-        "meta": 6,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "meta": 5,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-        "meta": 13,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-
+        "name": "lightBlue",
         "meta": 3,
         "id": "dye",
         "type": "item"
     },
     {
-
-        "meta": 0,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-
-        "meta": 8,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-
-        "meta": 7,
-        "id": "dye",
-        "type": "item"
-    },
-    {
-
+        "name": "yellow",
         "meta": 4,
         "id": "dye",
         "type": "item"
     },
     {
-
+        "name": "lime",
+        "meta": 5,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "pink",
+        "meta": 6,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "gray",
+        "meta": 7,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "silver",
+        "meta": 8,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "cyan",
+        "meta": 9,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "purple",
+        "meta": 10,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "blue",
+        "meta": 11,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "brown",
         "meta": 12,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "green",
+        "meta": 13,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "red",
+        "meta": 14,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "black",
+        "meta": 15,
         "id": "dye",
         "type": "item"
     },
@@ -2862,7 +2866,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
     if (!useBlocks) {
         list.dynamicConcat("item", "id", (x) => {
-            return { id: x, type: "item", name: "missingno" }
+            return { id: x, type: "item", meta: 0, name: "missingno" }
         });
     }
 
