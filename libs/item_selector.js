@@ -404,103 +404,91 @@ const items = [
         "type": "item"
     },
     {
-        "name": "white_dye",
         "meta": 15,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "red_dye",
         "meta": 1,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "orange_dye",
         "meta": 14,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "pink_dye",
         "meta": 9,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "yellow_dye",
         "meta": 11,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "lime_dye",
         "meta": 10,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "green_dye",
         "meta": 2,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "cyan_dye",
         "meta": 6,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "purple_dye",
         "meta": 5,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "magenta_dye",
         "meta": 13,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "brown_dye",
+
         "meta": 3,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "black_dye",
+
         "meta": 0,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "gray_dye",
+
         "meta": 8,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "light_gray_dye",
+
         "meta": 7,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "blue_dye",
+
         "meta": 4,
         "id": "dye",
         "type": "item"
     },
     {
-        "name": "light_blue_dye",
+
         "meta": 12,
         "id": "dye",
         "type": "item"
     },
-
-
     {
         "id": "bone",
         "type": "item"
@@ -2662,9 +2650,6 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("command_block_minecart", "minecart_with_command_block");
     item.id = item.id.replace("chest_minecart", "minecart_with_chest");
     item.id = item.id.replace("furnace_minecart", "minecart_with_furnace");
-
-    
-    
     item.id = item.id.replace("tnt_minecart", "minecart_with_TNT");
     item.id = item.id.replace("hopper_minecart", "minecart_with_hopper");
     item.id = item.id.replace("writable_book", "book_and_quill");
