@@ -115,7 +115,7 @@ const items = [
     },
     {
         "id": "diamond_pickaxe",
-        "type": "item"
+        "type": "item",
         "meta": 0
     },
     {

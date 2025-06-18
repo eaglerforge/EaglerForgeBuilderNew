@@ -53,7 +53,9 @@ javascript.javascriptGenerator.forBlock['items_item'] = function () {
     const item_primitive = this.getFieldValue('ITEM');
     const object = {
         type: item_primitive.split("/")[0],
-        id: item_primitive.split("/")[1].split("@")[0]
+        id: item_primitive.split("/")[1].split("@")[0],
+        meta: item_primitive.split("/")
+
     }
     if (object.type === "item") {
         return [`(ModAPI.items["${object.id}"]?.getRef() || null)`, javascript.Order.NONE]
