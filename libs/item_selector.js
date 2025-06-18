@@ -2593,9 +2593,7 @@ const blocks = [
     }
 ];
 const IMAGE_HOST = [
-    "https://images-for-eaglerforge-builder.vercel.app/images/",
     "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
-    "https://minecraft.wiki/images/"
 ][0];
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
@@ -2673,7 +2671,6 @@ function getImageLocationBlock(block, display) {
     block.name = block.name.replaceAll("silver", "light_gray");
     block.id = block.id.replaceAll("log2", "log");
     block.id = block.id.replaceAll("leaves2", "leaves");
-    block.id = block.id.replaceAll("lapis", "lapis_lazuli");
     const blockOfBanlist = ["brown_mushroom_block", "red_mushroom_block", "command_block", "slime_block"];
     switch (block.id) {
         case "stone":
