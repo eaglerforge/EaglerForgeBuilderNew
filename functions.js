@@ -85,9 +85,11 @@ FUNCTIONS["execute_command_as"] = {
     //Very important that there is no name and a whitespace before and after the parantheses
     code: function () {
         function EFB2__defineExecCmdAsGlobal() {
-            var getServer = ModAPI.reflect.getClassById("net.minecraft.server.MinecraftServer").staticMethods.getServer.method;
+            var getServer = ModAPI.reflect.getClassById("net.minecraft.server.MinecraftServer").staticMethods.getServer?.method;
             globalThis.efb2__executeCommandAs = function efb2__executeCommandAs($commandsender, command, feedback) {
-                var server = getServer();
+                var server = getServer ?
+                    getServer() : //1.8
+                    ModAPI.reflect.getClassById("net.minecraft.server.MinecraftServer").staticVariables.server; //1.12
                 if (!server) { return };
                 var commandManager = server.$commandManager;
 

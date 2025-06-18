@@ -27,7 +27,10 @@ const items_creativetab = {
 };
 Blockly.common.defineBlocks({ items_creativetab: items_creativetab });
 javascript.javascriptGenerator.forBlock['items_creativetab'] = function () {
-    const dropdown_tab = this.getFieldValue('TAB');
+    let dropdown_tab = this.getFieldValue('TAB');
+    if (flags.target === "1_12") {
+        dropdown_tab = dropdown_tab.replace("tab", "").toUpperCase();
+    }
     const code = `this.$setCreativeTab(ModAPI.reflect.getClassById("net.minecraft.creativetab.CreativeTabs").staticVariables.${dropdown_tab});`;
     return code;
 }
@@ -95,7 +98,7 @@ registerHandler("ItemRightClick", "item right click", {
     "WORLD": "world",
     "PLAYER": "player"
 }, function () {
-    this.setTooltip('Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.');
+    this.setTooltip('1.8: Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.\n\n1.12: Do not return any value!!! If UseItemOnRight click is enabled, the stack size is automagically decremented.');
     this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
     this.setColour(225);
 });
@@ -199,7 +202,7 @@ const items_currentitem = {
         this.setOutput(true, null);
         this.setTooltip('The current Item that the handler is executing on.');
         this.setHelpUrl('');
-        this.setColour(0);
+        this.setColour(225);
     }
 };
 Blockly.common.defineBlocks({ items_currentitem: items_currentitem });

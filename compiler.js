@@ -2,10 +2,19 @@ function toFunctionName(str) {
     return (/^[a-zA-Z_]/.test(str.replace(/[^a-zA-Z0-9_]/g, '')) ? '' : '_') + str.replace(/[^a-zA-Z0-9_]/g, '');
 }
 
+const flags = {};
+Object.defineProperty(flags, "target", {
+    get: ()=>document.querySelector("#compiler_target").value,
+    set: ()=>{}
+});
+
 function getCompiledCode() {
     javascript.javascriptGenerator.init(workspace);
+    const watermark = `// Built in EFBN targetting ${flags.target}
+// https://github.com/eaglerforge/EaglerForgeBuilderNew
+`;
     let datablock_contents = "";
-    var prereq_contents = "";
+    var prereq_contents = watermark;
     let functionPrereqs = [];
     state.nodes.forEach(node => {
         delete node._deps;
@@ -27,6 +36,7 @@ function getCompiledCode() {
     });
     state.nodes.forEach(node => {
         functionPrereqs = functionPrereqs.concat(PRIMITIVES[node.type].uses);
+        globalThis.__currentlyProcessingNode = node;
         datablock_contents += PRIMITIVES[node.type].asJavaScript.apply(node, []);
     });
     workspace.getAllBlocks().forEach(block => {

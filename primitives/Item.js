@@ -25,8 +25,38 @@ PRIMITIVES["item"] = {
         return [];
     },
     asJavaScript: function () {
+        const firstPersonScale = this.tags.firstPersonScale / (flags.target === "1_12" ? 1.7 : 1);
+        const thirdPersonScale = this.tags.thirdPersonScale / (flags.target === "1_12" ? 0.55 : 1);
         var constructorHandler = getHandlerCode("ItemConstructor", this.tags.Constructor, []);
-        var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"]);
+        var rightClickHandler = getHandlerCode("ItemRightClick", this.tags.RightClick, ["$$itemstack", "$$world", "$$player"], {
+            "1_8": function (argNames, code) {
+                return `
+                $$CustomItem.prototype.$onItemRightClick = function (${argNames.join(", ")}) {
+                    ${this.tags.useItemOnRightClick ?
+                        `(${argNames[2]}).$setItemInUse(${argNames[0]},${this.tags.useDurationTicks});`
+                        : ""}
+                    ${code};
+                    return (${argNames[0]});
+                }
+                `
+            },
+            "1_12": function (argNames, code) {
+                return `
+                var $$ResultEnum = ModAPI.reflect.getClassByName("EnumActionResult").staticVariables; //SUCCESS, PASS, FAIL
+                var $$ActionResult = ModAPI.reflect.getClassByName("ActionResult").constructors[0];
+                $$CustomItem.prototype.$onItemRightClick = function (${argNames.slice(1,3).join(", ")},$handEnum,$unused) {
+                    var ${argNames[0]} = (${argNames[2]}).$getHeldItem($handEnum);
+                    ${this.tags.useItemOnRightClick ?
+                        `
+                        (${argNames[2]}).$setActiveHand($handEnum);
+                        `
+                        : ""}
+                    ${code};
+                    return ($$ActionResult(${this.tags.useItemOnRightClick ? "$$ResultEnum.SUCCESS" : "$$ResultEnum.PASS"}, ${argNames[0]}));
+                }
+                `
+            }
+        });
         var usedHandler = getHandlerCode("ItemUsed", this.tags.Used, ["$$itemstack", "$$world", "$$player"]);
         var tickedHandler = getHandlerCode("ItemTicked", this.tags.Tick, ["$$itemstack", "$$world", "$$player", "$$hotbar_slot", "$$is_held"]);
         var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"]);
@@ -43,18 +73,13 @@ PRIMITIVES["item"] = {
         var $$itemSuper = ModAPI.reflect.getSuper($$itemClass, (x) => x.length === 1);
         var $$itemUseAnimation = ModAPI.reflect.getClassById("net.minecraft.item.EnumAction").staticVariables["${this.tags.itemUseAnimation}"];
         var $$itemGetAttributes = ModAPI.reflect.getClassById("net.minecraft.item.Item").methods.getItemAttributeModifiers.method;
+        
         function $$CustomItem() {
             $$itemSuper(this);
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
-        $$CustomItem.prototype.$onItemRightClick = function (${rightClickHandler.args.join(", ")}) {
-            ${this.tags.useItemOnRightClick ?
-                `(${rightClickHandler.args[2]}).$setItemInUse(${rightClickHandler.args[0]},${this.tags.useDurationTicks});`
-                : ""}
-            ${rightClickHandler.code};
-            return (${rightClickHandler.args[0]});
-        }
+        ${rightClickHandler}
         $$CustomItem.prototype.$getMaxItemUseDuration = function () {
             return ${this.tags.useDurationTicks};
         }
@@ -121,14 +146,14 @@ PRIMITIVES["item"] = {
                 },
                 "display": {
                     "thirdperson": {
-                        "rotation": [ -90, 0, 0 ],
-                        "translation": [ 0, 1, -3 ],
-                        "scale": [ ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale}, ${this.tags.thirdPersonScale} ]
+                        "rotation": [ ${flags.target === "1_12" ? 0 : -90}, 0, 0 ],
+                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 1, -3 ]"},
+                        "scale": [ ${thirdPersonScale}, ${thirdPersonScale}, ${thirdPersonScale} ]
                     },
                     "firstperson": {
-                        "rotation": [ 0, -135, 25 ],
-                        "translation": [ 0, 4, 2 ],
-                        "scale": [ ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale}, ${this.tags.firstPersonScale} ]
+                        "rotation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, -135, 25 ]"},
+                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 4, 2 ]"},
+                        "scale": [ ${firstPersonScale}, ${firstPersonScale}, ${firstPersonScale} ]
                     }
                 }
             }

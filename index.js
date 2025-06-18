@@ -68,8 +68,12 @@ function getProcedureCode(name, procMap) {
     javascript.javascriptGenerator.blockToCode(procMap[name]); //for some *stupid* reason, is hardcoded to always return null.
     return rippedCode;
 }
-function getHandlerCode(type, tag, defaultArgs) {
+function getHandlerCode(type, tag, defaultArgs, targetMapper) {
+    debugger;
     var handler = getHandler(type, tag);
+    if (!handler && targetMapper) {
+        return "";
+    }
     if (!handler) { return { code: "", args: defaultArgs } };
     var { usedVariableSet, enounteredFunctions, procMap } = depsgraph_search(handler);
     var generatedCode = javascript.javascriptGenerator.forBlock[handler.type].apply(handler, []);
@@ -80,6 +84,15 @@ function getHandlerCode(type, tag, defaultArgs) {
     var procedureCode = [...enounteredFunctions].map(x => getProcedureCode(x, procMap)).join(";");
 
     generatedCode.code = variableCode + procedureCode + generatedCode.code;
+
+    if (targetMapper) {
+        const mappingFunction = Object.entries(targetMapper).filter(ent=>ent[0].split(",").includes(flags.target))[0]?.[1];
+        if (!mappingFunction) {
+            alert("Mapping function for handler " + type + " not defined! Please contact developers.");
+            throw Error("Mapping fn not defined!");
+        }
+        return mappingFunction.apply(globalThis.__currentlyProcessingNode, [generatedCode.args, generatedCode.code]);
+    };
     return generatedCode;
 }
 const supportedEvents = [
