@@ -3135,8 +3135,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var searchBox = document.createElement("div");
     searchBox.style.position = conf.popoverMethod;
     searchBox.style.backgroundColor = "var(--background)";
-    searchBox.style.border = "1px solid var(--col)";
-    searchBox.style.borderRadius = "6px";
+    // searchBox.style.border = "1px solid var(--col)";
+    // searchBox.style.borderRadius = "6px";
     searchBox.style.width = conf.width;
     searchBox.style.height = conf.height;
     searchBox.style.top = conf.top;
@@ -3169,7 +3169,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
         var lookFor = searchBar.value.toLowerCase().trim().replaceAll(" ", "_");
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
             if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
-                opt.style.display = "inline-block";
+                // opt.style.display = "inline-block";
+                opt.style.display = "block";
             } else {
                 opt.style.display = "none";
             }
@@ -3186,7 +3187,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             var div2 = document.createElement("div");
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
-            div2.style.width = div2.style.height = "3rem"; // image size
+            div2.style.width = div2.style.height = "4rem"; // image size
             // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
 
@@ -3196,7 +3197,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.backgroundSize = "cover, cover";
 
             div2.style.imageRendering = "pixelated";
-            div2.style.display = "inline-block";
+            // div2.style.display = "inline-block";
+            div2.style.display = "block";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
                 
