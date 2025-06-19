@@ -3201,14 +3201,14 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             var div2 = document.createElement("div");
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
-            div2.style.width = div2.style.height = "2rem"; // image size
+            div2.style.width = div2.style.height = "4rem"; // image size
             // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
 
             
             div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             div2.style.backgroundRepeat = "no-repeat, no-repeat";
-            div2.style.backgroundSize = "cover, cover";
+            div2.style.backgroundSize = "2rem 2rem, 2rem 2rem"; // or any size you want
 
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
