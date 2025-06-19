@@ -3135,8 +3135,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var searchBox = document.createElement("div");
     searchBox.style.position = conf.popoverMethod;
     searchBox.style.backgroundColor = "var(--background)";
-    // searchBox.style.border = "1px solid var(--col)";
-    // searchBox.style.borderRadius = "6px";
+    searchBox.style.border = "1px solid var(--col)";
+    searchBox.style.borderRadius = "6px";
     searchBox.style.width = conf.width;
     searchBox.style.height = conf.height;
     searchBox.style.top = conf.top;
