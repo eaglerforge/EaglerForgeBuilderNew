@@ -3130,9 +3130,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.classList.add("dynamic_itemsel");
     
     div.style.marginRight = "1px"; //ditance bettwen cells
-    div2.style.marginBottom = "1px"; //ditance bettwen cells
     
-    div.style.borderRadius = "0px";
+    div.style.borderRadius = "1px";
     div.value = selected;
 
     var searchBox = document.createElement("div");
