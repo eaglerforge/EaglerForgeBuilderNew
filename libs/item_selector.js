@@ -3123,7 +3123,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
     div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${fallbackBase64})`;
     div.style.backgroundRepeat = "no-repeat, no-repeat";
-    div.style.backgroundSize = "3rem 3rem, 3rem 3rem";
+    div.style.backgroundSize = "cover, cover";
 
     
     div.style.imageRendering = "pixelated";
@@ -3208,7 +3208,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             
             div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             div2.style.backgroundRepeat = "no-repeat, no-repeat";
-            div2.style.backgroundSize = "3rem 3rem, 3rem 3rem"; // or any size you want
+            div2.style.backgroundSize = "cover, cover"; // or any size you want
 
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
