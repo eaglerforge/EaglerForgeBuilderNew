@@ -3170,7 +3170,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
             if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
                 // opt.style.display = "inline-block";
-                opt.style.display = "block";
+                opt.style.display = "none";
+
             } else {
                 opt.style.display = "none";
             }
@@ -3198,7 +3199,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
             div2.style.imageRendering = "pixelated";
             // div2.style.display = "inline-block";
-            div2.style.display = "block";
+            div2.style.display = "none";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
                 
@@ -3232,7 +3233,8 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
             label.style.fontSize = "12px";
             label.style.wordBreak = "break-all";
-            label.style.display = "inline-block";
+            // label.style.display = "inline-block";
+            label.style.display = "none";
             label.style.width = "4rem";
             label.style.color = "black";
 
