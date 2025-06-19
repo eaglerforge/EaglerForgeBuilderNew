@@ -3119,7 +3119,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.style.display = "inline-block";
     div.style.overflow = "hidden";
 
-    const fallbackBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAADVJREFUOE9jNDc3/89AIQgJCWFgBBkEYlACSkpKRg0iEICjYUQ4hY2G0WgY/f//n+KCDRSKAJWpRm8GiY6hAAAAAElFTkSuQmCC";
+    const fallbackBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAEBJREFUSEtjNDc3/89AZRASEsLACDIYxKAmKCkpGTUYEqCjQQFPWKNBMRoUmKXMaKoYTRX0ThX///+nemUK8gMAG9lWY9CX1RAAAAAASUVORK5CYII=";
 
     div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${fallbackBase64})`;
     div.style.backgroundRepeat = "no-repeat, no-repeat";
