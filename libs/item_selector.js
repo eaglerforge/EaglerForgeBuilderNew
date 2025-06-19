@@ -3129,16 +3129,15 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.style.imageRendering = "pixelated";
     div.classList.add("dynamic_itemsel");
     
-    div.style.marginRight = "1px"; //ditance bettwen cells
-    div.style.marginBottom = "1px";
+    div.style.marginRight = "4px"; //ditance bettwen cells
     
     div.style.borderRadius = "1px";
     div.value = selected;
 
     var searchBox = document.createElement("div");
     searchBox.style.position = conf.popoverMethod;
-    searchBox.style.backgroundColor = "var(--background)";
-    searchBox.style.border = "1px solid var(--col)";
+    searchBox.style.backgroundColor = "rgb(139, 139, 139)";
+    // searchBox.style.border = "1px solid var(--col)";
     searchBox.style.borderRadius = "0px";
     searchBox.style.width = conf.width;
     searchBox.style.height = conf.height;
@@ -3192,8 +3191,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.classList.add("itemoption");
             div2.style.width = div2.style.height = "4rem"; // image size
             // div2.style.border = "1px solid var(--col)";
-            div2.style.marginRight = "1px";
-            div2.style.marginBottom = "1px";
+            div2.style.marginRight = "4px";
 
             
             div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
