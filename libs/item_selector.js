@@ -3187,7 +3187,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
             div2.style.width = div2.style.height = "3rem"; // image size
-            div2.style.border = "1px solid var(--col)";
+            // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
 
             
