@@ -3123,7 +3123,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
     div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${fallbackBase64})`;
     div.style.backgroundRepeat = "no-repeat, no-repeat";
-    div.style.backgroundSize = "cover, cover";
+    div.style.backgroundSize = "3rem 3rem, 3rem 3rem";
 
     
     div.style.imageRendering = "pixelated";
