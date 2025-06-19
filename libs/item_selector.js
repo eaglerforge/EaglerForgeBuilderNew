@@ -3115,7 +3115,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var div = document.createElement("div");
     div._useInline = true;
     div.style.width = div.style.height = "4rem";
-    div.style.border = "1px solid var(--col)";
+    // div.style.border = "1px solid var(--col)";
     div.style.display = "inline-block";
     div.style.overflow = "hidden";
 
@@ -3178,6 +3178,18 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             }
         });
     });
+
+    searchBar.type = "search";
+
+    // Style it:
+    searchBar.style.backgroundColor = "rgb(139, 139, 139)"; // box background
+    searchBar.style.color = "white";                        // text color
+    searchBar.style.fontSize = "16px";                      // text size
+    searchBar.style.border = "1px solid #444";              // border color (you can change this)
+    searchBar.style.borderRadius = "4px";                   // optional: rounded corners
+    searchBar.style.padding = "4px";                        // optional: inner spacing
+    searchBar.style.width = "calc(100% - 8px)";             // fills the width while accounting for padding
+
     
     
     searchBox.appendChild(searchBar);
@@ -3189,7 +3201,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             var div2 = document.createElement("div");
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
-            div2.style.width = div2.style.height = "4rem"; // image size
+            div2.style.width = div2.style.height = "2rem"; // image size
             // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
 
