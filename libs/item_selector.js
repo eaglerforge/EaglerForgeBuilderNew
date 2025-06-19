@@ -3198,18 +3198,13 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
-
             if (itemToRep(item) === selected) {
+                div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
                 div2.setAttribute("data-sel", "yes");
-                const highlightBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAlhJREFUSEu9VktvUkEY/YY3xEDC3pgY1xr/hSb+LVeuTJOqia2h9uEr1oDSQMuby6uUlgKlNdbExjRaMYQFXB4XxpwhA/hYuBh6NpP57tw535lvZs4wzjkfjUbU6/WImRmd61/omvsGAScXVdHim81mI8YYWa1WGgwGIm42m2k4HFK32yWHwyFisygW9ogZhsHXgr5JvN/vi8lmwTknt9tNjUaD7HY7NZtN8nq9YmL0kQBaCafTSbquUyQcJab3dP4qtE7xSIKkEjkYZMgYmUvIrBGDEovFIv4zmUyTMXfv3RHKwlvbxLBEK4Flim7HyLewOp3pL8H/Hyh/LfKDUlnMyWrfDni9dkyBd++VEZy1T3ksEictmbkkAlRb5RJhVTBnOqGNFcyLQNSgcKqJGsxDwaTI81BQPaxRMLBF7Oh7mVfKVdFRtU2Pf1R4PlugD/7gfGrwuXXCU4k0ZdM5Yh9/1nhWy4lTt/bohZKDJjdOKBgeKygV98m/GaDXS2+VEogif2rWuZbKUCaVpScPnqonkHKK+T1auL+ojADLvhOKjBUkYklx6p49XFFGgK0f24lPDxouuzfLm0oI9s8KvFY5okQ0eQkElfMST8ZT4mpdf/xSiYL6xSEv5HanfoAO7G11cUMJQbff5RvB59OrYjdfpFu3bwoTn7U+9OGtiMEaYYOI/QuwVuDqleuihQ3/dtkh6HK5hKHLFwLMHoC5w+Q7nQ4ZhiHIJCQpWvnSgEfDs8Uu8vmXOJgAmUW73Z4MlhnjIYCfQPbniwMJ4WUBeDwearVaQjkS/gVvfuq5zo1dagAAAABJRU5ErkJggg==";
-                div2.style.backgroundImage = `url(${highlightBase64}), url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
-
-                div2.style.backgroundRepeat = "no-repeat, no-repeat, no-repeat";
-                div2.style.backgroundSize = "cover, cover, cover";
+                div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div.value = itemToRep(item);
             }
-            
             div2.addEventListener("click", (e) => {
                 e.stopPropagation();
                 searchBox.querySelectorAll(".itemoption[data-sel=yes]").forEach(x => {
