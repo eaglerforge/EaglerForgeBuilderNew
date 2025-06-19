@@ -3193,6 +3193,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             div2.style.width = div2.style.height = "4rem"; // image size
             // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "1px";
+            div2.style.marginBottom = "1px";
 
             
             div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
