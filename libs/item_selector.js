@@ -3130,6 +3130,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     div.classList.add("dynamic_itemsel");
     
     div.style.marginRight = "1px"; //ditance bettwen cells
+    div.style.marginBottom = "1px";
     
     div.style.borderRadius = "1px";
     div.value = selected;
@@ -3219,7 +3220,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                     x.style.zIndex = 0;
                 });
                 div2.setAttribute("data-sel", "yes");
-                // div2.style.transform = "scale(1.2)";
+                div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div.value = itemToRep(item);
                 selected = div.value;
