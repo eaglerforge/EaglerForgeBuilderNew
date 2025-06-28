@@ -42,9 +42,9 @@ PRIMITIVES["item"] = {
             },
             "1_12": function (argNames, code) {
                 return `
-                var $$ResultEnum = ModAPI.reflect.getClassByName("EnumActionResult").staticVariables; //SUCCESS, PASS, FAIL
+                var $$ResultEnum = ModAPI.reflect.getClassByName("EnumActionResult").staticVariables;
                 var $$ActionResult = ModAPI.reflect.getClassByName("ActionResult").constructors[0];
-                $$CustomItem.prototype.$onItemRightClick = function (${argNames.slice(1,3).join(", ")},$handEnum,$unused) {
+                $$CustomItem.prototype.$onItemRightClick = function (${argNames.slice(1, 3).join(", ")},$handEnum,$unused) {
                     var ${argNames[0]} = (${argNames[2]}).$getHeldItem($handEnum);
                     ${this.tags.useItemOnRightClick ?
                         `
@@ -57,9 +57,27 @@ PRIMITIVES["item"] = {
                 `
             }
         });
+        var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"], {
+            "1_8": function (args, code) {
+                return `
+                $$CustomItem.prototype.$onItemUse0 = function (${args.join(", ")}) {
+                    ${code};
+                    return 0;
+                }
+                `
+            },
+            "1_12": function (args, code) {
+                return `
+                var $$ResultEnum = ModAPI.reflect.getClassByName("EnumActionResult").staticVariables;
+                $$CustomItem.prototype.$onItemUse = function (${args.join(", ")}) {
+                    ${code};
+                    return $$ResultEnum.PASS;
+                }
+                `
+            }
+        });
         var usedHandler = getHandlerCode("ItemUsed", this.tags.Used, ["$$itemstack", "$$world", "$$player"]);
         var tickedHandler = getHandlerCode("ItemTicked", this.tags.Tick, ["$$itemstack", "$$world", "$$player", "$$hotbar_slot", "$$is_held"]);
-        var blockUseHandler = getHandlerCode("ItemBlockUse", this.tags.UsedOnBlock, ["$$itemstack", "$$player", "$$world", "$$blockpos"]);
         var craftedHandler = getHandlerCode("ItemCrafted", this.tags.Crafted, ["$$itemstack", "$$world", "$$player"]);
         var blockBrokenHandler = getHandlerCode("ItemBlockBroken", this.tags.BlockBroken, ["$$itemstack", "$$world", "$$block", "$$blockpos", "$$entity"]);
         var getAttributes = getHandlerCode("ItemGetAttributes", this.tags.GetAttributes, ["$$attributemap"]);
@@ -80,26 +98,25 @@ PRIMITIVES["item"] = {
         }
         ModAPI.reflect.prototypeStack($$itemClass, $$CustomItem);
         ${rightClickHandler}
-        $$CustomItem.prototype.$getMaxItemUseDuration = function () {
+        $$CustomItem.prototype.$getMaxItemUseDuration = function () { //1.12 works
             return ${this.tags.useDurationTicks};
         }
-        $$CustomItem.prototype.$getItemUseAction = function () {
+        $$CustomItem.prototype.$getItemUseAction = function () { //1.12 works
             return $$itemUseAnimation;
         }
-        $$CustomItem.prototype.$onItemUseFinish = function (${usedHandler.args.join(", ")}) {
+        $$CustomItem.prototype.$onItemUseFinish = function (${usedHandler.args.join(", ")}) { //1.12 works
             ${usedHandler.code};
             return (${usedHandler.args[0]});
         }
-        $$CustomItem.prototype.$onUpdate = function (${tickedHandler.args.join(", ")}) {
+        $$CustomItem.prototype.$onUpdate = function (${tickedHandler.args.join(", ")}) { //1.12 works
             ${tickedHandler.args[4]} = (${tickedHandler.args[4]}) ? true : false;
             ${tickedHandler.code};
             return (${tickedHandler.args[0]});
         }
-        $$CustomItem.prototype.$onItemUse0 = function (${blockUseHandler.args.join(", ")}) {
-            ${blockUseHandler.code};
-            return 0;
-        }
-        $$CustomItem.prototype.$onCreated = function (${craftedHandler.args.join(", ")}) {
+        
+        ${blockUseHandler}
+
+        $$CustomItem.prototype.$onCreated = function (${craftedHandler.args.join(", ")}) { //1.12 works
             ${craftedHandler.code};
         }
         $$CustomItem.prototype.$onBlockDestroyed = function (${blockBrokenHandler.args.join(", ")}) {
