@@ -98,7 +98,7 @@ registerHandler("ItemRightClick", "item right click", {
     "WORLD": "world",
     "PLAYER": "player"
 }, function () {
-    this.setTooltip('1.8: Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.\n\n1.12: Do not return any value!!! If UseItemOnRight click is enabled, the stack size is automagically decremented.');
+    this.setTooltip('1.8: Runs when the item is right-clicked.\nThe itemstack argument is expected as a return value.\n\n1.12: Expects ActionResult containing the ItemStack. If \'SUCCESS\' is the mode selected, the stack size is automatically decreased. If no return value, UseItemOnRightClick determines wether or not SUCCESS or PASS is the enabled mode.');
     this.setHelpUrl('https://nurmarvin.github.io/Minecraft-1.8-JavaDocs/net/minecraft/item/Item.html');
     this.setColour(225);
 });
