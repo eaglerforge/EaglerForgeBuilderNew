@@ -123,7 +123,7 @@ PRIMITIVES["item"] = {
             ${blockBrokenHandler.code};
             return 0;
         }
-        $$CustomItem.prototype.$getItemAttributeModifiers = function () {
+        $$CustomItem.prototype.$getItemAttributeModifiers = function () { //1.12 works i think
             var ${getAttributes.args[0]} = $$itemGetAttributes.apply(this, []);
             ${getAttributes.code};
             return ${getAttributes.args[0]};
