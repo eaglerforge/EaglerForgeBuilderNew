@@ -30,13 +30,48 @@ PRIMITIVES["block_advanced"] = {
         var constructorHandler = getHandlerCode("BlockConstructor", this.tags.Constructor, []);
         var breakHandler = getHandlerCode("BlockBreak", this.tags.Break, ["$$world", "$$blockpos", "$$blockstate"]);
         var addedHandler = getHandlerCode("BlockAdded", this.tags.Added, ["$$world", "$$blockpos", "$$blockstate"]);
-        var neighborHandler = getHandlerCode("BlockNeighbourChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"]);
+        var neighborHandler = getHandlerCode("BlockNeighbourChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"], {
+            "1_8": function (args, code) {
+                return `
+                $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${args.join(", ")}) {
+                    ${code};
+                    return $$onNeighborBlockChangeMethod(this, ${args.join(", ")});
+                }
+                `
+            },
+            "1_12": function (args, code) {
+                const copy = [...args];
+                copy[0] = args[1];
+                copy[1] = args[2];
+                copy[2] = args[0];
+                return `
+                $$nmb_AdvancedBlock.prototype.$neighborChanged = function (${copy.join(", ")}) {
+                    ${code};
+                    return $$onNeighborBlockChangeMethod(this, ${copy.join(", ")});
+                }
+                `
+            }
+        });
         var brokenByPlayerHandler = getHandlerCode("BlockBrokenByPlayer", this.tags.BrokenByPlayer, ["$$world", "$$blockpos", "$$blockstate"]);
         var randomTickHandler = getHandlerCode("BlockRandomTick", this.tags.RandomTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
-        var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"]);
+        var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"], {
+            "1.8": function (args, code) {
+                return `$$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${args.join(", ")}) {
+                    ${code};
+                    return $$entityCollisionMethod(this, ${args.join(", ")});
+                }`;
+            },
+            "1.12": function (args, code) {
+                const argList = `${args.slice(0,2).join(", ")},$$blockstate,${args[2]}`;
+                return `$$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${argList}) {
+                    ${code};
+                    return $$entityCollisionMethod(this, ${argList});
+                }`;
+            }
+        });
         var getDroppedItemHandler = getHandlerCode("BlockGetDroppedItem", this.tags.GetDroppedItem, ["$$blockstate", "$$random", "$$forture"]);
         var quantityDroppedHandler = getHandlerCode("BlockQuantityDropped", this.tags.QuantityDropped, ["$$random", "$$fortune"]);
-        
+
         var animationCode = `
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/textures/blocks/${this.tags.id}.png.mcmeta", efb2__str2ab(
 \`{
@@ -87,10 +122,9 @@ PRIMITIVES["block_advanced"] = {
             ${addedHandler.code};
             return $$onBlockAddedMethod(this, ${addedHandler.args.join(", ")});
         }
-        $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${neighborHandler.args.join(", ")}) {
-            ${neighborHandler.code};
-            return $$onNeighborBlockChangeMethod(this, ${neighborHandler.args.join(", ")});
-        }
+        
+        ${neighborHandler}
+
         $$nmb_AdvancedBlock.prototype.$onBlockDestroyedByPlayer = function (${brokenByPlayerHandler.args.join(", ")}) {
             ${brokenByPlayerHandler.code};
             return $$onBlockDestroyedByPlayerMethod(this, ${brokenByPlayerHandler.args.join(", ")});
@@ -102,22 +136,20 @@ PRIMITIVES["block_advanced"] = {
         $$nmb_AdvancedBlock.prototype.$tickRate = function () {
             return ${Math.max(1, Math.floor(this.tags.tickRatio || 10))};
         }
-        $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${entityCollisionHandler.args.join(", ")}) {
-            ${entityCollisionHandler.code};
-            return $$entityCollisionMethod(this, ${entityCollisionHandler.args.join(", ")});
-        }
+        
+        ${entityCollisionHandler}
+
         $$nmb_AdvancedBlock.prototype.$getItemDropped = function (${getDroppedItemHandler.args.join(", ")}) {
             ${getDroppedItemHandler.code};
             return $$getDroppedItem(this, ${getDroppedItemHandler.args.join(", ")});
         }
         $$nmb_AdvancedBlock.prototype.$quantityDropped = function (${quantityDroppedHandler.args.join(", ")}) {
-            ${quantityDroppedHandler.args[0]} ||= 0;
             ${quantityDroppedHandler.code};
             return $$quantityDropped(this, ${quantityDroppedHandler.args.join(", ")});
         }
-        $$nmb_AdvancedBlock.prototype.$quantityDroppedWithBonus = function (${quantityDroppedHandler.args.join(", ")}) {
+        $$nmb_AdvancedBlock.prototype.$quantityDroppedWithBonus = function (${quantityDroppedHandler.args.reverse().join(", ")}) {
             ${quantityDroppedHandler.code};
-            return $$quantityDropped(this, ${quantityDroppedHandler.args.join(", ")});
+            return $$quantityDropped(this, ${quantityDroppedHandler.args.reverse().join(", ")});
         }
 
         function $$internal_reg() {
