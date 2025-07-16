@@ -109,7 +109,7 @@ PRIMITIVES["block_advanced"] = {
 
         var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
             $$blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
-            this.$defaultBlockState = this.$blockState.$getBaseState();
+            ${flags.target === "1_12" ? "//" : ""}this.$defaultBlockState = this.$blockState.$getBaseState();
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$blockClass, $$nmb_AdvancedBlock);
