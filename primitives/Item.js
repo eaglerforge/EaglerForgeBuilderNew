@@ -82,6 +82,43 @@ PRIMITIVES["item"] = {
         var blockBrokenHandler = getHandlerCode("ItemBlockBroken", this.tags.BlockBroken, ["$$itemstack", "$$world", "$$block", "$$blockpos", "$$entity"]);
         var getAttributes = getHandlerCode("ItemGetAttributes", this.tags.GetAttributes, ["$$attributemap"]);
         var getEfficiency = getHandlerCode("ItemGetEfficiency", this.tags.GetEfficiency, ["$$itemstack", "$$block"]);
+
+        const transforms = flags.target === "1_12"
+            ? {
+                "thirdperson_righthand": {
+                    "rotation": [0, -90, 55],
+                    "translation": [0, 4.0, 0.5],
+                    "scale": [0.85 * thirdPersonScale, 0.85 * thirdPersonScale, 0.85 * thirdPersonScale]
+                },
+                "thirdperson_lefthand": {
+                    "rotation": [0, 90, -55],
+                    "translation": [0, 4.0, 0.5],
+                    "scale": [0.85 * thirdPersonScale, 0.85 * thirdPersonScale, 0.85 * thirdPersonScale]
+                },
+                "firstperson_righthand": {
+                    "rotation": [0, -90, 25],
+                    "translation": [1.13, 3.2, 1.13],
+                    "scale": [0.68 * firstPersonScale, 0.68 * firstPersonScale, 0.68 * firstPersonScale]
+                },
+                "firstperson_lefthand": {
+                    "rotation": [0, 90, -25],
+                    "translation": [1.13, 3.2, 1.13],
+                    "scale": [0.68 * firstPersonScale, 0.68 * firstPersonScale, 0.68 * firstPersonScale]
+                }
+            }
+            : {
+                "thirdperson": {
+                    "rotation": [-90, 0, 0],
+                    "translation": [0, 1, -3],
+                    "scale": [thirdPersonScale, thirdPersonScale, thirdPersonScale]
+                },
+                "firstperson": {
+                    "rotation": [0, -135, 25],
+                    "translation": [0, 4, 2],
+                    "scale": [firstPersonScale, firstPersonScale, firstPersonScale]
+                }
+            };
+
         return `(function ItemDatablock() {
     const $$itemTexture = "${this.tags.texture}";
 
@@ -161,18 +198,7 @@ PRIMITIVES["item"] = {
                 "textures": {
                     "layer0": "items/${this.tags.id}"
                 },
-                "display": {
-                    "thirdperson": {
-                        "rotation": [ ${flags.target === "1_12" ? 0 : -90}, 0, 0 ],
-                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 1, -3 ]"},
-                        "scale": [ ${thirdPersonScale}, ${thirdPersonScale}, ${thirdPersonScale} ]
-                    },
-                    "firstperson": {
-                        "rotation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, -135, 25 ]"},
-                        "translation": ${flags.target === "1_12" ? "[0, 0, 0]" : "[ 0, 4, 2 ]"},
-                        "scale": [ ${firstPersonScale}, ${firstPersonScale}, ${firstPersonScale} ]
-                    }
-                }
+                "display": ${JSON.stringify(transforms)}
             }
         ));
         AsyncSink.setFile("resourcepacks/AsyncSinkLib/assets/minecraft/textures/items/${this.tags.id}.png", await (await fetch(
