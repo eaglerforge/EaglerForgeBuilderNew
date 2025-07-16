@@ -306,7 +306,7 @@ javascript.javascriptGenerator.forBlock['blocks_setsoundtype'] = function () {
     dropdown_tab = dropdown_tab.toUpperCase();
   }
   const code = flags.target === "1_12"
-    ? `this.$setStepSound(ModAPI.blockSounds.${dropdown_tab}.getRef())`
+    ? `this.$setSoundType(ModAPI.blockSounds.${dropdown_tab}.getRef())`
     : `this.$setStepSound(blockClass.staticVariables.${dropdown_tab})`;
   return code;
 }
