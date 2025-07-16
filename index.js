@@ -69,7 +69,6 @@ function getProcedureCode(name, procMap) {
     return rippedCode;
 }
 function getHandlerCode(type, tag, defaultArgs, targetMapper) {
-    debugger;
     var handler = getHandler(type, tag);
     if (!handler && targetMapper) {
         return "";
