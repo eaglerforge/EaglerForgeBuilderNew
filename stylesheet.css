@@ -82,7 +82,7 @@ button:hover {
 }
 .datablock .controls {
   position: absolute;
-  bottom: 4px;
+  left: 4px;
   justify-self: end;
 }
 td {
