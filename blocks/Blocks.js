@@ -262,3 +262,51 @@ registerHandler("BlockQuantityDropped", "block get dropped quantity", {
   this.setHelpUrl('');
   this.setColour(0);
 });
+
+
+const blocks_setsoundtype = {
+  init: function () {
+    this.appendDummyInput('S')
+      .setAlign(Blockly.inputs.Align.RIGHT)
+      .appendField('Set block sound type to')
+      .appendField(new Blockly.FieldDropdown([
+        ["wood", "wood"],
+        ["ground", "ground"],
+        ["plant", "plant"],
+        ["stone", "stone"],
+        ["metal", "metal"],
+        ["glass", "glass"],
+        ["cloth", "cloth"],
+        ["sand", "sand"],
+        ["snow", "snow"],
+        ["ladder", "ladder"],
+        ["anvil", "anvil"],
+        ["slime", "slime"]
+      ]), 'S');
+    this.setInputsInline(false)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip('Set the sound type of the block');
+    this.setHelpUrl('');
+    this.setColour(0);
+  }
+};
+Blockly.common.defineBlocks({ blocks_setsoundtype: blocks_setsoundtype });
+javascript.javascriptGenerator.forBlock['blocks_setsoundtype'] = function () {
+  let dropdown_tab = this.getFieldValue('S');
+  if (flags.target !== "1_12") {
+    dropdown_tab = dropdown_tab.replaceAll("ground", "gravel");
+    if (dropdown_tab === "slime") {
+      dropdown_tab = "SLIME_SOUND";
+    } else {
+      dropdown_tab = dropdown_tab[0].toUpperCase() + dropdown_tab.slice(1);
+      dropdown_tab = "soundType" + dropdown_tab;
+    }
+  } else {
+    dropdown_tab = dropdown_tab.toUpperCase();
+  }
+  const code = flags.target === "1_12"
+    ? `this.$setStepSound(ModAPI.blockSounds.${dropdown_tab}.getRef())`
+    : `this.$setStepSound(blockClass.staticVariables.${dropdown_tab})`;
+  return code;
+}
