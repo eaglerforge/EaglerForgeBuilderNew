@@ -33,6 +33,7 @@ PRIMITIVES["block_advanced"] = {
         var neighborHandler = getHandlerCode("BlockNeighbourChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"], {
             "1_8": function (args, code) {
                 return `
+                var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
                 $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${args.join(", ")}) {
                     ${code};
                     return $$onNeighborBlockChangeMethod(this, ${args.join(", ")});
@@ -45,6 +46,7 @@ PRIMITIVES["block_advanced"] = {
                 copy[1] = args[2];
                 copy[2] = args[0];
                 return `
+                var $$onNeighborBlockChangeMethod = $$blockClass.methods.neighborChanged.method;
                 $$nmb_AdvancedBlock.prototype.$neighborChanged = function (${copy.join(", ")}) {
                     ${code};
                     return $$onNeighborBlockChangeMethod(this, ${copy.join(", ")});
@@ -66,8 +68,8 @@ PRIMITIVES["block_advanced"] = {
             "1_12": function (args, code) {
                 const argList = `${args.slice(0,2).join(", ")},$$blockstate,${args[2]}`;
                 return `
-                var $$entityCollisionMethod = $$blockClass.methods.entityCollided.method;
-                $$nmb_AdvancedBlock.prototype.$entityCollided = function (${argList}) {
+                var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
+                $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${argList}) {
                     ${code};
                     return $$entityCollisionMethod(this, ${argList});
                 }`;
@@ -99,7 +101,6 @@ PRIMITIVES["block_advanced"] = {
 
         var $$breakBlockMethod = $$blockClass.methods.breakBlock.method;
         var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
-        var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
         var $$onBlockDestroyedByPlayerMethod = $$blockClass.methods.onBlockDestroyedByPlayer.method;
         var $$randomTickMethod = $$blockClass.methods.randomTick.method;
         
