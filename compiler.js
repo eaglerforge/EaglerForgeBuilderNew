@@ -67,9 +67,16 @@ ${datablock_contents}
 }
 
 function exportMod() {
-    let output = getCompiledCode()
-    fileSave(output, "mod.js");
+    let output = getCompiledCode();
+
+    // Get the title from the metadata block and sanitize it
+    let title = PRIMITIVES["metadata"].tags.Title || "mod";
+    title = title.replace(/[^a-z0-9]/gi, '_'); // Replace non-alphanumeric chars with underscores
+
+    // Save the file with the sanitized title
+    fileSave(output, `${title}.js`);
 }
+
 var efiBuild = null;
 function getEfiBuild() {
     return new Promise((res, rej) => {

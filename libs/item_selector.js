@@ -1,755 +1,1027 @@
 const items = [
     {
         "id": "air",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flint_and_steel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "apple",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bow",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "arrow",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "coal",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_ingot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gold_ingot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_sword",
-        "type": "item"
+        "type": "item",
     },
     {
         "id": "wooden_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bowl",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "mushroom_stew",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_sword",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_shovel",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_pickaxe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_axe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "string",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "feather",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gunpowder",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wooden_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "stone_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_hoe",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wheat_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "wheat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bread",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chainmail_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_helmet",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_chestplate",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_leggings",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_boots",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flint",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "porkchop",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_porkchop",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "painting",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_apple",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "sign",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "oak_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spruce_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "birch_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "jungle_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "acacia_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "dark_oak_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "water_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "lava_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "saddle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_door",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "redstone",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "snowball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "boat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "leather",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "milk_bucket",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "brick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "clay_ball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "reeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "paper",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "slime_ball",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chest_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "furnace_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "egg",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "compass",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fishing_rod",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "clock",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "glowstone_dust",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fish",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_fish",
+        "type": "item",
+        "meta": 0
+    },
+    {
+        "name": "orange",
+        "meta": 14,
+        "id": "dye",
         "type": "item"
     },
     {
+        "name": "magenta",
+        "meta": 13,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "lightBlue",
+        "meta": 12,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "yellow",
+        "meta": 11,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "lime",
+        "meta": 10,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "pink",
+        "meta": 0,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "gray",
+        "meta": 8,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "silver",
+        "meta": 7,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "cyan",
+        "meta": 6,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "purple",
+        "meta": 5,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "blue",
+        "meta": 4,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "brown",
+        "meta": 3,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "green",
+        "meta": 2,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "red",
+        "meta": 1,
+        "id": "dye",
+        "type": "item"
+    },
+    {
+        "name": "black",
+        "meta": 0,
         "id": "dye",
         "type": "item"
     },
     {
         "id": "bone",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "sugar",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cake",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "bed",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "repeater",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cookie",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "filled_map",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "shears",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "melon",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "pumpkin_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "melon_seeds",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "beef",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_beef",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "chicken",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_chicken",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "mutton",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_mutton",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cooked_rabbit",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_stew",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_foot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rabbit_hide",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "rotten_flesh",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ender_pearl",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "blaze_rod",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ghast_tear",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "gold_nugget",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "nether_wart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "potionitem",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "glass_bottle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spider_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fermented_spider_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "blaze_powder",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "magma_cream",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "brewing_stand",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "cauldron",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "ender_eye",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "speckled_melon",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "spawn_egg",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "experience_bottle",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fire_charge",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "writable_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "written_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "emerald",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "item_frame",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "flower_pot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "carrot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "baked_potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "poisonous_potato",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "map",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_carrot",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "skull",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "carrot_on_a_stick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "nether_star",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "pumpkin_pie",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "fireworks",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "firework_charge",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "enchanted_book",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "comparator",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "netherbrick",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "quartz",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "tnt_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "hopper_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "armor_stand",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "iron_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "golden_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "diamond_horse_armor",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "lead",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "name_tag",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "command_block_minecart",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_13",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_cat",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_blocks",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_chirp",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_far",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_mall",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_mellohi",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_stal",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_strad",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_ward",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_11",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "record_wait",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "prismarine_shard",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "prismarine_crystals",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     },
     {
         "id": "banner",
-        "type": "item"
+        "type": "item",
+        "meta": 0
     }
 ];
 const blocks = [
@@ -2537,9 +2809,7 @@ const blocks = [
     }
 ];
 const IMAGE_HOST = [
-    "https://images-for-eaglerforge-builder.vercel.app/images/",
     "https://21cookej.github.io/Images-For-Eaglerforge-Builder/images/",
-    "https://minecraft.wiki/images/"
 ][0];
 const animatedList = ["command_block", "prismarine", "sea_lantern", "written_book", "compass", "clock", "Bottle_o%27_Enchanting", "nether_star", "enchanted_book"];
 const emptyTexture = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
@@ -2564,7 +2834,7 @@ function getImageLocationItem(item, display) {
         }
         return tex;
     }
-    item = Object.assign({}, item);
+    item = Object.assign({}, item); 
     item.id = item.id.replace("record", "music_disc");
     item.id = item.id.replace("banner", "white_banner");
     item.id = item.id.replace("command_block_minecart", "minecart_with_command_block");
@@ -2575,8 +2845,56 @@ function getImageLocationItem(item, display) {
     item.id = item.id.replace("writable_book", "book_and_quill");
     item.id = item.id.replace("reeds", "sugar_cane");
     item.id = item.id.replace("bed", "red_bed");
-    item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
     item.id = !display ? item.id.replace("spawn_egg", "blank_spawn_egg") : item.id;
+    
+    
+    if (item.name == "orange") {
+        item.id = !display ? item.id.replace("dye", "orange_dye") : item.id;
+    }
+    if (item.name == "magenta") {
+        item.id = !display ? item.id.replace("dye", "magenta_dye") : item.id;
+    }
+    if (item.name == "lightBlue") {
+        item.id = !display ? item.id.replace("dye", "light_blue_dye") : item.id;
+    }
+    if (item.name == "yellow") {
+        item.id = !display ? item.id.replace("dye", "yellow_dye") : item.id;
+    }
+    if (item.name == "lime") {
+        item.id = !display ? item.id.replace("dye", "lime_dye") : item.id;
+    }
+    if (item.name == "pink") {
+        item.id = !display ? item.id.replace("dye", "pink_dye") : item.id;
+    }
+    if (item.name == "gray") {
+        item.id = !display ? item.id.replace("dye", "gray_dye") : item.id;
+    }
+    if (item.name == "silver") {
+        item.id = !display ? item.id.replace("dye", "silver_dye") : item.id;
+    }
+    if (item.name == "cyan") {
+        item.id = !display ? item.id.replace("dye", "cyan_dye") : item.id;
+    }
+    if (item.name == "purple") {
+        item.id = !display ? item.id.replace("dye", "purple_dye") : item.id;
+    }
+    if (item.name == "blue") {
+        item.id = !display ? item.id.replace("dye", "lapis_lazuli") : item.id;
+    }
+    if (item.name == "brown") {
+        item.id = !display ? item.id.replace("dye", "brown_dye") : item.id;
+    }
+    if (item.name == "green") {
+        item.id = !display ? item.id.replace("dye", "green_dye") : item.id;
+    }
+    if (item.name == "red") {
+        item.id = !display ? item.id.replace("dye", "red_dye") : item.id;
+    }
+    if (item.name == "black") {
+        item.id = !display ? item.id.replace("dye", "black_dye") : item.id;
+    }
+
+    
     item.id = item.id.replace("repeater", "redstone_repeater");
     item.id = item.id.replace("comparator", "redstone_comparator");
     item.id = item.id.replace("slime_ball", "slimeball");
@@ -2618,7 +2936,6 @@ function getImageLocationBlock(block, display) {
     block.name = block.name.replaceAll("silver", "light_gray");
     block.id = block.id.replaceAll("log2", "log");
     block.id = block.id.replaceAll("leaves2", "leaves");
-    block.id = block.id.replaceAll("lapis", "lapis_lazuli");
     const blockOfBanlist = ["brown_mushroom_block", "red_mushroom_block", "command_block", "slime_block"];
     switch (block.id) {
         case "stone":
@@ -2784,7 +3101,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
 
     if (!useBlocks) {
         list.dynamicConcat("item", "id", (x) => {
-            return { id: x, type: "item", name: "missingno" }
+            return { id: x, type: "item", meta: 0, name: "missingno" }
         });
     }
 
@@ -2798,30 +3115,36 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
     var div = document.createElement("div");
     div._useInline = true;
     div.style.width = div.style.height = "4rem";
-    div.style.border = "1px solid var(--col)";
+    // div.style.border = "1px solid var(--col)";
     div.style.display = "inline-block";
     div.style.overflow = "hidden";
-    div.style.backgroundImage = `url(${getImageLocation(selected)})`;
-    div.style.backgroundRepeat = "no-repeat";
-    div.style.backgroundSize = "cover";
+
+    const fallbackBase64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAEBJREFUSEtjNDc3/89AZRASEsLACDIYxKAmKCkpGTUYEqCjQQFPWKNBMRoUmKXMaKoYTRX0ThX///+nemUK8gMAG9lWY9CX1RAAAAAASUVORK5CYII=";
+
+    div.style.backgroundImage = `url(${getImageLocation(selected)}), url(${fallbackBase64})`;
+    div.style.backgroundRepeat = "no-repeat, no-repeat";
+    div.style.backgroundSize = "cover, cover";
+
+    
     div.style.imageRendering = "pixelated";
     div.classList.add("dynamic_itemsel");
-    div.style.marginRight = "4px";
-    div.style.borderRadius = "4px";
+    
+    div.style.marginRight = "4px"; //ditance bettwen cells
+    
+    div.style.borderRadius = "1px";
     div.value = selected;
 
     var searchBox = document.createElement("div");
     searchBox.style.position = conf.popoverMethod;
-    searchBox.style.backgroundColor = "var(--background)";
-    searchBox.style.border = "1px solid var(--col)";
-    searchBox.style.borderRadius = "6px";
+    searchBox.style.backgroundColor = "rgb(198, 198, 198)";
+    // searchBox.style.border = "1px solid var(--col)";
+    searchBox.style.borderRadius = "0px";
     searchBox.style.width = conf.width;
     searchBox.style.height = conf.height;
     searchBox.style.top = conf.top;
     searchBox.style.left = conf.left;
     searchBox.style.zIndex = "255";
     searchBox.style.display = "none";
-    searchBox.style.boxShadow = "rgba(0,0,0,0.5) 0px 0px 16px 8px";
     searchBox.style.overflowY = "scroll";
     
     var closeButton = document.createElement("button");
@@ -2849,11 +3172,24 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
         searchBox.querySelectorAll(".itemoption").forEach(opt => {
             if (opt.getAttribute("data-item").toLowerCase().includes(lookFor) || opt.querySelector("label").innerText.toLowerCase().includes(lookFor)) {
                 opt.style.display = "inline-block";
+
             } else {
                 opt.style.display = "none";
             }
         });
     });
+
+    searchBar.type = "search";
+
+    // Style it:
+    searchBar.style.backgroundColor = "rgb(139, 139, 139)"; // box background
+    searchBar.style.color = "white";                        // text color
+    searchBar.style.fontSize = "16px";                      // text size
+    searchBar.style.border = "1px solid #444";              // border color (you can change this)
+    searchBar.style.borderRadius = "4px";                   // optional: rounded corners
+    searchBar.style.padding = "4px";                        // optional: inner spacing
+    searchBar.style.width = "calc(100% - 8px)";             // fills the width while accounting for padding
+
     
     
     searchBox.appendChild(searchBar);
@@ -2865,19 +3201,22 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
             var div2 = document.createElement("div");
             div2.setAttribute("data-item", (item.type === "block") ? getImageLocationBlock(item, true) : getImageLocationItem(item, true));
             div2.classList.add("itemoption");
-            div2.style.width = div2.style.height = "4rem";
-            div2.style.border = "1px solid var(--col)";
+            div2.style.width = div2.style.height = "4rem"; // image size
+            // div2.style.border = "1px solid var(--col)";
             div2.style.marginRight = "4px";
-            div2.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
-            div2.style.backgroundRepeat = "no-repeat";
-            div2.style.backgroundSize = "cover";
+
+            
+            div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
+            div2.style.backgroundRepeat = "no-repeat, no-repeat";
+            div2.style.backgroundSize = "cover, cover"; // or any size you want
+
             div2.style.imageRendering = "pixelated";
             div2.style.display = "inline-block";
             div2.style.overflow = "hidden";
             if (itemToRep(item) === selected) {
-                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+                
+                div2.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
                 div2.setAttribute("data-sel", "yes");
-                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
                 div.value = itemToRep(item);
@@ -2886,7 +3225,7 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                 e.stopPropagation();
                 searchBox.querySelectorAll(".itemoption[data-sel=yes]").forEach(x => {
                     x.setAttribute("data-sel", "no");
-                    x.style.border = "1px solid var(--col)";
+                    // x.style.border = "1px solid var(--col)";
                     x.style.backgroundColor = "";
                     x.style.transform = "";
                     x.style.zIndex = 0;
@@ -2894,22 +3233,23 @@ function makeItemSelector(selected, useBlocks, triggerFn, options) {
                 div2.setAttribute("data-sel", "yes");
                 div2.style.transform = "scale(1.2)";
                 div2.style.zIndex = 1;
-                div2.style.backgroundColor = "rgba(255,255,255,0.2)";
                 div.value = itemToRep(item);
                 selected = div.value;
                 triggerFn();
-                div.style.backgroundImage = `url(${getImageLocation((item.type === "block") ? getImageLocationBlock(item) : getImageLocationItem(item))})`;
+                div.style.backgroundImage = `url(${getImageLocation(item.type === "block" ? getImageLocationBlock(item) : getImageLocationItem(item))}), url(${fallbackBase64})`;
             });
             var label = document.createElement("label");
             label.innerText = (item.type === "block") ? getImageLocationBlock(item, true).replaceAll("%27", "'") : getImageLocationItem(item, true);
             if (conf.noMeta) {
                 label.innerText = item.id;
             }
+            label.style.fontSize = "12px";
             label.style.wordBreak = "break-all";
             label.style.display = "inline-block";
             label.style.width = "4rem";
-            label.style.backgroundColor = "rgba(0,0,0,0.6)";
-            label.style.boxShadow = "rgba(0,0,0,0.6) 0px 0px 5px 5px";
+            label.style.color = "black";
+
+            
             div2.appendChild(label);
             searchBox.appendChild(div2);
         });
