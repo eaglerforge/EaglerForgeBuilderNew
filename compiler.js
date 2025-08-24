@@ -91,7 +91,8 @@ function getEfiBuild() {
                     if (window.confirm("This file is not a EaglerForgeInjector build, or is too old.\nOpen the EaglerForgeInjector page?")) {
                         window.open("https://eaglerforge.github.io/EaglerForgeInjector");
                     }
-                    rej();
+                    
+                    return rej();
                 }
                 efiBuild = reader.result;
                 res();

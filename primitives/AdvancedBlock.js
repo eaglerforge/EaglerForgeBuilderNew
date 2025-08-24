@@ -33,6 +33,7 @@ PRIMITIVES["block_advanced"] = {
         var neighborHandler = getHandlerCode("BlockNeighbourChange", this.tags.NeighborChange, ["$$world", "$$blockpos", "$$blockstate"], {
             "1_8": function (args, code) {
                 return `
+                var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
                 $$nmb_AdvancedBlock.prototype.$onNeighborBlockChange = function (${args.join(", ")}) {
                     ${code};
                     return $$onNeighborBlockChangeMethod(this, ${args.join(", ")});
@@ -45,6 +46,7 @@ PRIMITIVES["block_advanced"] = {
                 copy[1] = args[2];
                 copy[2] = args[0];
                 return `
+                var $$onNeighborBlockChangeMethod = $$blockClass.methods.neighborChanged.method;
                 $$nmb_AdvancedBlock.prototype.$neighborChanged = function (${copy.join(", ")}) {
                     ${code};
                     return $$onNeighborBlockChangeMethod(this, ${copy.join(", ")});
@@ -55,15 +57,19 @@ PRIMITIVES["block_advanced"] = {
         var brokenByPlayerHandler = getHandlerCode("BlockBrokenByPlayer", this.tags.BrokenByPlayer, ["$$world", "$$blockpos", "$$blockstate"]);
         var randomTickHandler = getHandlerCode("BlockRandomTick", this.tags.RandomTick, ["$$world", "$$blockpos", "$$blockstate", "$$random"]);
         var entityCollisionHandler = getHandlerCode("BlockEntityCollision", this.tags.EntityCollided, ["$$world", "$$blockpos", "$$entity"], {
-            "1.8": function (args, code) {
-                return `$$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${args.join(", ")}) {
+            "1_8": function (args, code) {
+                return `
+                var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
+                $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${args.join(", ")}) {
                     ${code};
                     return $$entityCollisionMethod(this, ${args.join(", ")});
                 }`;
             },
-            "1.12": function (args, code) {
+            "1_12": function (args, code) {
                 const argList = `${args.slice(0,2).join(", ")},$$blockstate,${args[2]}`;
-                return `$$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${argList}) {
+                return `
+                var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
+                $$nmb_AdvancedBlock.prototype.$onEntityCollidedWithBlock = function (${argList}) {
                     ${code};
                     return $$entityCollisionMethod(this, ${argList});
                 }`;
@@ -90,21 +96,20 @@ PRIMITIVES["block_advanced"] = {
         var $$itemClass = ModAPI.reflect.getClassById("net.minecraft.item.Item");
         var $$blockClass = ModAPI.reflect.getClassById("net.minecraft.block.Block");
         var $$iproperty = ModAPI.reflect.getClassById("net.minecraft.block.properties.IProperty").class;
-        var $$makeBlockState = ModAPI.reflect.getClassById("net.minecraft.block.state.BlockState").constructors.find(x => x.length === 2);
+        var $$makeBlockState = ModAPI.reflect.getClassById("${flags.target === "1_12" ? "net.minecraft.block.state.BlockStateContainer" : "net.minecraft.block.state.BlockState"}").constructors.find(x => x.length === 2);
         var $$blockSuper = ModAPI.reflect.getSuper($$blockClass, (x) => x.length === 2);
 
         var $$breakBlockMethod = $$blockClass.methods.breakBlock.method;
         var $$onBlockAddedMethod = $$blockClass.methods.onBlockAdded.method;
-        var $$onNeighborBlockChangeMethod = $$blockClass.methods.onNeighborBlockChange.method;
         var $$onBlockDestroyedByPlayerMethod = $$blockClass.methods.onBlockDestroyedByPlayer.method;
         var $$randomTickMethod = $$blockClass.methods.randomTick.method;
-        var $$entityCollisionMethod = $$blockClass.methods.onEntityCollidedWithBlock.method;
+        
         var $$getDroppedItem = $$blockClass.methods.getItemDropped.method;
         var $$quantityDropped = $$blockClass.methods.quantityDropped.method;
 
         var $$nmb_AdvancedBlock = function $$nmb_AdvancedBlock() {
             $$blockSuper(this, ModAPI.materials.${this.tags.material}.getRef());
-            this.$defaultBlockState = this.$blockState.$getBaseState();
+            ${flags.target === "1_12" ? "//" : ""}this.$defaultBlockState = this.$blockState.$getBaseState();
             ${constructorHandler.code};
         }
         ModAPI.reflect.prototypeStack($$blockClass, $$nmb_AdvancedBlock);
