@@ -4,8 +4,12 @@ PRIMITIVES["furnace_recipe"] = {
     type: "recipe",
     tags: {
         input: VALUE_ENUMS.ABSTRACT_ITEM,   // item/block to smelt
+        lf0: VALUE_ENUMS.NEWLINE,
+        lf1: VALUE_ENUMS.NEWLINE,
         result: VALUE_ENUMS.ABSTRACT_ITEM,  // smelt result
+        lf2: VALUE_ENUMS.NEWLINE,
         resultQuantity: 1,                  // output count
+        lf3: VALUE_ENUMS.NEWLINE,
         experience: 0.1,                    // xp gained
     },
     getDependencies: function () {
@@ -32,7 +36,7 @@ PRIMITIVES["furnace_recipe"] = {
         });
         
         return `(function FurnaceRecipeDatablock() {
-    async function $registerFurnaceRecipe(isServer) {
+    async function $$registerFurnaceRecipe(isServer) {
         await new Promise((res, rej) => {
             if (!isServer) {
                 res();
@@ -81,45 +85,10 @@ PRIMITIVES["furnace_recipe"] = {
                 return;
             }
 
-            var $outputStack;
+            var $$outputStack;
             if (output.type === "block") {
                 if (!ModAPI.blocks[output.id]) {
                     console.warn("Block not found: " + output.id);
                     return;
                 }
-                $outputStack = ModAPI.reflect.getClassById("net.minecraft.item.ItemStack").constructors[1](ModAPI.blocks[output.id].getRef(), ${tags.resultQuantity});
-            } else {
-                if (!ModAPI.items[output.id]) {
-                    console.warn("Item not found: " + output.id);
-                    return;
-                }
-                $outputStack = ModAPI.reflect.getClassById("net.minecraft.item.ItemStack").constructors[4](ModAPI.items[output.id].getRef(), ${tags.resultQuantity});
-            }
-
-            if (input.type === "block") {
-                if (!ModAPI.blocks[input.id]) {
-                    console.warn("Input block not found: " + input.id);
-                    return;
-                }
-                FurnaceRecipesInstance.addSmeltingRecipeForBlock(ModAPI.blocks[input.id].getRef(), $outputStack, ${tags.experience});
-            } else {
-                if (!ModAPI.items[input.id]) {
-                    console.warn("Input item not found: " + input.id);
-                    return;
-                }
-                FurnaceRecipesInstance.addSmelting(ModAPI.items[input.id].getRef(), $outputStack, ${tags.experience});
-            }
-            
-            console.log("Registered furnace recipe: " + "${tags.input}" + " -> " + "${tags.result}");
-        } catch (e) {
-            console.error("Error registering furnace recipe:", e);
-        }
-    }
-    
-    $registerFurnaceRecipe();
-    if (ModAPI.dedicatedServer && ModAPI.dedicatedServer.appendCode) {
-        ModAPI.dedicatedServer.appendCode($registerFurnaceRecipe);
-    }
-})();`;
-    }
-}
+                $$outputStack = ModAPI.reflect.getClassById(
