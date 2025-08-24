@@ -1,7 +1,7 @@
 PRIMITIVES["furnace_recipe"] = {
     name: "Furnace Recipe",
     uses: [],
-    type: "recipe",
+    type: "furnace_recipe",
     tags: {
         input: VALUE_ENUMS.ABSTRACT_ITEM,   // item/block to smelt
         lf0: VALUE_ENUMS.NEWLINE,
@@ -91,4 +91,39 @@ PRIMITIVES["furnace_recipe"] = {
                     console.warn("Block not found: " + output.id);
                     return;
                 }
-                $$outputStack = ModAPI.reflect.getClassById(
+                $$outputStack = ModAPI.reflect.getClassById("net.minecraft.item.ItemStack").constructors[1](ModAPI.blocks[output.id].getRef(), ${tags.resultQuantity});
+            } else {
+                if (!ModAPI.items[output.id]) {
+                    console.warn("Item not found: " + output.id);
+                    return;
+                }
+                $$outputStack = ModAPI.reflect.getClassById("net.minecraft.item.ItemStack").constructors[4](ModAPI.items[output.id].getRef(), ${tags.resultQuantity});
+            }
+
+            if (input.type === "block") {
+                if (!ModAPI.blocks[input.id]) {
+                    console.warn("Input block not found: " + input.id);
+                    return;
+                }
+                FurnaceRecipesInstance.addSmeltingRecipeForBlock(ModAPI.blocks[input.id].getRef(), $$outputStack, ${tags.experience});
+            } else {
+                if (!ModAPI.items[input.id]) {
+                    console.warn("Input item not found: " + input.id);
+                    return;
+                }
+                FurnaceRecipesInstance.addSmelting(ModAPI.items[input.id].getRef(), $$outputStack, ${tags.experience});
+            }
+            
+            console.log("Registered furnace recipe: " + "${tags.input}" + " -> " + "${tags.result}");
+        } catch (e) {
+            console.error("Error registering furnace recipe:", e);
+        }
+    }
+    
+    $$registerFurnaceRecipe();
+    if (ModAPI.dedicatedServer && ModAPI.dedicatedServer.appendCode) {
+        ModAPI.dedicatedServer.appendCode($$registerFurnaceRecipe);
+    }
+})();`;
+    }
+}
