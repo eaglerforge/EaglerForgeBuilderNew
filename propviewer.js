@@ -37,7 +37,7 @@ function editObject(obj, datablock) {
         const isInline = InlineValues.includes(parentValue);
 
         if (parentValue === VALUE_ENUMS.NEWLINE) {
-            return propnav.appendChild(document.createElement("br"));;
+            return propnav.appendChild(document.createElement("div"));;
         }
 
         if (!isInline) {
