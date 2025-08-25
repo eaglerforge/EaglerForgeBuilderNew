@@ -1,7 +1,7 @@
 PRIMITIVES["furnace_recipe"] = {
     name: "Furnace Recipe",
     uses: [],
-    type: "recipe",
+    type: "furnace_recipe",
     tags: {
         input: VALUE_ENUMS.ABSTRACT_ITEM,   // item/block to smelt
         lf0: VALUE_ENUMS.NEWLINE,
