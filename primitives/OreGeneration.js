@@ -36,73 +36,74 @@ PRIMITIVES["ore_generation"] = {
     ModAPI.dedicatedServer.appendCode(()=>{
         const WorldGenMineable = ModAPI.reflect.getClassById("net.minecraft.world.gen.feature.WorldGenMineable").constructors.find(x=>x.length===2);
         
-        // For Overworld generation
-        if (${targetDimension} === 0) {
-            const BiomeDecorator_decorate = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "decorate");
-            const oldDecorate = ModAPI.hooks.methods[BiomeDecorator_decorate];
-            ModAPI.hooks.methods[BiomeDecorator_decorate] = function ($this, $world, $random, $biomeGenBase, $blockpos) {
-                if (!$this.$currentWorld) {
+        // Universal approach - hook into chunk decoration
+        const BiomeDecorator_decorate = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "decorate");
+        const oldDecorate = ModAPI.hooks.methods[BiomeDecorator_decorate];
+        ModAPI.hooks.methods[BiomeDecorator_decorate] = function ($this, $world, $random, $biomeGenBase, $blockpos) {
+            // Check dimension
+            const dimensionId = $world.provider ? $world.provider.getDimensionId() : ($world.worldInfo ? $world.worldInfo.getDimension() : 0);
+            
+            if (dimensionId === ${targetDimension}) {
+                if (!$this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`]) {
                     $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
                 }
-                return oldDecorate.apply(this, [$this, $world, $random, $biomeGenBase, $blockpos]);
             }
-            const BiomeDecorator_generateOres = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "generateOres");
-            const oldGenerateOres = ModAPI.hooks.methods[BiomeDecorator_generateOres];
-            ModAPI.hooks.methods[BiomeDecorator_generateOres] = function ($this) {
-                $this.$genStandardOre1(${this.tags.veinCount}, $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] || null, ${this.tags.minGenerationHeight}, ${this.tags.maxGenerationHeight});
-                return oldGenerateOres.apply(this, [$this]);
-            }
+            return oldDecorate.apply(this, [$this, $world, $random, $biomeGenBase, $blockpos]);
         }
         
-        // For Nether generation
-        else if (${targetDimension} === -1) {
-            const ChunkProviderHell_populate = ModAPI.util.getMethodFromPackage("net.minecraft.world.gen.ChunkProviderHell", "populate");
-            const oldPopulate = ModAPI.hooks.methods[ChunkProviderHell_populate];
-            ModAPI.hooks.methods[ChunkProviderHell_populate] = function ($this, $chunkProvider, $x, $z) {
-                const result = oldPopulate.apply(this, [$this, $chunkProvider, $x, $z]);
-                
-                // Generate custom ore in nether
-                const world = $chunkProvider.worldObj || $chunkProvider.world;
-                const random = world.rand;
-                const blockPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors[0](($x << 4) + 8, 0, ($z << 4) + 8);
-                
-                const oreGen = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
-                
-                for (let i = 0; i < ${this.tags.veinCount}; i++) {
-                    const genX = blockPos.getX() + random.nextInt(16);
-                    const genY = random.nextInt(Math.max(1, ${this.tags.maxGenerationHeight} - ${this.tags.minGenerationHeight})) + ${this.tags.minGenerationHeight};
-                    const genZ = blockPos.getZ() + random.nextInt(16);
-                    const genPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors[0](genX, genY, genZ);
-                    oreGen.generate(world, random, genPos);
-                }
-                
-                return result;
+        const BiomeDecorator_generateOres = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "generateOres");
+        const oldGenerateOres = ModAPI.hooks.methods[BiomeDecorator_generateOres];
+        ModAPI.hooks.methods[BiomeDecorator_generateOres] = function ($this) {
+            // Generate ores if we have the generator for this dimension
+            if ($this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`]) {
+                $this.$genStandardOre1(${this.tags.veinCount}, $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`], ${this.tags.minGenerationHeight}, ${this.tags.maxGenerationHeight});
             }
+            return oldGenerateOres.apply(this, [$this]);
         }
         
-        // For End generation
-        else if (${targetDimension} === 1) {
-            const ChunkProviderEnd_populate = ModAPI.util.getMethodFromPackage("net.minecraft.world.gen.ChunkProviderEnd", "populate");
-            const oldPopulateEnd = ModAPI.hooks.methods[ChunkProviderEnd_populate];
-            ModAPI.hooks.methods[ChunkProviderEnd_populate] = function ($this, $chunkProvider, $x, $z) {
-                const result = oldPopulateEnd.apply(this, [$this, $chunkProvider, $x, $z]);
-                
-                // Generate custom ore in end
-                const world = $chunkProvider.worldObj || $chunkProvider.world;
-                const random = world.rand;
-                const blockPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors[0](($x << 4) + 8, 0, ($z << 4) + 8);
-                
-                const oreGen = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
-                
-                for (let i = 0; i < ${this.tags.veinCount}; i++) {
-                    const genX = blockPos.getX() + random.nextInt(16);
-                    const genY = random.nextInt(Math.max(1, ${this.tags.maxGenerationHeight} - ${this.tags.minGenerationHeight})) + ${this.tags.minGenerationHeight};
-                    const genZ = blockPos.getZ() + random.nextInt(16);
-                    const genPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors[0](genX, genY, genZ);
-                    oreGen.generate(world, random, genPos);
+        // Additional fallback - try to hook chunk population directly
+        if (${targetDimension} !== 0) {
+            try {
+                // Try to find and hook the populate method from any chunk provider
+                const IChunkProvider_populate = ModAPI.util.getMethodFromPackage("net.minecraft.world.chunk.IChunkProvider", "populate");
+                if (IChunkProvider_populate) {
+                    const oldPopulate = ModAPI.hooks.methods[IChunkProvider_populate];
+                    ModAPI.hooks.methods[IChunkProvider_populate] = function ($this, $chunkProvider, $x, $z) {
+                        const result = oldPopulate ? oldPopulate.apply(this, [$this, $chunkProvider, $x, $z]) : undefined;
+                        
+                        // Get the world
+                        const world = $chunkProvider.worldObj || $chunkProvider.world || $this.worldObj || $this.world;
+                        if (world) {
+                            const dimensionId = world.provider ? world.provider.getDimensionId() : (world.worldInfo ? world.worldInfo.getDimension() : 0);
+                            
+                            if (dimensionId === ${targetDimension}) {
+                                const random = world.rand || world.random;
+                                if (random) {
+                                    const oreGen = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
+                                    
+                                    for (let i = 0; i < ${this.tags.veinCount}; i++) {
+                                        const genX = ($x << 4) + random.nextInt(16);
+                                        const genY = random.nextInt(Math.max(1, ${this.tags.maxGenerationHeight} - ${this.tags.minGenerationHeight})) + ${this.tags.minGenerationHeight};
+                                        const genZ = ($z << 4) + random.nextInt(16);
+                                        
+                                        try {
+                                            const genPos = ModAPI.reflect.getClassById("net.minecraft.util.BlockPos").constructors[0](genX, genY, genZ);
+                                            oreGen.generate(world, random, genPos);
+                                        } catch (e) {
+                                            // Fallback - try direct block placement
+                                            const blockState = ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta});
+                                            world.setBlockState(genX, genY, genZ, blockState);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        return result;
+                    }
                 }
-                
-                return result;
+            } catch (e) {
+                console.log("Could not hook IChunkProvider.populate:", e);
             }
         }
     });
