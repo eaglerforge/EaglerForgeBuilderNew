@@ -9,7 +9,15 @@ PRIMITIVES["ore_generation"] = {
         veinCount: 105,
         minGenerationHeight: 0,
         maxGenerationHeight: 256,
-        dimension: 0 // 0=Overworld, -1=Nether, 1=End (custom IDs allowed)
+        dimension: {
+            type: "enum",
+            default: 0,
+            values: {
+                "Overworld": 0,
+                "Nether": -1,
+                "End": 1
+            }
+        }
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
@@ -29,7 +37,7 @@ PRIMITIVES["ore_generation"] = {
         var blockId = this.tags.oreBlock.replaceAll("block/", "").split("@")[0];
         var blockMeta = parseInt(this.tags.oreBlock.replaceAll("block/", "").split("@")[1]) || 0;
         var salt = "XXXXXX".split("").map(x => Math.floor(Math.random() * 10)).join("");
-        var dimId = this.tags.dimension; // selected dimension
+        var dimId = this.tags.dimension || 0; // default to Overworld
 
         return (function OreGenerationDatablock() {
             ModAPI.dedicatedServer.appendCode(() => {
