@@ -4,11 +4,12 @@ PRIMITIVES["furnace_recipe"] = {
     type: "recipe",
     tags: {
         input: VALUE_ENUMS.ABSTRACT_ITEM,   // item/block to smelt
-        result: VALUE_ENUMS.ABSTRACT_ITEM,  // smelt result
         lf0: VALUE_ENUMS.NEWLINE,
+        result: VALUE_ENUMS.ABSTRACT_ITEM,  // smelt result
         lf1: VALUE_ENUMS.NEWLINE,
-        resultQuantity: 1,                  // output count
         lf2: VALUE_ENUMS.NEWLINE,
+        resultQuantity: 1,                  // output count
+        lf3: VALUE_ENUMS.NEWLINE,
         experience: 0.1,                    // xp gained
     },
     getDependencies: function () {
