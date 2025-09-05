@@ -8,16 +8,7 @@ PRIMITIVES["ore_generation"] = {
         veinSize: 4,
         veinCount: 105,
         minGenerationHeight: 0,
-        maxGenerationHeight: 256,
-        dimension: {
-            type: "enum",
-            default: 0,
-            values: {
-                "Overworld": 0,
-                "Nether": -1,
-                "End": 1
-            }
-        }
+        maxGenerationHeight: 256
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
@@ -35,71 +26,28 @@ PRIMITIVES["ore_generation"] = {
     },
     asJavaScript: function () {
         var blockId = this.tags.oreBlock.replaceAll("block/", "").split("@")[0];
-        var blockMeta = parseInt(this.tags.oreBlock.replaceAll("block/", "").split("@")[1]) || 0;
+        var blockMeta = parseInt(this.tags.oreBlock.replaceAll("block/", "").split("@")[0]) || 0;
         var salt = "XXXXXX".split("").map(x => Math.floor(Math.random() * 10)).join("");
-        var dimId = this.tags.dimension || 0; // default to Overworld
+        return `(function OreGenerationDatablock() {
+    ModAPI.dedicatedServer.appendCode(()=>{
+        const WorldGenMineable = ModAPI.reflect.getClassById("net.minecraft.world.gen.feature.WorldGenMinable").constructors.find(x=>x.length===2);
 
-        return (function OreGenerationDatablock() {
-            ModAPI.dedicatedServer.appendCode(() => {
-                const WorldGenMinable = ModAPI.reflect.getClassById("net.minecraft.world.gen.feature.WorldGenMinable")
-                    .constructors.find(x => x.length === 2);
+        const BiomeDecorator_decorate = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "decorate");
+        const oldDecorate = ModAPI.hooks.methods[BiomeDecorator_decorate];
+        ModAPI.hooks.methods[BiomeDecorator_decorate] = function ($this, $world, $random, $biomeGenBase, $blockpos) {
+            if (!$this.$currentWorld) {
+                $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
+            }
+            return oldDecorate.apply(this, [$this, $world, $random, $biomeGenBase, $blockpos]);
+        }
 
-                function makeGen() {
-                    return WorldGenMinable(
-                        ModAPI.blocks[blockId].getStateFromMeta(blockMeta).getRef(),
-                        ${this.tags.veinSize}
-                    );
-                }
-
-                // --- Overworld (BiomeDecorator) ---
-                const BiomeDecorator_generateOres = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "generateOres");
-                const oldGenerateOres = ModAPI.hooks.methods[BiomeDecorator_generateOres];
-                ModAPI.hooks.methods[BiomeDecorator_generateOres] = function ($this) {
-                    if ($this.currentWorld.provider.getDimensionId() === ${dimId}) {
-                        $this.$genStandardOre1(
-                            ${this.tags.veinCount},
-                            makeGen(),
-                            ${this.tags.minGenerationHeight},
-                            ${this.tags.maxGenerationHeight}
-                        );
-                    }
-                    return oldGenerateOres.apply(this, [$this]);
-                };
-
-                // --- Nether (ChunkProviderHell) ---
-                const ChunkProviderHell_generate = ModAPI.util.getMethodFromPackage("net.minecraft.world.gen.ChunkProviderHell", "generate");
-                const oldNetherGen = ModAPI.hooks.methods[ChunkProviderHell_generate];
-                ModAPI.hooks.methods[ChunkProviderHell_generate] = function ($this, chunkX, chunkZ, chunkPrimer) {
-                    let result = oldNetherGen.apply(this, [$this, chunkX, chunkZ, chunkPrimer]);
-
-                    if ($this.worldObj.provider.getDimensionId() === ${dimId}) {
-                        for (let i = 0; i < ${this.tags.veinCount}; i++) {
-                            let x = chunkX * 16 + $this.hellRNG.nextInt(16);
-                            let y = $this.hellRNG.nextInt(${this.tags.maxGenerationHeight});
-                            let z = chunkZ * 16 + $this.hellRNG.nextInt(16);
-                            makeGen().generate($this.worldObj, $this.hellRNG, new BlockPos(x, y, z));
-                        }
-                    }
-                    return result;
-                };
-
-                // --- End (ChunkProviderEnd) ---
-                const ChunkProviderEnd_generate = ModAPI.util.getMethodFromPackage("net.minecraft.world.gen.ChunkProviderEnd", "generate");
-                const oldEndGen = ModAPI.hooks.methods[ChunkProviderEnd_generate];
-                ModAPI.hooks.methods[ChunkProviderEnd_generate] = function ($this, chunkX, chunkZ, chunkPrimer) {
-                    let result = oldEndGen.apply(this, [$this, chunkX, chunkZ, chunkPrimer]);
-
-                    if ($this.worldObj.provider.getDimensionId() === ${dimId}) {
-                        for (let i = 0; i < ${this.tags.veinCount}; i++) {
-                            let x = chunkX * 16 + $this.endRNG.nextInt(16);
-                            let y = $this.endRNG.nextInt(${this.tags.maxGenerationHeight});
-                            let z = chunkZ * 16 + $this.endRNG.nextInt(16);
-                            makeGen().generate($this.worldObj, $this.endRNG, new BlockPos(x, y, z));
-                        }
-                    }
-                    return result;
-                };
-            });
-        })();
+        const BiomeDecorator_generateOres = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "generateOres");
+        const oldGenerateOres = ModAPI.hooks.methods[BiomeDecorator_generateOres];
+        ModAPI.hooks.methods[BiomeDecorator_generateOres] = function ($this) {
+            $this.$genStandardOre1(${this.tags.veinCount}, $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] || null, ${this.tags.minGenerationHeight}, ${this.tags.maxGenerationHeight});
+            return oldGenerateOres.apply(this, [$this]);
+        }
+    });
+})();`;
     }
-};
+}
