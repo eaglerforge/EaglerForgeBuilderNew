@@ -18,7 +18,7 @@ PRIMITIVES["ore_generation"] = {
         lf1: VALUE_ENUMS.NEWLINE,
         
         // Nether generation settings
-        netherEnabled: false,
+        netherEnabled: true,
         netherVeinSize: 8,
         netherVeinCount: 20,
         netherMinHeight: 10,
