@@ -1,4 +1,3 @@
-//TODO: quantityDropped, onBlockDestroyedByExplosion, onBlockActivated
 PRIMITIVES["ore_generation"] = {
     name: "Ore Generation",
     type: "ore_generation",
@@ -8,7 +7,8 @@ PRIMITIVES["ore_generation"] = {
         veinSize: 4,
         veinCount: 105,
         minGenerationHeight: 0,
-        maxGenerationHeight: 256
+        maxGenerationHeight: 256,
+        dimensionId: 0  // 0 = Overworld, -1 = Nether, 1 = End
     },
     getDependencies: function () {
         const matchesList = new Set([].bake().dynamicConcat("block_advanced", "id", (x) => {
@@ -30,21 +30,33 @@ PRIMITIVES["ore_generation"] = {
         var salt = "XXXXXX".split("").map(x => Math.floor(Math.random() * 10)).join("");
         return `(function OreGenerationDatablock() {
     ModAPI.dedicatedServer.appendCode(()=>{
-        const WorldGenMineable = ModAPI.reflect.getClassById("net.minecraft.world.gen.feature.WorldGenMinable").constructors.find(x=>x.length===2);
-
+        const WorldGenMineable = ModAPI.reflect.getClassById("net.minecraft.world.gen.feature.WorldGenMinable").constructors.find(x=>x.length===3);
         const BiomeDecorator_decorate = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "decorate");
         const oldDecorate = ModAPI.hooks.methods[BiomeDecorator_decorate];
         ModAPI.hooks.methods[BiomeDecorator_decorate] = function ($this, $world, $random, $biomeGenBase, $blockpos) {
             if (!$this.$currentWorld) {
-                $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize});
+                // Determine which block to replace based on dimension
+                let targetBlock;
+                const dimensionId = ${this.tags.dimensionId};
+                if (dimensionId === -1) {
+                    targetBlock = ModAPI.blocks.netherrack.getDefaultState().getRef(); // Nether
+                } else if (dimensionId === 1) {
+                    targetBlock = ModAPI.blocks.end_stone.getDefaultState().getRef(); // End
+                } else {
+                    targetBlock = ModAPI.blocks.stone.getDefaultState().getRef(); // Overworld
+                }
+                $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] = WorldGenMineable(ModAPI.blocks[\`${blockId}\`].getStateFromMeta(${blockMeta}).getRef(), ${this.tags.veinSize}, targetBlock);
             }
             return oldDecorate.apply(this, [$this, $world, $random, $biomeGenBase, $blockpos]);
         }
-
         const BiomeDecorator_generateOres = ModAPI.util.getMethodFromPackage("net.minecraft.world.biome.BiomeDecorator", "generateOres");
         const oldGenerateOres = ModAPI.hooks.methods[BiomeDecorator_generateOres];
         ModAPI.hooks.methods[BiomeDecorator_generateOres] = function ($this) {
-            $this.$genStandardOre1(${this.tags.veinCount}, $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] || null, ${this.tags.minGenerationHeight}, ${this.tags.maxGenerationHeight});
+            // Check if we're in the correct dimension
+            const dimensionId = $this.field_180294_c.field_73011_w.field_76574_g; // world.provider.dimensionId
+            if (dimensionId === ${this.tags.dimensionId}) {
+                $this.$genStandardOre1(${this.tags.veinCount}, $this[\`$efb2__${blockId + blockMeta}_${salt}_BlockGen\`] || null, ${this.tags.minGenerationHeight}, ${this.tags.maxGenerationHeight});
+            }
             return oldGenerateOres.apply(this, [$this]);
         }
     });
