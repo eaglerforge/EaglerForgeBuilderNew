@@ -88,19 +88,27 @@ PRIMITIVES["recipe"] = {
                 newGrid[y - minY][x - minX] = grid[y][x];
             }
         }
-        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
+        const uniqueTypesMap = Object.fromEntries([...new Set(newGrid.flat())].filter(x => x !== "item/air").map((x, i) => {
             return [x, String.fromCharCode(65 + i)];
         }));
-        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].filter(x=>x!=="item/air").map((x, i) => {
+        const uniqueTypesMapReverse = Object.fromEntries([...new Set(newGrid.flat())].filter(x => x !== "item/air").map((x, i) => {
             return [String.fromCharCode(65 + i), x];
         }));
         var legendStr = "";
-        Object.keys(uniqueTypesMapReverse).forEach(k => {
-            legendStr += `"${k}": {
+        const ks = Object.keys(uniqueTypesMapReverse);
+        ks.forEach((k, i) => {
+            if (flags.target === "1_12") {
+                legendStr += `"${k}": {
+                item: "minecraft:${uniqueTypesMapReverse[k].split("/")[1].split("@")[0]}",
+                ${uniqueTypesMapReverse[k].includes("@") ? `data: ${parseInt(uniqueTypesMapReverse[k].split("/")[1].split("@")[1]) || 0}` : ""}
+            }${ks.length === (i+1) ? "" : ","}`
+            } else {
+                legendStr += `"${k}": {
                 type: "${uniqueTypesMapReverse[k].split("/")[0]}",
                 id: "${uniqueTypesMapReverse[k].split("/")[1].split("@")[0]}",
                 ${uniqueTypesMapReverse[k].includes("@") ? `meta: ${parseInt(uniqueTypesMapReverse[k].split("/")[1].split("@")[1]) || 0}` : ""}
-            },`
+            }${ks.length === (i+1) ? "" : ","}`
+            }
         });
         var $$recipePattern = "";
         for (let y = 0; y < newGrid.length; y++) {
@@ -114,7 +122,42 @@ PRIMITIVES["recipe"] = {
             $$recipePattern += ",";
         }
         var modifyResultHandler = getHandlerCode("CraftingRecipeModifyResult", this.tags.ModifyResult, ["$$itemstack"]);
-        return `(function CraftingRecipeDatablock() {
+        if (flags.target === "1_12") {
+            return `(function CraftingRecipeDatablock112() {
+
+    async function registerRecipe(isServer) {
+        if (isServer) {
+            await new Promise((res, rej) => {
+                ModAPI.addEventListener("bootstrap", res);
+            });
+        }
+        const parseJson = ModAPI.reflect.getClassByName("JSONObject").constructors.findLast(x => x.length === 1);
+        const CraftingManager = ModAPI.reflect.getClassByName("CraftingManager");
+        const CraftingManagerMethods = CraftingManager.staticMethods;
+        const jsonData = parseJson(ModAPI.util.str(\`{
+            "type": "crafting_shaped", ${/*/or crafting_shapeless/*/""}
+            "pattern": [
+    ${$$recipePattern}
+  ],
+  "key": {
+    ${legendStr}
+  },
+  "result": {
+    "item": "minecraft:${this.tags.result.split("/")[1].split("@")[0]}",
+    "data": ${this.tags.result.split("/")[1].split("@")[1] || "0"},
+    "count": ${this.tags.resultQuantity}
+  }
+            }\`.trim()));
+        const recipeObj = CraftingManagerMethods.func_193376_a.method(jsonData); //convert json to an IRecipe
+        CraftingManagerMethods.func_193379_a.method(ModAPI.util.str("coolrecipeid"), recipeObj); //register recipe under resource location
+    }
+
+    ModAPI.dedicatedServer.appendCode(registerRecipe);
+    registerRecipe(false);
+})();
+`;
+        } else {
+            return `(function CraftingRecipeDatablock() {
     function $$registerRecipe() {
         function $$internalRegister() {
             const $$scoped_efb_globals = {};
@@ -161,5 +204,6 @@ PRIMITIVES["recipe"] = {
     ModAPI.dedicatedServer.appendCode($$registerRecipe);
     $$registerRecipe();
 })();`;
+        }
     }
 }
