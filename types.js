@@ -34,4 +34,5 @@ window.addEventListener("load", ()=>{
         option.innerText = PRIMITIVES[type].name;
         addtype.appendChild(option);
     });
+    reloadUI();
 });
