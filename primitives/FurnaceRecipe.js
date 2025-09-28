@@ -6,9 +6,8 @@ PRIMITIVES["furnace_recipe"] = {
         input: VALUE_ENUMS.ABSTRACT_ITEM,   // item/block to smelt
         lf0: VALUE_ENUMS.NEWLINE,
         lf1: VALUE_ENUMS.NEWLINE,
-        result: VALUE_ENUMS.ABSTRACT_ITEM,  // smelt result
-        lf2: VALUE_ENUMS.NEWLINE,
         resultQuantity: 1,                  // output count
+        result: VALUE_ENUMS.ABSTRACT_ITEM,  // smelt result
         lf3: VALUE_ENUMS.NEWLINE,
         experience: 0.1,                    // xp gained
     },
