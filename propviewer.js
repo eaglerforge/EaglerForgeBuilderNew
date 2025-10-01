@@ -3,21 +3,48 @@ const InlineValues = [
     VALUE_ENUMS.ABSTRACT_ITEM
 ];
 function editObject(obj, datablock) {
+    var propnav = document.querySelector("#propnav");
+    Array.from(propnav.childNodes).forEach(element => {
+        if (element.tagName != "IFRAME") {
+            element.remove();
+        }
+    });
+
     if (obj.type === "inspector") {
         inspectorFrame.style.display = "block";
         inspectorFrame.style.pointerEvents = "all";
-        inspectorFrameReposTimer = setInterval(positionInspectorFrame, 1000 / 15);
+        inspectorFrame.style.zIndex = "70";
+        propnav.style.height = (propnav.offsetWidth/16)*10+"px"; // 10:16 scale
+
+        let fullscreenButton = document.createElement('button');
+        fullscreenButton.id = "fullscreen";
+        fullscreenButton.innerHTML = "⇙";
+        fullscreenButton.style.pointerEvents = "all";
+        fullscreenButton.onclick = function() {
+            fullscreenButton.toggleAttribute("fullscreen");
+            if (fullscreenButton.hasAttribute("fullscreen")) {
+                fullscreenButton.style.transitionProperty = "initial";
+                fullscreenButton.style.position = "fixed";
+                fullscreenButton.style.scale = "2";
+                fullscreenButton.innerHTML = "&#10799;";
+                propnav.style.resize = "none";
+            } else {
+                fullscreenButton.style.transitionProperty = "background-color";
+                fullscreenButton.style.position = "absolute";
+                fullscreenButton.style.scale = "1";
+                fullscreenButton.innerHTML = "⇙";
+                propnav.style.resize = "vertical";
+            }
+            updateFullscreen(fullscreenButton.hasAttribute("fullscreen"))
+        }
+        propnav.appendChild(fullscreenButton);
+
     } else {
         inspectorFrame.style.display = "none";
         inspectorFrame.style.pointerEvents = "none";
-        if (inspectorFrameReposTimer === null) {
-            inspectorFrameReposTimer = null;
-            clearInterval(inspectorFrameReposTimer);
-        }
     }
-    var propnav = document.querySelector("#propnav");
-    propnav.innerHTML = "";
 
+    if (obj.type !== "inspector") {
     var nameField = document.createElement("input");
     nameField.placeholder = "Datablock Name";
     nameField.type = "text";
@@ -26,12 +53,24 @@ function editObject(obj, datablock) {
         obj.name = nameField.value || "No name";
         datablock.querySelector("h4").innerText = obj.name;
     });
-    propnav.appendChild(nameField);
-
-    propnav.appendChild(document.createElement("br"));
-    propnav.appendChild(document.createElement("br"));
+        propnav.appendChild(nameField);
+        propnav.appendChild(document.createElement("br"));
+        propnav.appendChild(document.createElement("br"));
+    }
 
     var keys = Object.keys(obj.tags);
+
+    const validValues = {
+        'metadata': {
+            "Title": {"maxlength": 20},
+            "Version": {"maxlength": 7},
+            "Credits": {"maxlength": 36},
+            "Description": {"maxlength": 160},
+        },
+        'ore_generation': {
+            "veinSize": {"min": 0},
+        },
+    }
     keys.forEach(k => {
         const parentValue = PRIMITIVES[obj.type].tags[k];
         const isInline = InlineValues.includes(parentValue);
@@ -165,6 +204,12 @@ function editObject(obj, datablock) {
             }
             updateDynamics(true);
         });
+
+        if (typeof validValues[obj.type] !== "undefined" && typeof validValues[obj.type][k] !== "undefined") {
+            Object.keys(validValues[obj.type][k]).forEach(attribute => {
+                input.setAttribute(attribute, validValues[obj.type][k][attribute]);
+            })
+        }
 
         propnav.appendChild(input);
 
