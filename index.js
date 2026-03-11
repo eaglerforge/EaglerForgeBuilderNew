@@ -138,7 +138,6 @@ function reloadUI(sel) {
     if (!state.nodes.includes(sel)) {
         sel = document.querySelector(".datablock.selected")?.datablock;
     }
-    document.querySelector("#propnav").innerHTML = "";
     document.querySelectorAll(".datablock").forEach(elem => {
         elem.remove();
     });
@@ -177,21 +176,41 @@ function reloadUI(sel) {
         var controls = document.createElement("div");
         controls.classList.add("controls");
 
-        var deleteButton = document.createElement("button");
-        deleteButton.innerText = "Delete";
-        deleteButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
+        if (node.name !== "Inspector") {
+            var deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
 
-            state.nodes.splice(index, 1);
-            updateDynamics(false);
-            reloadUI();
-        });
-        controls.appendChild(deleteButton);
+                state.nodes.splice(index, 1);
+                updateDynamics(false);
+                reloadUI();
+            });
+            controls.appendChild(deleteButton);
+        } else {
+            var runButton = document.createElement("button");
+            runButton.innerText = "Run";
+            if (typeof runMod !== "undefined") {
+                runButton.addEventListener("click", runMod);
+            }
+            controls.appendChild(runButton);
+        }
 
         datablock.appendChild(controls);
 
         datablockContainer.appendChild(datablock);
+    });
+
+    var optionTypesList = Array.from(document.querySelectorAll("#addtype option"));
+    optionTypesList.forEach((type, index, list) => {
+        if ((type.value === "metadata") && state.nodes.find(element => element.type === "metadata") || (type.value === "icon") && state.nodes.find(element => element.type === "icon")) {
+            type.disabled = true;
+            type.selected = false;
+        } else {
+            type.disabled = false;
+        }
+        list[index] = type;
     });
 }
 document.querySelector("#newdatablock").addEventListener("click", (e) => {
@@ -199,4 +218,19 @@ document.querySelector("#newdatablock").addEventListener("click", (e) => {
     updateDynamics(false);
     reloadUI(document.querySelector(".datablock.selected")?.datablock);
 });
+
+document.getElementById('search').addEventListener("input", () => {
+    let searchValue = document.getElementById('search').value.toLowerCase();
+    elementList = Array.from(document.querySelectorAll(".datablock"));
+    elementList.forEach((element, index, list) => {
+        let type = element.getAttribute('data-dtype').toLowerCase();
+        let title = element.firstElementChild.innerText.toLowerCase();
+        if (type.indexOf(searchValue) > -1 || title.indexOf(searchValue) > -1 || searchValue === "") {
+            element.style.display = "inline-block";
+        } else {
+            element.style.display = "none";
+        }
+        list[index] = element;
+    })
+})
 reloadUI();
