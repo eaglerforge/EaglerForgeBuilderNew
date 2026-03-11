@@ -64,7 +64,7 @@ javascript.javascriptGenerator.forBlock['itemstack_setstacksize'] = function () 
     const value_itemstack = javascript.javascriptGenerator.valueToCode(this, 'ITEMSTACK', javascript.Order.ATOMIC);
     const value_num = javascript.javascriptGenerator.valueToCode(this, 'VALUE', javascript.Order.ATOMIC);
     const code = `(${value_itemstack}).$stackSize = (${value_num});`;
-    return [code, javascript.Order.NONE];
+    return code;
 }
 
 
